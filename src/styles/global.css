@@ -1,49 +1,86 @@
 :root {
-  --c-paper: #fafaf7;
-  --c-paper-sunk: #edefec;
-  --c-ink: #131a20;
-  --c-mute: #5a6770;
-  --c-rule: #dee3e0;
+  /* ==========================================================================
+     1. THE ADAPTIVE PALETTE SYSTEM (LIGHT MODE DEFAULT)
+     ========================================================================== */
+  --c-paper: #f4f7f6;        /* Crisp, premium ice white */
+  --c-paper-sunk: #e9eceb;   /* Deep ice shade for container depth */
+  --c-ink: #0f141c;         /* Structural deep midnight obsidian */
+  --c-mute: #65757d;         /* High-readability muted slate */
+  --c-rule: #dce2e0;         /* Clear hairline grid color */
 
-  --c-accent: #164f7a;
-  --c-accent-ink: #0f3654;
-  --c-accent-pale: #e7f1f7;
-  --c-accent-edge: #c7d9e4;
+  /* Spotify-Inspired Tech Accent Core */
+  --c-accent: #1db954;       /* Spotify Active Green */
+  --c-accent-ink: #148a3e;   /* Deep saturated press/hover green */
+  --c-accent-pale: #e8f8ee;  /* Soft glow green background */
+  --c-accent-edge: #a3e6ba;  /* Border-level accent tint */
 
-  --ff-sans:
-    "Founders Grotesk Text", "Inter", "Helvetica Neue", Arial, system-ui,
-    sans-serif;
-  --ff-serif:
-    "Publico Headline", "Publico Text", "Source Serif 4", Georgia, serif;
+  /* ==========================================================================
+     2. HIGH-FIDELITY TYPOGRAPHY & STRUCTURE (POLISHED)
+     ========================================================================== */
+  /* Typeface Selection - Prioritizing elite, structural grotesque & high-end editorial display */
+  --ff-sans: "Söhne Breit", "Inter Display", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --ff-serif: "Darkmode Sans", "Publico Headline", "Source Serif 4", Georgia, serif;
 
-  --t-display: clamp(2.5rem, 4vw + 1rem, 4.25rem);
-  --t-h1: clamp(2rem, 1.8vw + 1rem, 2.75rem);
-  --t-h2: clamp(1.5rem, 1vw + 1rem, 1.875rem);
-  --t-body-lg: 1.1875rem;
+  /* Size Scale - Deep contrast hierarchy */
+  --t-display: clamp(3rem, 7vw + 1rem, 6.5rem);
+  --t-h1: clamp(2.25rem, 3vw + 1rem, 3.5rem);
+  --t-h2: clamp(1.625rem, 1.5vw + 1rem, 2.25rem);
+  --t-body-lg: 1.25rem;
   --t-body: 1.0625rem;
-  --t-small: 0.875rem;
-  --t-kicker: 0.75rem;
+  --t-small: 0.8125rem;
+  --t-kicker: 0.6875rem;
 
-  --lh-display: 1.08;
-  --lh-h: 1.2;
-  --lh-body: 1.55;
+  /* Leading (Line-Height) Calibration */
+  --lh-display: 0.95;       /* Intentionally overlapping, high-impact tight leading */
+  --lh-h: 1.12;             /* Clean, grouped head tracking */
+  --lh-body: 1.625;         /* Relaxed, highly legible reading distance for prose */
+  --lh-meta: 1.2;
 
+  /* Tracking (Letter-Spacing) Matrix */
+  --ls-display: -0.035em;   /* Aggressive compression for high-end optical sizing */
+  --ls-h: -0.02em;          /* Subtle geometric compression */
+  --ls-body: -0.005em;      /* Near-neutral baseline reading flow */
+  --ls-small: 0.02em;       /* Open definition for micro-copy */
+  --ls-tracking-wide: 0.14em;/* Severe luxury tracking for system specs and headers */
+
+  /* Structural Spatial Spacing */
   --s-xs: 0.5rem;
   --s-sm: 0.75rem;
-  --s-md: 1rem;
-  --s-lg: 1.5rem;
-  --s-xl: 2.5rem;
-  --s-2xl: 4rem;
-  --s-3xl: 6.5rem;
+  --s-md: 1.125rem;
+  --s-lg: 1.75rem;
+  --s-xl: 3rem;
+  --s-2xl: 5.5rem;
+  --s-3xl: 9rem;
 
-  --measure-prose: 38rem;
-  --measure-page: 72rem;
+  --measure-prose: 36rem;   /* Strictly prevents eye strain by blocking lines past ~65 characters */
+  --measure-page: 84rem;    
 
-  --r-sm: 2px;
+  --r-sm: 0px;              /* Definitive sharp geometric edges */
   --hairline: 1px solid var(--c-rule);
-  --ms-base: 120ms ease-out;
+  --ms-base: 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* ==========================================================================
+   3. THE PREFERS-COLOR-SCHEME DARK INVERSION
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-paper: #121212;        
+    --c-paper-sunk: #1a1a1a;   
+    --c-ink: #f4f7f6;         
+    --c-mute: #9ca3af;         
+    --c-rule: #282828;         
+
+    --c-accent: #1ed760;       
+    --c-accent-ink: #ffffff;   
+    --c-accent-pale: #1db95420;
+    --c-accent-edge: #1ed760;
+  }
+}
+
+/* ==========================================================================
+   4. TYPE DEFINITION OVERRIDES & LAYOUT
+   ========================================================================== */
 *,
 *::before,
 *::after {
@@ -63,18 +100,23 @@ body {
   font-size: var(--t-body);
   font-weight: 400;
   line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background var(--ms-base), color var(--ms-base);
 }
 
 a {
   color: var(--c-accent);
-  text-decoration-color: var(--c-accent-edge);
-  text-underline-offset: 0.2em;
+  text-decoration: none;
+  border-bottom: 1px solid var(--c-accent-edge);
+  transition: all var(--ms-base);
 }
 
 a:hover {
   color: var(--c-accent-ink);
-  text-decoration-color: var(--c-accent-ink);
+  border-bottom-color: var(--c-accent-ink);
 }
 
 :focus-visible {
@@ -82,10 +124,7 @@ a:hover {
   outline-offset: 2px;
 }
 
-h1,
-h2,
-h3,
-p {
+h1, h2, h3, p {
   margin: 0;
 }
 
@@ -98,10 +137,13 @@ ul {
 .container {
   width: 100%;
   max-width: var(--measure-page);
-  padding-inline: clamp(var(--s-lg), 5vw, var(--s-2xl));
+  padding-inline: clamp(var(--s-lg), 6vw, var(--s-3xl));
   margin-inline: auto;
 }
 
+/* ==========================================================================
+   5. COMPONENT INTERFACES
+   ========================================================================== */
 .site-header {
   border-bottom: var(--hairline);
 }
@@ -111,13 +153,15 @@ ul {
   align-items: center;
   justify-content: space-between;
   gap: var(--s-lg);
-  padding-block: var(--s-lg);
+  padding-block: var(--s-xl);
 }
 
 .brand {
   color: var(--c-ink);
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
+  letter-spacing: var(--ls-h);
+  border: none;
 }
 
 .site-nav ul {
@@ -130,7 +174,9 @@ ul {
   color: var(--c-ink);
   font-size: var(--t-small);
   font-weight: 500;
+  letter-spacing: var(--ls-small);
   text-decoration: none;
+  border: none;
 }
 
 .site-nav a:hover,
@@ -149,13 +195,14 @@ ul {
   justify-content: space-between;
   gap: var(--s-md);
   flex-wrap: wrap;
-  padding-block: var(--s-xl);
+  padding-block: var(--s-2xl);
 }
 
-.footer-text,
-.footer-links a {
+.footer-text {
   color: var(--c-mute);
   font-size: var(--t-small);
+  line-height: var(--lh-meta);
+  letter-spacing: var(--ls-body);
 }
 
 .footer-links {
@@ -164,32 +211,38 @@ ul {
 }
 
 .footer-links a {
+  color: var(--c-mute);
+  font-size: var(--t-small);
+  letter-spacing: var(--ls-small);
   text-decoration: none;
+  border: none;
 }
 
+/* --- Typographically Intensive Hero Block --- */
 .hero {
-  padding-block: clamp(var(--s-2xl), 9vw, var(--s-3xl));
+  padding-block: clamp(var(--s-3xl), 12vw, var(--s-3xl) * 1.5);
   display: flex;
   flex-direction: column;
-  gap: var(--s-lg);
+  gap: var(--s-xl);
 }
 
 .kicker {
-  color: var(--c-mute);
+  color: var(--c-accent);
   font-size: var(--t-kicker);
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  line-height: var(--lh-meta);
+  letter-spacing: var(--ls-tracking-wide);
   text-transform: uppercase;
 }
 
 .display {
-  max-width: 24ch;
+  max-width: 18ch;
   color: var(--c-ink);
   font-family: var(--ff-serif);
   font-size: var(--t-display);
   font-weight: 400;
   line-height: var(--lh-display);
-  letter-spacing: -0.012em;
+  letter-spacing: var(--ls-display);
 }
 
 .lead {
@@ -197,6 +250,7 @@ ul {
   font-size: var(--t-body-lg);
   font-weight: 400;
   line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
 }
 
 .section {
@@ -216,12 +270,15 @@ ul {
   font-size: var(--t-h2);
   font-weight: 500;
   line-height: var(--lh-h);
+  letter-spacing: var(--ls-h);
 }
 
 .section-more {
   color: var(--c-mute);
   font-size: var(--t-small);
+  letter-spacing: var(--ls-small);
   text-decoration: none;
+  border: none;
 }
 
 .section-more:hover {
@@ -247,6 +304,7 @@ ul {
   font-size: var(--t-body-lg);
   font-weight: 400;
   line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
 }
 
 .about-prose + .about-prose {
@@ -260,20 +318,31 @@ ul {
   align-content: flex-start;
 }
 
+/* Industrial Component Blueprint Tag */
 .tag {
   display: inline-flex;
   align-items: center;
-  padding: 0.4em 0.7em;
+  padding: 0.5em 0.8em;
   border: 1px solid var(--c-rule);
   border-radius: var(--r-sm);
-  background: var(--c-paper);
-  color: var(--c-ink);
+  background: transparent;
+  color: var(--c-mute);
   font-size: var(--t-small);
   font-weight: 500;
   line-height: 1;
+  letter-spacing: var(--ls-tracking-wide);
+  text-transform: uppercase;
   white-space: nowrap;
+  transition: all var(--ms-base);
 }
 
+.tag:hover {
+  color: var(--c-ink);
+  border-color: var(--c-ink);
+  background: var(--c-paper-sunk);
+}
+
+/* --- Bespoke Project & Content Display Grids --- */
 .work-list,
 .writing-list {
   display: flex;
@@ -283,6 +352,7 @@ ul {
 .work-list-item,
 .writing-list-item {
   border-top: var(--hairline);
+  transition: background var(--ms-base);
 }
 
 .work-list-item:last-child,
@@ -290,30 +360,50 @@ ul {
   border-bottom: var(--hairline);
 }
 
+.work-list-item:hover,
+.writing-list-item:hover {
+  background: var(--c-paper-sunk);
+}
+
 .work-link,
 .writing-link {
   display: grid;
-  gap: var(--s-xs);
+  grid-template-columns: 1fr;
+  gap: var(--s-md);
   padding-block: var(--s-xl);
   padding-inline: var(--s-sm);
   margin-inline: calc(-1 * var(--s-sm));
   color: inherit;
   text-decoration: none;
+  transition: transform var(--ms-base);
 }
 
-.work-link:hover,
-.writing-link:hover {
-  background: var(--c-paper-sunk);
+@media (min-width: 48rem) {
+  .work-link,
+  .writing-link {
+    grid-template-columns: 4.5fr 7.5fr;
+    align-items: baseline;
+    gap: var(--s-2xl);
+    padding-inline: 0;
+    margin-inline: 0;
+  }
+}
+
+.work-list-item:hover .work-link,
+.writing-list-item:hover .writing-link {
+  transform: translateX(var(--s-sm));
 }
 
 .work-title,
 .writing-title {
-  max-width: 34ch;
+  max-width: 100%;
   color: var(--c-ink);
   font-family: var(--ff-serif);
-  font-size: clamp(1.5rem, 1.5vw + 1rem, 2rem);
+  font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem);
   font-weight: 400;
   line-height: var(--lh-h);
+  letter-spacing: var(--ls-h);
+  transition: color var(--ms-base);
 }
 
 .work-link:hover .work-title,
@@ -326,12 +416,17 @@ ul {
   max-width: var(--measure-prose);
   color: var(--c-mute);
   font-weight: 400;
+  font-size: var(--t-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-body);
 }
 
 .meta {
   color: var(--c-mute);
   font-size: var(--t-small);
+  line-height: var(--lh-meta);
   font-variant-numeric: tabular-nums;
+  letter-spacing: var(--ls-small);
 }
 
 .muted {
@@ -339,6 +434,9 @@ ul {
   font-style: italic;
 }
 
+/* ==========================================================================
+   6. ACCESSIBILITY AXIOM
+   ========================================================================== */
 .skip-link {
   position: absolute;
   top: -100vh;
@@ -347,6 +445,8 @@ ul {
   background: var(--c-ink);
   color: var(--c-paper);
   padding: var(--s-sm) var(--s-md);
+  font-size: var(--t-small);
+  letter-spacing: var(--ls-small);
 }
 
 .skip-link:focus {
