@@ -1,17 +1,159 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Tag from "../components/ui/Tag.astro";
 
+const capabilities = [
+  "Customer lifecycle design",
+  "Onboarding & time-to-value",
+  "Retention & expansion",
+  "At-risk recovery",
+  "CRM process design",
+  "Salesforce administration",
+  "HubSpot workflows",
+  "Account portfolio management",
+  "QBR cadence",
+  "Executive reporting",
+  "Implementation",
+  "Cross-functional execution",
+];
+
+const featuredWork = [
+  {
+    kicker: "Healthtech",
+    title: "Building the customer success function at a healthcare diagnostics startup.",
+    summary:
+      "Owned onboarding, adoption, account health, and renewal readiness across a 32-account clinical portfolio.",
+    meta: "NeuroSync · Customer Success Manager · 32 accounts",
+  },
+  {
+    kicker: "Brand-side retail",
+    title: "Turning account growth and customer experience into an operating system.",
+    summary:
+      "Managed customer experience and account growth work at Shinola’s Detroit flagship, connecting portfolio discipline with client-facing execution.",
+    meta: "Shinola · CX / account growth · Detroit flagship",
+  },
+  {
+    kicker: "Consulting",
+    title: "Designing lifecycle systems for operationally complex service businesses.",
+    summary:
+      "Built customer journey, retention, onboarding, and lifecycle frameworks through Context By Design.",
+    meta: "Context By Design · Independent consulting",
+  },
+];
+
+const recentWriting = [
+  {
+    title: "The sales-to-implementation handoff is a risk control.",
+    dek: "Why delivery risk starts before the customer ever meets the implementation owner.",
+    meta: "Healthcare CX · Draft",
+  },
+  {
+    title: "Customer health scores fail when no one owns the next action.",
+    dek: "A practical note on account health, escalation, and operational accountability.",
+    meta: "Customer Success · Draft",
+  },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Matt Rabah">
+  <section class="hero container">
+    <p class="kicker">Customer Success · Customer Experience · Implementation</p>
+
+    <h1 class="display">
+      Customer lifecycle systems for complex client environments.
+    </h1>
+
+    <p class="lead">
+      I build onboarding, adoption, retention, and account-management systems
+      for healthcare, regulated, and operationally serious teams. My work sits
+      where customer experience, implementation, CRM process, and account growth
+      meet.
+    </p>
+  </section>
+
+  <section class="section container" aria-labelledby="selected-work">
+    <header class="section-head">
+      <h2 class="section-title" id="selected-work">Selected work</h2>
+      <a href="/work" class="section-more">All work →</a>
+    </header>
+
+    <ul class="work-list">
+      {
+        featuredWork.map((entry) => (
+          <li class="work-list-item">
+            <a href="/work" class="work-link">
+              <p class="kicker">{entry.kicker}</p>
+              <h3 class="work-title">{entry.title}</h3>
+              <p class="work-summary">{entry.summary}</p>
+              <p class="meta">{entry.meta}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section container" aria-labelledby="what-i-do">
+    <header class="section-head">
+      <h2 class="section-title" id="what-i-do">What I do</h2>
+    </header>
+
+    <div class="capabilities">
+      <p class="capabilities-prose">
+        I work where customer-facing teams meet operational reality: onboarding
+        flows that run, account portfolios that get triaged on schedule, CRM
+        systems that leadership trusts, and renewal conversations that surface
+        risk before it becomes churn.
+      </p>
+
+      <ul class="capabilities-tags" aria-label="Areas of work">
+        {
+          capabilities.map((label) => (
+            <li>
+              <Tag label={label} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="recent-writing">
+    <header class="section-head">
+      <h2 class="section-title" id="recent-writing">Recent writing</h2>
+      <a href="/blog" class="section-more">All writing →</a>
+    </header>
+
+    <ul class="writing-list">
+      {
+        recentWriting.map((entry) => (
+          <li class="writing-list-item">
+            <a href="/blog" class="writing-link">
+              <p class="meta">{entry.meta}</p>
+              <h3 class="writing-title">{entry.title}</h3>
+              <p class="writing-dek">{entry.dek}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section container about-snapshot" aria-labelledby="about">
+    <header class="section-head">
+      <h2 class="section-title" id="about">About</h2>
+    </header>
+
+    <p class="about-prose">
+      I am a Detroit-based Customer Experience, Customer Success, and
+      Implementation professional with experience across healthtech, brand-side
+      retail, and consulting.
+    </p>
+
+    <p class="about-prose">
+      My background includes NeuroSync, Shinola, and Context By Design, with
+      work spanning onboarding, adoption, retention, portfolio growth, CRM
+      process design, and executive-facing communication.
+    </p>
+  </section>
+</BaseLayout>

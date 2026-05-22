@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const posts = [
+  {
+    meta: "Healthcare CX · Draft",
+    title: "The sales-to-implementation handoff is a risk control.",
+    dek: "Why delivery risk starts before the customer ever meets the implementation owner.",
+  },
+  {
+    meta: "Customer Success · Draft",
+    title: "Customer health scores fail when no one owns the next action.",
+    dek: "A practical note on account health, escalation, and operational accountability.",
+  },
+  {
+    meta: "CRM Systems · Draft",
+    title: "The CRM field that matters most is the one someone actually updates.",
+    dek: "A short argument for designing customer systems around behavior, not reporting wish lists.",
+  },
+];
+---
+
+<BaseLayout
+  title="Writing"
+  description="Writing from Matt Rabah on customer success, healthcare CX, implementation, account health, CRM systems, and operational clarity."
+>
+  <section class="hero container">
+    <p class="kicker">Writing</p>
+
+    <h1 class="display">
+      Notes on customer lifecycle systems, implementation, and operational CX.
+    </h1>
+
+    <p class="lead">
+      Short essays on the practical work behind onboarding, adoption, retention,
+      customer health, sales-to-implementation handoffs, and CRM systems people
+      actually use.
+    </p>
+  </section>
+
+  <section class="section container" aria-labelledby="posts">
+    <header class="section-head">
+      <h2 class="section-title" id="posts">Recent notes</h2>
+    </header>
+
+    <ul class="writing-list writing-list--full">
+      {
+        posts.map((entry) => (
+          <li class="writing-list-item">
+            <a href="/blog" class="writing-link">
+              <p class="meta">{entry.meta}</p>
+              <h3 class="writing-title">{entry.title}</h3>
+              <p class="writing-dek">{entry.dek}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>
