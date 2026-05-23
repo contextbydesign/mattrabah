@@ -1,50 +1,100 @@
 /* ==========================================================================
    Matt Rabah Portfolio
-   Intelligent Operations Editorial
+   Vibrant CX + SaaS + Helvetica Now Edition
    ========================================================================== */
 
-:root {
-  /* Surfaces */
-  --c-paper: #f6f8f9;
-  --c-surface: #ffffff;
-  --c-surface-alt: #eef4f6;
-  --c-panel: #e8f1f4;
+/* Typography: Helvetica Now */
 
-  /* Text */
-  --c-ink: #0f1720;
-  --c-ink-soft: #25313b;
-  --c-mute: #64727c;
-  --c-faint: #8a98a3;
+/* Text (Body copy, UI elements) */
+@font-face {
+  font-family: 'Helvetica Now Text';
+  src: url('./HelveticaNowMTTextRegular_normal_normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Now Text';
+  src: url('./HelveticaNowMTTextMedium_normal_normal.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Now Text';
+  src: url('./HelveticaNowMTTextBold_normal_normal.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Display (Large Headlines) */
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url('./HelveticaNowMTDisplayMedium_normal_normal.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Helvetica Now Display';
+  src: url('./HelveticaNowMTDisplayBold_normal_normal.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Micro (Kickbacks, Tags, Meta) */
+@font-face {
+  font-family: 'Helvetica Now Micro';
+  src: url('./HelveticaNowMTMicroRegular_normal_normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Surfaces (Mapped to 'Spirits' Gray Scale) */
+  --c-paper: #f9fafb;       /* Spirits 50 */
+  --c-surface: #ffffff;     /* White */
+  --c-surface-alt: #f3f4f6; /* Spirits 100 */
+  --c-panel: #e7eaee;       /* Spirits 200 */
+
+  /* Text (Mapped to 'Spirits' AAA Compliant Scale) */
+  --c-ink: #0e1013;         /* Spirits 950 */
+  --c-ink-soft: #1e242c;    /* Spirits 900 */
+  --c-mute: #313945;        /* Spirits 800 */
+  --c-faint: #4D5A6C;       /* Spirits 700 (Adjusted for AAA) */
 
   /* Rules */
-  --c-rule: #d7e1e6;
-  --c-rule-strong: #b9cbd4;
+  --c-rule: #dbdfe5;        /* Spirits 300 */
+  --c-rule-strong: #cfd5dd; /* Spirits 400 */
 
-  /* Intelligence blue */
-  --c-accent: #155e8a;
-  --c-accent-ink: #0a3855;
-  --c-accent-pale: #e2f1f8;
-  --c-accent-edge: #aacfe1;
+  /* Accent (Blue Duck) */
+  --c-accent: #1356A8;      /* Blue Duck 500 (Adjusted for AAA) */
+  --c-accent-ink: #0c3368;  /* Blue Duck 900 */
+  --c-accent-pale: #f2f5fd; /* Blue Duck 50 */
+  --c-accent-edge: #a3b8f1; /* Blue Duck 300 */
 
-  /* AI signal teal */
-  --c-signal: #0f8c95;
-  --c-signal-ink: #075d63;
-  --c-signal-pale: #def4f5;
-  --c-signal-edge: #a8dadd;
+  /* Signal (Magneton) */
+  --c-signal: #A91D5E;      /* Magneton 500 (Adjusted for AAA) */
+  --c-signal-ink: #5f1035;  /* Magneton 900 */
+  --c-signal-pale: #fbf2f5; /* Magneton 50 */
+  --c-signal-edge: #e7a4ba; /* Magneton 300 */
 
   /* Status */
-  --c-success: #2d6a4f;
-  --c-caution: #8a6d1f;
-  --c-risk: #8b2e2e;
+  --c-success: #1d8051;     /* Turtle Green 700 */
+  --c-caution: #916d00;     /* Taco Yellow 700 */
+  --c-risk: #aa001c;        /* Red Babe 700 */
 
   /* Type */
-  --ff-sans:
-    "Roboto Flex", "Inter", "Helvetica Neue", Arial, system-ui, sans-serif;
-  --ff-serif:
-    "Roboto Serif", "Source Serif 4", Georgia, serif;
-  --ff-mono:
-    "Roboto Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo,
-    Consolas, monospace;
+  --ff-display: "Helvetica Now Display", "Helvetica Neue", Arial, sans-serif;
+  --ff-sans: "Helvetica Now Text", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --ff-micro: "Helvetica Now Micro", "Helvetica Neue", Arial, sans-serif;
+  
+  /* Overriding serif to unify the modern tech look */
+  --ff-serif: "Helvetica Now Text", "Helvetica Neue", Arial, sans-serif;
+  --ff-mono: "Roboto Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* Scale */
   --t-display: clamp(3.4rem, 7vw, 7.5rem);
@@ -104,13 +154,13 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at 85% 8%, rgba(15, 140, 149, 0.12), transparent 28rem),
-    radial-gradient(circle at 12% 0%, rgba(21, 94, 138, 0.1), transparent 30rem),
+    radial-gradient(circle at 85% 8%, rgba(213, 35, 119, 0.05), transparent 28rem),
+    radial-gradient(circle at 12% 0%, rgba(26, 115, 232, 0.08), transparent 30rem),
     var(--c-paper);
   color: var(--c-ink);
   font-family: var(--ff-sans);
   font-size: var(--t-body);
-  font-weight: 430;
+  font-weight: 400;
   line-height: var(--lh-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -174,7 +224,7 @@ ol {
 
 strong {
   color: var(--c-ink);
-  font-weight: 680;
+  font-weight: 700;
 }
 
 /* Layout */
@@ -192,8 +242,8 @@ strong {
   position: sticky;
   top: 0;
   z-index: 50;
-  border-bottom: 1px solid rgba(185, 203, 212, 0.7);
-  background: rgba(246, 248, 249, 0.82);
+  border-bottom: 1px solid rgba(219, 223, 229, 0.7);
+  background: rgba(249, 250, 251, 0.82);
   backdrop-filter: blur(18px);
 }
 
@@ -209,7 +259,7 @@ strong {
   color: var(--c-ink);
   font-family: var(--ff-sans);
   font-size: 0.98rem;
-  font-weight: 680;
+  font-weight: 700;
   letter-spacing: -0.015em;
   text-decoration: none;
 }
@@ -229,7 +279,7 @@ strong {
   color: var(--c-ink-soft);
   font-family: var(--ff-sans);
   font-size: var(--t-small);
-  font-weight: 640;
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -276,9 +326,9 @@ strong {
 
 .kicker {
   color: var(--c-faint);
-  font-family: var(--ff-mono);
+  font-family: var(--ff-micro);
   font-size: var(--t-kicker);
-  font-weight: 650;
+  font-weight: 400;
   line-height: var(--lh-tight);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -287,9 +337,9 @@ strong {
 .display {
   max-width: 20ch;
   color: var(--c-ink);
-  font-family: var(--ff-serif);
+  font-family: var(--ff-display);
   font-size: var(--t-display);
-  font-weight: 520;
+  font-weight: 700;
   line-height: var(--lh-display);
   letter-spacing: -0.045em;
 }
@@ -299,7 +349,7 @@ strong {
   color: var(--c-ink-soft);
   font-family: var(--ff-serif);
   font-size: var(--t-body-lg);
-  font-weight: 430;
+  font-weight: 400;
   line-height: var(--lh-body);
 }
 
@@ -321,16 +371,16 @@ strong {
 .section-title {
   color: var(--c-ink);
   font-size: var(--t-h2);
-  font-weight: 720;
+  font-weight: 700;
   line-height: var(--lh-h);
   letter-spacing: -0.025em;
 }
 
 .section-more {
   color: var(--c-mute);
-  font-family: var(--ff-mono);
+  font-family: var(--ff-micro);
   font-size: var(--t-kicker);
-  font-weight: 650;
+  font-weight: 400;
   letter-spacing: 0.12em;
   text-decoration: none;
   text-transform: uppercase;
@@ -370,8 +420,8 @@ strong {
   background:
     linear-gradient(
       90deg,
-      rgba(21, 94, 138, 0.08),
-      rgba(15, 140, 149, 0.06)
+      rgba(26, 115, 232, 0.04),
+      rgba(213, 35, 119, 0.03)
     );
 }
 
@@ -381,7 +431,7 @@ strong {
   color: var(--c-ink);
   font-family: var(--ff-serif);
   font-size: clamp(1.75rem, 2.2vw, 3rem);
-  font-weight: 520;
+  font-weight: 500;
   line-height: var(--lh-h);
   letter-spacing: -0.035em;
   transition: color var(--ms-base);
@@ -398,15 +448,15 @@ strong {
   color: var(--c-mute);
   font-family: var(--ff-sans);
   font-size: var(--t-body);
-  font-weight: 450;
+  font-weight: 400;
   line-height: var(--lh-body);
 }
 
 .meta {
   color: var(--c-faint);
-  font-family: var(--ff-mono);
+  font-family: var(--ff-micro);
   font-size: var(--t-kicker);
-  font-weight: 650;
+  font-weight: 400;
   letter-spacing: 0.1em;
   line-height: var(--lh-tight);
   text-transform: uppercase;
@@ -438,7 +488,7 @@ strong {
   color: var(--c-ink-soft);
   font-family: var(--ff-serif);
   font-size: var(--t-body-lg);
-  font-weight: 430;
+  font-weight: 400;
   line-height: var(--lh-body);
 }
 
@@ -465,7 +515,7 @@ strong {
   color: var(--c-ink-soft);
   font-family: var(--ff-mono);
   font-size: 0.72rem;
-  font-weight: 650;
+  font-weight: 600;
   line-height: 1;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -489,7 +539,7 @@ section[aria-labelledby="tool-list"] {
   background:
     linear-gradient(
       180deg,
-      rgba(227, 245, 246, 0.65),
+      rgba(251, 242, 245, 0.8),
       rgba(246, 248, 249, 0)
     );
   border-top-color: var(--c-signal-edge);
