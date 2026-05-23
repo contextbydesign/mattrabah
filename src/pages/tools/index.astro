@@ -1,0 +1,102 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Tag from "../../components/ui/Tag.astro";
+
+const tools = [
+  {
+    title: "Handoff Risk Checker",
+    status: "Prototype",
+    summary:
+      "Helps identify implementation risk before a customer handoff becomes an escalation. Designed for sales, implementation, and customer success teams.",
+    inputs: ["Sales promise", "Stakeholders", "Timeline", "Known constraints"],
+  },
+  {
+    title: "Customer Health Signal Mapper",
+    status: "Prototype",
+    summary:
+      "Turns customer signals into likely risk patterns, root causes, and next actions. Built for account review and portfolio triage.",
+    inputs: [
+      "Usage signals",
+      "Relationship changes",
+      "Support volume",
+      "Renewal timing",
+    ],
+  },
+  {
+    title: "Renewal Readiness Diagnostic",
+    status: "Planned",
+    summary:
+      "Assesses whether an account is operationally, commercially, and relationship-ready for renewal conversations.",
+    inputs: ["Adoption", "Executive sponsor", "Business value", "Open risks"],
+  },
+  {
+    title: "QBR Question Builder",
+    status: "Planned",
+    summary:
+      "Generates better executive review questions based on account context, value realization, and unresolved risk.",
+    inputs: [
+      "Account stage",
+      "Known outcomes",
+      "Open risks",
+      "Expansion potential",
+    ],
+  },
+  {
+    title: "CRM Field Quality Checker",
+    status: "Planned",
+    summary:
+      "Reviews whether CRM fields are useful, owned, updated, and tied to an actual customer-facing decision.",
+    inputs: ["Field name", "Owner", "Update cadence", "Decision supported"],
+  },
+];
+---
+
+<BaseLayout
+  title="AI Tools"
+  description="Practical AI tools from Matt Rabah for CX, customer success, implementation, account health, and customer lifecycle teams."
+>
+  <section class="hero container">
+    <p class="kicker">AI Tools</p>
+
+    <h1 class="display">
+      Practical AI tools for CX, CS, and implementation teams.
+    </h1>
+
+    <p class="lead">
+      These tools are built around real customer-operations problems: handoff
+      risk, account health, renewal readiness, executive preparation, CRM
+      discipline, and workflow adoption. The goal is not novelty. The goal is
+      better judgment, faster preparation, and clearer next actions.
+    </p>
+  </section>
+
+  <section class="section container" aria-labelledby="tool-list">
+    <header class="section-head">
+      <h2 class="section-title" id="tool-list">Tool prototypes</h2>
+    </header>
+
+    <ul class="work-list work-list--full">
+      {
+        tools.map((tool) => (
+          <li class="work-list-item">
+            <a href="/tools" class="work-link">
+              <p class="kicker">{tool.status}</p>
+              <h3 class="work-title">{tool.title}</h3>
+              <p class="work-summary">{tool.summary}</p>
+
+              <ul class="capabilities-tags" aria-label={`${tool.title} inputs`}>
+                {
+                  tool.inputs.map((input) => (
+                    <li>
+                      <Tag label={input} />
+                    </li>
+                  ))
+                }
+              </ul>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

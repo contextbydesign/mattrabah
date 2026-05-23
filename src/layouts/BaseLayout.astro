@@ -8,7 +8,7 @@ export interface Props {
 
 const SITE_NAME = "Matt Rabah";
 const DEFAULT_DESCRIPTION =
-  "Matt Rabah builds customer lifecycle systems for complex, regulated, and operationally serious environments.";
+  "Matt Rabah builds customer lifecycle systems, practical AI workflows, and operating models for complex customer-facing teams.";
 
 const { title, description = DEFAULT_DESCRIPTION } = Astro.props;
 const fullTitle = title === SITE_NAME ? title : `${title} — ${SITE_NAME}`;
@@ -23,6 +23,7 @@ const year = new Date().getFullYear();
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
   </head>
+
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
@@ -35,6 +36,7 @@ const year = new Date().getFullYear();
         <nav class="site-nav" aria-label="Primary">
           <ul>
             <li><a href="/work">Work</a></li>
+            <li><a href="/tools">AI Tools</a></li>
             <li><a href="/blog">Writing</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>

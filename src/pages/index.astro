@@ -2,54 +2,83 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Tag from "../components/ui/Tag.astro";
 
-const capabilities = [
-  "Customer lifecycle design",
-  "Onboarding & time-to-value",
-  "Retention & expansion",
-  "At-risk recovery",
-  "CRM process design",
-  "Salesforce administration",
-  "HubSpot workflows",
-  "Account portfolio management",
-  "QBR cadence",
-  "Executive reporting",
-  "Implementation",
-  "Cross-functional execution",
+const pillars = [
+  {
+    kicker: "Lifecycle Systems",
+    title: "Make the customer lifecycle visible and manageable.",
+    summary:
+      "Onboarding, adoption, retention, account health, renewal readiness, and executive visibility organized into a usable operating model.",
+  },
+  {
+    kicker: "AI Workflow Design",
+    title: "Use AI where it reduces friction, not where it creates noise.",
+    summary:
+      "Practical tools and workflows that help customer-facing teams summarize context, surface risk, prepare follow-ups, and improve decision quality.",
+  },
+  {
+    kicker: "Change Management",
+    title: "Turn process changes into repeatable team behavior.",
+    summary:
+      "Operating cadence, stakeholder alignment, CRM discipline, enablement, and documentation that help teams actually adopt the system.",
+  },
 ];
 
 const featuredWork = [
   {
     kicker: "Healthtech",
-    title: "Building the customer success function at a healthcare diagnostics startup.",
+    title: "NeuroSync",
+    subtitle: "Customer Lifecycle Systems",
     summary:
-      "Owned onboarding, adoption, account health, and renewal readiness across a 32-account clinical portfolio.",
-    meta: "NeuroSync · Customer Success Manager · 32 accounts",
+      "Built and managed customer success workflows across healthcare accounts, with ownership across onboarding, adoption, account health, and renewal readiness.",
+    meta: "Healthtech · Customer Success · Adoption & Implementation",
   },
   {
     kicker: "Brand-side retail",
-    title: "Turning account growth and customer experience into an operating system.",
+    title: "Shinola",
+    subtitle: "Portfolio Growth & CX Operations",
     summary:
-      "Managed customer experience and account growth work at Shinola’s Detroit flagship, connecting portfolio discipline with client-facing execution.",
-    meta: "Shinola · CX / account growth · Detroit flagship",
+      "Connected high-touch customer experience, portfolio growth, Salesforce process, and executive-facing account work inside a complex retail environment.",
+    meta: "Brand-side Retail · Client Experience · Operating Cadence",
   },
   {
     kicker: "Consulting",
-    title: "Designing lifecycle systems for operationally complex service businesses.",
+    title: "Context By Design",
+    subtitle: "Lifecycle Diagnostics & Retention",
     summary:
-      "Built customer journey, retention, onboarding, and lifecycle frameworks through Context By Design.",
-    meta: "Context By Design · Independent consulting",
+      "Developed customer journey, onboarding, retention, and lifecycle frameworks for service businesses operating with limited process visibility.",
+    meta: "Consulting · Transformation · Retention Systems",
   },
 ];
 
-const recentWriting = [
+const aiTools = [
+  {
+    title: "Handoff Risk Checker",
+    summary:
+      "A structured prompt-based tool for identifying delivery risk before sales promises become implementation problems.",
+  },
+  {
+    title: "Customer Health Signal Mapper",
+    summary:
+      "A lightweight tool for turning account signals into risk patterns, likely causes, and recommended next actions.",
+  },
+  {
+    title: "Renewal Readiness Diagnostic",
+    summary:
+      "A guided checklist for assessing whether an account is commercially, operationally, and relationship-ready for renewal.",
+  },
+];
+
+const writing = [
+  {
+    title: "AI in CX fails when it starts with tools instead of workflows.",
+    meta: "AI in CX · Draft",
+  },
   {
     title: "The sales-to-implementation handoff is a risk control.",
-    dek: "Why delivery risk starts before the customer ever meets the implementation owner.",
-    meta: "Healthcare CX · Draft",
+    meta: "Implementation · Draft",
   },
   {
     title: "Customer health scores fail when no one owns the next action.",
-    dek: "A practical note on account health, escalation, and operational accountability.",
     meta: "Customer Success · Draft",
   },
 ];
@@ -57,18 +86,37 @@ const recentWriting = [
 
 <BaseLayout title="Matt Rabah">
   <section class="hero container">
-    <p class="kicker">Customer Success · Customer Experience · Implementation</p>
+    <p class="kicker">CX Management · AI Workflows · Change Management</p>
 
     <h1 class="display">
-      Customer lifecycle systems for complex client environments.
+      Customer lifecycle systems, strengthened by practical AI workflows.
     </h1>
 
     <p class="lead">
-      I build onboarding, adoption, retention, and account-management systems
-      for healthcare, regulated, and operationally serious teams. My work sits
-      where customer experience, implementation, CRM process, and account growth
-      meet.
+      I help complex customer-facing teams improve onboarding, adoption, account
+      health, retention, and executive visibility through clearer operating
+      systems, better CRM discipline, and practical AI-enabled workflows.
     </p>
+  </section>
+
+  <section class="section container" aria-labelledby="pillars">
+    <header class="section-head">
+      <h2 class="section-title" id="pillars">What I build</h2>
+    </header>
+
+    <ul class="work-list">
+      {
+        pillars.map((pillar) => (
+          <li class="work-list-item">
+            <div class="work-link">
+              <p class="kicker">{pillar.kicker}</p>
+              <h3 class="work-title">{pillar.title}</h3>
+              <p class="work-summary">{pillar.summary}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
   </section>
 
   <section class="section container" aria-labelledby="selected-work">
@@ -84,7 +132,9 @@ const recentWriting = [
             <a href="/work" class="work-link">
               <p class="kicker">{entry.kicker}</p>
               <h3 class="work-title">{entry.title}</h3>
-              <p class="work-summary">{entry.summary}</p>
+              <p class="work-summary">
+                <strong>{entry.subtitle}</strong> — {entry.summary}
+              </p>
               <p class="meta">{entry.meta}</p>
             </a>
           </li>
@@ -93,24 +143,27 @@ const recentWriting = [
     </ul>
   </section>
 
-  <section class="section container" aria-labelledby="what-i-do">
+  <section class="section container" aria-labelledby="ai-tools">
     <header class="section-head">
-      <h2 class="section-title" id="what-i-do">What I do</h2>
+      <h2 class="section-title" id="ai-tools">
+        Practical AI tools for CX, CS, and implementation teams.
+      </h2>
+      <a href="/tools" class="section-more">View tools →</a>
     </header>
 
     <div class="capabilities">
       <p class="capabilities-prose">
-        I work where customer-facing teams meet operational reality: onboarding
-        flows that run, account portfolios that get triaged on schedule, CRM
-        systems that leadership trusts, and renewal conversations that surface
-        risk before it becomes churn.
+        These tools are designed around real customer-operations problems:
+        handoff risk, account health, renewal readiness, executive preparation,
+        and CRM discipline. They are not AI demos for their own sake. They are
+        workflow aids for customer-facing teams.
       </p>
 
-      <ul class="capabilities-tags" aria-label="Areas of work">
+      <ul class="capabilities-tags" aria-label="AI tool previews">
         {
-          capabilities.map((label) => (
+          aiTools.map((tool) => (
             <li>
-              <Tag label={label} />
+              <Tag label={tool.title} />
             </li>
           ))
         }
@@ -118,20 +171,19 @@ const recentWriting = [
     </div>
   </section>
 
-  <section class="section container" aria-labelledby="recent-writing">
+  <section class="section container" aria-labelledby="writing">
     <header class="section-head">
-      <h2 class="section-title" id="recent-writing">Recent writing</h2>
+      <h2 class="section-title" id="writing">Writing</h2>
       <a href="/blog" class="section-more">All writing →</a>
     </header>
 
     <ul class="writing-list">
       {
-        recentWriting.map((entry) => (
+        writing.map((entry) => (
           <li class="writing-list-item">
             <a href="/blog" class="writing-link">
               <p class="meta">{entry.meta}</p>
               <h3 class="writing-title">{entry.title}</h3>
-              <p class="writing-dek">{entry.dek}</p>
             </a>
           </li>
         ))
@@ -151,9 +203,9 @@ const recentWriting = [
     </p>
 
     <p class="about-prose">
-      My background includes NeuroSync, Shinola, and Context By Design, with
-      work spanning onboarding, adoption, retention, portfolio growth, CRM
-      process design, and executive-facing communication.
+      My work connects customer lifecycle design, AI-enabled workflow adoption,
+      CRM process, account health, implementation, retention, and
+      executive-facing communication.
     </p>
   </section>
 </BaseLayout>

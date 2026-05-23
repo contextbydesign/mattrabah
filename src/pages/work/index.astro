@@ -1,52 +1,85 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Tag from "../../components/ui/Tag.astro";
 
 const workItems = [
   {
-    kicker: "Healthtech",
-    title: "Building the customer success function at a healthcare diagnostics startup.",
+    title: "NeuroSync",
+    subtitle: "Customer Lifecycle Systems",
     summary:
-      "A future case study on onboarding, adoption, account health, and renewal readiness across a 32-account clinical portfolio.",
-    meta: "NeuroSync · Customer Success Manager · 32 accounts",
+      "Built and managed customer success workflows across healthcare accounts, with ownership across onboarding, adoption, account health, clinical stakeholder communication, and renewal readiness.",
+    tags: [
+      "Healthtech",
+      "Customer Success",
+      "Adoption",
+      "Implementation",
+      "Account Health",
+    ],
   },
   {
-    kicker: "Brand-side retail",
-    title: "Turning account growth and customer experience into an operating system.",
+    title: "Shinola",
+    subtitle: "Portfolio Growth & CX Operations",
     summary:
-      "A future case study on portfolio discipline, client-facing execution, and executive event strategy at Shinola’s Detroit flagship.",
-    meta: "Shinola · CX / account growth · Detroit flagship",
+      "Connected high-touch customer experience, account growth, Salesforce process, executive event execution, and portfolio discipline inside a complex brand-side retail environment.",
+    tags: [
+      "Brand-side Retail",
+      "Client Experience",
+      "Portfolio Growth",
+      "Operating Cadence",
+      "Salesforce",
+    ],
   },
   {
-    kicker: "Consulting",
-    title: "Designing lifecycle systems for operationally complex service businesses.",
+    title: "Context By Design",
+    subtitle: "Lifecycle Diagnostics & Retention",
     summary:
-      "A future case study on customer journey, retention, onboarding, and lifecycle frameworks through Context By Design.",
-    meta: "Context By Design · Independent consulting",
+      "Designed lifecycle, onboarding, customer journey, and retention frameworks for service businesses that needed clearer operating systems and better customer visibility.",
+    tags: [
+      "Consulting",
+      "Transformation",
+      "Retention Systems",
+      "Lifecycle Design",
+      "CX Strategy",
+    ],
+  },
+  {
+    title: "AI Workflow Projects",
+    subtitle: "Practical Tools for Customer-Facing Teams",
+    summary:
+      "Building lightweight AI-assisted tools for handoff risk, account health, renewal readiness, QBR preparation, and CRM field quality.",
+    tags: [
+      "AI Workflows",
+      "CX Tools",
+      "Change Management",
+      "Customer Operations",
+      "Workflow Design",
+    ],
   },
 ];
 ---
 
 <BaseLayout
   title="Work"
-  description="Selected work from Matt Rabah across customer success, customer experience, implementation, CRM process design, and lifecycle systems."
+  description="Selected work from Matt Rabah across CX management, customer success, implementation, AI workflow design, and lifecycle systems."
 >
   <section class="hero container">
-    <p class="kicker">Selected work</p>
+    <p class="kicker">Work</p>
 
     <h1 class="display">
-      Customer lifecycle work across healthtech, retail, and consulting.
+      Work organized by business problem, not just industry.
     </h1>
 
     <p class="lead">
-      Case studies will focus on the systems behind onboarding, adoption,
-      account health, retention, expansion, CRM visibility, and executive-facing
-      communication.
+      My background spans healthtech, brand-side retail, consulting, and AI
+      workflow projects. The common thread is customer lifecycle design:
+      onboarding, adoption, account health, retention, CRM visibility, and
+      operating cadence.
     </p>
   </section>
 
   <section class="section container" aria-labelledby="case-studies">
     <header class="section-head">
-      <h2 class="section-title" id="case-studies">Case studies</h2>
+      <h2 class="section-title" id="case-studies">Selected case studies</h2>
     </header>
 
     <ul class="work-list work-list--full">
@@ -54,10 +87,16 @@ const workItems = [
         workItems.map((entry) => (
           <li class="work-list-item">
             <a href="/work" class="work-link">
-              <p class="kicker">{entry.kicker}</p>
+              <p class="kicker">{entry.subtitle}</p>
               <h3 class="work-title">{entry.title}</h3>
               <p class="work-summary">{entry.summary}</p>
-              <p class="meta">{entry.meta}</p>
+              <ul class="capabilities-tags" aria-label={`${entry.title} tags`}>
+                {entry.tags.map((tag) => (
+                  <li>
+                    <Tag label={tag} />
+                  </li>
+                ))}
+              </ul>
             </a>
           </li>
         ))
