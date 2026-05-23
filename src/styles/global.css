@@ -1,6 +1,6 @@
 /* ==========================================================================
    Matt Rabah Portfolio
-   Vibrant CX + SaaS + Helvetica Now Edition
+   Intelligent Operations Editorial (Vibrant SaaS + Helvetica Now Edition)
    ========================================================================== */
 
 /* Typography: Helvetica Now */
@@ -97,8 +97,8 @@
   --ff-mono: "Roboto Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* Scale */
-  --t-display: clamp(3.4rem, 7vw, 7.5rem);
-  --t-h1: clamp(2.4rem, 4vw, 4.25rem);
+  --t-display: clamp(2.8rem, 5vw, 5rem);
+  --t-h1: clamp(2.2rem, 4vw, 3.5rem);
   --t-h2: clamp(1.6rem, 1.8vw, 2.25rem);
   --t-h3: clamp(1.25rem, 1vw, 1.65rem);
   --t-body-lg: 1.25rem;
@@ -107,8 +107,8 @@
   --t-kicker: 0.72rem;
 
   /* Leading */
-  --lh-display: 0.96;
-  --lh-h: 1.15;
+  --lh-display: 1.05;
+  --lh-h: 1.2;
   --lh-body: 1.62;
   --lh-tight: 1.3;
 
@@ -260,7 +260,7 @@ strong {
   font-family: var(--ff-sans);
   font-size: 0.98rem;
   font-weight: 700;
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
   text-decoration: none;
 }
 
@@ -341,13 +341,13 @@ strong {
   font-size: var(--t-display);
   font-weight: 700;
   line-height: var(--lh-display);
-  letter-spacing: -0.045em;
+  letter-spacing: -0.01em;
 }
 
 .lead {
   max-width: var(--measure-prose);
   color: var(--c-ink-soft);
-  font-family: var(--ff-serif);
+  font-family: var(--ff-sans);
   font-size: var(--t-body-lg);
   font-weight: 400;
   line-height: var(--lh-body);
@@ -373,7 +373,7 @@ strong {
   font-size: var(--t-h2);
   font-weight: 700;
   line-height: var(--lh-h);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.01em;
 }
 
 .section-more {
@@ -429,11 +429,11 @@ strong {
 .writing-title {
   max-width: 34ch;
   color: var(--c-ink);
-  font-family: var(--ff-serif);
+  font-family: var(--ff-sans);
   font-size: clamp(1.75rem, 2.2vw, 3rem);
   font-weight: 500;
   line-height: var(--lh-h);
-  letter-spacing: -0.035em;
+  letter-spacing: -0.01em;
   transition: color var(--ms-base);
 }
 
@@ -486,7 +486,7 @@ strong {
 .about-prose {
   max-width: var(--measure-prose);
   color: var(--c-ink-soft);
-  font-family: var(--ff-serif);
+  font-family: var(--ff-sans);
   font-size: var(--t-body-lg);
   font-weight: 400;
   line-height: var(--lh-body);
