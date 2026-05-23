@@ -529,6 +529,8 @@ strong {
   flex-wrap: wrap;
   gap: var(--s-xs);
   align-content: flex-start;
+  margin: 0;
+  padding: 0;
 }
 
 .tag {

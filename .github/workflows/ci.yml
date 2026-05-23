@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install
+        run: npm ci --prefer-offline --no-audit
+      - name: Type-check
+        run: npx -y tsc --noEmit
+      - name: Build
+        run: npm run build --if-present
+      - name: Test build output exists
+        run: |
+          if [ ! -d "dist" ]; then echo "dist missing" && exit 1; fi
+      - name: Start static server for Lighthouse
+        run: |
+          npx http-server ./dist -p 8080 --silent &
+          sleep 2
+      - name: Run Lighthouse and save JSON
+        run: npx -y lighthouse http://127.0.0.1:8080 --output=json --output-path=./lighthouse-report.json --chrome-flags="--no-sandbox"
+      - name: Upload Lighthouse report
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: lighthouse-report.json

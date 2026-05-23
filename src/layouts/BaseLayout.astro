@@ -34,6 +34,10 @@ const navItems = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    <!-- Preload critical fonts to improve FCP / LCP -->
+    <link rel="preload" href="/fonts/HelveticaNowMTTextRegular_normal_normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/HelveticaNowMTDisplayMedium_normal_normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/HelveticaNowMTMicroRegular_normal_normal.woff2" as="font" type="font/woff2" crossorigin>
     
     <script is:inline>
       const theme = (() => {
@@ -93,7 +97,7 @@ const navItems = [
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p class="footer-text">© {year} {SITE_NAME} · Detroit, Michigan</p>
+        <p class="footer-text">© {year} {SITE_NAME} · Detroit, MI</p>
 
         <ul class="footer-links">
           <li>

@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Font Test" description="Visual test for font features">
+  <section class="section container">
+    <header class="section-head">
+      <h2 class="section-title">Font feature test</h2>
+    </header>
+
+    <p class="lead">This page compares the lowercase <code>i</code> rendered with different feature settings.</p>
+
+    <div style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap;margin-top:1rem;">
+      <div style="flex:1;min-width:280px;">
+        <h3>Default (site)</h3>
+        <p style="font-size:48px;">i i i i i</p>
+        <p style="font-size:20px;color:var(--c-mute)">Uses the site font settings.</p>
+      </div>
+
+      <div style="flex:1;min-width:280px;">
+        <h3>Forced features (`aalt` + `locl`)</h3>
+        <p style="font-size:48px; font-feature-settings: 'aalt' 1, 'locl' 1;">i i i i i</p>
+        <p style="font-size:20px;color:var(--c-mute)">Forces alternate glyphs for testing.</p>
+      </div>
+
+      <div style="flex:1;min-width:280px;">
+        <h3>Headlines disabled</h3>
+        <p style="font-size:48px; font-variant-ligatures: none; font-feature-settings: 'calt' 0, 'locl' 0, 'aalt' 0;">i i i i i</p>
+        <p style="font-size:20px;color:var(--c-mute)">Represents `.display` rules.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
