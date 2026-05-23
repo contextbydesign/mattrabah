@@ -126,6 +126,43 @@
   --ms-base: 160ms ease-out;
 }
 
+[data-theme="dark"] {
+  --c-paper: #0e1013;
+  --c-surface: #1e242c;
+  --c-surface-alt: #161a20;
+  --c-panel: #313945;
+
+  --c-ink: #fcfcfd;
+  --c-ink-soft: #f3f4f6;
+  --c-mute: #cfd5dd;
+  --c-faint: #c3cad4;
+
+  --c-rule: #313945;
+  --c-rule-strong: #576579;
+
+  --c-accent: #749aed;
+  --c-accent-ink: #c6d2f6;
+  --c-accent-pale: #0c3368;
+  --c-accent-edge: #104993;
+
+  --c-signal: #de769c;
+  --c-signal-ink: #efc7d3;
+  --c-signal-pale: #430b26;
+  --c-signal-edge: #87164b;
+
+  --c-success: #77bb93;
+  --c-caution: #ffc929;
+  --c-risk: #e37276;
+
+  --glow-signal: rgba(222, 118, 156, 0.12);
+  --glow-accent: rgba(116, 154, 237, 0.15);
+  --header-bg: rgba(14, 16, 19, 0.85);
+  --header-border: rgba(49, 57, 69, 0.7);
+  --tools-bg-start: rgba(67, 11, 38, 0.4);
+  --tools-bg-end: rgba(14, 16, 19, 0);
+  --card-bg: rgba(30, 36, 44, 0.58);
+}
+
 body {
   margin: 0;
   min-height: 100vh;
