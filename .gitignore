@@ -25,3 +25,4 @@ pnpm-debug.log*
 
 # Local font source files
 font-src/
+public/fonts/
