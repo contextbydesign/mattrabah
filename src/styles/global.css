@@ -4,7 +4,6 @@
    ========================================================================== */
 
 /* Typography: Helvetica Now */
-/* NOTE: If your styling breaks again, verify these paths point exactly to your font files! */
 
 /* Text (Body copy, UI elements) */
 @font-face {
@@ -54,8 +53,11 @@
   font-display: swap;
 }
 
+/* ==========================================================================
+   3-Tier Responsive Variables (Mobile Default)
+   ========================================================================== */
 :root {
-  /* LIGHT MODE (Default) */
+  /* LIGHT MODE COLORS */
   --c-paper: #f9fafb;       
   --c-surface: #ffffff;     
   --c-surface-alt: #f3f4f6; 
@@ -83,7 +85,7 @@
   --c-caution: #916d00;     
   --c-risk: #aa001c;        
 
-  /* Thematic Variables for Gradients & Components */
+  /* Thematic Gradients */
   --glow-signal: rgba(213, 35, 119, 0.05);
   --glow-accent: rgba(26, 115, 232, 0.08);
   --header-bg: rgba(249, 250, 251, 0.82);
@@ -92,30 +94,34 @@
   --tools-bg-end: rgba(246, 248, 249, 0);
   --card-bg: rgba(255, 255, 255, 0.58);
 
-  /* Type */
+  /* Font Families */
   --ff-display: "Helvetica Now Display", "Helvetica Neue", Arial, sans-serif;
   --ff-sans: "Helvetica Now Text", "Helvetica Neue", Arial, system-ui, sans-serif;
   --ff-micro: "Helvetica Now Micro", "Helvetica Neue", Arial, sans-serif;
-  --ff-serif: "Helvetica Now Text", "Helvetica Neue", Arial, sans-serif;
-  --ff-mono: "Roboto Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --ff-mono: "Roboto Mono", "IBM Plex Mono", ui-monospace, monospace;
 
-  /* Scale */
-  --t-display: clamp(2.8rem, 5vw, 5rem);
-  --t-h1: clamp(2.2rem, 4vw, 3.5rem);
-  --t-h2: clamp(1.6rem, 1.8vw, 2.25rem);
-  --t-h3: clamp(1.25rem, 1vw, 1.65rem);
-  --t-body-lg: 1.25rem;
-  --t-body: 1.0625rem;
+  /* Typography Scale: MOBILE DEFAULTS */
+  --t-display: 2.5rem;
+  --t-h1: 2rem;
+  --t-h2: 1.5rem;
+  --t-h3: 1.25rem;
+  --t-body-lg: 1.125rem;
+  --t-body: 1rem;
   --t-small: 0.875rem;
-  --t-kicker: 0.72rem;
+  --t-kicker: 0.75rem;
+  
+  /* Header Specific Typography (Mobile) */
+  --t-brand: 1.1rem;
+  --t-nav: 0.9rem;
 
   /* Leading */
   --lh-display: 1.05;
   --lh-h: 1.2;
-  --lh-body: 1.62;
+  --lh-body: 1.6;
+  --lh-lead: 1.45; /* Tighter leading for the large intro paragraph */
   --lh-tight: 1.3;
 
-  /* Spacing */
+  /* Spacing & Layout */
   --s-xs: 0.5rem;
   --s-sm: 0.75rem;
   --s-md: 1rem;
@@ -124,22 +130,53 @@
   --s-2xl: 5rem;
   --s-3xl: 8rem;
 
-  /* Layout */
   --measure-prose: 42rem;
-  --measure-page: 84rem;
+  --measure-page: 78rem;
 
-  /* Shape */
   --r-sm: 4px;
   --r-md: 10px;
-  --r-pill: 999px;
 
   --hairline: 1px solid var(--c-rule);
   --focus-ring: 2px solid var(--c-accent);
   --ms-base: 160ms ease-out;
 }
 
+/* TABLET TYPOGRAPHY (768px+) */
+@media (min-width: 48rem) {
+  :root {
+    --t-display: 3.5rem;
+    --t-h1: 2.75rem;
+    --t-h2: 1.85rem;
+    --t-h3: 1.35rem;
+    --t-body-lg: 1.25rem;
+    --t-body: 1.0625rem;
+    
+    /* Header Specific Typography (Tablet) */
+    --t-brand: 1.25rem;
+    --t-nav: 0.95rem;
+  }
+}
+
+/* DESKTOP TYPOGRAPHY (1024px+) */
+@media (min-width: 64rem) {
+  :root {
+    --t-display: 4.75rem; /* Massive, confident heading */
+    --t-h1: 3.5rem;
+    --t-h2: 2.25rem;
+    --t-h3: 1.5rem;
+    --t-body-lg: 1.5rem;  /* Large, editorial intro text */
+    --t-body: 1.125rem;   /* 18px body copy for easy reading */
+    --t-small: 0.95rem;
+    --t-kicker: 0.8rem;
+    
+    /* Header Specific Typography (Desktop) */
+    --t-brand: 1.4rem;    /* Strong top-left anchor */
+    --t-nav: 1.05rem;     /* Comfortable clicking targets */
+  }
+}
+
+/* DARK MODE OVERRIDES */
 [data-theme="dark"] {
-  /* DARK MODE OVERRIDES */
   --c-paper: #0e1013;       
   --c-surface: #1e242c;     
   --c-surface-alt: #161a20; 
@@ -176,8 +213,9 @@
   --card-bg: rgba(30, 36, 44, 0.58);
 }
 
-/* Reset */
-
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
 *,
 *::before,
 *::after {
@@ -239,38 +277,11 @@ a:hover {
   color: white;
 }
 
-h1,
-h2,
-h3,
-h4,
-p {
-  margin: 0;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  text-wrap: balance;
-}
-
-p {
-  text-wrap: pretty;
-}
-
-ul,
-ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-strong {
-  color: var(--c-ink);
-  font-weight: 700;
-}
-
-/* Layout */
+h1, h2, h3, h4, p { margin: 0; }
+h1, h2, h3, h4 { text-wrap: balance; }
+p { text-wrap: pretty; }
+ul, ol { list-style: none; margin: 0; padding: 0; }
+strong { color: var(--c-ink); font-weight: 700; }
 
 .container {
   width: 100%;
@@ -279,8 +290,9 @@ strong {
   margin-inline: auto;
 }
 
-/* Header */
-
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
 .site-header {
   position: sticky;
   top: 0;
@@ -291,13 +303,23 @@ strong {
   transition: background-color var(--ms-base), border-color var(--ms-base);
 }
 
+/* Mobile Default Header Alignment */
+.header-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding-block: 1.25rem;
+}
+
 .brand {
   color: var(--c-ink);
   font-family: var(--ff-sans);
-  font-size: 1.1rem; 
+  font-size: var(--t-brand); 
   font-weight: 500;  
   letter-spacing: -0.01em;
   text-decoration: none;
+  line-height: 1;
   transition: color var(--ms-base);
 }
 
@@ -309,19 +331,21 @@ strong {
   color: var(--c-accent);
 }
 
+/* Mobile Default Nav Alignment */
 .site-nav ul {
   display: flex;
   align-items: center;
-  gap: clamp(1rem, 2.2vw, 2.25rem);
+  gap: 1.25rem;
   flex-wrap: wrap;
 }
 
 .site-nav a {
   color: var(--c-ink-soft);
   font-family: var(--ff-sans);
-  font-size: var(--t-small);
+  font-size: var(--t-nav);
   font-weight: 500;
   text-decoration: none;
+  transition: color var(--ms-base);
 }
 
 .site-nav a:hover {
@@ -342,7 +366,6 @@ strong {
   transform-origin: left;
 }
 
-/* Theme Toggle */
 .theme-toggle-wrapper {
   display: flex;
   align-items: center;
@@ -370,10 +393,11 @@ strong {
 [data-theme="dark"] .sun-icon { display: block; }
 [data-theme="dark"] .moon-icon { display: none; }
 
-/* Hero */
-
+/* ==========================================================================
+   Hero & Sections
+   ========================================================================== */
 .hero {
-  padding-block: clamp(6rem, 13vw, 10rem);
+  padding-block: clamp(5rem, 13vw, 10rem);
   display: grid;
   gap: var(--s-lg);
   position: relative;
@@ -385,12 +409,7 @@ strong {
   width: min(100%, 32rem);
   height: 3px;
   margin-top: var(--s-md);
-  background: linear-gradient(
-    90deg,
-    var(--c-accent) 0%,
-    var(--c-signal) 45%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg, var(--c-accent) 0%, var(--c-signal) 45%, transparent 100%);
 }
 
 .kicker {
@@ -403,20 +422,38 @@ strong {
   text-transform: uppercase;
 }
 
+/* Mobile Default Hero Alignment */
+.display {
+  max-width: 12ch;
+  color: var(--c-ink);
+  font-family: var(--ff-display);
+  font-size: var(--t-display);
+  font-weight: 700;
+  line-height: var(--lh-display);
+  letter-spacing: -0.01em;
+}
+
 .lead {
   max-width: var(--measure-prose);
   color: var(--c-ink-soft);
   font-family: var(--ff-sans);
   font-size: var(--t-body-lg);
   font-weight: 400;
-  line-height: var(--lh-body);
+  line-height: var(--lh-lead); /* Tighter leading specifically for lead paragraphs */
 }
-
-/* Sections */
 
 .section {
   padding-block: var(--s-2xl);
   border-top: var(--hairline);
+}
+
+/* Mobile Default Section Head */
+.section-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-sm);
+  margin-bottom: var(--s-xl);
 }
 
 .section-title {
@@ -441,8 +478,9 @@ strong {
   color: var(--c-accent);
 }
 
-/* Work and writing lists */
-
+/* ==========================================================================
+   Cards & Lists
+   ========================================================================== */
 .work-list,
 .writing-list {
   display: grid;
@@ -510,8 +548,10 @@ strong {
   font-variant-numeric: tabular-nums;
 }
 
-/* Capabilities */
-
+/* ==========================================================================
+   Capabilities & Tags
+   ========================================================================== */
+/* Mobile Default Grid */
 .capabilities {
   display: grid;
   grid-template-columns: 1fr;
@@ -544,8 +584,6 @@ strong {
   align-content: flex-start;
 }
 
-/* Tags */
-
 .tag {
   display: inline-flex;
   align-items: center;
@@ -561,10 +599,7 @@ strong {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
-  transition:
-    color var(--ms-base),
-    background-color var(--ms-base),
-    border-color var(--ms-base);
+  transition: color var(--ms-base), background-color var(--ms-base), border-color var(--ms-base);
 }
 
 .tag:hover {
@@ -573,16 +608,12 @@ strong {
   color: var(--c-signal-ink);
 }
 
-/* Tools section */
-
+/* ==========================================================================
+   Tools Section (Gradient background)
+   ========================================================================== */
 section[aria-labelledby="ai-tools"],
 section[aria-labelledby="tool-list"] {
-  background:
-    linear-gradient(
-      180deg,
-      var(--tools-bg-start),
-      var(--tools-bg-end)
-    );
+  background: linear-gradient(180deg, var(--tools-bg-start), var(--tools-bg-end));
   border-top-color: var(--c-signal-edge);
 }
 
@@ -591,8 +622,9 @@ section[aria-labelledby="tool-list"] .section-title {
   color: var(--c-signal-ink);
 }
 
-/* Footer */
-
+/* ==========================================================================
+   Footer
+   ========================================================================== */
 .site-footer {
   margin-top: var(--s-3xl);
   border-top: var(--hairline);
@@ -638,8 +670,9 @@ section[aria-labelledby="tool-list"] .section-title {
   transition: stroke var(--ms-base);
 }
 
-/* Utility */
-
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
 .muted {
   color: var(--c-mute);
   font-style: italic;
@@ -660,94 +693,41 @@ section[aria-labelledby="tool-list"] .section-title {
 }
 
 /* ==========================================================================
-   Responsive Refinements (Mobile-First)
+   TABLET & DESKTOP STRUCTURAL ENHANCEMENTS
    ========================================================================== */
-
-/* 1. Mobile Defaults */
-.header-inner {
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.display {
-  max-width: 12ch;
-}
-
-.section-head {
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-/* 2. Tablet & Desktop Enhancements */
 @media (min-width: 48rem) {
+  /* Header Structural Alignment */
   .header-inner {
     flex-direction: row;
     align-items: center;
+    padding-block: 1.15rem;
+  }
+  
+  .site-nav ul {
+    gap: clamp(1.5rem, 2.5vw, 2.5rem); /* Wider spacing on larger screens */
   }
 
+  /* Hero Structural Alignment */
   .display {
-    max-width: 24ch;
+    max-width: 20ch;
   }
 
+  /* Section Structural Alignment */
   .section-head {
     flex-direction: row;
     align-items: baseline;
   }
 
+  /* Capabilities Grid Split */
   .capabilities {
     grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
     gap: var(--s-2xl);
   }
 }
 
-@media (min-width: 62rem) {
-  .container {
-    padding-inline: clamp(2rem, 4vw, 7rem);
-  }
-
-  .site-nav ul {
-    justify-content: flex-end;
-  }
-
-  .hero {
-    gap: var(--s-xl);
-  }
-
-  .display {
-    max-width: 34ch;
-  }
-
-  .lead {
-    max-width: 46rem;
-  }
-
-  .work-list,
-  .writing-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--s-lg);
-  }
-
-  .work-link,
-  .writing-link {
-    padding: clamp(1.8rem, 3vw, 3rem);
-  }
-}
-
-@media (min-width: 82rem) {
-  .display {
-    max-width: 40ch;
-  }
-
-  .container {
-    padding-inline: clamp(2.5rem, 3vw, 8rem);
-  }
-}
-
 /* Accessibility: Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
