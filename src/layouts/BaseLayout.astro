@@ -13,6 +13,18 @@ const DEFAULT_DESCRIPTION =
 const { title, description = DEFAULT_DESCRIPTION } = Astro.props;
 const fullTitle = title === SITE_NAME ? title : `${title} — ${SITE_NAME}`;
 const year = new Date().getFullYear();
+
+// 1. Get the current page URL path
+const currentPath = Astro.url.pathname;
+
+// 2. Define your navigation links
+const navItems = [
+  { href: "/work", label: "Work" },
+  { href: "/tools", label: "AI Tools" },
+  { href: "/blog", label: "Writing" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+];
 ---
 
 <!doctype html>
@@ -35,11 +47,23 @@ const year = new Date().getFullYear();
 
         <nav class="site-nav" aria-label="Primary">
           <ul>
-            <li><a href="/work">Work</a></li>
-            <li><a href="/tools">AI Tools</a></li>
-            <li><a href="/blog">Writing</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
+            {/* 3. Map over the links and dynamically assign the 'active' class */}
+            {navItems.map((item) => {
+              const isActive =
+                currentPath === item.href || currentPath.startsWith(item.href + "/");
+              
+              return (
+                <li>
+                  <a
+                    href={item.href}
+                    class={isActive ? "active" : ""}
+                    aria-current={isActive ? "page" : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </nav>
       </div>

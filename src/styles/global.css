@@ -287,11 +287,11 @@ strong {
   color: var(--c-accent);
 }
 
-.site-nav a[href="/tools"] {
+.site-nav a.active {
   color: var(--c-signal-ink);
 }
 
-.site-nav a[href="/tools"]::after {
+.site-nav a.active::after {
   content: "";
   display: block;
   height: 2px;
