@@ -29,7 +29,7 @@ jobs:
           npx http-server ./dist -p 8080 --silent &
           sleep 2
       - name: Run Lighthouse and save JSON
-        run: npx -y lighthouse http://127.0.0.1:8080 --output=json --output-path=./lighthouse-report.json --chrome-flags="--no-sandbox"
+        run: npx -y lighthouse http://127.0.0.1:8080 --output=json --output-path=./lighthouse-report.json --chrome-flags="--headless --no-sandbox"
       - name: Upload Lighthouse report
         uses: actions/upload-artifact@v4
         with:
