@@ -1,57 +1,39 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
   title="Contact"
-  description="Contact Matt Rabah for CX management, customer success, implementation, AI workflow, and customer lifecycle work."
+  description="Get in touch with me"
 >
   <section class="hero container">
     <p class="kicker">Contact</p>
 
-    <h1 class="display">
-      For CX management, lifecycle systems, and AI workflow work, start here.
-    </h1>
+    <h1 class="display">Let's build something that works.</h1>
 
     <p class="lead">
-      I'm a Detroit based Customer Experience Manager focused on optimizing
-      Customer Success, Implementation, AI workflow adoption,and customer lifecycle
-      transformation roles or projects.
+      If your team is wrestling with a complex customer lifecycle, trying to figure out practical AI workflows, or just needs to fix the CRM plumbing, let's talk.
     </p>
-  </section>
 
-  <section class="section container" aria-labelledby="contact-options">
-    <header class="section-head">
-      <h2 class="section-title" id="contact-options">Contact options</h2>
-    </header>
-
-    <ul class="writing-list">
-      <li class="writing-list-item">
-        <a href="mailto:rabah.matthew@gmail.com<" class="writing-link">
-          <p class="meta">Email</p>
-          <h3 class="writing-title">rabah.matthew@gmail.com</h3>
-          <p class="writing-dek">
-            Best for role conversations, project inquiries, and professional
-            follow-up.
-          </p>
-        </a>
-      </li>
-
-      <li class="writing-list-item">
-        <a
-          href="https://www.linkedin.com/in/mattrabah/"
-          rel="me noopener"
-          target="_blank"
-          class="writing-link"
-        >
-          <p class="meta">LinkedIn</p>
-          <h3 class="writing-title">Connect on LinkedIn</h3>
-          <p class="writing-dek">
-            Best for recruiter outreach, hiring conversations, and professional
-            context.
-          </p>
-        </a>
-      </li>
-    </ul>
+    <div style="margin-top: var(--s-lg);">
+      <a
+        href="mailto:rabah.matthew@gmail.com"
+        style="
+          display: inline-block;
+          background: var(--c-accent);
+          color: white;
+          padding: 0.8rem 1.6rem;
+          text-decoration: none;
+          font-weight: 500;
+          border-radius: var(--r-sm);
+          font-family: var(--ff-sans);
+          transition: background-color var(--ms-base);
+        "
+        onmouseover="this.style.backgroundColor='var(--c-accent-ink)'"
+        onmouseout="this.style.backgroundColor='var(--c-accent)'"
+      >
+        Email me directly
+      </a>
+    </div>
   </section>
 </BaseLayout>

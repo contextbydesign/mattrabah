@@ -1,61 +1,61 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
-const posts = [
+const blogPosts = [
   {
-    meta: "AI in CX · Draft",
-    title: "AI in CX fails when it starts with tools instead of workflows.",
-    dek: "A practical argument for starting with customer-facing operating problems before adding AI to the stack.",
+    title: "The problem with 'spray and pray' operations",
+    date: "2026-05-18",
+    dek: "Why high-volume tactical fixes usually fail, and how to build a strategic operating cadence instead.",
+    url: "/blog/spray-and-pray",
   },
   {
-    meta: "Implementation · Draft",
-    title: "The sales-to-implementation handoff is a risk control.",
-    dek: "Why delivery risk often starts before the implementation owner ever meets the customer.",
+    title: "Diagnosing input blindness in your CRM",
+    date: "2026-04-02",
+    dek: "When your team is entering data just to satisfy a required field, you don't have a system. You have a chore.",
+    url: "/blog/input-blindness",
   },
   {
-    meta: "Customer Success · Draft",
-    title: "Customer health scores fail when no one owns the next action.",
-    dek: "A customer health system is only useful if it changes behavior, accountability, and follow-through.",
-  },
-  {
-    meta: "Change Management · Draft",
-    title: "AI adoption is a change-management problem before it is a tooling problem.",
-    dek: "The hard part is rarely access to tools. It is workflow fit, trust, governance, and repeatable team behavior.",
+    title: "Salesforce as plumbing, not strategy",
+    date: "2026-02-14",
+    dek: "A certification is just permission to touch the pipes. The real work is figuring out where the water needs to go.",
+    url: "/blog/salesforce-plumbing",
   },
 ];
 ---
 
 <BaseLayout
   title="Writing"
-  description="Writing from Matt Rabah on AI-enabled CX management, customer lifecycle systems, implementation, account health, CRM discipline, and change management."
+  description="Thoughts on customer operations, system design, and building things that actually work."
 >
   <section class="hero container">
     <p class="kicker">Writing</p>
 
-    <h1 class="display">
-      Notes on AI-enabled CX management and customer lifecycle systems.
-    </h1>
+    <h1 class="display">Field notes on systems and strategy.</h1>
 
     <p class="lead">
-      Writing on practical AI workflows, customer success, implementation,
-      account health, CRM discipline, change management, and the operating
-      systems behind better customer outcomes.
+      Observations on AI-enabled CX management, customer lifecycle design, CRM discipline, and the operating models behind better customer outcomes.
     </p>
   </section>
 
-  <section class="section container" aria-labelledby="posts">
+  <section class="section container" aria-labelledby="articles">
     <header class="section-head">
-      <h2 class="section-title" id="posts">Recent notes</h2>
+      <h2 class="section-title" id="articles">Recent notes</h2>
     </header>
 
-    <ul class="writing-list writing-list--full">
+    <ul class="writing-list">
       {
-        posts.map((entry) => (
+        blogPosts.map((post) => (
           <li class="writing-list-item">
-            <a href="/blog" class="writing-link">
-              <p class="meta">{entry.meta}</p>
-              <h3 class="writing-title">{entry.title}</h3>
-              <p class="writing-dek">{entry.dek}</p>
+            <a href={post.url} class="writing-link">
+              <time class="meta" datetime={post.date}>
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+              <h3 class="writing-title">{post.title}</h3>
+              <p class="writing-dek">{post.dek}</p>
             </a>
           </li>
         ))

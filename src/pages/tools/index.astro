@@ -1,99 +1,67 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import Tag from "../../components/ui/Tag.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Tag from "../components/ui/Tag.astro";
 
-const tools = [
+const toolItems = [
   {
-    title: "Handoff Risk Checker",
-    status: "Prototype",
+    title: "Health Score Diagnostic",
+    subtitle: "Account Risk Assistant",
     summary:
-      "Helps identify implementation risk before a customer handoff becomes an escalation. Designed for sales, implementation, and customer success teams.",
-    inputs: ["Sales promise", "Stakeholders", "Timeline", "Known constraints"],
+      "A lightweight prompt engine designed to parse qualitative account notes and flag churn risk long before the renewal window opens.",
+    tags: ["Prompt Engineering", "Account Health", "Risk Mitigation"],
   },
   {
-    title: "Customer Health Signal Mapper",
-    status: "Prototype",
+    title: "QBR Synthesizer",
+    subtitle: "Meeting Prep Automation",
     summary:
-      "Turns customer signals into likely risk patterns, root causes, and next actions. Built for account review and portfolio triage.",
-    inputs: [
-      "Usage signals",
-      "Relationship changes",
-      "Support volume",
-      "Renewal timing",
-    ],
+      "A structured workflow that ingests recent support tickets and usage data to generate executive summaries, saving hours of manual prep.",
+    tags: ["Data Synthesis", "Workflow Automation", "Executive Prep"],
   },
   {
-    title: "Renewal Readiness Diagnostic",
-    status: "Planned",
+    title: "Handoff Optimizer",
+    subtitle: "Sales to CS Alignment",
     summary:
-      "Assesses whether an account is operationally, commercially, and relationship-ready for renewal conversations.",
-    inputs: ["Adoption", "Executive sponsor", "Business value", "Open risks"],
-  },
-  {
-    title: "QBR Question Builder",
-    status: "Planned",
-    summary:
-      "Generates better executive review questions based on account context, value realization, and unresolved risk.",
-    inputs: [
-      "Account stage",
-      "Known outcomes",
-      "Open risks",
-      "Expansion potential",
-    ],
-  },
-  {
-    title: "CRM Field Quality Checker",
-    status: "Planned",
-    summary:
-      "Reviews whether CRM fields are useful, owned, updated, and tied to an actual customer-facing decision.",
-    inputs: ["Field name", "Owner", "Update cadence", "Decision supported"],
+      "A framework that audits closed-won CRM fields and outputs a clean, actionable brief for the implementation team, reducing initial friction.",
+    tags: ["CRM Hygiene", "Change Management", "Process Design"],
   },
 ];
 ---
 
 <BaseLayout
   title="AI Tools"
-  description="Practical AI tools from Matt Rabah for CX, customer success, implementation, account health, and customer lifecycle teams."
+  description="Practical AI workflows and operational tools designed by Matt Rabah."
 >
   <section class="hero container">
     <p class="kicker">AI Tools</p>
 
-    <h1 class="display">
-      Practical AI tools for CX, CS, and implementation teams.
-    </h1>
+    <h1 class="display">AI should reduce friction, not add noise.</h1>
 
     <p class="lead">
-      These tools are built around real customer-operations problems: handoff
-      risk, account health, renewal readiness, executive preparation, CRM
-      discipline, and workflow adoption. The goal is not novelty. The goal is
-      better judgment, faster preparation, and clearer next actions.
+      We don't need more tools; we need better judgment. I build lightweight AI workflows designed to solve actual operational bottlenecks. These prototypes target things like handoff risk, account triage, and the "input blindness" that plagues most CRM environments.
     </p>
   </section>
 
   <section class="section container" aria-labelledby="tool-list">
     <header class="section-head">
-      <h2 class="section-title" id="tool-list">Tool prototypes</h2>
+      <h2 class="section-title" id="tool-list">Active frameworks</h2>
     </header>
 
     <ul class="work-list work-list--full">
       {
-        tools.map((tool) => (
+        toolItems.map((entry) => (
           <li class="work-list-item">
-            <a href="/tools" class="work-link">
-              <p class="kicker">{tool.status}</p>
-              <h3 class="work-title">{tool.title}</h3>
-              <p class="work-summary">{tool.summary}</p>
-
-              <ul class="capabilities-tags" aria-label={`${tool.title} inputs`}>
-                {
-                  tool.inputs.map((input) => (
-                    <li>
-                      <Tag label={input} />
-                    </li>
-                  ))
-                }
+            <div class="work-link">
+              <p class="kicker">{entry.subtitle}</p>
+              <h3 class="work-title">{entry.title}</h3>
+              <p class="work-summary">{entry.summary}</p>
+              <ul class="capabilities-tags" aria-label={`${entry.title} tags`}>
+                {entry.tags.map((tag) => (
+                  <li>
+                    <Tag label={tag} />
+                  </li>
+                ))}
               </ul>
-            </a>
+            </div>
           </li>
         ))
       }
