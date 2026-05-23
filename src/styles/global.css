@@ -180,7 +180,7 @@ body {
   text-rendering: optimizeLegibility;
   font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
   font-variant-numeric: lining-nums proportional-nums;
-  font-feature-settings: "salt" 1, "ss01" 1, "ss02" 1, "ss03" 1, "ss04" 1, "cv01" 1, "cv02" 1;
+  font-feature-settings: "aalt" 1, "salt" 1, "ss09" 1, "ss10" 1, "calt" 1, "locl" 1;
 }
 
 html {
