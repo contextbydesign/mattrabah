@@ -420,6 +420,10 @@ strong {
   gap: var(--s-sm);
 }
 
+.work-list--full {
+  width: 100%;
+}
+
 .work-list-item,
 .writing-list-item {
   border: 1px solid var(--c-rule);
@@ -436,6 +440,7 @@ strong {
   padding: clamp(1.4rem, 3vw, 2.4rem);
   color: inherit;
   text-decoration: none;
+  align-items: start;
 }
 
 .work-link:hover,
@@ -652,13 +657,18 @@ section[aria-labelledby="tool-list"] .section-title {
     gap: var(--s-lg);
   }
 
-  .work-list {
+  .work-list,
+  .work-list--full {
     grid-template-columns: 1fr;
   }
 
   .work-link,
   .writing-link {
     padding: clamp(1.8rem, 3vw, 3rem);
+  }
+
+  .capabilities-tags {
+    justify-content: flex-start;
   }
 }
 
