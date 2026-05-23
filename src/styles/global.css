@@ -8,21 +8,21 @@
 /* Text (Body copy, UI elements) */
 @font-face {
   font-family: 'Helvetica Now Text';
-  src: url('./HelveticaNowMTTextRegular_normal_normal.woff2') format('woff2');
+  src: url('/fonts/HelveticaNowMTTextRegular_normal_normal.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica Now Text';
-  src: url('./HelveticaNowMTTextMedium_normal_normal.woff2') format('woff2');
+  src: url('/fonts/HelveticaNowMTTextMedium_normal_normal.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica Now Text';
-  src: url('./HelveticaNowMTTextBold_normal_normal.woff2') format('woff2');
+  src: url('/fonts/HelveticaNowMTTextBold_normal_normal.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -31,14 +31,14 @@
 /* Display (Large Headlines) */
 @font-face {
   font-family: 'Helvetica Now Display';
-  src: url('./HelveticaNowMTDisplayMedium_normal_normal.woff2') format('woff2');
+  src: url('/fonts/HelveticaNowMTDisplayMedium_normal_normal.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Helvetica Now Display';
-  src: url('./HelveticaNowMTDisplayBold_normal_normal.woff2') format('woff2');
+  src: url('/fonts/HelveticaNowMTDisplayBold_normal_normal.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -47,7 +47,7 @@
 /* Micro (Kickbacks, Tags, Meta) */
 @font-face {
   font-family: 'Helvetica Now Micro';
-  src: url('./HelveticaNowMTMicroRegular_normal_normal.woff2') format('woff2');
+  src: url('/fonts/HelveticaNowMTMicroRegular_normal_normal.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
