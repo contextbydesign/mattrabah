@@ -553,7 +553,7 @@ section[aria-labelledby="ai-tools"] .section-title {
 }
 
 section[aria-labelledby="tool-list"] .section-title {
-  color: var(--c-paper);
+  color: var(--c-ink);
 }
 
 .site-footer {
