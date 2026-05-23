@@ -3,7 +3,8 @@
    ========================================================================== */
 
 @font-face {
-  font-family: 'Helvetica Now Text';
+  /* use a unique internal name to avoid system font collisions */
+  font-family: 'MR Helvetica Now Text';
   src: url('/fonts/HelveticaNowMTTextRegular_normal_normal.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
@@ -11,7 +12,7 @@
 }
 
 @font-face {
-  font-family: 'Helvetica Now Text';
+  font-family: 'MR Helvetica Now Text';
   src: url('/fonts/HelveticaNowMTTextMedium_normal_normal.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
@@ -19,7 +20,7 @@
 }
 
 @font-face {
-  font-family: 'Helvetica Now Text';
+  font-family: 'MR Helvetica Now Text';
   src: url('/fonts/HelveticaNowMTTextBold_normal_normal.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
@@ -27,7 +28,7 @@
 }
 
 @font-face {
-  font-family: 'Helvetica Now Display';
+  font-family: 'MR Helvetica Now Display';
   src: url('/fonts/HelveticaNowMTDisplayMedium_normal_normal.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
@@ -35,7 +36,7 @@
 }
 
 @font-face {
-  font-family: 'Helvetica Now Display';
+  font-family: 'MR Helvetica Now Display';
   src: url('/fonts/HelveticaNowMTDisplayBold_normal_normal.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
@@ -43,7 +44,7 @@
 }
 
 @font-face {
-  font-family: 'Helvetica Now Micro';
+  font-family: 'MR Helvetica Now Micro';
   src: url('/fonts/HelveticaNowMTMicroRegular_normal_normal.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
@@ -87,9 +88,9 @@
   --tools-bg-end: rgba(246, 248, 249, 0);
   --card-bg: rgba(255, 255, 255, 0.58);
 
-  --ff-display: 'Helvetica Now Display', 'Helvetica Neue', Arial, sans-serif;
-  --ff-sans: 'Helvetica Now Text', 'Helvetica Neue', Arial, system-ui, sans-serif;
-  --ff-micro: 'Helvetica Now Micro', 'Helvetica Neue', Arial, sans-serif;
+  --ff-display: 'MR Helvetica Now Display', 'Helvetica Neue', Arial, sans-serif;
+  --ff-sans: 'MR Helvetica Now Text', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  --ff-micro: 'MR Helvetica Now Micro', 'Helvetica Neue', Arial, sans-serif;
   --ff-mono: 'Roboto Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   /* Centralized OpenType feature settings for site fonts */
   --ff-features: "\"aalt\" 1, \"calt\" 1, \"locl\" 1";
@@ -182,8 +183,8 @@ body {
   text-rendering: optimizeLegibility;
   font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
   font-variant-numeric: lining-nums proportional-nums;
-  /* explicit feature settings (var() caused parsing issues in this environment) */
-  font-feature-settings: "aalt" 1, "calt" 1, "locl" 1;
+  /* enable only context and locale alternates globally (avoid aggressive alternates) */
+  font-feature-settings: "calt" 1, "locl" 1;
 }
 
 html {
@@ -373,6 +374,12 @@ strong {
   font-weight: 700;
   line-height: var(--lh-display);
   letter-spacing: -0.01em;
+}
+
+/* Headline rendering can be sensitive to stylistic substitutions — keep features off for display text */
+.display {
+  font-variant-ligatures: none;
+  font-feature-settings: "calt" 0, "locl" 0, "aalt" 0;
 }
 
 .lead {
