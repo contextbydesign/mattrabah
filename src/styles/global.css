@@ -544,13 +544,16 @@ strong {
 
 section[aria-labelledby="ai-tools"],
 section[aria-labelledby="tool-list"] {
-  background: linear-gradient(180deg, var(--tools-bg-start), var(--tools-bg-end));
-  border-top-color: var(--c-signal-edge);
+  background: transparent;
+  border-top-color: var(--c-rule);
 }
 
-section[aria-labelledby="ai-tools"] .section-title,
-section[aria-labelledby="tool-list"] .section-title {
+section[aria-labelledby="ai-tools"] .section-title {
   color: var(--c-signal-ink);
+}
+
+section[aria-labelledby="tool-list"] .section-title {
+  color: var(--c-paper);
 }
 
 .site-footer {
