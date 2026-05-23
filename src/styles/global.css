@@ -126,7 +126,7 @@
 
   /* Layout */
   --measure-prose: 42rem;
-  --measure-page: 78rem;
+  --measure-page: 84rem;
 
   /* Shape */
   --r-sm: 4px;
@@ -686,7 +686,7 @@ section[aria-labelledby="tool-list"] .section-title {
   }
 
   .display {
-    max-width: 20ch;
+    max-width: 24ch;
   }
 
   .section-head {
@@ -697,6 +697,49 @@ section[aria-labelledby="tool-list"] .section-title {
   .capabilities {
     grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
     gap: var(--s-2xl);
+  }
+}
+
+@media (min-width: 62rem) {
+  .container {
+    padding-inline: clamp(2rem, 4vw, 7rem);
+  }
+
+  .site-nav ul {
+    justify-content: flex-end;
+  }
+
+  .hero {
+    gap: var(--s-xl);
+  }
+
+  .display {
+    max-width: 34ch;
+  }
+
+  .lead {
+    max-width: 46rem;
+  }
+
+  .work-list,
+  .writing-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--s-lg);
+  }
+
+  .work-link,
+  .writing-link {
+    padding: clamp(1.8rem, 3vw, 3rem);
+  }
+}
+
+@media (min-width: 82rem) {
+  .display {
+    max-width: 40ch;
+  }
+
+  .container {
+    padding-inline: clamp(2.5rem, 3vw, 8rem);
   }
 }
 
