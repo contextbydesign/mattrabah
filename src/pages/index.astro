@@ -42,11 +42,18 @@ const featuredWork = [
   },
   {
     kicker: "Consulting",
-    title: "Designing lifecycle systems for operationally complex service businesses.",
+    title: "Context By Design",
+    subtitle: "Lifecycle Diagnostics & Retention",
     summary:
-      "Built customer journey, retention, onboarding, and lifecycle frameworks through Context By Design.",
-    meta: "Context By Design · Independent consulting",
+      "Developed customer journey, onboarding, retention, and lifecycle frameworks for service businesses operating with limited process visibility.",
+    meta: "Consulting · Transformation · Retention Systems",
   },
+];
+
+const aiTools = [
+  "Handoff Risk Checker",
+  "Customer Health Signal Mapper",
+  "Renewal Readiness Diagnostic",
 ];
 
 const writing = [
@@ -144,7 +151,7 @@ const writing = [
         {
           aiTools.map((tool) => (
             <li>
-              <Tag label={label} />
+              <Tag label={tool} />
             </li>
           ))
         }
