@@ -91,6 +91,8 @@
   --ff-sans: 'Helvetica Now Text', 'Helvetica Neue', Arial, system-ui, sans-serif;
   --ff-micro: 'Helvetica Now Micro', 'Helvetica Neue', Arial, sans-serif;
   --ff-mono: 'Roboto Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* Centralized OpenType feature settings for site fonts */
+  --ff-features: "\"aalt\" 1, \"calt\" 1, \"locl\" 1";
 
   --t-display: clamp(2.8rem, 5vw, 5rem);
   --t-h1: clamp(2.2rem, 4vw, 3.5rem);
@@ -180,7 +182,8 @@ body {
   text-rendering: optimizeLegibility;
   font-variant-ligatures: common-ligatures discretionary-ligatures contextual;
   font-variant-numeric: lining-nums proportional-nums;
-  font-feature-settings: "aalt" 1, "salt" 1, "ss09" 1, "ss10" 1, "calt" 1, "locl" 1;
+  /* explicit feature settings (var() caused parsing issues in this environment) */
+  font-feature-settings: "aalt" 1, "calt" 1, "locl" 1;
 }
 
 html {
