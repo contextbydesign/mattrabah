@@ -27,9 +27,31 @@ jobs:
       - name: Start static server for Lighthouse
         run: |
           npx http-server ./dist -p 8080 --silent &
-          sleep 2
+          # wait for server to respond (retry up to ~24s)
+          for i in 1 12; do
+            if curl -sSf http://127.0.0.1:8080 >/dev/null; then
+              echo "static server is up"
+              break
+            fi
+            echo "waiting for server ($i/12)..."
+            sleep 2
+          done
+          if ! curl -sSf http://127.0.0.1:8080 >/dev/null; then
+            echo "server failed to start" && exit 1
+          fi
       - name: Run Lighthouse and save JSON
-        run: npx -y lighthouse http://127.0.0.1:8080 --output=json --output-path=./lighthouse-report.json --chrome-flags="--headless --no-sandbox"
+        run: |
+          # try Lighthouse up to 3 times with backoff in case Chrome or server isn't ready
+          set -o pipefail
+          for attempt in 1 2 3; do
+            echo "Lighthouse attempt $attempt"
+            npx -y lighthouse http://127.0.0.1:8080 --output=json --output-path=./lighthouse-report.json --chrome-flags="--headless --no-sandbox" && break
+            echo "Lighthouse failed on attempt $attempt"
+            sleep $((attempt * 5))
+          done
+          if [ ! -f ./lighthouse-report.json ]; then
+            echo "Lighthouse did not produce a report" && exit 1
+          fi
       - name: Upload Lighthouse report
         uses: actions/upload-artifact@v4
         with:
