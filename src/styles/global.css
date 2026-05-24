@@ -51,60 +51,60 @@
 }
 
 :root {
-  /* Core palette */
-  --c-paper: #f7f7f4;
+  /* Core palette: editorial, warm, type-first */
+  --c-paper: #f7f5ef;
   --c-surface: #ffffff;
-  --c-surface-alt: #eeeeea;
-  --c-panel: #e7e7e1;
+  --c-surface-alt: #ede9df;
+  --c-panel: #e4dfd3;
 
-  --c-ink: #101010;
-  --c-ink-soft: #252525;
-  --c-mute: #53534e;
-  --c-faint: #73736c;
+  --c-ink: #0b0b0a;
+  --c-ink-soft: #262520;
+  --c-mute: #555248;
+  --c-faint: #777267;
 
-  --c-rule: #ddddd6;
-  --c-rule-strong: #c7c7be;
+  --c-rule: #ddd7ca;
+  --c-rule-strong: #beb6a6;
 
-  /* Compatibility aliases used by font-test and future components */
+  /* Compatibility aliases for test pages/components */
   --c-text: var(--c-ink);
   --c-border: var(--c-rule);
 
-  /* Accent system */
-  --c-accent: #254f8f;
-  --c-accent-ink: #173967;
-  --c-accent-pale: #edf2f8;
-  --c-accent-edge: #9fb5d6;
+  /* Accent: used sparingly, not as decoration */
+  --c-accent: #1f4f86;
+  --c-accent-ink: #15375e;
+  --c-accent-pale: #e9eef4;
+  --c-accent-edge: #9daec4;
 
-  --c-signal: #8f3a4a;
-  --c-signal-ink: #642735;
-  --c-signal-pale: #f6ecee;
-  --c-signal-edge: #d7a6af;
+  --c-signal: #7f3d3f;
+  --c-signal-ink: #552729;
+  --c-signal-pale: #f2e8e6;
+  --c-signal-edge: #c9a39d;
 
   --c-success: #2f6f4f;
   --c-caution: #806400;
   --c-risk: #9c1e2b;
 
-  --header-bg: rgba(247, 247, 244, 0.88);
-  --header-border: rgba(221, 221, 214, 0.82);
-  --card-bg: rgba(255, 255, 255, 0.72);
-  --card-bg-hover: rgba(231, 231, 225, 0.62);
+  --header-bg: rgba(247, 245, 239, 0.9);
+  --header-border: rgba(221, 215, 202, 0.88);
+  --card-bg: rgba(255, 255, 255, 0.58);
+  --card-bg-hover: rgba(237, 233, 223, 0.58);
 
   --ff-display: "MR Helvetica Now Display", "Helvetica Neue", Arial, sans-serif;
   --ff-sans: "MR Helvetica Now Text", "Helvetica Neue", Arial, system-ui, sans-serif;
   --ff-micro: "MR Helvetica Now Micro", "Helvetica Neue", Arial, sans-serif;
   --ff-mono: "Roboto Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-  --t-display: clamp(3.25rem, 6.7vw, 7rem);
-  --t-h1: clamp(2.4rem, 4.2vw, 4.25rem);
-  --t-h2: clamp(1.65rem, 2vw, 2.45rem);
-  --t-h3: clamp(1.25rem, 1.35vw, 1.6rem);
-  --t-body-lg: clamp(1.12rem, 1.25vw, 1.32rem);
+  --t-display: clamp(2.55rem, 4.65vw, 5.25rem);
+  --t-h1: clamp(2.25rem, 3.8vw, 4rem);
+  --t-h2: clamp(1.55rem, 1.85vw, 2.25rem);
+  --t-h3: clamp(1.18rem, 1.35vw, 1.55rem);
+  --t-body-lg: clamp(1.08rem, 1.2vw, 1.28rem);
   --t-body: 1.0625rem;
   --t-small: 0.875rem;
   --t-kicker: 0.72rem;
 
-  --lh-display: 0.96;
-  --lh-h: 1.12;
+  --lh-display: 1.04;
+  --lh-h: 1.14;
   --lh-body: 1.62;
   --lh-tight: 1.25;
 
@@ -117,54 +117,57 @@
   --s-3xl: 8rem;
 
   --measure-prose: 44rem;
-  --measure-page: 86rem;
+  --measure-page: 88rem;
 
-  --r-sm: 5px;
-  --r-md: 12px;
-  --r-lg: 18px;
+  --r-sm: 2px;
+  --r-md: 0;
+  --r-lg: 0;
   --r-pill: 999px;
 
   --hairline: 1px solid var(--c-rule);
   --focus-ring: 2px solid var(--c-accent);
-  --ms-base: 160ms ease-out;
+  --ms-base: 150ms ease-out;
 }
 
 [data-theme="dark"] {
-  --c-paper: #101010;
-  --c-surface: #171717;
-  --c-surface-alt: #141414;
-  --c-panel: #242424;
+  --c-paper: #10100f;
+  --c-surface: #171715;
+  --c-surface-alt: #1e1d1a;
+  --c-panel: #292720;
 
-  --c-ink: #f4f3ef;
-  --c-ink-soft: #e6e3dc;
-  --c-mute: #c4c0b7;
-  --c-faint: #99958c;
+  --c-ink: #f3f0e8;
+  --c-ink-soft: #e2ded3;
+  --c-mute: #bcb6a8;
+  --c-faint: #948d7f;
 
-  --c-rule: #30302c;
-  --c-rule-strong: #474741;
+  --c-rule: #353229;
+  --c-rule-strong: #575143;
 
   --c-text: var(--c-ink);
   --c-border: var(--c-rule);
 
-  --c-accent: #9eb9e3;
-  --c-accent-ink: #d2def0;
-  --c-accent-pale: #17243a;
-  --c-accent-edge: #334d76;
+  --c-accent: #9eb6d4;
+  --c-accent-ink: #d2deec;
+  --c-accent-pale: #172332;
+  --c-accent-edge: #3c526d;
 
-  --c-signal: #d38c98;
-  --c-signal-ink: #efc6ce;
-  --c-signal-pale: #33181f;
-  --c-signal-edge: #70434c;
+  --c-signal: #c78d88;
+  --c-signal-ink: #edc9c5;
+  --c-signal-pale: #2c1c1b;
+  --c-signal-edge: #684a47;
 
   --c-success: #8cc6a5;
   --c-caution: #e5c452;
   --c-risk: #e07b86;
 
-  --header-bg: rgba(16, 16, 16, 0.9);
-  --header-border: rgba(48, 48, 44, 0.86);
-  --card-bg: rgba(23, 23, 23, 0.72);
-  --card-bg-hover: rgba(36, 36, 36, 0.74);
+  --header-bg: rgba(16, 16, 15, 0.92);
+  --header-border: rgba(53, 50, 41, 0.9);
+  --card-bg: rgba(23, 23, 21, 0.56);
+  --card-bg-hover: rgba(30, 29, 26, 0.74);
 }
+
+/* Base
+   ========================================================================== */
 
 *,
 *::before,
@@ -198,7 +201,7 @@ a {
   color: var(--c-accent);
   text-decoration-color: var(--c-accent-edge);
   text-decoration-thickness: 1px;
-  text-underline-offset: 0.24em;
+  text-underline-offset: 0.23em;
   transition:
     color var(--ms-base),
     text-decoration-color var(--ms-base);
@@ -216,8 +219,8 @@ a:hover {
 }
 
 ::selection {
-  background: var(--c-accent);
-  color: #ffffff;
+  background: var(--c-ink);
+  color: var(--c-paper);
 }
 
 h1,
@@ -248,7 +251,7 @@ code {
 .container {
   width: 100%;
   max-width: var(--measure-page);
-  padding-inline: clamp(1.35rem, 5vw, 5rem);
+  padding-inline: clamp(1.35rem, 5vw, 5.25rem);
   margin-inline: auto;
 }
 
@@ -273,7 +276,7 @@ code {
   align-items: center;
   justify-content: space-between;
   gap: var(--s-lg);
-  padding-block: 1rem;
+  padding-block: 1.05rem;
   flex-wrap: wrap;
 }
 
@@ -282,18 +285,18 @@ code {
   font-family: var(--ff-sans);
   font-size: 1.02rem;
   font-weight: 700;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
   text-decoration: none;
 }
 
 .brand:hover {
-  color: var(--c-accent);
+  color: var(--c-ink);
 }
 
 .site-nav ul {
   display: flex;
   align-items: center;
-  gap: clamp(0.9rem, 2vw, 2rem);
+  gap: clamp(0.95rem, 2vw, 2.05rem);
   flex-wrap: wrap;
   margin: 0;
   padding: 0;
@@ -319,7 +322,7 @@ code {
   content: "";
   display: block;
   height: 1px;
-  margin-top: 0.25rem;
+  margin-top: 0.24rem;
   background: currentColor;
   transform: scaleX(0.72);
   transform-origin: left;
@@ -372,7 +375,7 @@ code {
   position: relative;
   display: grid;
   gap: var(--s-lg);
-  padding-block: clamp(5rem, 13vw, 11rem);
+  padding-block: clamp(5rem, 12vw, 10.5rem);
 }
 
 .hero::after {
@@ -384,10 +387,10 @@ code {
   background: linear-gradient(
     90deg,
     var(--c-ink) 0%,
-    var(--c-rule-strong) 54%,
+    var(--c-rule-strong) 52%,
     transparent 100%
   );
-  opacity: 0.72;
+  opacity: 0.68;
 }
 
 .kicker {
@@ -396,18 +399,18 @@ code {
   font-size: var(--t-kicker);
   font-weight: 400;
   line-height: var(--lh-tight);
-  letter-spacing: 0.15em;
+  letter-spacing: 0.155em;
   text-transform: uppercase;
 }
 
 .display {
-  max-width: 17ch;
+  max-width: 22ch;
   color: var(--c-ink);
   font-family: var(--ff-display);
   font-size: var(--t-display);
   font-weight: 700;
   line-height: var(--lh-display);
-  letter-spacing: -0.055em;
+  letter-spacing: -0.018em;
   font-variant-ligatures: none;
   font-feature-settings: "calt" 0, "locl" 0, "aalt" 0;
 }
@@ -444,7 +447,7 @@ code {
   font-size: var(--t-h2);
   font-weight: 700;
   line-height: var(--lh-h);
-  letter-spacing: -0.035em;
+  letter-spacing: -0.018em;
 }
 
 .section-more {
@@ -461,15 +464,16 @@ code {
   color: var(--c-ink);
 }
 
-/* Lists and cards
+/* Editorial cards and indexes
    ========================================================================== */
 
 .work-list,
 .writing-list {
   display: grid;
-  gap: var(--s-md);
+  gap: 0;
   margin: 0;
   padding: 0;
+  border-top: var(--hairline);
 }
 
 .work-list--full,
@@ -479,19 +483,16 @@ code {
 
 .work-list-item,
 .writing-list-item {
-  border: 1px solid var(--c-rule);
-  background: var(--card-bg);
-  border-radius: var(--r-md);
+  border-bottom: var(--hairline);
+  background: transparent;
   overflow: hidden;
   transition:
     background-color var(--ms-base),
-    border-color var(--ms-base),
-    transform var(--ms-base);
+    border-color var(--ms-base);
 }
 
 .work-list-item:hover,
 .writing-list-item:hover {
-  border-color: var(--c-rule-strong);
   background: var(--card-bg-hover);
 }
 
@@ -499,7 +500,7 @@ code {
 .writing-link {
   display: grid;
   gap: var(--s-sm);
-  padding: clamp(1.35rem, 3vw, 2.65rem);
+  padding: clamp(1.65rem, 3vw, 3rem) 0;
   color: inherit;
   text-decoration: none;
   align-items: start;
@@ -507,13 +508,13 @@ code {
 
 .work-title,
 .writing-title {
-  max-width: 32ch;
+  max-width: 35ch;
   color: var(--c-ink);
   font-family: var(--ff-display);
-  font-size: clamp(1.75rem, 2.45vw, 3.15rem);
+  font-size: clamp(1.75rem, 2.55vw, 3.25rem);
   font-weight: 700;
-  line-height: 1.02;
-  letter-spacing: -0.045em;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   transition: color var(--ms-base);
 }
 
@@ -537,7 +538,7 @@ code {
   font-family: var(--ff-micro);
   font-size: var(--t-kicker);
   font-weight: 400;
-  letter-spacing: 0.11em;
+  letter-spacing: 0.115em;
   line-height: var(--lh-tight);
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
@@ -550,10 +551,10 @@ code {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--s-xl);
-  padding: clamp(1.35rem, 3vw, 2.5rem);
-  border: 1px solid var(--c-rule);
-  border-radius: var(--r-md);
-  background: var(--card-bg);
+  padding: clamp(1.65rem, 3vw, 3rem) 0;
+  border-top: var(--hairline);
+  border-bottom: var(--hairline);
+  background: transparent;
   transition:
     background-color var(--ms-base),
     border-color var(--ms-base);
@@ -585,10 +586,10 @@ code {
 .tag {
   display: inline-flex;
   align-items: center;
-  padding: 0.58em 0.75em;
+  padding: 0.54em 0.7em;
   border: 1px solid var(--c-rule);
   border-radius: var(--r-sm);
-  background: var(--c-surface);
+  background: transparent;
   color: var(--c-mute);
   font-family: var(--ff-micro);
   font-size: 0.68rem;
@@ -712,9 +713,13 @@ section[aria-labelledby="tool-list"] .section-title {
     gap: 0.9rem 1.1rem;
   }
 
+  .hero {
+    padding-block: clamp(4rem, 18vw, 6.5rem);
+  }
+
   .display {
-    max-width: 11ch;
-    letter-spacing: -0.05em;
+    max-width: 12ch;
+    letter-spacing: -0.014em;
   }
 
   .section-head {
@@ -740,7 +745,7 @@ section[aria-labelledby="tool-list"] .section-title {
   }
 
   .display {
-    max-width: 24ch;
+    max-width: 23ch;
   }
 
   .lead {
@@ -752,18 +757,17 @@ section[aria-labelledby="tool-list"] .section-title {
   .work-list--full,
   .writing-list--full {
     grid-template-columns: 1fr;
-    gap: var(--s-lg);
   }
 
   .work-link,
   .writing-link {
-    padding: clamp(1.8rem, 3vw, 3rem);
+    padding-block: clamp(2rem, 3vw, 3.25rem);
   }
 }
 
 @media (min-width: 82rem) {
   .display {
-    max-width: 28ch;
+    max-width: 24ch;
   }
 
   .container {
