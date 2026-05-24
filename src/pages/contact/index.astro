@@ -1,22 +1,45 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const contactLinks = [
+  {
+    label: "Email",
+    href: "mailto:rabah.matthew@gmail.com",
+    value: "rabah.matthew@gmail.com",
+    external: false,
+    icon: "email",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com/in/mattrabah",
+    value: "linkedin.com/in/mattrabah",
+    external: true,
+    icon: "linkedin",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/contextbydesign.io?igsh=djVidzQ0emIwejkw&utm_source=qr",
+    value: "@contextbydesign.io",
+    external: true,
+    icon: "instagram",
+  },
+];
 ---
 
 <BaseLayout
   title="Contact"
-  description="Contact Matt Rabah for CX, customer success, implementation, customer lifecycle, CRM discipline, and practical AI workflow work."
+  description="Contact Matt Rabah for customer lifecycle systems, customer success, implementation, CRM discipline, and practical AI workflow work."
 >
   <section class="hero container">
     <p class="kicker">Contact</p>
 
     <h1 class="display">
-      Start with the customer problem, not the buzzword.
+      Start with the work. Then we can talk about fit.
     </h1>
 
     <p class="lead">
-      I am open to CX, Customer Success, Implementation, and customer lifecycle
-      roles or projects where the work requires clearer ownership, better
-      operating cadence, CRM discipline, and practical AI workflow design.
+      Best for role conversations, project inquiries, customer lifecycle work,
+      implementation-heavy teams, CRM discipline, and practical AI workflows.
     </p>
   </section>
 
@@ -25,33 +48,121 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <h2 class="section-title" id="contact-options">Contact options</h2>
     </header>
 
-    <ul class="writing-list">
-      <li class="writing-list-item">
-        <a href="mailto:rabah.matthew@gmail.com" class="writing-link">
-          <p class="meta">Email</p>
-          <h3 class="writing-title">rabah.matthew@gmail.com</h3>
-          <p class="writing-dek">
-            Best for role conversations, project inquiries, and direct
-            professional follow-up.
-          </p>
-        </a>
-      </li>
+    <ul class="contact-list" aria-label="Contact links">
+      {
+        contactLinks.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="contact-button"
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "me noopener noreferrer" : undefined}
+              aria-label={`${item.label}: ${item.value}`}
+            >
+              <span class="contact-icon" aria-hidden="true">
+                {
+                  item.icon === "email" && (
+                    <svg viewBox="0 0 24 24" role="img">
+                      <path
+                        d="M4.75 6.75h14.5v10.5H4.75V6.75Z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.9"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="m5.25 7.25 6.75 5 6.75-5"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.9"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  )
+                }
 
-      <li class="writing-list-item">
-        <a
-          href="https://www.linkedin.com/in/mattrabah/"
-          rel="me noopener"
-          target="_blank"
-          class="writing-link"
-        >
-          <p class="meta">LinkedIn</p>
-          <h3 class="writing-title">Connect on LinkedIn</h3>
-          <p class="writing-dek">
-            Best for recruiter outreach, hiring conversations, and broader
-            professional context.
-          </p>
-        </a>
-      </li>
+                {
+                  item.icon === "linkedin" && (
+                    <svg viewBox="0 0 24 24" role="img">
+                      <path
+                        d="M6.7 9.4v8.15"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.25"
+                        stroke-linecap="round"
+                      />
+                      <path
+                        d="M6.7 6.75h.02"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                      />
+                      <path
+                        d="M11 17.55v-8.1"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.25"
+                        stroke-linecap="round"
+                      />
+                      <path
+                        d="M11 12.35c.45-1.85 1.65-3.05 3.35-3.05 2.05 0 3.15 1.35 3.15 3.75v4.5"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.25"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <rect
+                        x="3.75"
+                        y="3.75"
+                        width="16.5"
+                        height="16.5"
+                        rx="3.25"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                      />
+                    </svg>
+                  )
+                }
+
+                {
+                  item.icon === "instagram" && (
+                    <svg viewBox="0 0 24 24" role="img">
+                      <rect
+                        x="4.25"
+                        y="4.25"
+                        width="15.5"
+                        height="15.5"
+                        rx="4.4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.9"
+                      />
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="3.45"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.9"
+                      />
+                      <circle cx="16.55" cy="7.55" r="1.05" fill="currentColor" />
+                    </svg>
+                  )
+                }
+              </span>
+
+              <span class="contact-copy">
+                <span class="contact-label">{item.label}</span>
+                <span class="contact-value">{item.value}</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </section>
 </BaseLayout>
