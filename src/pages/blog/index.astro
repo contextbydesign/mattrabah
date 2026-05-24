@@ -1,61 +1,61 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const blogPosts = [
+const posts = [
   {
-    title: "The problem with 'spray and pray' operations",
-    date: "2026-05-18",
-    dek: "Why high-volume tactical fixes usually fail, and how to build a strategic operating cadence instead.",
-    url: "/blog/spray-and-pray",
+    meta: "AI in CX · Draft",
+    title: "AI in CX fails when it starts with tools instead of workflows.",
+    dek: "Most teams do not need another AI demo. They need a clearer view of the customer-facing work that is slow, repetitive, risky, or easy to drop.",
   },
   {
-    title: "Diagnosing input blindness in your CRM",
-    date: "2026-04-02",
-    dek: "When your team is entering data just to satisfy a required field, you don't have a system. You have a chore.",
-    url: "/blog/input-blindness",
+    meta: "Implementation · Draft",
+    title: "The sales-to-implementation handoff is a risk control.",
+    dek: "A closed deal can still become a delivery problem. The handoff is where confidence, context, constraints, and ownership either line up or start leaking trust.",
   },
   {
-    title: "Salesforce as plumbing, not strategy",
-    date: "2026-02-14",
-    dek: "A certification is just permission to touch the pipes. The real work is figuring out where the water needs to go.",
-    url: "/blog/salesforce-plumbing",
+    meta: "Customer Success · Draft",
+    title: "Customer health scores fail when no one owns the next action.",
+    dek: "A score is only useful if it changes behavior. Otherwise it is just a cleaner way to watch risk arrive late.",
+  },
+  {
+    meta: "Change Management · Draft",
+    title: "AI adoption is a change-management problem before it is a tooling problem.",
+    dek: "The hard part is rarely access. It is workflow fit, trust, governance, and whether the team knows when to use the tool and when not to.",
   },
 ];
 ---
 
 <BaseLayout
-  title="Blog"
-  description="Thoughts on customer operations, system design, and building things that actually work."
+  title="Writing"
+  description="Writing from Matt Rabah on practical AI workflows, customer lifecycle systems, implementation, account health, CRM discipline, and customer success operations."
 >
   <section class="hero container">
-    <p class="kicker">Blog</p>
+    <p class="kicker">Writing</p>
 
-    <h1 class="display">Field notes on systems and strategy.</h1>
+    <h1 class="display">
+      Notes on the systems customers feel but teams often overlook.
+    </h1>
 
     <p class="lead">
-      Observations on AI-enabled CX management, CRM discipline, and the operating models behind better customer outcomes.
+      Writing on customer lifecycle operations, practical AI workflows, handoffs,
+      account health, implementation risk, CRM discipline, and the operating
+      choices that shape trust before anyone calls them customer experience.
     </p>
   </section>
 
-  <section class="section container" aria-labelledby="articles">
+  <section class="section container" aria-labelledby="posts">
     <header class="section-head">
-      <h2 class="section-title" id="articles">Recent posts</h2>
+      <h2 class="section-title" id="posts">Recent notes</h2>
     </header>
 
-    <ul class="writing-list">
+    <ul class="writing-list writing-list--full">
       {
-        blogPosts.map((post) => (
+        posts.map((entry) => (
           <li class="writing-list-item">
-            <a href={post.url} class="writing-link">
-              <time class="meta" datetime={post.date}>
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </time>
-              <h3 class="writing-title">{post.title}</h3>
-              <p class="writing-dek">{post.dek}</p>
+            <a href="/blog" class="writing-link">
+              <p class="meta">{entry.meta}</p>
+              <h3 class="writing-title">{entry.title}</h3>
+              <p class="writing-dek">{entry.dek}</p>
             </a>
           </li>
         ))

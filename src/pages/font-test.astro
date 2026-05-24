@@ -1,33 +1,302 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const featureRows = [
+  {
+    label: "Default site rendering",
+    description: "Uses the active global font settings.",
+    style: "",
+  },
+  {
+    label: "Common ligatures off",
+    description: "Disables standard ligatures to expose letterform behavior.",
+    style:
+      "font-variant-ligatures:none;font-feature-settings:'liga' 0,'clig' 0;",
+  },
+  {
+    label: "Contextual alternates off",
+    description: "Disables contextual substitution and localized forms.",
+    style:
+      "font-feature-settings:'calt' 0,'locl' 0,'aalt' 0;",
+  },
+  {
+    label: "Alternates forced",
+    description: "Forces alternates/localized forms where the font supports them.",
+    style:
+      "font-feature-settings:'aalt' 1,'locl' 1,'calt' 1;",
+  },
+];
+
+const copySamples = [
+  "Customer lifecycle systems, strengthened by practical AI workflows.",
+  "Customers feel the operating model.",
+  "The customer does not care who owns the field in Salesforce.",
+  "A QBR without a decision is just a recap.",
+  "AI should reduce drag, not judgment.",
+  "Renewal readiness starts long before the renewal conversation.",
+];
+
+const glyphSamples = [
+  "i j l I 1 | !",
+  "fi fl ffi ffl fj ft",
+  "rn m n u v w y",
+  "O 0 C G Q D",
+  ".,;:!?()[]{}",
+  "0123456789 $8M 1,100 24/7 30–60–90",
+];
+
+const typeScale = [
+  {
+    label: "Display",
+    className: "display",
+    text: "Customer work breaks when the system behind it is unclear.",
+  },
+  {
+    label: "Lead",
+    className: "lead",
+    text:
+      "I work on customer lifecycle systems, CRM discipline, implementation handoffs, and practical AI workflows for complex customer-facing teams.",
+  },
+  {
+    label: "Section title",
+    className: "section-title",
+    text: "Operating principles",
+  },
+  {
+    label: "Body",
+    className: "about-prose",
+    text:
+      "The industries are different. The operating problems are not. Healthcare accounts need trust, adoption, and implementation discipline. Brand-side retail needs account visibility, high-touch service, and follow-through at scale.",
+  },
+  {
+    label: "Meta",
+    className: "meta",
+    text: "Healthtech · Customer Success · Adoption & Implementation",
+  },
+  {
+    label: "Kicker",
+    className: "kicker",
+    text: "Lifecycle Systems",
+  },
+];
 ---
 
-<BaseLayout title="Font Test" description="Visual test for font features">
-  <section class="section container">
+<BaseLayout title="Font Test" description="Full typography QA page for site font rendering.">
+  <section class="hero container">
+    <p class="kicker">Type QA</p>
+
+    <h1 class="display">
+      Font rendering should be tested with real language, not just alphabets.
+    </h1>
+
+    <p class="lead">
+      This page checks the active site typography across display copy, body copy,
+      ligatures, numerals, punctuation, OpenType feature settings, and the exact
+      language used throughout the portfolio.
+    </p>
+  </section>
+
+  <section class="section container" aria-labelledby="type-scale">
     <header class="section-head">
-      <h2 class="section-title">Font feature test</h2>
+      <h2 class="section-title" id="type-scale">Site type scale</h2>
     </header>
 
-    <p class="lead">This page compares the lowercase <code>i</code> rendered with different feature settings.</p>
-
-    <div style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap;margin-top:1rem;">
-      <div style="flex:1;min-width:280px;">
-        <h3>Default (site)</h3>
-        <p style="font-size:48px;">i i i i i</p>
-        <p style="font-size:20px;color:var(--c-mute)">Uses the site font settings.</p>
-      </div>
-
-      <div style="flex:1;min-width:280px;">
-        <h3>Forced features (`aalt` + `locl`)</h3>
-        <p style="font-size:48px; font-feature-settings: 'aalt' 1, 'locl' 1;">i i i i i</p>
-        <p style="font-size:20px;color:var(--c-mute)">Forces alternate glyphs for testing.</p>
-      </div>
-
-      <div style="flex:1;min-width:280px;">
-        <h3>Headlines disabled</h3>
-        <p style="font-size:48px; font-variant-ligatures: none; font-feature-settings: 'calt' 0, 'locl' 0, 'aalt' 0;">i i i i i</p>
-        <p style="font-size:20px;color:var(--c-mute)">Represents `.display` rules.</p>
-      </div>
+    <div class="fonttest-stack">
+      {
+        typeScale.map((sample) => (
+          <article class="fonttest-card">
+            <p class="meta">{sample.label}</p>
+            <p class={sample.className}>{sample.text}</p>
+          </article>
+        ))
+      }
     </div>
   </section>
+
+  <section class="section container" aria-labelledby="real-copy">
+    <header class="section-head">
+      <h2 class="section-title" id="real-copy">Real copy samples</h2>
+    </header>
+
+    <div class="fonttest-grid">
+      {
+        copySamples.map((sample) => (
+          <article class="fonttest-card">
+            <p class="fonttest-sample">{sample}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="glyph-check">
+    <header class="section-head">
+      <h2 class="section-title" id="glyph-check">Glyph, numeral, and punctuation check</h2>
+    </header>
+
+    <div class="fonttest-stack">
+      {
+        glyphSamples.map((sample) => (
+          <article class="fonttest-card">
+            <p class="fonttest-glyphs">{sample}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="feature-check">
+    <header class="section-head">
+      <h2 class="section-title" id="feature-check">OpenType feature comparison</h2>
+    </header>
+
+    <div class="fonttest-grid">
+      {
+        featureRows.map((row) => (
+          <article class="fonttest-card">
+            <p class="meta">{row.label}</p>
+            <p class="fonttest-glyphs" style={row.style}>
+              i j l I 1 | fi fl ffi ffl
+            </p>
+            <p class="fonttest-sample" style={row.style}>
+              Customer lifecycle systems, strengthened by practical AI workflows.
+            </p>
+            <p class="fonttest-note">{row.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="stress-test">
+    <header class="section-head">
+      <h2 class="section-title" id="stress-test">Portfolio stress test</h2>
+    </header>
+
+    <div class="fonttest-card">
+      <p class="kicker">Implementation discipline</p>
+
+      <h3 class="fonttest-headline">
+        A weak handoff turns a closed deal into implementation risk.
+      </h3>
+
+      <p class="about-prose">
+        A signed agreement does not mean the customer is ready for delivery. The
+        customer has already heard timelines, expectations, constraints, and
+        promises. If that context does not move cleanly from sales to
+        implementation, the delivery team inherits risk without the story behind
+        it.
+      </p>
+
+      <p class="about-prose">
+        That is why CRM discipline matters. The record should help the next
+        owner understand what was promised, what changed, who cares, and what
+        needs attention before the customer has to repeat themselves.
+      </p>
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="decision-rules">
+    <header class="section-head">
+      <h2 class="section-title" id="decision-rules">What to look for</h2>
+    </header>
+
+    <div class="fonttest-card">
+      <ul class="fonttest-list">
+        <li>
+          The lowercase <strong>i</strong> should not look distracting in body
+          copy or oversized display settings.
+        </li>
+        <li>
+          Ligatures like <strong>fi</strong>, <strong>fl</strong>, and
+          <strong>ffi</strong> should improve rhythm without looking decorative.
+        </li>
+        <li>
+          Numerals should stay clear in business copy like <strong>$8M</strong>,
+          <strong>1,100</strong>, <strong>24/7</strong>, and
+          <strong>30–60–90</strong>.
+        </li>
+        <li>
+          Display copy should feel intentional without making the writing look
+          like a brand slogan generator wrote it.
+        </li>
+        <li>
+          Body copy should remain readable in both light and dark mode.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <style>
+    .fonttest-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .fonttest-stack {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .fonttest-card {
+      border: 1px solid var(--c-border);
+      border-radius: 1rem;
+      padding: clamp(1rem, 2vw, 1.5rem);
+      background: var(--c-surface);
+    }
+
+    .fonttest-sample {
+      margin: 0;
+      font-size: clamp(1.4rem, 3vw, 2.4rem);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      color: var(--c-text);
+    }
+
+    .fonttest-glyphs {
+      margin: 0.5rem 0 0;
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      color: var(--c-text);
+    }
+
+    .fonttest-headline {
+      margin: 0.75rem 0 1.25rem;
+      max-width: 14ch;
+      font-size: clamp(2.5rem, 8vw, 7rem);
+      line-height: 0.9;
+      letter-spacing: -0.07em;
+      color: var(--c-text);
+    }
+
+    .fonttest-note {
+      margin: 1rem 0 0;
+      max-width: 48ch;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--c-mute);
+    }
+
+    .fonttest-list {
+      margin: 0;
+      padding-left: 1.25rem;
+      color: var(--c-text);
+    }
+
+    .fonttest-list li + li {
+      margin-top: 0.75rem;
+    }
+
+    .fonttest-list strong {
+      font-weight: 600;
+      color: var(--c-text);
+    }
+
+    code {
+      font: inherit;
+      color: var(--c-text);
+    }
+  </style>
 </BaseLayout>

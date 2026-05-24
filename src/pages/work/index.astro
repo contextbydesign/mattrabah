@@ -2,105 +2,197 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Tag from "../../components/ui/Tag.astro";
 
-const workItems = [
+const work = [
   {
+    kicker: "Healthtech",
     title: "NeuroSync",
-    subtitle: "Customer Lifecycle Systems",
+    subtitle: "Customer Success, Implementation, and Healthcare Accounts",
     summary:
-      "Built and managed customer success workflows across healthcare accounts, with ownership across onboarding, adoption, account health, clinical stakeholder communication, and renewal readiness.",
-    tags: [
-      "Healthtech",
-      "Customer Success",
-      "Adoption",
-      "Implementation",
-      "Account Health",
+      "Owned customer-facing work across healthcare accounts where adoption, implementation discipline, and account visibility mattered. The job was not just keeping relationships warm. It was making sure clinical and operational customers had the context, follow-through, and support needed to keep using the system.",
+    details: [
+      "Onboarding and implementation support",
+      "Healthcare account management",
+      "Adoption and utilization visibility",
+      "Customer health and renewal readiness",
     ],
   },
   {
+    kicker: "Brand-side retail",
     title: "Shinola",
-    subtitle: "Portfolio Growth & CX Operations",
+    subtitle: "Portfolio Growth, Salesforce Process, and High-touch CX",
     summary:
-      "Connected high-touch customer experience, account growth, Salesforce process, executive event execution, and portfolio discipline inside a complex brand-side retail environment.",
-    tags: [
-      "Brand-side Retail",
-      "Client Experience",
-      "Portfolio Growth",
-      "Operating Cadence",
-      "Salesforce",
+      "Managed a large corporate account portfolio inside a brand environment where the customer experience had to feel personal, but the operating model still had to scale. The work connected Salesforce discipline, account segmentation, executive-facing communication, and high-touch client experience.",
+    details: [
+      "Corporate account portfolio management",
+      "Salesforce segmentation and process design",
+      "Executive-facing account work",
+      "Client experience and portfolio growth",
     ],
   },
   {
+    kicker: "Consulting",
     title: "Context By Design",
-    subtitle: "Lifecycle Diagnostics & Retention",
+    subtitle: "Lifecycle Diagnostics, Retention Systems, and CX Strategy",
     summary:
-      "Designed lifecycle, onboarding, customer journey, and retention frameworks for service businesses that needed clearer operating systems and better customer visibility.",
-    tags: [
-      "Consulting",
-      "Transformation",
-      "Retention Systems",
-      "Lifecycle Design",
-      "CX Strategy",
+      "Developed lifecycle and retention frameworks for service businesses that had customer relationships, but limited visibility into the systems behind them. The work focused on making the customer journey easier to see, operate, and improve.",
+    details: [
+      "Customer journey diagnostics",
+      "Onboarding and retention frameworks",
+      "Lifecycle maturity models",
+      "CRM and operating rhythm recommendations",
     ],
+  },
+];
+
+const capabilities = [
+  {
+    kicker: "Lifecycle systems",
+    title: "Make customer progress visible.",
+    summary:
+      "Onboarding, adoption, account health, renewal readiness, and executive visibility need a shared operating model. If the team cannot see where the customer is, it cannot manage what happens next.",
   },
   {
-    title: "AI Workflow Projects",
-    subtitle: "Practical Tools for Customer-Facing Teams",
+    kicker: "Implementation discipline",
+    title: "Treat the handoff as a risk control.",
     summary:
-      "Building lightweight AI-assisted tools for handoff risk, account health, renewal readiness, QBR preparation, and CRM field quality.",
-    tags: [
-      "AI Workflows",
-      "CX Tools",
-      "Change Management",
-      "Customer Operations",
-      "Workflow Design",
-    ],
+      "A signed deal is not a clean handoff. The customer has already heard promises, timelines, constraints, and assumptions. Implementation inherits all of it, whether it was documented or not.",
   },
+  {
+    kicker: "CRM operations",
+    title: "Make the system useful to the next owner.",
+    summary:
+      "CRM data only matters if it helps the next person make a better decision. Fields, notes, stages, and account records should reduce rediscovery, not create another place for vague updates to live.",
+  },
+  {
+    kicker: "Practical AI workflows",
+    title: "Use AI to reduce drag, not judgment.",
+    summary:
+      "AI is useful when it helps teams prepare faster, summarize context, surface risk, and follow through with more discipline. It is a liability when it hides uncertainty or blurs accountability.",
+  },
+];
+
+const operatingPrinciples = [
+  "Customers feel the operating model.",
+  "A weak handoff turns a closed deal into implementation risk.",
+  "A dashboard is not an operating system.",
+  "CRM hygiene is customer-facing, even when it looks internal.",
+  "AI should reduce administrative drag without replacing ownership.",
+  "Renewal readiness starts long before the renewal conversation.",
 ];
 ---
 
 <BaseLayout
   title="Work"
-  description="Selected work from Matt Rabah across CX management, customer success, implementation, AI workflow design, and lifecycle systems."
+  description="Selected work from Matt Rabah across customer success, implementation, customer lifecycle systems, CRM discipline, healthtech, retail, consulting, and practical AI workflows."
 >
   <section class="hero container">
     <p class="kicker">Work</p>
 
     <h1 class="display">
-      Work organized by business problem, not just industry.
+      Customer work breaks when the system behind it is unclear.
     </h1>
 
     <p class="lead">
-      My background spans healthtech, brand-side retail, consulting, and AI
-      workflow projects. The common thread is customer lifecycle design:
-      onboarding, adoption, account health, retention, CRM visibility, and
-      operating cadence.
+      My work sits between customer experience, customer success, implementation,
+      CRM operations, and practical AI workflows. The common thread is simple:
+      make the customer lifecycle easier to see, own, and improve.
     </p>
   </section>
 
-  <section class="section container" aria-labelledby="case-studies">
+  <section class="section container" aria-labelledby="selected-work">
     <header class="section-head">
-      <h2 class="section-title" id="case-studies">Selected case studies</h2>
+      <h2 class="section-title" id="selected-work">Selected work</h2>
     </header>
 
     <ul class="work-list work-list--full">
       {
-        workItems.map((entry) => (
+        work.map((entry) => (
           <li class="work-list-item">
-            <a href="/work" class="work-link">
-              <p class="kicker">{entry.subtitle}</p>
+            <article class="work-link">
+              <p class="kicker">{entry.kicker}</p>
               <h3 class="work-title">{entry.title}</h3>
+              <p class="meta">{entry.subtitle}</p>
               <p class="work-summary">{entry.summary}</p>
-              <ul class="capabilities-tags" aria-label={`${entry.title} tags`}>
-                {entry.tags.map((tag) => (
-                  <li>
-                    <Tag label={tag} />
-                  </li>
-                ))}
+
+              <ul class="capabilities-tags" aria-label={`${entry.title} work areas`}>
+                {
+                  entry.details.map((detail) => (
+                    <li>
+                      <Tag label={detail} />
+                    </li>
+                  ))
+                }
               </ul>
-            </a>
+            </article>
           </li>
         ))
       }
     </ul>
+  </section>
+
+  <section class="section container" aria-labelledby="capabilities">
+    <header class="section-head">
+      <h2 class="section-title" id="capabilities">How I work</h2>
+    </header>
+
+    <ul class="work-list">
+      {
+        capabilities.map((capability) => (
+          <li class="work-list-item">
+            <article class="work-link">
+              <p class="kicker">{capability.kicker}</p>
+              <h3 class="work-title">{capability.title}</h3>
+              <p class="work-summary">{capability.summary}</p>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section container" aria-labelledby="principles">
+    <header class="section-head">
+      <h2 class="section-title" id="principles">Operating principles</h2>
+    </header>
+
+    <div class="capabilities">
+      <p class="capabilities-prose">
+        The work is not about making customer-facing teams sound more mature
+        than they are. It is about giving them fewer places to hide ambiguity:
+        clearer owners, cleaner handoffs, better records, stronger preparation,
+        and a more honest view of account risk.
+      </p>
+
+      <ul class="capabilities-tags" aria-label="Operating principles">
+        {
+          operatingPrinciples.map((principle) => (
+            <li>
+              <Tag label={principle} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="proof">
+    <header class="section-head">
+      <h2 class="section-title" id="proof">What this proves</h2>
+    </header>
+
+    <p class="about-prose">
+      The work spans different industries, but the operating problems rhyme.
+      Healthcare accounts need trust, adoption, and implementation discipline.
+      Brand-side retail needs account visibility, high-touch service, and
+      follow-through at scale. Consulting work needs a clear way to turn customer
+      journey language into decisions a team can actually run.
+    </p>
+
+    <p class="about-prose">
+      That is the useful pattern: customer experience improves when the internal
+      system becomes easier to operate. Better notes. Better handoffs. Better
+      ownership. Better use of AI where it helps the team prepare, see risk, and
+      act sooner.
+    </p>
   </section>
 </BaseLayout>

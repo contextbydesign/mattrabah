@@ -4,36 +4,54 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Contact"
-  description="Get in touch with Matt Rabah."
+  description="Contact Matt Rabah for CX, customer success, implementation, customer lifecycle, CRM discipline, and practical AI workflow work."
 >
   <section class="hero container">
     <p class="kicker">Contact</p>
 
-    <h1 class="display">Let's build a better lifecycle.</h1>
+    <h1 class="display">
+      Start with the customer problem, not the buzzword.
+    </h1>
 
     <p class="lead">
-      If you need a CX Manager to untangle a complex customer journey, align your teams, or design workflows that actually drive retention—let's talk.
+      I am open to CX, Customer Success, Implementation, and customer lifecycle
+      roles or projects where the work requires clearer ownership, better
+      operating cadence, CRM discipline, and practical AI workflow design.
     </p>
+  </section>
 
-    <div style="margin-top: var(--s-lg);">
-      <a
-        href="mailto:rabah.matthew@gmail.com"
-        style="
-          display: inline-block;
-          background: var(--c-accent);
-          color: white;
-          padding: 0.8rem 1.6rem;
-          text-decoration: none;
-          font-weight: 500;
-          border-radius: var(--r-sm);
-          font-family: var(--ff-sans);
-          transition: background-color var(--ms-base);
-        "
-        onmouseover="this.style.backgroundColor='var(--c-accent-ink)'"
-        onmouseout="this.style.backgroundColor='var(--c-accent)'"
-      >
-        Email me
-      </a>
-    </div>
+  <section class="section container" aria-labelledby="contact-options">
+    <header class="section-head">
+      <h2 class="section-title" id="contact-options">Contact options</h2>
+    </header>
+
+    <ul class="writing-list">
+      <li class="writing-list-item">
+        <a href="mailto:rabah.matthew@gmail.com" class="writing-link">
+          <p class="meta">Email</p>
+          <h3 class="writing-title">rabah.matthew@gmail.com</h3>
+          <p class="writing-dek">
+            Best for role conversations, project inquiries, and direct
+            professional follow-up.
+          </p>
+        </a>
+      </li>
+
+      <li class="writing-list-item">
+        <a
+          href="https://www.linkedin.com/in/mattrabah/"
+          rel="me noopener"
+          target="_blank"
+          class="writing-link"
+        >
+          <p class="meta">LinkedIn</p>
+          <h3 class="writing-title">Connect on LinkedIn</h3>
+          <p class="writing-dek">
+            Best for recruiter outreach, hiring conversations, and broader
+            professional context.
+          </p>
+        </a>
+      </li>
+    </ul>
   </section>
 </BaseLayout>
