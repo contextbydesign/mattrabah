@@ -70,6 +70,31 @@
   --ms-base: 160ms ease-out;
 }
 
+:root[data-theme="dark"] {
+  --c-paper: #090d12;
+  --c-surface: #10161d;
+  --c-surface-alt: #0d1319;
+  --c-panel: #151d25;
+
+  --c-ink: #f5f7fa;
+  --c-ink-soft: #d9e0e7;
+  --c-mute: #a4afba;
+  --c-faint: #7f8a96;
+
+  --c-rule: #26313b;
+  --c-rule-strong: #394653;
+
+  --c-accent: #7fb7ff;
+  --c-accent-ink: #b9d8ff;
+  --c-accent-pale: #13263a;
+  --c-accent-edge: #335c7d;
+
+  --c-signal: #67d5dc;
+  --c-signal-ink: #a8f2f5;
+  --c-signal-pale: #123538;
+  --c-signal-edge: #2a747a;
+}
+
 /* Reset */
 
 *,
@@ -195,7 +220,7 @@ img {
   top: 0;
   z-index: 50;
   border-bottom: 1px solid rgba(185, 203, 212, 0.7);
-  background: rgba(247, 248, 250, 0.88);
+  background: color-mix(in srgb, var(--c-paper) 88%, transparent);
   backdrop-filter: blur(18px);
 }
 
@@ -254,13 +279,49 @@ img {
   transform-origin: left;
 }
 
+/* Theme toggle */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--c-ink-soft);
+  font-family: var(--ff-sans);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color var(--ms-base),
+    background-color var(--ms-base),
+    transform var(--ms-base);
+}
+
+.theme-toggle:hover {
+  color: var(--c-accent);
+  background: var(--c-accent-pale);
+}
+
+.theme-toggle:active {
+  transform: scale(0.96);
+}
+
+.theme-toggle-icon {
+  display: block;
+  line-height: 1;
+}
+
 /* Mobile navigation button */
 
 .nav-toggle {
   display: none;
   appearance: none;
   border: 1px solid var(--c-rule);
-  background: rgba(255, 255, 255, 0.72);
+  background: color-mix(in srgb, var(--c-surface) 78%, transparent);
   color: var(--c-ink);
   width: 2.75rem;
   height: 2.75rem;
@@ -395,7 +456,7 @@ img {
 .work-list-item,
 .writing-list-item {
   border: 1px solid var(--c-rule);
-  background: rgba(255, 255, 255, 0.64);
+  background: color-mix(in srgb, var(--c-surface) 64%, transparent);
   border-radius: var(--r-md);
   overflow: hidden;
 }
@@ -467,7 +528,7 @@ img {
   padding: clamp(1.5rem, 3vw, 2.5rem);
   border: 1px solid var(--c-rule);
   border-radius: var(--r-md);
-  background: rgba(255, 255, 255, 0.64);
+  background: color-mix(in srgb, var(--c-surface) 64%, transparent);
 }
 
 @media (min-width: 48rem) {
@@ -535,8 +596,8 @@ section[aria-labelledby="tool-list"] {
   background:
     linear-gradient(
       180deg,
-      rgba(227, 245, 246, 0.65),
-      rgba(247, 248, 250, 0)
+      color-mix(in srgb, var(--c-signal-pale) 65%, transparent),
+      color-mix(in srgb, var(--c-paper) 0%, transparent)
     );
   border-top-color: var(--c-signal-edge);
 }
@@ -696,6 +757,16 @@ section[aria-labelledby="tool-list"] .section-title {
     display: none;
   }
 
+  .site-nav .theme-toggle {
+    width: 100%;
+    height: auto;
+    justify-content: flex-start;
+    padding: 1rem;
+    border-radius: var(--r-sm);
+    color: var(--c-ink);
+    font-size: 1rem;
+  }
+
   .display {
     max-width: 12ch;
     font-size: clamp(3rem, 15vw, 4.5rem);
@@ -709,7 +780,6 @@ section[aria-labelledby="tool-list"] .section-title {
   }
 
   .section-title {
-    align-items: flex-start;
     font-size: clamp(1.6rem, 8vw, 2.25rem);
     line-height: 1.08;
   }
@@ -767,8 +837,8 @@ section[aria-labelledby="tool-list"] .section-title {
     padding: 0 !important;
     border: 1px solid var(--c-rule-strong) !important;
     border-radius: var(--r-sm) !important;
-    background: #ffffff !important;
-    color: #0f1720 !important;
+    background: var(--c-surface) !important;
+    color: var(--c-ink) !important;
     cursor: pointer !important;
   }
 
@@ -790,7 +860,7 @@ section[aria-labelledby="tool-list"] .section-title {
     z-index: 1001 !important;
     border: 1px solid var(--c-rule) !important;
     border-radius: var(--r-md) !important;
-    background: #ffffff !important;
+    background: var(--c-surface) !important;
     box-shadow: 0 1.5rem 4rem rgba(15, 23, 32, 0.18) !important;
   }
 
@@ -813,6 +883,17 @@ section[aria-labelledby="tool-list"] .section-title {
     padding: 1rem !important;
     color: var(--c-ink) !important;
     font-size: 1rem !important;
+  }
+
+  .site-nav .theme-toggle {
+    display: flex !important;
+    width: 100% !important;
+    height: auto !important;
+    justify-content: flex-start !important;
+    padding: 1rem !important;
+    border-radius: var(--r-sm) !important;
+    color: var(--c-ink) !important;
+    background: transparent !important;
   }
 
   .site-nav a[href="/tools"]::after {

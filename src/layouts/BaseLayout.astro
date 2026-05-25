@@ -1,59 +1,87 @@
 ---
 import "../styles/global.css";
 
-export interface Props {
-  title: string;
+interface Props {
+  title?: string;
   description?: string;
 }
 
-const SITE_NAME = "Matt Rabah";
-const DEFAULT_DESCRIPTION =
-  "Matt Rabah builds customer lifecycle systems, practical AI workflows, and operating models for complex customer-facing teams.";
+const {
+  title = "Matt Rabah",
+  description = "Customer experience, implementation, and customer success work focused on lifecycle systems, adoption, retention, and commercial outcomes.",
+} = Astro.props;
 
-const { title, description = DEFAULT_DESCRIPTION } = Astro.props;
-const fullTitle = title === SITE_NAME ? title : `${title} — ${SITE_NAME}`;
-const year = new Date().getFullYear();
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/work", label: "Work" },
+  { href: "/blog", label: "Blog" },
+  { href: "/tools", label: "AI Tools" },
+  { href: "/contact", label: "Contact" },
+];
+
+const isActive = (href: string) => {
+  const normalizedHref = href.replace(/\/$/, "") || "/";
+
+  if (normalizedHref === "/") {
+    return currentPath === "/";
+  }
+
+  return currentPath === normalizedHref || currentPath.startsWith(`${normalizedHref}/`);
+};
+
+const pageTitle = title === "Matt Rabah" ? title : `${title} | Matt Rabah`;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{fullTitle}</title>
+    <meta charset="UTF-8" />
     <meta name="description" content={description} />
-    <link rel="stylesheet" href="https://use.typekit.net/vex0ome.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{pageTitle}</title>
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate icon" href="/favicon.ico" />
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
   </head>
 
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
-      <div class="container header-inner">
-        <a href="/" class="brand" aria-label={`${SITE_NAME}, home`}>
-          {SITE_NAME}
+      <div class="site-shell site-header__inner">
+        <a class="site-mark" href="/" aria-label="Matt Rabah home">
+          Matt Rabah
         </a>
 
-        <button
-          class="nav-toggle"
-          type="button"
-          aria-label="Open navigation"
-          aria-controls="primary-navigation"
-          aria-expanded="false"
-        >
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-          <span class="nav-toggle-line"></span>
-        </button>
+        <nav class="nav" aria-label="Primary navigation">
+          {
+            navItems.map((item) => {
+              const active = isActive(item.href);
 
-        <nav class="site-nav" id="primary-navigation" aria-label="Primary">
-          <ul>
-            <li><a href="/work">Work</a></li>
-            <li><a href="/tools">AI Tools</a></li>
-            <li><a href="/blog">Blog</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
+              return (
+                <a
+                  href={item.href}
+                  class="nav-link"
+                  aria-current={active ? "page" : undefined}
+                  data-active={active ? "true" : "false"}
+                >
+                  {item.label}
+                </a>
+              );
+            })
+          }
         </nav>
       </div>
     </header>
@@ -61,60 +89,5 @@ const year = new Date().getFullYear();
     <main id="main">
       <slot />
     </main>
-
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <p class="footer-text">© {year} {SITE_NAME} · Detroit, Michigan</p>
-
-        <ul class="footer-links">
-          <li><a href="mailto:hello@mattrabah.com">Email</a></li>
-          <li>
-            <a
-              href="https://www.linkedin.com/in/mattrabah/"
-              rel="me noopener"
-              target="_blank"
-            >
-              LinkedIn
-            </a>
-          </li>
-        </ul>
-      </div>
-    </footer>
-
-    <script>
-      const navToggle = document.querySelector(".nav-toggle");
-      const nav = document.querySelector(".site-nav");
-
-      navToggle?.addEventListener("click", () => {
-        const isOpen = navToggle.getAttribute("aria-expanded") === "true";
-
-        navToggle.setAttribute("aria-expanded", String(!isOpen));
-        navToggle.setAttribute(
-          "aria-label",
-          isOpen ? "Open navigation" : "Close navigation"
-        );
-
-        nav?.classList.toggle("is-open", !isOpen);
-        document.body.classList.toggle("nav-open", !isOpen);
-      });
-
-      nav?.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navToggle?.setAttribute("aria-expanded", "false");
-          navToggle?.setAttribute("aria-label", "Open navigation");
-          nav?.classList.remove("is-open");
-          document.body.classList.remove("nav-open");
-        });
-      });
-
-      window.addEventListener("keydown", (event) => {
-        if (event.key !== "Escape") return;
-
-        navToggle?.setAttribute("aria-expanded", "false");
-        navToggle?.setAttribute("aria-label", "Open navigation");
-        nav?.classList.remove("is-open");
-        document.body.classList.remove("nav-open");
-      });
-    </script>
   </body>
 </html>
