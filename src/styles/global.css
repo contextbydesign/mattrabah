@@ -245,7 +245,7 @@ img {
   font-family: var(--ff-expanded);
   font-size: var(--t-title);
   font-weight: var(--fw-semibold);
-  letter-spacing: -0.01em;
+  letter-spacing: 0.0em;
   text-decoration: none;
 }
 
@@ -273,17 +273,18 @@ img {
   color: var(--c-accent);
 }
 
-.site-nav a[href="/tools"] {
-  color: var(--c-signal-ink);
+.site-nav a[aria-current="page"] {
+  color: var(--c-ink);
 }
 
-.site-nav a[href="/tools"]::after {
+.site-nav a[aria-current="page"]::after {
   content: "";
   display: block;
-  height: 2px;
+  height: 1px;
   margin-top: 0.2rem;
-  background: linear-gradient(90deg, var(--c-accent), var(--c-signal));
-  transform: scaleX(0.6);
+  background: var(--c-rule-strong);
+  opacity: 0.8;
+  transform: scaleX(0.45);
   transform-origin: left;
 }
 
@@ -430,7 +431,7 @@ img {
   font-family: var(--ff-expanded);
   font-size: var(--t-display-lg);
   font-weight: var(--fw-semibold);
-  letter-spacing: -0.04em;
+  letter-spacing: -0.01em;
 }
 
 .lead {

@@ -13,6 +13,13 @@ const DEFAULT_DESCRIPTION =
 const { title, description = DEFAULT_DESCRIPTION } = Astro.props;
 const fullTitle = title === SITE_NAME ? title : `${title} — ${SITE_NAME}`;
 const year = new Date().getFullYear();
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const isCurrentPath = (href: string) => {
+  if (href === "/") return pathname === "/";
+
+  return pathname === href || pathname.startsWith(`${href}/`);
+};
 ---
 
 <!doctype html>
@@ -62,11 +69,11 @@ const year = new Date().getFullYear();
 
         <nav class="site-nav" id="primary-navigation" aria-label="Primary">
           <ul>
-            <li><a href="/work">Work</a></li>
-            <li><a href="/tools">AI Tools</a></li>
-            <li><a href="/blog">Blog</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
+            <li><a href="/work" aria-current={isCurrentPath("/work") ? "page" : undefined}>Work</a></li>
+            <li><a href="/tools" aria-current={isCurrentPath("/tools") ? "page" : undefined}>AI Tools</a></li>
+            <li><a href="/blog" aria-current={isCurrentPath("/blog") ? "page" : undefined}>Blog</a></li>
+            <li><a href="/about" aria-current={isCurrentPath("/about") ? "page" : undefined}>About</a></li>
+            <li><a href="/contact" aria-current={isCurrentPath("/contact") ? "page" : undefined}>Contact</a></li>
             <li class="theme-toggle-item">
               <button
                 class="theme-toggle"
