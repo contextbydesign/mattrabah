@@ -13,13 +13,6 @@ const DEFAULT_DESCRIPTION =
 const { title, description = DEFAULT_DESCRIPTION } = Astro.props;
 const fullTitle = title === SITE_NAME ? title : `${title} — ${SITE_NAME}`;
 const year = new Date().getFullYear();
-const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
-
-const isCurrentPath = (href: string) => {
-  if (href === "/") return pathname === "/";
-
-  return pathname === href || pathname.startsWith(`${href}/`);
-};
 ---
 
 <!doctype html>
@@ -29,8 +22,6 @@ const isCurrentPath = (href: string) => {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    
-    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
     <link rel="stylesheet" href="https://use.typekit.net/vex0ome.css" />
   </head>
 
@@ -40,8 +31,28 @@ const isCurrentPath = (href: string) => {
     <header class="site-header">
       <div class="container header-inner">
         <a href="/" class="brand" aria-label={`${SITE_NAME}, home`}>
-          {SITE_NAME}
+          <span class="brand-mark" aria-hidden="true">m</span>
+          <span class="brand-name">{SITE_NAME}</span>
         </a>
+
+        <nav class="site-nav" id="primary-navigation" aria-label="Primary">
+          <ul>
+            <li><a href="/work">Work</a></li>
+            <li><a href="/tools">AI Tools</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li class="theme-toggle-item">
+              <button
+                class="theme-toggle"
+                type="button"
+                aria-label="Switch to dark mode"
+              >
+                <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
 
         <div class="header-actions">
           <button
@@ -53,6 +64,11 @@ const isCurrentPath = (href: string) => {
           >
             Search
           </button>
+
+          <a class="header-cta" href="/contact">
+            Start a conversation
+            <span aria-hidden="true">→</span>
+          </a>
 
           <button
             class="nav-toggle"
@@ -66,25 +82,6 @@ const isCurrentPath = (href: string) => {
             <span class="nav-toggle-line"></span>
           </button>
         </div>
-
-        <nav class="site-nav" id="primary-navigation" aria-label="Primary">
-          <ul>
-            <li><a href="/work" aria-current={isCurrentPath("/work") ? "page" : undefined}>Work</a></li>
-            <li><a href="/tools" aria-current={isCurrentPath("/tools") ? "page" : undefined}>AI Tools</a></li>
-            <li><a href="/blog" aria-current={isCurrentPath("/blog") ? "page" : undefined}>Blog</a></li>
-            <li><a href="/about" aria-current={isCurrentPath("/about") ? "page" : undefined}>About</a></li>
-            <li><a href="/contact" aria-current={isCurrentPath("/contact") ? "page" : undefined}>Contact</a></li>
-            <li class="theme-toggle-item">
-              <button
-                class="theme-toggle"
-                type="button"
-                aria-label="Switch to dark mode"
-              >
-                <span class="theme-toggle-icon" aria-hidden="true">☾</span>
-              </button>
-            </li>
-          </ul>
-        </nav>
       </div>
 
       <div
@@ -95,7 +92,7 @@ const isCurrentPath = (href: string) => {
       >
         <div class="container search-inner">
           <form class="site-search-form" role="search">
-            <label class="search-label smcp" for="site-search-input">
+            <label class="search-label" for="site-search-input">
               Search the site
             </label>
 
@@ -109,9 +106,7 @@ const isCurrentPath = (href: string) => {
                 spellcheck="false"
               />
 
-              <button class="search-close" type="button">
-                Close
-              </button>
+              <button class="search-close" type="button">Close</button>
             </div>
           </form>
 
@@ -138,7 +133,7 @@ const isCurrentPath = (href: string) => {
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <p class="footer-text tnum">© {year} {SITE_NAME} · Detroit, Michigan</p>
+        <p class="footer-text">© {year} {SITE_NAME} — Detroit, MI</p>
 
         <ul class="footer-links">
           <li><a href="mailto:hello@mattrabah.com">Email</a></li>
@@ -151,6 +146,7 @@ const isCurrentPath = (href: string) => {
               LinkedIn
             </a>
           </li>
+          <li><a href="/blog">Writing</a></li>
         </ul>
       </div>
     </footer>
@@ -172,60 +168,81 @@ const isCurrentPath = (href: string) => {
 
       const navToggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
       const nav = document.querySelector<HTMLElement>(".site-nav");
-      const searchToggle = document.querySelector<HTMLButtonElement>(".search-toggle");
-      const searchPanel = document.querySelector<HTMLElement>(".site-search-panel");
-      const searchInput = document.querySelector<HTMLInputElement>(".site-search-input");
-      const searchClose = document.querySelector<HTMLButtonElement>(".search-close");
-      const searchResults = document.querySelector<HTMLUListElement>(".search-results");
+
+      const searchToggle =
+        document.querySelector<HTMLButtonElement>(".search-toggle");
+      const searchPanel =
+        document.querySelector<HTMLElement>(".site-search-panel");
+      const searchInput =
+        document.querySelector<HTMLInputElement>(".site-search-input");
+      const searchClose =
+        document.querySelector<HTMLButtonElement>(".search-close");
+      const searchResults =
+        document.querySelector<HTMLUListElement>(".search-results");
       const searchHelp = document.querySelector<HTMLElement>(".search-help");
-      const themeToggle = document.querySelector<HTMLButtonElement>(".theme-toggle");
-      const themeToggleIcon = document.querySelector<HTMLElement>(".theme-toggle-icon");
-      
+
+      const themeToggle =
+        document.querySelector<HTMLButtonElement>(".theme-toggle");
+      const themeToggleIcon =
+        document.querySelector<HTMLElement>(".theme-toggle-icon");
+
       const searchIndex: SearchItem[] = [
         {
           title: "Home",
           url: "/",
           type: "Overview",
-          description: "Customer lifecycle systems, practical AI workflows, implementation discipline, account health, retention, and change management.",
-          keywords: "home customer lifecycle systems ai workflows implementation cx customer success retention adoption account health",
+          description:
+            "Customer lifecycle systems, practical AI workflows, implementation discipline, account health, retention, and change management.",
+          keywords:
+            "home customer lifecycle systems ai workflows implementation cx customer success retention adoption account health",
         },
         {
           title: "Work",
           url: "/work",
           type: "Case studies",
-          description: "Selected work across healthtech, brand-side retail, consulting, portfolio growth, onboarding, adoption, and customer lifecycle systems.",
-          keywords: "work case studies shinola neurosync context by design healthtech retail consulting implementation portfolio growth salesforce onboarding adoption",
+          description:
+            "Selected work across healthtech, brand-side retail, consulting, portfolio growth, onboarding, adoption, and customer lifecycle systems.",
+          keywords:
+            "work case studies shinola neurosync context by design healthtech retail consulting implementation portfolio growth salesforce onboarding adoption",
         },
         {
           title: "AI Tools",
           url: "/tools",
           type: "Tools",
-          description: "Practical AI tools for handoff risk, customer health, renewal readiness, QBR preparation, and CRM field quality.",
-          keywords: "ai tools handoff risk checker customer health signal mapper renewal readiness diagnostic qbr crm field quality implementation customer success",
+          description:
+            "Practical AI tools for handoff risk, customer health, renewal readiness, QBR preparation, and CRM field quality.",
+          keywords:
+            "ai tools handoff risk checker customer health signal mapper renewal readiness diagnostic qbr crm field quality implementation customer success",
         },
         {
           title: "Blog",
           url: "/blog",
           type: "Writing",
-          description: "Writing on AI in customer experience, implementation, customer health, lifecycle operations, and customer-facing systems.",
-          keywords: "blog writing articles ai cx implementation customer health sales handoff lifecycle operations customer success",
+          description:
+            "Writing on AI in customer experience, implementation, customer health, lifecycle operations, and customer-facing systems.",
+          keywords:
+            "blog writing articles ai cx implementation customer health sales handoff lifecycle operations customer success",
         },
         {
           title: "About",
           url: "/about",
           type: "Profile",
-          description: "About Matt Rabah, a Detroit-based customer experience, customer success, and implementation professional.",
-          keywords: "about matt rabah detroit customer experience customer success implementation msu shinola neurosync context by design",
+          description:
+            "About Matt Rabah, a Detroit-based customer experience, customer success, and implementation professional.",
+          keywords:
+            "about matt rabah detroit customer experience customer success implementation msu shinola neurosync context by design",
         },
         {
           title: "Contact",
           url: "/contact",
           type: "Contact",
-          description: "Contact Matt Rabah for customer experience, implementation, customer success, lifecycle systems, and AI workflow work.",
-          keywords: "contact email linkedin matt rabah cx implementation customer success ai workflows",
+          description:
+            "Contact Matt Rabah for customer experience, implementation, customer success, lifecycle systems, and AI workflow work.",
+          keywords:
+            "contact email linkedin matt rabah cx implementation customer success ai workflows",
         },
       ];
-      
+
       const closeNavigation = () => {
         navToggle?.setAttribute("aria-expanded", "false");
         navToggle?.setAttribute("aria-label", "Open navigation");
@@ -237,6 +254,7 @@ const isCurrentPath = (href: string) => {
 
       const renderSearchResults = (query: string) => {
         if (!searchResults || !searchHelp) return;
+
         const normalizedQuery = normalizeText(query);
         searchResults.innerHTML = "";
 
@@ -246,9 +264,13 @@ const isCurrentPath = (href: string) => {
         }
 
         const terms = normalizedQuery.split(/\s+/).filter(Boolean);
+
         const matches: SearchItemWithScore[] = searchIndex
           .map((item) => {
-            const haystack = normalizeText(`${item.title} ${item.type} ${item.description} ${item.keywords}`);
+            const haystack = normalizeText(
+              `${item.title} ${item.type} ${item.description} ${item.keywords}`
+            );
+
             const score = terms.reduce((total, term) => {
               if (normalizeText(item.title).includes(term)) return total + 4;
               if (normalizeText(item.type).includes(term)) return total + 3;
@@ -256,11 +278,12 @@ const isCurrentPath = (href: string) => {
               if (haystack.includes(term)) return total + 1;
               return total;
             }, 0);
+
             return { ...item, score };
           })
           .filter((item) => item.score > 0)
           .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
-          
+
         searchHelp.hidden = matches.length > 0;
 
         if (matches.length === 0) {
@@ -280,7 +303,7 @@ const isCurrentPath = (href: string) => {
           link.href = item.url;
 
           const type = document.createElement("span");
-          type.className = "search-result-type smcp";
+          type.className = "search-result-type";
           type.textContent = item.type;
 
           const title = document.createElement("strong");
@@ -321,8 +344,9 @@ const isCurrentPath = (href: string) => {
 
         renderSearchResults("");
       };
-      
-      const isThemeName = (value: string | null): value is ThemeName => value === "light" || value === "dark";
+
+      const isThemeName = (value: string | null): value is ThemeName =>
+        value === "light" || value === "dark";
 
       const applyTheme = (theme: ThemeName) => {
         document.documentElement.dataset.theme = theme;
@@ -330,27 +354,39 @@ const isCurrentPath = (href: string) => {
 
         if (themeToggle && themeToggleIcon) {
           const isDark = theme === "dark";
+
           themeToggle.setAttribute(
             "aria-label",
             isDark ? "Switch to light mode" : "Switch to dark mode"
           );
+
           themeToggleIcon.textContent = isDark ? "☼" : "☾";
         }
       };
 
       const savedTheme = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      applyTheme(isThemeName(savedTheme) ? savedTheme : prefersDark ? "dark" : "light");
-      
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+
+      applyTheme(
+        isThemeName(savedTheme) ? savedTheme : prefersDark ? "dark" : "light"
+      );
+
       themeToggle?.addEventListener("click", () => {
         const currentTheme = document.documentElement.dataset.theme;
         applyTheme(currentTheme === "dark" ? "light" : "dark");
       });
-      
+
       navToggle?.addEventListener("click", () => {
         const isOpen = navToggle.getAttribute("aria-expanded") === "true";
+
         navToggle.setAttribute("aria-expanded", String(!isOpen));
-        navToggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+        navToggle.setAttribute(
+          "aria-label",
+          isOpen ? "Open navigation" : "Close navigation"
+        );
+
         nav?.classList.toggle("is-open", !isOpen);
         document.body.classList.toggle("nav-open", !isOpen);
 
@@ -358,36 +394,34 @@ const isCurrentPath = (href: string) => {
           closeSearch();
         }
       });
-      
+
       searchToggle?.addEventListener("click", () => {
         const isOpen = searchToggle.getAttribute("aria-expanded") === "true";
-        if (isOpen) {
-          closeSearch();
-        } else {
-          openSearch();
-        }
+        isOpen ? closeSearch() : openSearch();
       });
-      
+
       searchClose?.addEventListener("click", closeSearch);
 
       searchInput?.addEventListener("input", (event) => {
-        const target = event.currentTarget;
-        if (target instanceof HTMLInputElement) {
-          renderSearchResults(target.value);
-        }
+        const input = event.currentTarget;
+
+        if (!(input instanceof HTMLInputElement)) return;
+
+        renderSearchResults(input.value);
       });
-      
+
       nav?.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", closeNavigation);
       });
-      
+
       searchResults?.addEventListener("click", (event) => {
         const target = event.target;
+
         if (target instanceof Element && target.closest("a")) {
           closeSearch();
         }
       });
-      
+
       window.addEventListener("keydown", (event) => {
         if (event.key !== "Escape") return;
         closeNavigation();
