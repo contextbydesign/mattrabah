@@ -1,6 +1,6 @@
 /* ==========================================================================
    Matt Rabah Portfolio
-   Typeface-inspired system · TT Commons Pro
+  Inter-based system · Practical AI portfolio
    ========================================================================== */
 
 :root {
@@ -31,26 +31,24 @@
   --c-signal-pale: rgba(253, 36, 62, 0.08);
   --c-signal-edge: rgba(253, 36, 62, 0.28);
 
-  --ff-sans:
-    "tt-commons-pro", "Inter", "Helvetica Neue", Arial, system-ui, sans-serif;
-  --ff-serif:
-    "tt-commons-pro", "Inter", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --ff-sans: "Inter", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --ff-serif: "Inter", "Helvetica Neue", Arial, system-ui, sans-serif;
   --ff-mono:
     "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo,
     Consolas, monospace;
 
-  --t-display: clamp(4.25rem, 10vw, 8.75rem);
-  --t-h1: clamp(3rem, 6vw, 5.5rem);
-  --t-h2: clamp(2.6rem, 5vw, 4.75rem);
-  --t-h3: clamp(1.65rem, 2vw, 2.25rem);
-  --t-body-lg: clamp(1.2rem, 1.5vw, 1.45rem);
-  --t-body: 1.0625rem;
-  --t-small: 0.9rem;
-  --t-kicker: 0.76rem;
+  --t-display: clamp(4.5rem, 10.5vw, 9rem);
+  --t-h1: clamp(2.6rem, 5.2vw, 4.25rem);
+  --t-h2: clamp(2.1rem, 4.2vw, 3.2rem);
+  --t-h3: clamp(1.35rem, 2.2vw, 1.9rem);
+  --t-body-lg: clamp(1.05rem, 1.4vw, 1.25rem);
+  --t-body: 1rem;
+  --t-small: 0.875rem;
+  --t-kicker: 0.75rem;
 
-  --lh-display: 0.92;
-  --lh-h: 1;
-  --lh-body: 1.55;
+  --lh-display: 0.98;
+  --lh-h: 1.02;
+  --lh-body: 1.6;
   --lh-tight: 1.2;
 
   --s-xs: 0.5rem;
@@ -114,12 +112,23 @@ body {
   color: var(--c-ink);
   font-family: var(--ff-sans);
   font-size: var(--t-body);
-  font-weight: 300;
+  font-weight: 400;
   line-height: var(--lh-body);
   letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at top left, rgba(253, 36, 62, 0.06), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(29, 33, 48, 0.05), transparent 28%);
+  z-index: -1;
 }
 
 body.nav-open,
@@ -209,12 +218,18 @@ img {
 /* Header */
 
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  inset-inline: 0;
   z-index: 1000;
   border-bottom: 1px solid var(--c-rule);
-  background: color-mix(in srgb, var(--c-paper) 90%, transparent);
+  background: color-mix(in srgb, var(--c-paper) 88%, transparent);
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+main {
+  padding-top: 4.25rem;
 }
 
 .header-inner {
@@ -548,26 +563,26 @@ img {
 .kicker {
   color: var(--c-mute);
   font-size: var(--t-kicker);
-  font-weight: 500;
+  font-weight: 600;
   line-height: var(--lh-tight);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
 .display {
-  max-width: 13ch;
+  max-width: 14ch;
   color: var(--c-ink);
   font-size: var(--t-display);
-  font-weight: 600;
+  font-weight: 700;
   line-height: var(--lh-display);
-  letter-spacing: -0.055em;
+  letter-spacing: -0.03em;
 }
 
 .lead {
   max-width: var(--measure-prose);
   color: var(--c-ink-soft);
   font-size: var(--t-body-lg);
-  font-weight: 300;
+  font-weight: 400;
   line-height: var(--lh-body);
 }
 
@@ -593,7 +608,7 @@ img {
 .section-title {
   color: var(--c-ink);
   font-size: var(--t-h2);
-  font-weight: 600;
+  font-weight: 700;
   line-height: var(--lh-h);
   letter-spacing: -0.045em;
 }
@@ -720,24 +735,169 @@ img {
 .tag {
   display: inline-flex;
   align-items: center;
-  padding: 0.55em 0.78em;
+  padding: 0.58em 0.82em;
   border: 1px solid var(--c-rule);
-  border-radius: var(--r-sm);
+  border-radius: 999px;
   background: var(--c-cream);
   color: var(--c-mute);
   font-family: var(--ff-sans);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 500;
   line-height: 1;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
+  box-shadow: 0 1px 0 rgba(29, 33, 48, 0.02);
+  transition:
+    transform var(--ms-base),
+    border-color var(--ms-base),
+    background-color var(--ms-base),
+    color var(--ms-base),
+    box-shadow var(--ms-base);
 }
 
 .tag:hover {
   border-color: var(--c-accent-edge);
   background: var(--c-accent-pale);
   color: var(--c-rust);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px -14px rgba(253, 36, 62, 0.45);
+}
+
+/* Tag sizes */
+.tag--sm {
+  padding: 0.35em 0.6em;
+  font-size: 0.65rem;
+}
+
+.tag--md {
+  padding: 0.58em 0.82em;
+  font-size: 0.7rem;
+}
+
+.tag--lg {
+  padding: 0.9em 1.1em;
+  font-size: 0.9rem;
+}
+
+/* Tag variants */
+.tag--accent {
+  background: var(--c-accent-pale);
+  border-color: var(--c-accent-edge);
+  color: var(--c-accent-ink);
+}
+
+.tag--accent:hover {
+  background: var(--c-accent);
+  color: #fff;
+  border-color: var(--c-accent);
+}
+
+.tag--muted {
+  background: transparent;
+  border-color: var(--c-rule);
+  color: var(--c-mute);
+}
+
+.tag--ghost {
+  background: transparent;
+  border-color: transparent;
+  color: var(--c-ink);
+  box-shadow: none;
+}
+
+.tag-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.45rem;
+  color: inherit;
+}
+
+.tag-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.tag-label {
+  display: inline-block;
+}
+
+/* Contact */
+
+.contact-list {
+  display: grid;
+  gap: var(--s-md);
+}
+
+@media (min-width: 48rem) {
+  .contact-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.contact-button {
+  display: flex;
+  align-items: center;
+  gap: var(--s-md);
+  min-height: 6.5rem;
+  padding: 1.2rem 1.25rem;
+  border: 1px solid var(--c-rule);
+  border-radius: var(--r-lg);
+  background: var(--c-surface);
+  color: var(--c-ink);
+  text-decoration: none;
+  transition:
+    transform var(--ms-slow),
+    box-shadow var(--ms-slow),
+    border-color var(--ms-base),
+    background-color var(--ms-base);
+}
+
+.contact-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+  border-color: var(--c-rule-strong);
+  background: var(--c-cream);
+}
+
+.contact-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  background: var(--c-rust);
+  color: #ffffff;
+}
+
+.contact-icon svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.contact-copy {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.contact-label {
+  font-size: var(--t-kicker);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-mute);
+}
+
+.contact-value {
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 
 /* About image support */

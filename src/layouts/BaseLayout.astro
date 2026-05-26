@@ -22,7 +22,10 @@ const year = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="stylesheet" href="https://use.typekit.net/vex0ome.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/index.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/500.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/600.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.8/index.css" />
   </head>
 
   <body>
@@ -147,6 +150,8 @@ const year = new Date().getFullYear();
             </a>
           </li>
           <li><a href="/blog">Writing</a></li>
+          <li><a href="/style-guide">Style Guide</a></li>
+          <li><a href="/tag-test">Tag Test</a></li>
         </ul>
       </div>
     </footer>
@@ -240,6 +245,24 @@ const year = new Date().getFullYear();
             "Contact Matt Rabah for customer experience, implementation, customer success, lifecycle systems, and AI workflow work.",
           keywords:
             "contact email linkedin matt rabah cx implementation customer success ai workflows",
+        },
+        {
+          title: "Style Guide",
+          url: "/style-guide",
+          type: "Reference",
+          description:
+            "Design tokens, color swatches, type samples, and tag variants for the site system.",
+          keywords:
+            "style guide tokens color swatches type samples tag variants reference",
+        },
+        {
+          title: "Tag Test",
+          url: "/tag-test",
+          type: "Reference",
+          description:
+            "Light and dark preview of tag variants, sizes, and icon states.",
+          keywords:
+            "tag test variants sizes icons light dark preview",
         },
       ];
 
