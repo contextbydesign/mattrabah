@@ -274,17 +274,16 @@ img {
 }
 
 .site-nav a[aria-current="page"] {
-  color: var(--c-ink);
+  color: var(--c-signal-ink);
 }
 
 .site-nav a[aria-current="page"]::after {
   content: "";
   display: block;
-  height: 1px;
+  height: 2px;
   margin-top: 0.2rem;
-  background: var(--c-rule-strong);
-  opacity: 0.8;
-  transform: scaleX(0.45);
+  background: linear-gradient(90deg, var(--c-accent), var(--c-signal));
+  transform: scaleX(0.6);
   transform-origin: left;
 }
 
