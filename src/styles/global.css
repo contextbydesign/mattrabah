@@ -142,6 +142,27 @@ body.search-open {
   overflow: hidden;
 }
 
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 9999;
+  transform: translateY(-150%);
+  background: var(--c-ink);
+  color: var(--c-paper);
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--r-sm);
+  font-size: var(--t-small);
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform var(--ms-base);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
 a {
   color: var(--c-accent);
   text-decoration-color: var(--c-accent-edge);
