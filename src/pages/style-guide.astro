@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Tag from "../components/ui/Tag.astro";
+---
+
+<BaseLayout title="Style Guide" description="Design tokens and components reference.">
+  <section class="section container">
+    <header class="section-head">
+      <h2 class="section-title">Design tokens</h2>
+    </header>
+
+    <div class="capabilities">
+      <div>
+        <h3>Colors</h3>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="width:72px;height:48px;border-radius:8px;background:var(--c-paper);border:1px solid var(--c-rule);"></div>
+            <small>--c-paper</small>
+          </div>
+
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="width:72px;height:48px;border-radius:8px;background:var(--c-cream);border:1px solid var(--c-rule);"></div>
+            <small>--c-cream</small>
+          </div>
+
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="width:72px;height:48px;border-radius:8px;background:var(--c-ink);border:1px solid rgba(0,0,0,0.06);"></div>
+            <small>--c-ink</small>
+          </div>
+
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div style="width:72px;height:48px;border-radius:8px;background:var(--c-rust);border:1px solid rgba(0,0,0,0.06);"></div>
+            <small>--c-rust</small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3>Type</h3>
+        <ul>
+          <li><strong>--t-display:</strong> <span style="font-size:var(--t-display)">Display sample</span></li>
+          <li><strong>--t-h1:</strong> <span style="font-size:var(--t-h1)">H1 sample</span></li>
+          <li><strong>--t-h2:</strong> <span style="font-size:var(--t-h2)">H2 sample</span></li>
+          <li><strong>--t-body:</strong> <span style="font-size:var(--t-body)">Body sample</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <header class="section-head">
+      <h2 class="section-title">Tag variants</h2>
+    </header>
+
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;">
+      <Tag label="Default" />
+      <Tag label="Accent" variant="accent" />
+      <Tag label="Muted" variant="muted" />
+      <Tag label="Ghost" variant="ghost" />
+      <Tag label="Small" size="sm" />
+      <Tag label="Large" size="lg" />
+      <Tag label="Checked" variant="accent" icon="check" />
+      <Tag label="Spark" variant="muted" icon="spark" />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,106 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Tag from "../components/ui/Tag.astro";
+
+const tagExamples = [
+  { label: "Default", props: {} },
+  { label: "Accent", props: { variant: "accent" as const } },
+  { label: "Muted", props: { variant: "muted" as const } },
+  { label: "Ghost", props: { variant: "ghost" as const } },
+  { label: "Small", props: { size: "sm" as const } },
+  { label: "Medium", props: { size: "md" as const } },
+  { label: "Large", props: { size: "lg" as const } },
+  { label: "Check", props: { variant: "accent" as const, icon: "check" as const } },
+  { label: "Dot", props: { variant: "muted" as const, icon: "dot" as const } },
+  { label: "Spark", props: { variant: "accent" as const, icon: "spark" as const } },
+];
+---
+
+<BaseLayout
+  title="Tag Test"
+  description="Light and dark preview for Tag variants, sizes, and icons."
+>
+  <section class="hero container">
+    <p class="kicker">Visual Test</p>
+    <h1 class="display">Tag variants across light and dark theme samples.</h1>
+    <p class="lead">
+      Use this page to compare chip spacing, contrast, and icon treatment in both theme contexts.
+    </p>
+  </section>
+
+  <section class="section container" aria-labelledby="light-sample">
+    <header class="section-head">
+      <h2 class="section-title" id="light-sample">Light theme</h2>
+    </header>
+
+    <div class="theme-frame theme-frame--light">
+      <div class="theme-frame__inner">
+        <div class="tag-grid">
+          {
+            tagExamples.map((example) => (
+              <Tag label={example.label} {...example.props} />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section container" aria-labelledby="dark-sample">
+    <header class="section-head">
+      <h2 class="section-title" id="dark-sample">Dark theme</h2>
+    </header>
+
+    <div class="theme-frame theme-frame--dark">
+      <div class="theme-frame__inner">
+        <div class="tag-grid">
+          {
+            tagExamples.map((example) => (
+              <Tag label={example.label} {...example.props} />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .theme-frame {
+    border: 1px solid var(--c-rule);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+
+  .theme-frame--light {
+    background: var(--c-paper);
+    color: var(--c-ink);
+  }
+
+  .theme-frame--dark {
+    background: #111013;
+    color: #ffffff;
+    --c-paper: #111013;
+    --c-cream: #1d2130;
+    --c-surface: #171821;
+    --c-surface-alt: #1d2130;
+    --c-ink: #ffffff;
+    --c-ink-soft: rgba(255, 255, 255, 0.78);
+    --c-mute: rgba(255, 255, 255, 0.62);
+    --c-faint: rgba(255, 255, 255, 0.42);
+    --c-rule: rgba(255, 255, 255, 0.1);
+    --c-rule-strong: rgba(255, 255, 255, 0.18);
+    --c-accent-pale: rgba(253, 36, 62, 0.14);
+  }
+
+  .theme-frame__inner {
+    padding: clamp(1.25rem, 2.5vw, 2rem);
+  }
+
+  .tag-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+  }
+</style>
