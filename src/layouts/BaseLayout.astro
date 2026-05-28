@@ -22,22 +22,7 @@ const year = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/index.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/500.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/600.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.8/index.css"
-    />
+    <link rel="stylesheet" href="https://use.typekit.net/vex0ome.css" />
   </head>
 
   <body>
@@ -45,9 +30,16 @@ const year = new Date().getFullYear();
 
     <header class="site-header">
       <div class="container header-inner">
-        <a href="/" class="brand" aria-label={`${SITE_NAME}, home`}>
-          <span class="brand-mark" aria-hidden="true">m</span>
-          <span class="brand-name">{SITE_NAME}</span>
+        <a href="/" class="brand brand-wordmark" aria-label={`${SITE_NAME}, home`}>
+          <span class="brand-wordmark-name">Matt Rabah</span>
+
+          <span class="brand-wordmark-signal" aria-hidden="true">
+            <span>CX</span>
+            <span>AI</span>
+            <span>CS</span>
+            <span>CRM</span>
+            <span>OPS</span>
+          </span>
         </a>
 
         <nav class="site-nav" id="primary-navigation" aria-label="Primary">
@@ -136,8 +128,7 @@ const year = new Date().getFullYear();
               id="search-results"
               aria-live="polite"
               aria-label="Search results"
-            >
-            </ul>
+            ></ul>
           </div>
         </div>
       </div>
@@ -163,31 +154,46 @@ const year = new Date().getFullYear();
             </a>
           </li>
           <li><a href="/blog">Writing</a></li>
-          <li><a href="/style-guide">Style Guide</a></li>
-          <li><a href="/tag-test">Tag Test</a></li>
         </ul>
       </div>
     </footer>
 
     <script>
-      // @ts-nocheck
-      // Search index and UI interaction script (plain JavaScript)
+      type SearchItem = {
+        title: string;
+        url: string;
+        type: string;
+        description: string;
+        keywords: string;
+      };
 
-      const navToggle = document.querySelector(".nav-toggle");
-      const nav = document.querySelector(".site-nav");
+      type SearchItemWithScore = SearchItem & {
+        score: number;
+      };
 
-      const searchToggle = document.querySelector(".search-toggle");
-      const searchPanel = document.querySelector(".site-search-panel");
-      const searchInput = document.querySelector(".site-search-input");
-      const searchClose = document.querySelector(".search-close");
-      const searchResults = document.querySelector(".search-results");
-      const searchHelp = document.querySelector(".search-help");
+      type ThemeName = "light" | "dark";
 
-      const themeToggle = document.querySelector(".theme-toggle");
-      const themeToggleIcon = document.querySelector(".theme-toggle-icon");
+      const navToggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
+      const nav = document.querySelector<HTMLElement>(".site-nav");
 
-      /** @type {{title:string,url:string,type:string,description:string,keywords:string}[]} */
-      const searchIndex = [
+      const searchToggle =
+        document.querySelector<HTMLButtonElement>(".search-toggle");
+      const searchPanel =
+        document.querySelector<HTMLElement>(".site-search-panel");
+      const searchInput =
+        document.querySelector<HTMLInputElement>(".site-search-input");
+      const searchClose =
+        document.querySelector<HTMLButtonElement>(".search-close");
+      const searchResults =
+        document.querySelector<HTMLUListElement>(".search-results");
+      const searchHelp = document.querySelector<HTMLElement>(".search-help");
+
+      const themeToggle =
+        document.querySelector<HTMLButtonElement>(".theme-toggle");
+      const themeToggleIcon =
+        document.querySelector<HTMLElement>(".theme-toggle-icon");
+
+      const searchIndex: SearchItem[] = [
         {
           title: "Home",
           url: "/",
@@ -242,76 +248,50 @@ const year = new Date().getFullYear();
           keywords:
             "contact email linkedin matt rabah cx implementation customer success ai workflows",
         },
-        {
-          title: "Style Guide",
-          url: "/style-guide",
-          type: "Reference",
-          description:
-            "Design tokens, color swatches, type samples, and tag variants for the site system.",
-          keywords:
-            "style guide tokens color swatches type samples tag variants reference",
-        },
-        {
-          title: "Tag Test",
-          url: "/tag-test",
-          type: "Reference",
-          description:
-            "Light and dark preview of tag variants, sizes, and icon states.",
-          keywords: "tag test variants sizes icons light dark preview",
-        },
       ];
-        const closeNavigation = () => {
-        if (navToggle) {
-          navToggle.setAttribute("aria-expanded", "false");
-          navToggle.setAttribute("aria-label", "Open navigation");
-        }
 
-        if (nav) nav.classList.remove("is-open");
+      const closeNavigation = () => {
+        navToggle?.setAttribute("aria-expanded", "false");
+        navToggle?.setAttribute("aria-label", "Open navigation");
+        nav?.classList.remove("is-open");
         document.body.classList.remove("nav-open");
       };
 
-      /**
-       * @param {string} value
-       * @returns {string}
-       */
-      const normalizeText = (value) => value.toLowerCase().trim();
+      const normalizeText = (value: string) => value.toLowerCase().trim();
 
-      /**
-       * @param {string} query
-       */
-      const renderSearchResults = (query) => {
+      const renderSearchResults = (query: string) => {
         if (!searchResults || !searchHelp) return;
-        const normalizedQuery = normalizeText(String(query));
+
+        const normalizedQuery = normalizeText(query);
         searchResults.innerHTML = "";
 
         if (!normalizedQuery) {
-          if (searchHelp instanceof HTMLElement) searchHelp.hidden = false;
+          searchHelp.hidden = false;
           return;
         }
 
-        /** @type {string[]} */
         const terms = normalizedQuery.split(/\s+/).filter(Boolean);
 
-        const matches = searchIndex
+        const matches: SearchItemWithScore[] = searchIndex
           .map((item) => {
             const haystack = normalizeText(
-              `${item.title} ${item.type} ${item.description} ${item.keywords}`,
+              `${item.title} ${item.type} ${item.description} ${item.keywords}`
             );
 
             const score = terms.reduce((total, term) => {
-              if (item.title.toLowerCase().includes(term)) return total + 4;
-              if (item.type.toLowerCase().includes(term)) return total + 3;
-              if (item.description.toLowerCase().includes(term)) return total + 2;
+              if (normalizeText(item.title).includes(term)) return total + 4;
+              if (normalizeText(item.type).includes(term)) return total + 3;
+              if (normalizeText(item.description).includes(term)) return total + 2;
               if (haystack.includes(term)) return total + 1;
               return total;
             }, 0);
 
-            return Object.assign({}, item, { score });
+            return { ...item, score };
           })
           .filter((item) => item.score > 0)
           .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
 
-        if (searchHelp instanceof HTMLElement) searchHelp.hidden = matches.length > 0;
+        searchHelp.hidden = matches.length > 0;
 
         if (matches.length === 0) {
           const emptyItem = document.createElement("li");
@@ -348,35 +328,34 @@ const year = new Date().getFullYear();
       };
 
       const openSearch = () => {
-        if (searchPanel) searchPanel.removeAttribute("hidden");
-        if (searchToggle) {
-          searchToggle.setAttribute("aria-expanded", "true");
-          searchToggle.setAttribute("aria-label", "Close search");
-        }
-
+        searchPanel?.removeAttribute("hidden");
+        searchToggle?.setAttribute("aria-expanded", "true");
+        searchToggle?.setAttribute("aria-label", "Close search");
         document.body.classList.add("search-open");
         closeNavigation();
 
         window.requestAnimationFrame(() => {
-          if (searchInput instanceof HTMLInputElement) searchInput.focus();
+          searchInput?.focus();
         });
       };
 
       const closeSearch = () => {
-        if (searchPanel) searchPanel.setAttribute("hidden", "");
-        if (searchToggle) {
-          searchToggle.setAttribute("aria-expanded", "false");
-          searchToggle.setAttribute("aria-label", "Open search");
-        }
+        searchPanel?.setAttribute("hidden", "");
+        searchToggle?.setAttribute("aria-expanded", "false");
+        searchToggle?.setAttribute("aria-label", "Open search");
         document.body.classList.remove("search-open");
 
-        if (searchInput instanceof HTMLInputElement) searchInput.value = "";
+        if (searchInput) {
+          searchInput.value = "";
+        }
 
         renderSearchResults("");
       };
 
-      /** @param {'light'|'dark'} theme */
-      const applyTheme = (theme) => {
+      const isThemeName = (value: string | null): value is ThemeName =>
+        value === "light" || value === "dark";
+
+      const applyTheme = (theme: ThemeName) => {
         document.documentElement.dataset.theme = theme;
         localStorage.setItem("theme", theme);
 
@@ -385,7 +364,7 @@ const year = new Date().getFullYear();
 
           themeToggle.setAttribute(
             "aria-label",
-            isDark ? "Switch to light mode" : "Switch to dark mode",
+            isDark ? "Switch to light mode" : "Switch to dark mode"
           );
 
           themeToggleIcon.textContent = isDark ? "☼" : "☾";
@@ -393,67 +372,58 @@ const year = new Date().getFullYear();
       };
 
       const savedTheme = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
 
-      applyTheme(savedTheme === "light" || savedTheme === "dark" ? savedTheme : prefersDark ? "dark" : "light");
+      applyTheme(
+        isThemeName(savedTheme) ? savedTheme : prefersDark ? "dark" : "light"
+      );
 
-      if (themeToggle) {
-        themeToggle.addEventListener("click", () => {
-          const currentTheme = document.documentElement.dataset.theme;
-          applyTheme(currentTheme === "dark" ? "light" : "dark");
-        });
-      }
+      themeToggle?.addEventListener("click", () => {
+        const currentTheme = document.documentElement.dataset.theme;
+        applyTheme(currentTheme === "dark" ? "light" : "dark");
+      });
 
-      if (navToggle) {
-        navToggle.addEventListener("click", () => {
-          const isOpen = navToggle.getAttribute("aria-expanded") === "true";
+      navToggle?.addEventListener("click", () => {
+        const isOpen = navToggle.getAttribute("aria-expanded") === "true";
 
-          navToggle.setAttribute("aria-expanded", String(!isOpen));
-          navToggle.setAttribute(
-            "aria-label",
-            isOpen ? "Open navigation" : "Close navigation",
-          );
+        navToggle.setAttribute("aria-expanded", String(!isOpen));
+        navToggle.setAttribute(
+          "aria-label",
+          isOpen ? "Open navigation" : "Close navigation"
+        );
 
-          if (nav) nav.classList.toggle("is-open", !isOpen);
-          document.body.classList.toggle("nav-open", !isOpen);
+        nav?.classList.toggle("is-open", !isOpen);
+        document.body.classList.toggle("nav-open", !isOpen);
 
-          if (!isOpen) {
-            closeSearch();
-          }
-        });
-      }
+        if (!isOpen) {
+          closeSearch();
+        }
+      });
 
-      if (searchToggle) {
-        searchToggle.addEventListener("click", () => {
-          const isOpen = searchToggle.getAttribute("aria-expanded") === "true";
-          isOpen ? closeSearch() : openSearch();
-        });
-      }
+      searchToggle?.addEventListener("click", () => {
+        const isOpen = searchToggle.getAttribute("aria-expanded") === "true";
+        isOpen ? closeSearch() : openSearch();
+      });
 
-      if (searchClose) searchClose.addEventListener("click", closeSearch);
+      searchClose?.addEventListener("click", closeSearch);
 
-      if (searchInput) {
-        searchInput.addEventListener("input", (event) => {
-          const input = event.currentTarget;
-          if (!(input instanceof HTMLInputElement)) return;
-          renderSearchResults(input.value);
-        });
-      }
+      searchInput?.addEventListener("input", (event) => {
+        renderSearchResults(event.currentTarget.value);
+      });
 
-      if (nav) {
-        nav.querySelectorAll("a").forEach((link) => {
-          link.addEventListener("click", closeNavigation);
-        });
-      }
+      nav?.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeNavigation);
+      });
 
-      if (searchResults) {
-        searchResults.addEventListener("click", (event) => {
-          const target = event.target;
-          if (target instanceof Element && target.closest("a")) {
-            closeSearch();
-          }
-        });
-      }
+      searchResults?.addEventListener("click", (event) => {
+        const target = event.target;
+
+        if (target instanceof Element && target.closest("a")) {
+          closeSearch();
+        }
+      });
 
       window.addEventListener("keydown", (event) => {
         if (event.key !== "Escape") return;
