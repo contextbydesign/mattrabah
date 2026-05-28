@@ -170,42 +170,24 @@ const year = new Date().getFullYear();
     </footer>
 
     <script>
-      type SearchItem = {
-        title: string;
-        url: string;
-        type: string;
-        description: string;
-        keywords: string;
-      };
+      // @ts-nocheck
+      // Search index and UI interaction script (plain JavaScript)
 
-      type SearchItemWithScore = SearchItem & {
-        score: number;
-      };
+      const navToggle = document.querySelector(".nav-toggle");
+      const nav = document.querySelector(".site-nav");
 
-      type ThemeName = "light" | "dark";
+      const searchToggle = document.querySelector(".search-toggle");
+      const searchPanel = document.querySelector(".site-search-panel");
+      const searchInput = document.querySelector(".site-search-input");
+      const searchClose = document.querySelector(".search-close");
+      const searchResults = document.querySelector(".search-results");
+      const searchHelp = document.querySelector(".search-help");
 
-      const navToggle =
-        document.querySelector<HTMLButtonElement>(".nav-toggle");
-      const nav = document.querySelector<HTMLElement>(".site-nav");
+      const themeToggle = document.querySelector(".theme-toggle");
+      const themeToggleIcon = document.querySelector(".theme-toggle-icon");
 
-      const searchToggle =
-        document.querySelector<HTMLButtonElement>(".search-toggle");
-      const searchPanel =
-        document.querySelector<HTMLElement>(".site-search-panel");
-      const searchInput =
-        document.querySelector<HTMLInputElement>(".site-search-input");
-      const searchClose =
-        document.querySelector<HTMLButtonElement>(".search-close");
-      const searchResults =
-        document.querySelector<HTMLUListElement>(".search-results");
-      const searchHelp = document.querySelector<HTMLElement>(".search-help");
-
-      const themeToggle =
-        document.querySelector<HTMLButtonElement>(".theme-toggle");
-      const themeToggleIcon =
-        document.querySelector<HTMLElement>(".theme-toggle-icon");
-
-      const searchIndex: SearchItem[] = [
+      /** @type {{title:string,url:string,type:string,description:string,keywords:string}[]} */
+      const searchIndex = [
         {
           title: "Home",
           url: "/",
@@ -278,50 +260,58 @@ const year = new Date().getFullYear();
           keywords: "tag test variants sizes icons light dark preview",
         },
       ];
+        const closeNavigation = () => {
+        if (navToggle) {
+          navToggle.setAttribute("aria-expanded", "false");
+          navToggle.setAttribute("aria-label", "Open navigation");
+        }
 
-      const closeNavigation = () => {
-        navToggle?.setAttribute("aria-expanded", "false");
-        navToggle?.setAttribute("aria-label", "Open navigation");
-        nav?.classList.remove("is-open");
+        if (nav) nav.classList.remove("is-open");
         document.body.classList.remove("nav-open");
       };
 
-      const normalizeText = (value: string) => value.toLowerCase().trim();
+      /**
+       * @param {string} value
+       * @returns {string}
+       */
+      const normalizeText = (value) => value.toLowerCase().trim();
 
-      const renderSearchResults = (query: string) => {
+      /**
+       * @param {string} query
+       */
+      const renderSearchResults = (query) => {
         if (!searchResults || !searchHelp) return;
-
-        const normalizedQuery = normalizeText(query);
+        const normalizedQuery = normalizeText(String(query));
         searchResults.innerHTML = "";
 
         if (!normalizedQuery) {
-          searchHelp.hidden = false;
+          if (searchHelp instanceof HTMLElement) searchHelp.hidden = false;
           return;
         }
 
+        /** @type {string[]} */
         const terms = normalizedQuery.split(/\s+/).filter(Boolean);
 
-        const matches: SearchItemWithScore[] = searchIndex
+        const matches = searchIndex
           .map((item) => {
             const haystack = normalizeText(
               `${item.title} ${item.type} ${item.description} ${item.keywords}`,
             );
 
             const score = terms.reduce((total, term) => {
-              if (normalizeText(item.title).includes(term)) return total + 4;
-              if (normalizeText(item.type).includes(term)) return total + 3;
-              if (normalizeText(item.description).includes(term))
-                return total + 2;
+              if (item.title.toLowerCase().includes(term)) return total + 4;
+              if (item.type.toLowerCase().includes(term)) return total + 3;
+              if (item.description.toLowerCase().includes(term)) return total + 2;
               if (haystack.includes(term)) return total + 1;
               return total;
             }, 0);
 
-            return { ...item, score };
+            return Object.assign({}, item, { score });
           })
           .filter((item) => item.score > 0)
           .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
 
-        searchHelp.hidden = matches.length > 0;
+        if (searchHelp instanceof HTMLElement) searchHelp.hidden = matches.length > 0;
 
         if (matches.length === 0) {
           const emptyItem = document.createElement("li");
@@ -358,34 +348,35 @@ const year = new Date().getFullYear();
       };
 
       const openSearch = () => {
-        searchPanel?.removeAttribute("hidden");
-        searchToggle?.setAttribute("aria-expanded", "true");
-        searchToggle?.setAttribute("aria-label", "Close search");
+        if (searchPanel) searchPanel.removeAttribute("hidden");
+        if (searchToggle) {
+          searchToggle.setAttribute("aria-expanded", "true");
+          searchToggle.setAttribute("aria-label", "Close search");
+        }
+
         document.body.classList.add("search-open");
         closeNavigation();
 
         window.requestAnimationFrame(() => {
-          searchInput?.focus();
+          if (searchInput instanceof HTMLInputElement) searchInput.focus();
         });
       };
 
       const closeSearch = () => {
-        searchPanel?.setAttribute("hidden", "");
-        searchToggle?.setAttribute("aria-expanded", "false");
-        searchToggle?.setAttribute("aria-label", "Open search");
+        if (searchPanel) searchPanel.setAttribute("hidden", "");
+        if (searchToggle) {
+          searchToggle.setAttribute("aria-expanded", "false");
+          searchToggle.setAttribute("aria-label", "Open search");
+        }
         document.body.classList.remove("search-open");
 
-        if (searchInput) {
-          searchInput.value = "";
-        }
+        if (searchInput instanceof HTMLInputElement) searchInput.value = "";
 
         renderSearchResults("");
       };
 
-      const isThemeName = (value: string | null): value is ThemeName =>
-        value === "light" || value === "dark";
-
-      const applyTheme = (theme: ThemeName) => {
+      /** @param {'light'|'dark'} theme */
+      const applyTheme = (theme) => {
         document.documentElement.dataset.theme = theme;
         localStorage.setItem("theme", theme);
 
@@ -402,62 +393,67 @@ const year = new Date().getFullYear();
       };
 
       const savedTheme = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-      applyTheme(
-        isThemeName(savedTheme) ? savedTheme : prefersDark ? "dark" : "light",
-      );
+      applyTheme(savedTheme === "light" || savedTheme === "dark" ? savedTheme : prefersDark ? "dark" : "light");
 
-      themeToggle?.addEventListener("click", () => {
-        const currentTheme = document.documentElement.dataset.theme;
-        applyTheme(currentTheme === "dark" ? "light" : "dark");
-      });
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          const currentTheme = document.documentElement.dataset.theme;
+          applyTheme(currentTheme === "dark" ? "light" : "dark");
+        });
+      }
 
-      navToggle?.addEventListener("click", () => {
-        const isOpen = navToggle.getAttribute("aria-expanded") === "true";
+      if (navToggle) {
+        navToggle.addEventListener("click", () => {
+          const isOpen = navToggle.getAttribute("aria-expanded") === "true";
 
-        navToggle.setAttribute("aria-expanded", String(!isOpen));
-        navToggle.setAttribute(
-          "aria-label",
-          isOpen ? "Open navigation" : "Close navigation",
-        );
+          navToggle.setAttribute("aria-expanded", String(!isOpen));
+          navToggle.setAttribute(
+            "aria-label",
+            isOpen ? "Open navigation" : "Close navigation",
+          );
 
-        nav?.classList.toggle("is-open", !isOpen);
-        document.body.classList.toggle("nav-open", !isOpen);
+          if (nav) nav.classList.toggle("is-open", !isOpen);
+          document.body.classList.toggle("nav-open", !isOpen);
 
-        if (!isOpen) {
-          closeSearch();
-        }
-      });
+          if (!isOpen) {
+            closeSearch();
+          }
+        });
+      }
 
-      searchToggle?.addEventListener("click", () => {
-        const isOpen = searchToggle.getAttribute("aria-expanded") === "true";
-        isOpen ? closeSearch() : openSearch();
-      });
+      if (searchToggle) {
+        searchToggle.addEventListener("click", () => {
+          const isOpen = searchToggle.getAttribute("aria-expanded") === "true";
+          isOpen ? closeSearch() : openSearch();
+        });
+      }
 
-      searchClose?.addEventListener("click", closeSearch);
+      if (searchClose) searchClose.addEventListener("click", closeSearch);
 
-      searchInput?.addEventListener("input", (event) => {
-        const input = event.currentTarget;
+      if (searchInput) {
+        searchInput.addEventListener("input", (event) => {
+          const input = event.currentTarget;
+          if (!(input instanceof HTMLInputElement)) return;
+          renderSearchResults(input.value);
+        });
+      }
 
-        if (!(input instanceof HTMLInputElement)) return;
+      if (nav) {
+        nav.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", closeNavigation);
+        });
+      }
 
-        renderSearchResults(input.value);
-      });
-
-      nav?.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", closeNavigation);
-      });
-
-      searchResults?.addEventListener("click", (event) => {
-        const target = event.target;
-
-        if (target instanceof Element && target.closest("a")) {
-          closeSearch();
-        }
-      });
+      if (searchResults) {
+        searchResults.addEventListener("click", (event) => {
+          const target = event.target;
+          if (target instanceof Element && target.closest("a")) {
+            closeSearch();
+          }
+        });
+      }
 
       window.addEventListener("keydown", (event) => {
         if (event.key !== "Escape") return;
