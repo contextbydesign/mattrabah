@@ -12,6 +12,6 @@ export default defineConfig({
   integrations: [svelte(), mdx()],
 
   vite: {
-    plugins: [tailwindcss()]
-  }
+    plugins: [tailwindcss()],
+  },
 });
