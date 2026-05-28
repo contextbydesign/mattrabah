@@ -410,7 +410,9 @@ const year = new Date().getFullYear();
       searchClose?.addEventListener("click", closeSearch);
 
       searchInput?.addEventListener("input", (event) => {
-        renderSearchResults(event.currentTarget.value);
+        const input = event.currentTarget;
+        if (!(input instanceof HTMLInputElement)) return;
+        renderSearchResults(input.value);
       });
 
       nav?.querySelectorAll("a").forEach((link) => {
