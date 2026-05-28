@@ -22,10 +22,22 @@ const year = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/index.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/500.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/600.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.8/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/index.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/500.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.8/600.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.8/index.css"
+    />
   </head>
 
   <body>
@@ -124,7 +136,8 @@ const year = new Date().getFullYear();
               id="search-results"
               aria-live="polite"
               aria-label="Search results"
-            ></ul>
+            >
+            </ul>
           </div>
         </div>
       </div>
@@ -171,7 +184,8 @@ const year = new Date().getFullYear();
 
       type ThemeName = "light" | "dark";
 
-      const navToggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
+      const navToggle =
+        document.querySelector<HTMLButtonElement>(".nav-toggle");
       const nav = document.querySelector<HTMLElement>(".site-nav");
 
       const searchToggle =
@@ -261,8 +275,7 @@ const year = new Date().getFullYear();
           type: "Reference",
           description:
             "Light and dark preview of tag variants, sizes, and icon states.",
-          keywords:
-            "tag test variants sizes icons light dark preview",
+          keywords: "tag test variants sizes icons light dark preview",
         },
       ];
 
@@ -291,13 +304,14 @@ const year = new Date().getFullYear();
         const matches: SearchItemWithScore[] = searchIndex
           .map((item) => {
             const haystack = normalizeText(
-              `${item.title} ${item.type} ${item.description} ${item.keywords}`
+              `${item.title} ${item.type} ${item.description} ${item.keywords}`,
             );
 
             const score = terms.reduce((total, term) => {
               if (normalizeText(item.title).includes(term)) return total + 4;
               if (normalizeText(item.type).includes(term)) return total + 3;
-              if (normalizeText(item.description).includes(term)) return total + 2;
+              if (normalizeText(item.description).includes(term))
+                return total + 2;
               if (haystack.includes(term)) return total + 1;
               return total;
             }, 0);
@@ -380,7 +394,7 @@ const year = new Date().getFullYear();
 
           themeToggle.setAttribute(
             "aria-label",
-            isDark ? "Switch to light mode" : "Switch to dark mode"
+            isDark ? "Switch to light mode" : "Switch to dark mode",
           );
 
           themeToggleIcon.textContent = isDark ? "☼" : "☾";
@@ -389,11 +403,11 @@ const year = new Date().getFullYear();
 
       const savedTheme = localStorage.getItem("theme");
       const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
+        "(prefers-color-scheme: dark)",
       ).matches;
 
       applyTheme(
-        isThemeName(savedTheme) ? savedTheme : prefersDark ? "dark" : "light"
+        isThemeName(savedTheme) ? savedTheme : prefersDark ? "dark" : "light",
       );
 
       themeToggle?.addEventListener("click", () => {
@@ -407,7 +421,7 @@ const year = new Date().getFullYear();
         navToggle.setAttribute("aria-expanded", String(!isOpen));
         navToggle.setAttribute(
           "aria-label",
-          isOpen ? "Open navigation" : "Close navigation"
+          isOpen ? "Open navigation" : "Close navigation",
         );
 
         nav?.classList.toggle("is-open", !isOpen);
