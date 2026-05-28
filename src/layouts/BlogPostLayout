@@ -1,0 +1,55 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+type TocItem = {
+  label: string;
+  href: string;
+};
+
+const { frontmatter } = Astro.props;
+
+const title = frontmatter.title ?? "Blog post";
+const description = frontmatter.description ?? "";
+const eyebrow = frontmatter.eyebrow ?? "Article";
+const readingTime = frontmatter.readingTime ?? "2 min read";
+const toc = frontmatter.toc ?? [];
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="article-shell">
+    <div class="container article-grid">
+      <header class="article-header">
+        <p class="article-eyebrow">{eyebrow}</p>
+        <h1 class="article-title">{title}</h1>
+
+        {description && <p class="article-dek">{description}</p>}
+      </header>
+
+      <div class="article-content">
+        <slot />
+      </div>
+
+      <aside class="article-sidebar" aria-label="Article navigation">
+        <div class="article-sidebar-card">
+          <p class="article-sidebar-title">In this article</p>
+
+          {toc.length > 0 && (
+            <nav class="article-toc" aria-label="In this article">
+              <ul>
+                {
+                  toc.map((item: TocItem) => (
+                    <li>
+                      <a href={item.href}>{item.label}</a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </nav>
+          )}
+
+          <p class="article-reading-time">{readingTime}</p>
+        </div>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
