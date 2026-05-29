@@ -95,7 +95,12 @@
   --font-mono: "Sohne Mono", ui-monospace, Menlo, monospace;
 
   /* Editorial fluid scale */
-  --fs-display: clamp(2.85rem, 1.5rem + 5.6vw, 5.5rem);
+  --fs-statement: clamp(
+    2.4rem,
+    1.4rem + 4.6vw,
+    4.75rem
+  ); /* big centered interstitials */
+  --fs-display: clamp(3rem, 1.5rem + 6.2vw, 6rem);
   --fs-h1: clamp(2.3rem, 1.6rem + 3vw, 3.6rem);
   --fs-h2: clamp(1.8rem, 1.4rem + 1.7vw, 2.6rem);
   --fs-h3: clamp(1.3rem, 1.15rem + 0.7vw, 1.6rem);
@@ -130,6 +135,7 @@
   --space-8: 4rem;
   --space-9: 6rem;
   --space-10: 8rem;
+  --space-12: 11rem; /* statement-section breathing room */
 
   /* ----- Radius (restrained â€” luxury uses tighter corners) ---------------- */
   --radius-sm: 5px;

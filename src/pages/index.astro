@@ -3,8 +3,25 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Card from "../components/Card.astro";
 import Lozenge from "../components/lozenge.astro";
-import Stat from "../components/stat.astro";
 import Tag from "../components/ui/Tag.astro";
+
+const pillars = [
+  {
+    kicker: "Lifecycle",
+    title: "Make progress visible.",
+    body: "Onboarding, adoption, account health, and renewal readiness, in one operating model the team can actually run when the account gets complicated.",
+  },
+  {
+    kicker: "Practical AI",
+    title: "Reduce drag, not judgment.",
+    body: "AI that helps a team prepare faster, summarize context, and surface risk earlier — never another place to check, never a way to blur who owns what.",
+  },
+  {
+    kicker: "Change",
+    title: "Make process stick.",
+    body: "Cadence, handoffs, and CRM discipline that hold up under real workload — not a process that only works when everyone remembers it.",
+  },
+];
 
 const work = [
   {
@@ -12,24 +29,24 @@ const work = [
     href: "/work#neurosync",
     kicker: "Healthtech",
     title: "NeuroSync",
-    line: "Stood up customer success from scratch for a clinical platform — onboarding, adoption tracking, and a renewal motion that held up under real operational pressure.",
-    tags: ["Customer success", "Implementation", "Healthcare"],
+    line: "Stood up customer success from scratch for a clinical platform — onboarding, adoption, and a renewal motion that held under real operational pressure.",
+    tags: ["Customer success", "Implementation"],
   },
   {
     index: "02",
     href: "/work#shinola",
     kicker: "Brand-side retail",
     title: "Shinola",
-    line: "Ran a corporate account portfolio at the Detroit flagship — high-touch client experience, Salesforce process, and executive relationships, kept personal at scale.",
-    tags: ["Portfolio growth", "Salesforce", "Client experience"],
+    line: "Ran a corporate account portfolio at the Detroit flagship — high-touch client experience and Salesforce process, kept personal at scale.",
+    tags: ["Portfolio growth", "Salesforce"],
   },
   {
     index: "03",
     href: "/work#context-by-design",
     kicker: "Consulting",
     title: "Context By Design",
-    line: "Built lifecycle and retention frameworks for service businesses that had relationships but no system — so they could finally see where customers stalled.",
-    tags: ["Lifecycle design", "Retention", "CX strategy"],
+    line: "Built lifecycle and retention frameworks for service businesses that had relationships but no system to see where customers stalled.",
+    tags: ["Lifecycle design", "Retention"],
   },
 ];
 
@@ -64,7 +81,6 @@ const writing = [
 ---
 
 <BaseLayout title="Matt Rabah">
-  <!-- HERO -->
   <section class="hero">
     <div class="container">
       <p class="eyebrow reveal reveal-1">
@@ -74,11 +90,10 @@ const writing = [
         I make customers <em>easier to keep.</em>
       </h1>
       <p class="lead hero-lead reveal reveal-3">
-        I'm a CX and customer success professional in Detroit. I build the
+        A CX and customer success professional in Detroit, building the
         operating layer underneath customer-facing teams — the onboarding,
         handoffs, account health, and renewal rhythm that decide whether people
-        stay. Lately, that includes practical AI where it actually saves the
-        team time.
+        stay.
       </p>
       <div class="hero-actions reveal reveal-4">
         <Button href="/work" variant="solid" arrow>See the work</Button>
@@ -87,36 +102,49 @@ const writing = [
     </div>
   </section>
 
-  <!-- POSITIONING + STATS -->
-  <section class="section section--alt">
-    <div class="container">
-      <div class="intro-grid">
-        <p class="lead">
-          Most customer experience problems aren't really about the customer.
-          They're about the system behind them — a vague owner, a note that
-          never got written down, a handoff that dropped context. Fix the
-          operating model and the experience fixes itself.
-        </p>
-        <div class="stat-row">
-          <Stat value="7+" label="Years in CX & CS" />
-          <Stat
-            value="3"
-            label="Industries"
-            note="Healthtech · Retail · Consulting"
-          />
-          <Stat value="M.S." label="CX Management" note="Michigan State" />
-        </div>
-      </div>
+  <section class="statement section--alt">
+    <div class="container statement-inner">
+      <h2 class="statement-title">
+        Customer experience is <em>made or lost</em> in the operating model.
+      </h2>
+      <p class="statement-sub">
+        Not in the brand, not in the dashboard. In who owns the next action,
+        what survives a handoff, and whether the team can see where the customer
+        actually is.
+      </p>
     </div>
   </section>
 
-  <!-- SELECTED WORK -->
   <section class="section">
     <div class="container">
       <div class="section-head">
         <div>
-          <p class="eyebrow">Selected work</p>
-          <h2 class="h2">Proof across messy customer systems.</h2>
+          <p class="eyebrow">What I build</p><h2 class="h2">
+            Three places the lifecycle breaks — and holds.
+          </h2>
+        </div>
+      </div>
+      <div class="pillars">
+        {
+          pillars.map((p) => (
+            <article class="pillar">
+              <p class="pillar-kicker">{p.kicker}</p>
+              <h3 class="pillar-title">{p.title}</h3>
+              <p class="pillar-body">{p.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Selected work</p><h2 class="h2">
+            Proof across messy customer systems.
+          </h2>
         </div>
         <Button href="/work" variant="link" arrow>All work</Button>
       </div>
@@ -145,21 +173,29 @@ const writing = [
     </div>
   </section>
 
-  <!-- AI TOOLS -->
+  <section class="quote-band">
+    <div class="container">
+      <blockquote class="quote">
+        <span class="quote-mark">&ldquo;</span>A weak handoff turns a closed
+        deal into implementation risk. The record should help the next person,
+        before the customer has to repeat themselves.<span class="quote-mark"
+          >&rdquo;</span
+        >
+        <cite class="quote-cite">Operating principle no. 02</cite>
+      </blockquote>
+    </div>
+  </section>
+
   <section class="section section--alt">
     <div class="container">
       <div class="section-head">
         <div>
-          <p class="eyebrow">Practical AI</p>
-          <h2 class="h2">Small tools for the gaps that cost you accounts.</h2>
+          <p class="eyebrow">Practical AI</p><h2 class="h2">
+            Small tools for the gaps that cost you accounts.
+          </h2>
         </div>
         <Button href="/tools" variant="link" arrow>View tools</Button>
       </div>
-      <p class="body" style="max-width:52ch; margin-bottom:var(--space-6)">
-        None of this is flashy. It helps a team prep for a handoff, read account
-        risk early, or write a follow-up that doesn't make the customer repeat
-        themselves. That's the whole bar.
-      </p>
       <div class="tool-row">
         {
           tools.map((t) => (
@@ -175,13 +211,13 @@ const writing = [
     </div>
   </section>
 
-  <!-- WRITING -->
   <section class="section">
     <div class="container">
       <div class="section-head">
         <div>
-          <p class="eyebrow">Writing</p>
-          <h2 class="h2">Notes on better customer systems.</h2>
+          <p class="eyebrow">Writing</p><h2 class="h2">
+            Notes on better customer systems.
+          </h2>
         </div>
         <Button href="/blog" variant="link" arrow>All writing</Button>
       </div>
@@ -199,7 +235,7 @@ const writing = [
                 <span class="h3 writing-title">{w.title}</span>
               </span>
               <span class="writing-arrow" aria-hidden="true">
-                →
+                &rarr;
               </span>
             </a>
           ))
@@ -208,14 +244,13 @@ const writing = [
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section class="section section--alt">
-    <div class="container contact-band">
+  <section class="statement section--alt">
+    <div class="container statement-inner">
       <p class="eyebrow eyebrow--plain">Let's talk</p>
-      <h2 class="display contact-title">
-        If your lifecycle runs on heroics, that's the problem I fix.
+      <h2 class="statement-title">
+        If your lifecycle runs on <em>heroics,</em> that's the problem I fix.
       </h2>
-      <div class="hero-actions">
+      <div class="hero-actions" style="justify-content:center">
         <Button href="/contact" variant="accent" arrow
           >Start a conversation</Button
         >
@@ -226,14 +261,14 @@ const writing = [
 
   <style>
     .hero {
-      padding-block: clamp(var(--space-9), 16vw, 11rem) var(--space-9);
+      padding-block: clamp(var(--space-10), 18vw, 12rem) var(--space-9);
     }
     .hero .display {
-      max-width: 16ch;
+      max-width: 15ch;
       margin-top: var(--space-5);
     }
     .hero-lead {
-      max-width: 52ch;
+      max-width: 50ch;
       margin-top: var(--space-6);
     }
     .hero-actions {
@@ -242,30 +277,6 @@ const writing = [
       flex-wrap: wrap;
       margin-top: var(--space-7);
     }
-
-    .intro-grid {
-      display: grid;
-      gap: var(--space-7);
-    }
-    @media (min-width: 52rem) {
-      .intro-grid {
-        grid-template-columns: 1.1fr 0.9fr;
-        gap: var(--space-9);
-        align-items: center;
-      }
-    }
-    .stat-row {
-      display: grid;
-      grid-template-columns: repeat(3, auto);
-      gap: var(--space-6);
-      justify-content: start;
-    }
-    @media (max-width: 30rem) {
-      .stat-row {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
     .work-list {
       display: grid;
       gap: var(--space-4);
@@ -281,13 +292,11 @@ const writing = [
       gap: var(--space-2);
       margin-top: var(--space-5);
     }
-
     .tool-row {
       display: grid;
       gap: var(--space-4);
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
     }
-
     .writing-list {
       display: grid;
     }
@@ -332,19 +341,6 @@ const writing = [
     .writing-row:hover .writing-arrow {
       color: var(--color-text-accent);
       transform: translateX(4px);
-    }
-
-    .contact-band {
-      text-align: center;
-      display: grid;
-      justify-items: center;
-      gap: var(--space-6);
-    }
-    .contact-title {
-      max-width: 20ch;
-    }
-    .contact-band .hero-actions {
-      justify-content: center;
     }
   </style>
 </BaseLayout>

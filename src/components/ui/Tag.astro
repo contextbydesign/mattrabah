@@ -1,55 +1,27 @@
 ---
 /**
- * Tag — quiet capability label. Supports both the current `text` API and the
- * older `label`/`variant`/`size`/`color` usages used across the site.
+ * Tag — quiet capability label. Hairline chip, mono caps, optional link.
+ * Editorial restraint: tags are texture, not decoration — one tone only.
  */
 export interface Props {
-  text?: string;
-  label?: string;
+  text: string;
   href?: string;
-  color?: "grey" | "blue" | "green" | "red" | "purple" | "teal" | "yellow";
-  variant?: string;
-  size?: string;
-  icon?: string;
   external?: boolean;
+  class?: string;
+  color?: string;
   rel?: string;
   target?: string;
-  class?: string;
 }
-
-const {
-  text,
-  label,
-  href,
-  color = "grey",
-  variant,
-  size,
-  icon,
-  external = false,
-  rel: relProp,
-  target: targetProp,
-  class: className,
-} = Astro.props;
-
-const content = text ?? label ?? "";
-const TagElement = href ? "a" : "span";
-const classes = [
-  "chip",
-  variant ? `chip--${variant}` : `chip--${color}`,
-  size ? `chip--${size}` : "",
-  href ? "chip--link" : "",
-  icon ? "chip--icon" : "",
-  className,
-]
+const { text, href, external = false, class: className } = Astro.props;
+const TagEl = href ? "a" : "span";
+const classes = ["chip", href ? "chip--link" : "", className]
   .filter(Boolean)
   .join(" ");
-const rel = relProp ?? (external ? "noopener noreferrer" : undefined);
-const target = targetProp ?? (external ? "_blank" : undefined);
+const rel = external ? "noopener noreferrer" : undefined;
+const target = external ? "_blank" : undefined;
 ---
 
-<TagElement class={classes} href={href} rel={rel} target={target}>
-  {content}
-</TagElement>
+<TagEl class={classes} href={href} rel={rel} target={target}>{text}</TagEl>
 <style>
   .chip {
     display: inline-flex;

@@ -5,8 +5,8 @@
  */
 export interface Props {
   href?: string;
-  appearance?: "primary" | "default" | "subtle" | "link";
   variant?: "solid" | "accent" | "ghost" | "link";
+  appearance?: string;
   size?: "md" | "sm";
   type?: "button" | "submit" | "reset";
   external?: boolean;
@@ -16,7 +16,6 @@ export interface Props {
 }
 const {
   href,
-  appearance,
   variant = "solid",
   size = "md",
   type = "button",
@@ -25,18 +24,8 @@ const {
   class: className,
   "aria-label": ariaLabel,
 } = Astro.props;
-const resolvedVariant =
-  appearance === "primary"
-    ? "accent"
-    : appearance === "default"
-      ? "solid"
-      : appearance === "subtle"
-        ? "ghost"
-        : appearance === "link"
-          ? "link"
-          : variant;
 const Tag = href ? "a" : "button";
-const classes = ["btn", `btn--${resolvedVariant}`, `btn--${size}`, className]
+const classes = ["btn", `btn--${variant}`, `btn--${size}`, className]
   .filter(Boolean)
   .join(" ");
 const rel = external ? "noopener noreferrer" : undefined;

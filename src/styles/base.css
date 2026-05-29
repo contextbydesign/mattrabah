@@ -283,6 +283,136 @@ a:hover {
   text-decoration-color: var(--color-border-accent);
 }
 
+/* ==========================================================================
+   Editorial patterns â€” the Cambridge-Audio register: big serif statements,
+   generous air, quiet proof. Typography does the work product photography
+   does for a hardware brand.
+   ========================================================================== */
+
+/* Statement â€” a full-bleed centered serif declaration between sections.
+   The signature "premium" move: short, confident, enormous breathing room. */
+.statement {
+  padding-block: clamp(var(--space-9), 14vw, var(--space-12));
+  text-align: center;
+}
+.statement-inner {
+  max-width: 24ch;
+  margin-inline: auto;
+  display: grid;
+  gap: var(--space-6);
+  justify-items: center;
+}
+.statement-title {
+  font-family: var(--font-display);
+  font-weight: var(--w-med); /* Medium, not Semibold â€” big but not heavy */
+  font-size: var(--fs-statement);
+  line-height: 1.04;
+  letter-spacing: var(--tr-display);
+  color: var(--color-text);
+  text-wrap: balance;
+}
+.statement-title em {
+  font-style: italic;
+  color: var(--color-text-accent);
+}
+.statement-sub {
+  max-width: 46ch;
+  font-family: var(--font-serif);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  color: var(--color-text-subtle);
+}
+
+/* Quote band â€” large serif pull quote with a small attribution. For proof,
+   testimonials, or a signature operating belief given its own quiet room. */
+.quote-band {
+  padding-block: clamp(var(--space-8), 11vw, var(--space-10));
+}
+.quote {
+  max-width: 24ch;
+  margin-inline: auto;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: var(--w-reg);
+  font-style: italic;
+  font-size: clamp(1.75rem, 1.2rem + 2.6vw, 3rem);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  text-wrap: balance;
+}
+.quote-mark {
+  color: var(--color-text-accent);
+  font-style: normal;
+}
+.quote-cite {
+  display: block;
+  margin-top: var(--space-6);
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  font-style: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-subtlest);
+}
+
+/* Pillar trio â€” image/figure-led editorial columns (Cambridge "Emotive sound"
+   pattern). Serif H4 + one calm sentence, lots of air, hairline top rule. */
+.pillars {
+  display: grid;
+  gap: var(--space-7);
+}
+@media (min-width: 52rem) {
+  .pillars {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+}
+.pillar {
+  display: grid;
+  gap: var(--space-4);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border-strong);
+}
+.pillar-figure {
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius-md);
+  background: var(--color-surface-sunken);
+  overflow: hidden;
+}
+.pillar-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pillar-kicker {
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-accent);
+}
+.pillar-title {
+  font-family: var(--font-display);
+  font-weight: var(--w-semi);
+  font-size: var(--fs-h4);
+  line-height: 1.2;
+  color: var(--color-text);
+}
+.pillar-body {
+  font-family: var(--font-serif);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--color-text-subtle);
+}
+
+/* Hairline divider rule */
+.rule {
+  height: 1px;
+  background: var(--color-border);
+  border: 0;
+}
+
 .skip-link {
   position: fixed;
   top: var(--space-3);

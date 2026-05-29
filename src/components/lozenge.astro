@@ -1,57 +1,23 @@
 ---
 /**
- * Lozenge — quiet editorial status marker.
+ * Lozenge — quiet editorial status marker. Not a loud pill: small mono caps,
+ * tinted background, a leading dot. status: live | progress | planned | draft
  */
 export interface Props {
-  label?: string;
-  text?: string;
-  status?:
-    | "live"
-    | "progress"
-    | "planned"
-    | "draft"
-    | "inprogress"
-    | "moved"
-    | "new"
-    | "removed"
-    | "success";
-  appearance?:
-    | "live"
-    | "progress"
-    | "planned"
-    | "draft"
-    | "inprogress"
-    | "moved"
-    | "new"
-    | "removed"
-    | "success";
+  label: string;
+  status?: "live" | "progress" | "planned" | "draft";
+  appearance?: string;
   isBold?: boolean;
   class?: string;
 }
-const {
-  label,
-  text,
-  status = "draft",
-  appearance,
-  isBold = false,
-  class: className,
-} = Astro.props;
-const resolvedStatus = appearance ?? status;
-const mappedStatus = resolvedStatus === "inprogress" ? "progress" : resolvedStatus;
-const classes = [
-  "loz",
-  `loz--${mappedStatus}`,
-  isBold ? "loz--bold" : "",
-  className,
-]
-  .filter(Boolean)
-  .join(" ");
-const content = text ?? label ?? "";
+const { label, status = "draft", appearance, isBold = false, class: className } = Astro.props;
+const statusVal = appearance ?? status;
+const classes = ["loz", `loz--${statusVal}`, isBold ? "loz--bold" : "", className].filter(Boolean).join(" ");
 ---
 
-<span class={classes}>
-  <span class="loz-dot" aria-hidden="true"></span>{content}
-</span>
+<span class={classes}
+  ><span class="loz-dot" aria-hidden="true"></span>{label}</span
+>
 <style>
   .loz {
     display: inline-flex;
@@ -66,9 +32,6 @@ const content = text ?? label ?? "";
     text-transform: uppercase;
     background: var(--_bg);
     color: var(--_fg);
-  }
-  .loz--bold {
-    font-weight: var(--w-semi);
   }
   .loz-dot {
     width: 0.4rem;
@@ -91,5 +54,8 @@ const content = text ?? label ?? "";
   .loz--draft {
     --_bg: var(--status-draft-bg);
     --_fg: var(--status-draft-text);
+  }
+  .loz--bold {
+    font-weight: var(--w-semi);
   }
 </style>
