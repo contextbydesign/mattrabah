@@ -1,7 +1,6 @@
 /* ==========================================================================
-   base.css â€” reset + element defaults + typography utilities.
-   Import AFTER tokens.css. Everything here references semantic tokens only,
-   so light/dark "just works" when data-theme flips.
+   base.css â€” reset, element defaults, type utilities, layout primitives.
+   Each utility binds the RIGHT licensed face to its role.
    ========================================================================== */
 @import "./tokens.css";
 
@@ -13,106 +12,316 @@
 
 html {
   -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
   scroll-behavior: smooth;
+  font-feature-settings: "kern", "liga", "calt";
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--color-elevation-surface-sunken);
+  background: var(--color-surface);
   color: var(--color-text);
-  font: var(--font-body-l);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--w-reg);
+  line-height: var(--lh-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, h4, h5, h6, p, figure { margin: 0; }
-ul, ol { margin: 0; padding: 0; list-style: none; }
-img, svg { display: block; max-width: 100%; }
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+figure,
+blockquote {
+  margin: 0;
+}
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+strong {
+  font-weight: var(--w-semi);
+  color: var(--color-text);
+}
+em {
+  font-style: italic;
+}
 
 a {
   color: var(--color-link);
+  text-decoration: none;
   text-underline-offset: 0.18em;
-  transition: color var(--duration-medium) var(--ease-standard);
+  transition: color var(--dur-1) var(--ease);
 }
-a:active { color: var(--color-link-pressed); }
-
+a:hover {
+  color: var(--color-link-hover);
+}
 :focus-visible {
   outline: none;
   box-shadow: var(--focus-ring);
-  border-radius: var(--radius-100);
+  border-radius: var(--radius-sm);
 }
-
 ::selection {
-  background: var(--color-background-selected);
-  color: var(--color-text);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
 }
 
-/* ----- Typography utilities (map 1:1 to ADS text styles) ------------------ */
-.heading-xxl { font: var(--font-heading-xxl); letter-spacing: -0.01em; color: var(--color-text); }
-.heading-xl  { font: var(--font-heading-xl);  letter-spacing: -0.01em; color: var(--color-text); }
-.heading-l   { font: var(--font-heading-l);   color: var(--color-text); }
-.heading-m   { font: var(--font-heading-m);   color: var(--color-text); }
-.heading-s   { font: var(--font-heading-s);   color: var(--color-text); }
-.heading-xs  { font: var(--font-heading-xs);  color: var(--color-text); }
-.heading-xxs {
-  font: var(--font-heading-xxs);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+/* ---- Display & headings â€” Tiempos Headline ------------------------------- */
+.display {
+  font-family: var(--font-display);
+  font-weight: var(--w-semi);
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--tr-display);
+  text-wrap: balance;
+}
+.display em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: var(--w-semi);
+  color: var(--color-text-accent);
+}
+
+.h1 {
+  font-family: var(--font-display);
+  font-weight: var(--w-semi);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-head);
+  letter-spacing: var(--tr-head);
+  text-wrap: balance;
+}
+.h2 {
+  font-family: var(--font-display);
+  font-weight: var(--w-semi);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-head);
+  letter-spacing: var(--tr-head);
+  text-wrap: balance;
+}
+/* H3/H4 step DOWN to SÃ¶hne â€” the serif/sans handoff is the editorial signature */
+.h3 {
+  font-family: var(--font-sans);
+  font-weight: var(--w-semi);
+  font-size: var(--fs-h3);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.h4 {
+  font-family: var(--font-sans);
+  font-weight: var(--w-semi);
+  font-size: var(--fs-h4);
+  line-height: 1.3;
+}
+
+/* ---- Reading text â€” Tiempos Text (serif body for editorial warmth) ------- */
+.lead {
+  font-family: var(--font-serif);
+  font-weight: var(--w-reg);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  color: var(--color-text-subtle);
+  text-wrap: pretty;
+}
+.prose-serif {
+  font-family: var(--font-serif);
+}
+
+/* ---- UI text â€” SÃ¶hne ----------------------------------------------------- */
+.body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--color-text-subtle);
+  text-wrap: pretty;
+}
+.body-sm {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  line-height: 1.6;
   color: var(--color-text-subtlest);
 }
 
-.body-l { font: var(--font-body-l); color: var(--color-text-subtle); }
-.body   { font: var(--font-body);   color: var(--color-text-subtle); }
-.body-s { font: var(--font-body-s); color: var(--color-text-subtlest); }
+/* ---- Eyebrow â€” SÃ¶hne Mono, tracked caps, short clay rule ----------------- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  font-weight: var(--w-med);
+  letter-spacing: var(--tr-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-text-accent);
+}
+.eyebrow::before {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background: var(--color-accent);
+}
+.eyebrow--plain::before {
+  display: none;
+}
 
-.metric-l { font: var(--font-metric-l); color: var(--color-text); }
-.metric-m { font: var(--font-metric-m); color: var(--color-text); }
+/* ---- Meta â€” SÃ¶hne Mono, tabular ------------------------------------------ */
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--fs-meta);
+  letter-spacing: 0.02em;
+  color: var(--color-text-subtlest);
+  font-variant-numeric: tabular-nums;
+}
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
 
-.text-subtle   { color: var(--color-text-subtle); }
-.text-subtlest { color: var(--color-text-subtlest); }
-.text-brand    { color: var(--color-text-brand); }
+.text-subtle {
+  color: var(--color-text-subtle);
+}
+.text-subtlest {
+  color: var(--color-text-subtlest);
+}
+.text-accent {
+  color: var(--color-text-accent);
+}
 
-/* ----- Layout primitives -------------------------------------------------- */
+/* ---- Layout primitives --------------------------------------------------- */
 .container {
   width: 100%;
-  max-width: var(--layout-max);
+  max-width: var(--max-page);
   margin-inline: auto;
-  padding-inline: clamp(var(--space-200), 5vw, var(--space-1000));
+  padding-inline: var(--gutter);
 }
-.container--prose { max-width: var(--layout-prose); }
+.container--text {
+  max-width: var(--max-text);
+}
+.container--wide {
+  max-width: var(--max-wide);
+}
 
-.stack { display: grid; gap: var(--space-200); }
-.stack-100 { display: grid; gap: var(--space-100); }
-.stack-300 { display: grid; gap: var(--space-300); }
-.stack-400 { display: grid; gap: var(--space-400); }
+.stack > * + * {
+  margin-top: var(--space-4);
+}
+.stack-2 > * + * {
+  margin-top: var(--space-2);
+}
+.stack-3 > * + * {
+  margin-top: var(--space-3);
+}
+.stack-5 > * + * {
+  margin-top: var(--space-5);
+}
+.stack-6 > * + * {
+  margin-top: var(--space-6);
+}
 
 .section {
-  padding-block: clamp(var(--space-600), 9vw, var(--space-1000));
+  padding-block: clamp(var(--space-8), 9vw, var(--space-10));
+}
+.section + .section {
   border-top: 1px solid var(--color-border);
+}
+.section--alt {
+  background: var(--color-surface-sunken);
+}
+
+.section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-5);
+  margin-bottom: var(--space-7);
+  flex-wrap: wrap;
+}
+.section-head .h2 {
+  max-width: 18ch;
+}
+
+/* Prose â€” Tiempos Text for warm long-form reading */
+.prose {
+  max-width: var(--max-text);
+}
+.prose > * + * {
+  margin-top: var(--space-5);
+}
+.prose p {
+  font-family: var(--font-serif);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--color-text-subtle);
+}
+.prose p strong {
+  color: var(--color-text);
+  font-weight: var(--w-semi);
+}
+.prose a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border-accent);
 }
 
 .skip-link {
   position: fixed;
-  top: var(--space-150);
-  left: var(--space-150);
+  top: var(--space-3);
+  left: var(--space-3);
   z-index: 9999;
   transform: translateY(-150%);
-  padding: var(--space-100) var(--space-150);
-  border-radius: var(--radius-100);
-  background: var(--color-background-neutral-bold);
-  color: var(--color-text-inverse);
-  font: var(--font-body);
-  text-decoration: none;
-  transition: transform var(--duration-medium) var(--ease-standard);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-text);
+  color: var(--color-surface);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-body-sm);
+  transition: transform var(--dur-1) var(--ease);
 }
-.skip-link:focus { transform: translateY(0); }
+.skip-link:focus {
+  transform: translateY(0);
+}
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: reveal var(--dur-3) var(--ease) forwards;
+  }
+  .reveal-1 {
+    animation-delay: 60ms;
+  }
+  .reveal-2 {
+    animation-delay: 150ms;
+  }
+  .reveal-3 {
+    animation-delay: 240ms;
+  }
+  .reveal-4 {
+    animation-delay: 330ms;
+  }
+  @keyframes reveal {
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 }

@@ -1,0 +1,58 @@
+---
+/**
+ * Stat — a single CX metric, displayed as proof. Large serif figure with a
+ * mono label beneath. This is the element that makes a CX portfolio read as
+ * credible: concrete outcomes, not adjectives. Group several in a .stat-row.
+ *
+ * Be honest in usage — only real, defensible numbers. A vague "100% better"
+ * undermines the whole page; "cut onboarding time from 6 to 4 weeks" earns trust.
+ */
+export interface Props {
+  value: string;
+  label: string;
+  note?: string;
+  compact?: boolean; /* for word values like "Salesforce" — smaller figure */
+  class?: string;
+}
+const { value, label, note, compact = false, class: className } = Astro.props;
+const classes = ["stat", compact ? "stat--compact" : "", className]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<div class={classes}>
+  <span class="stat-value tabular">{value}</span>
+  <span class="stat-label">{label}</span>
+  {note && <span class="stat-note">{note}</span>}
+</div>
+<style>
+  .stat {
+    display: grid;
+    gap: var(--space-1);
+  }
+  .stat-value {
+    font-family: var(--font-display);
+    font-weight: var(--w-semi);
+    font-size: clamp(2.25rem, 1.5rem + 2.4vw, 3.25rem);
+    line-height: 1;
+    letter-spacing: var(--tr-display);
+    color: var(--color-text);
+  }
+  .stat--compact .stat-value {
+    font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2rem);
+    letter-spacing: -0.01em;
+  }
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta);
+    font-weight: var(--w-med);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-accent);
+    margin-top: var(--space-2);
+  }
+  .stat-note {
+    font-size: var(--fs-body-sm);
+    color: var(--color-text-subtlest);
+  }
+</style>

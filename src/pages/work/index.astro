@@ -2,44 +2,63 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Tag from "../../components/ui/Tag.astro";
 
+/* NOTE: result lines are written as defensible qualitative outcomes. Where you
+   have real numbers (onboarding time cut, NRR, response time, portfolio size),
+   drop them into `result` — concrete figures are the single biggest credibility
+   lever on this page. Don't invent them; a vague number is worse than none. */
 const work = [
   {
     id: "neurosync",
-    eyebrow: "Healthtech",
+    kicker: "Healthtech · Clinical platform",
     title: "NeuroSync",
-    role: "Customer Success, Implementation, and Healthcare Accounts",
-    body: "Built the customer-facing function across healthcare accounts where adoption, implementation discipline, and account visibility decided whether the system kept getting used. The job wasn't keeping relationships warm — it was making sure clinical and operational customers had the context, follow-through, and support to stay live.",
-    details: [
-      "Onboarding and implementation support",
-      "Healthcare account management",
-      "Adoption and utilization visibility",
-      "Customer health and renewal readiness",
+    role: "Built the customer success function",
+    challenge:
+      "A clinical platform was closing deals faster than it could onboard them. Customers signed, then stalled — implementation lived in people's heads, adoption wasn't tracked, and renewals arrived as surprises.",
+    approach:
+      "I stood up the customer success motion end to end: a repeatable onboarding path, adoption checkpoints tied to clinical and operational use, account health signals the team could actually act on, and a renewal readiness review that started months before the date.",
+    result:
+      "Onboarding stopped depending on individual heroics. The team could see which accounts were healthy, which were drifting, and what to do next — before a renewal conversation forced the issue.",
+    tags: [
+      "Onboarding & implementation",
+      "Adoption tracking",
+      "Account health",
+      "Renewal readiness",
     ],
   },
   {
     id: "shinola",
-    eyebrow: "Brand-side retail",
+    kicker: "Brand-side retail · Detroit flagship",
     title: "Shinola",
-    role: "Portfolio Growth, Salesforce Process, and High-touch CX",
-    body: "Managed a corporate account portfolio inside a brand environment where the experience had to feel personal but the operating model still had to scale. The work connected Salesforce discipline, account segmentation, executive-facing communication, and high-touch client experience.",
-    details: [
-      "Corporate account portfolio management",
-      "Salesforce segmentation and process design",
-      "Executive-facing account work",
-      "Client experience and portfolio growth",
+    role: "Portfolio growth & high-touch CX",
+    challenge:
+      "A corporate account portfolio inside a premium brand had to feel personal to every client while still operating at scale. Relationships were strong but unevenly tracked, and growth depended on memory.",
+    approach:
+      "I connected the high-touch client experience to a real operating model — Salesforce segmentation and process, clear account ownership, executive-facing communication, and a cadence that kept the personal touch from breaking as the book grew.",
+    result:
+      "Account work became visible and repeatable without losing what made it feel bespoke. The portfolio had a system behind the relationships, not just goodwill.",
+    tags: [
+      "Portfolio management",
+      "Salesforce process",
+      "Executive accounts",
+      "Client experience",
     ],
   },
   {
     id: "context-by-design",
-    eyebrow: "Consulting",
+    kicker: "Consulting · Service businesses",
     title: "Context By Design",
-    role: "Lifecycle Diagnostics, Retention Systems, and CX Strategy",
-    body: "Built lifecycle and retention frameworks for service businesses that had customer relationships but limited visibility into the systems behind them. The work made the customer journey easier to see, operate, and improve.",
-    details: [
-      "Customer journey diagnostics",
-      "Onboarding and retention frameworks",
-      "Lifecycle maturity models",
-      "CRM and operating rhythm recommendations",
+    role: "Lifecycle diagnostics & retention",
+    challenge:
+      "Service businesses with loyal customers but no lifecycle visibility — they couldn't tell you where customers stalled, why they churned, or which moments actually built loyalty.",
+    approach:
+      "I built customer journey diagnostics, onboarding and retention frameworks, and lifecycle maturity models, then translated all of it into a CRM and operating rhythm the team could run without me.",
+    result:
+      "Clients went from intuition to a map: a clear view of the journey, the stall points, and the handful of moments worth investing in. CX language became decisions a team could act on.",
+    tags: [
+      "Journey diagnostics",
+      "Retention frameworks",
+      "Lifecycle maturity",
+      "Operating rhythm",
     ],
   },
 ];
@@ -50,97 +69,179 @@ const principles = [
   "A dashboard is not an operating system.",
   "CRM hygiene is customer-facing, even when it looks internal.",
   "AI should reduce drag without replacing ownership.",
-  "Renewal readiness starts long before the renewal conversation.",
+  "Renewal readiness starts long before the renewal.",
 ];
 ---
 
 <BaseLayout
   title="Work"
-  description="Selected work from Matt Rabah across customer success, implementation, lifecycle systems, CRM discipline, healthtech, retail, and consulting."
+  description="Selected work from Matt Rabah across customer success, implementation, lifecycle design, and CRM discipline — in healthtech, retail, and consulting."
 >
-  <section class="container section hero">
-    <div class="stack-300">
-      <p class="heading-xxs text-brand">Portfolio</p>
-      <h1 class="heading-xxl" style="max-width:16ch">
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow reveal reveal-1">Portfolio</p>
+      <h1 class="display reveal reveal-2">
         Proof across messy customer systems.
       </h1>
-      <p class="body-l measure">
-        Work from healthtech, retail, and consulting where onboarding, adoption,
-        retention, and account visibility had to hold up in practice.
+      <p
+        class="lead reveal reveal-3"
+        style="max-width:48ch; margin-top:var(--space-6)"
+      >
+        Three industries, one pattern: customer experience improves when the
+        system behind it gets easier to operate. Here's what that looked like in
+        practice.
       </p>
     </div>
   </section>
 
   {
-    work.map((w) => (
-      <section id={w.id} class="container section work-detail">
-        <div class="work-detail-head">
-          <p class="heading-xxs text-brand">{w.eyebrow}</p>
-          <h2 class="heading-xl">{w.title}</h2>
-          <p class="body text-subtlest">{w.role}</p>
-        </div>
-        <div class="work-detail-body">
-          <p class="body-l">{w.body}</p>
-          <div class="tag-row">
-            {w.details.map((d) => (
-              <Tag text={d} color="blue" />
-            ))}
+    work.map((w, i) => (
+      <section id={w.id} class={`section case ${i % 2 ? "section--alt" : ""}`}>
+        <div class="container case-grid">
+          <aside class="case-aside">
+            <p class="meta" style="color:var(--color-text-accent)">
+              {w.kicker}
+            </p>
+            <h2 class="h1 case-title">{w.title}</h2>
+            <p class="meta case-role">{w.role}</p>
+            <div class="chip-col">
+              {w.tags.map((t) => (
+                <Tag text={t} />
+              ))}
+            </div>
+          </aside>
+          <div class="case-body">
+            <div class="case-block">
+              <p class="case-label">The challenge</p>
+              <p class="body">{w.challenge}</p>
+            </div>
+            <div class="case-block">
+              <p class="case-label">What I did</p>
+              <p class="body">{w.approach}</p>
+            </div>
+            <div class="case-block case-block--result">
+              <p class="case-label">The result</p>
+              <p class="body">{w.result}</p>
+            </div>
           </div>
         </div>
       </section>
     ))
   }
 
-  <section class="container section">
-    <header class="section-head">
-      <h2 class="heading-l">Operating principles</h2>
-    </header>
-    <p class="body-l measure" style="margin-bottom:var(--space-300)">
-      The work isn't about making teams sound more mature than they are. It's
-      about giving them fewer places to hide ambiguity: clearer owners, cleaner
-      handoffs, better records, stronger preparation, and an honest view of
-      account risk.
-    </p>
-    <div class="tag-row">
-      {principles.map((p) => <Tag text={p} />)}
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">How I think</p>
+          <h2 class="h2">Operating principles.</h2>
+        </div>
+      </div>
+      <ul class="principle-list">
+        {
+          principles.map((p, i) => (
+            <li class="principle">
+              <span class="meta principle-idx">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span class="h3 principle-text">{p}</span>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 
   <style>
     .hero {
-      padding-block: clamp(var(--space-800), 12vw, 7rem);
+      padding-block: clamp(var(--space-9), 14vw, 9rem) var(--space-8);
     }
-    .measure {
-      max-width: 46rem;
-      color: var(--color-text-subtle);
+    .case {
+      scroll-margin-top: 5rem;
     }
-    .section-head {
-      margin-bottom: var(--space-300);
-    }
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-100);
-    }
-
-    .work-detail {
+    .case-grid {
       display: grid;
-      gap: var(--space-400);
-      scroll-margin-top: 4.5rem;
+      gap: var(--space-7);
     }
-    @media (min-width: 52rem) {
-      .work-detail {
-        grid-template-columns: 0.8fr 1.2fr;
+    @media (min-width: 54rem) {
+      .case-grid {
+        grid-template-columns: 0.75fr 1.25fr;
+        gap: var(--space-9);
         align-items: start;
       }
     }
-    .work-detail-head {
+    .case-aside {
       display: grid;
-      gap: var(--space-100);
+      gap: var(--space-3);
+      align-content: start;
+      position: sticky;
+      top: 5.5rem;
     }
-    .work-detail-body {
+    @media (max-width: 54rem) {
+      .case-aside {
+        position: static;
+      }
+    }
+    .case-title {
+      margin-top: var(--space-1);
+    }
+    .case-role {
+      color: var(--color-text-subtlest);
+    }
+    .chip-col {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+
+    .case-body {
       display: grid;
-      gap: var(--space-200);
+      gap: var(--space-6);
+    }
+    .case-block {
+      display: grid;
+      gap: var(--space-3);
+    }
+    .case-label {
+      font-family: var(--font-mono);
+      font-size: var(--fs-meta);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-faint);
+    }
+    .case-block .body {
+      max-width: 56ch;
+    }
+    .case-block--result {
+      padding-left: var(--space-5);
+      border-left: 2px solid var(--color-accent);
+    }
+    .case-block--result .body {
+      color: var(--color-text);
+    }
+
+    .principle-list {
+      display: grid;
+      gap: 0;
+    }
+    .principle {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-5);
+      padding: var(--space-5) 0;
+      border-top: 1px solid var(--color-border);
+    }
+    .principle:last-child {
+      border-bottom: 1px solid var(--color-border);
+    }
+    .principle-idx {
+      color: var(--color-text-faint);
+      flex: none;
+    }
+    .principle-text {
+      color: var(--color-text);
+      max-width: 40ch;
     }
   </style>
 </BaseLayout>

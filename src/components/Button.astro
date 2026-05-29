@@ -1,39 +1,42 @@
 ---
 /**
- * Button — Atlassian Design System button.
- * Appearances: primary | default | subtle | link | warning | danger
- * Renders <a> when `href` is set, else <button>.
- *
- * ADS rules encoded here:
- *  - primary  = brand.bold background, inverse text
- *  - default  = neutral background, default text
- *  - subtle   = transparent, neutral.subtle hover
- *  - link     = looks like a link, button semantics
- *  - 32px (default) / 24px (compact) heights, radius.100
+ * Button — editorial. Solid (ink fill), accent (ember), ghost (hairline),
+ * link (underline-on-hover with arrow). Renders <a> or <button>.
  */
 export interface Props {
   href?: string;
-  appearance?: "primary" | "default" | "subtle" | "link" | "warning" | "danger";
-  spacing?: "default" | "compact";
+  appearance?: "primary" | "default" | "subtle" | "link";
+  variant?: "solid" | "accent" | "ghost" | "link";
+  size?: "md" | "sm";
   type?: "button" | "submit" | "reset";
-  iconAfter?: boolean;
   external?: boolean;
+  arrow?: boolean;
   class?: string;
   "aria-label"?: string;
 }
-
 const {
   href,
-  appearance = "default",
-  spacing = "default",
+  appearance,
+  variant = "solid",
+  size = "md",
   type = "button",
   external = false,
+  arrow = false,
   class: className,
   "aria-label": ariaLabel,
 } = Astro.props;
-
+const resolvedVariant =
+  appearance === "primary"
+    ? "accent"
+    : appearance === "default"
+      ? "solid"
+      : appearance === "subtle"
+        ? "ghost"
+        : appearance === "link"
+          ? "link"
+          : variant;
 const Tag = href ? "a" : "button";
-const classes = ["btn", `btn--${appearance}`, `btn--${spacing}`, className]
+const classes = ["btn", `btn--${resolvedVariant}`, `btn--${size}`, className]
   .filter(Boolean)
   .join(" ");
 const rel = external ? "noopener noreferrer" : undefined;
@@ -48,96 +51,91 @@ const target = external ? "_blank" : undefined;
   target={target}
   aria-label={ariaLabel}
 >
-  <span class="btn-content"><slot /></span>
+  <span><slot /></span>
   {
-    Astro.slots.has("iconAfter") && (
-      <span class="btn-icon" aria-hidden="true">
-        <slot name="iconAfter" />
+    arrow && (
+      <span class="btn-arrow" aria-hidden="true">
+        →
       </span>
     )
   }
 </Tag>
-
 <style>
   .btn {
-    --_bg: var(--color-background-neutral);
-    --_bg-hover: var(--color-background-neutral-hovered);
-    --_bg-press: var(--color-background-neutral-pressed);
-    --_fg: var(--color-text);
-
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: var(--space-075);
-    border: none;
-    border-radius: var(--radius-100);
-    background: var(--_bg);
-    color: var(--_fg);
-    font: var(--font-body);
-    font-weight: var(--font-weight-medium);
-    text-decoration: none;
+    gap: var(--space-2);
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-sans);
+    font-weight: var(--w-med);
+    line-height: 1;
     white-space: nowrap;
     cursor: pointer;
+    text-decoration: none;
     transition:
-      background-color var(--duration-medium) var(--ease-standard),
-      color var(--duration-medium) var(--ease-standard);
+      background-color var(--dur-1) var(--ease),
+      color var(--dur-1) var(--ease),
+      border-color var(--dur-1) var(--ease),
+      transform var(--dur-1) var(--ease);
   }
-  .btn--default {
-    height: 2rem;
-    padding-inline: var(--space-150);
-  }
-  .btn--compact {
-    height: 1.5rem;
-    padding-inline: var(--space-100);
-    font-size: 0.8125rem;
-  }
-
   .btn:hover {
-    background: var(--_bg-hover);
-  }
-  .btn:active {
-    background: var(--_bg-press);
+    transform: translateY(-1px);
   }
   .btn:focus-visible {
     box-shadow: var(--focus-ring);
   }
-
-  .btn--primary {
-    --_bg: var(--color-background-brand-bold);
-    --_bg-hover: var(--color-background-brand-bold-hovered);
-    --_bg-press: var(--color-background-brand-bold-pressed);
-    --_fg: var(--color-text-inverse);
+  .btn--md {
+    padding: 0.7rem 1.25rem;
+    font-size: var(--fs-body-sm);
   }
-  .btn--subtle {
-    --_bg: var(--color-background-neutral-subtle);
-    --_bg-hover: var(--color-background-neutral-subtle-hovered);
-    --_bg-press: var(--color-background-neutral-subtle-pressed);
-    --_fg: var(--color-text-subtle);
+  .btn--sm {
+    padding: 0.5rem 0.95rem;
+    font-size: var(--fs-meta);
+  }
+  .btn-arrow {
+    transition: transform var(--dur-1) var(--ease);
+  }
+  .btn:hover .btn-arrow {
+    transform: translateX(3px);
+  }
+
+  .btn--solid {
+    background: var(--color-text);
+    color: var(--color-surface);
+  }
+  .btn--solid:hover {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+  .btn--accent {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+  .btn--accent:hover {
+    background: var(--color-accent-hover);
+    color: var(--color-on-accent);
+  }
+  .btn--ghost {
+    border-color: var(--color-border-strong);
+    color: var(--color-text);
+    background: transparent;
+  }
+  .btn--ghost:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text-accent);
+    background: var(--color-accent-bg);
   }
   .btn--link {
-    --_bg: transparent;
-    --_bg-hover: transparent;
-    --_bg-press: transparent;
-    --_fg: var(--color-link);
-    height: auto;
-    padding-inline: var(--space-050);
+    padding-inline: 0;
+    color: var(--color-link);
+    border-radius: var(--radius-sm);
   }
   .btn--link:hover {
+    color: var(--color-link-hover);
+    transform: none;
+  }
+  .btn--link:hover span:first-child {
     text-decoration: underline;
-  }
-  .btn--warning {
-    --_bg: var(--color-background-warning-bold);
-    --_bg-hover: var(--color-background-warning-bold);
-    --_fg: var(--ads-n-1000);
-  }
-  .btn--danger {
-    --_bg: var(--color-background-danger-bold);
-    --_bg-hover: var(--color-background-danger-bold);
-    --_fg: var(--color-text-inverse);
-  }
-  .btn-icon {
-    display: inline-flex;
-    width: 1em;
-    height: 1em;
   }
 </style>

@@ -1,97 +1,140 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Button from "../../components/Button.astro";
-import SectionMessage from "../../components/sectionmessage.astro";
+import Stat from "../../components/stat.astro";
 ---
 
 <BaseLayout
   title="About"
   description="Matt Rabah is a Detroit-based CX, customer success, and implementation professional focused on customer lifecycle systems, CRM discipline, and practical AI workflows."
 >
-  <section class="container section hero">
-    <div class="stack-300">
-      <p class="heading-xxs text-brand">About</p>
-      <h1 class="heading-xxl" style="max-width:18ch">
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow reveal reveal-1">About</p>
+      <h1 class="display reveal reveal-2">
         I build the operating layer customers feel.
       </h1>
-      <p class="body-l measure">
+      <p
+        class="lead reveal reveal-3"
+        style="max-width:50ch; margin-top:var(--space-6)"
+      >
         My work sits between CX, customer success, implementation, and CRM
-        discipline — with practical AI layered in where it earns its place.
+        discipline — with practical AI layered in where it earns its place, not
+        where it looks impressive.
       </p>
     </div>
   </section>
 
-  <section class="container section container--prose">
-    <header class="section-head"><h2 class="heading-l">Background</h2></header>
-    <div class="stack-300">
-      <p class="body-l">
-        I've spent seven-plus years across NeuroSync, Shinola, and Context By
-        Design. The thread is simple: customers feel the operating model. They
-        feel the handoff, the missed note, the unclear owner, the delayed
-        follow-up, and the moment a team has to rediscover what should already
-        be known.
+  <section class="section section--alt">
+    <div class="container">
+      <div class="stat-row">
+        <Stat value="7+" label="Years in CX & CS" />
+        <Stat
+          value="3"
+          label="Industries"
+          note="Healthtech · Retail · Consulting"
+        />
+        <Stat
+          value="M.S."
+          label="CX Management"
+          note="Michigan State · Eli Broad"
+        />
+        <Stat
+          value="Salesforce"
+          label="Certified Admin"
+          note="Platform Administrator"
+          compact
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <p>
+        I've spent the better part of a decade across <strong
+          >NeuroSync, Shinola, and Context By Design</strong
+        >. Different industries, but the same thread runs through all of it:
+        customers feel the operating model. They feel the handoff, the missed
+        note, the unclear owner, the delayed follow-up, and the moment a team
+        has to rediscover what should already have been written down.
       </p>
-      <p class="body-l">
-        I've worked across healthcare accounts, high-touch client experience,
-        portfolio growth, Salesforce process, lifecycle diagnostics, onboarding,
-        retention systems, and executive-facing account work. Different
-        industries, same problem: customer experience breaks when ownership is
-        vague.
+
+      <blockquote class="pull">
+        Customer experience breaks when ownership is vague. Everything else is
+        downstream of that.
+      </blockquote>
+
+      <p>
+        I've worked across healthcare accounts, high-touch retail client
+        experience, portfolio growth, Salesforce process, lifecycle diagnostics,
+        onboarding, and retention systems. The job has never really been "manage
+        relationships." It's been making sure the relationship doesn't depend on
+        one person remembering everything.
       </p>
-      <p class="body-l">
-        I hold an M.S. in Customer Experience Management from Michigan State
-        University's Eli Broad College of Business and a B.S. in Organizational
-        Behavior from Oakland University. I'm a Salesforce Certified Platform
-        Administrator, with additional certifications in business intelligence
-        and inbound marketing.
+
+      <p>
+        I hold an <strong>M.S. in Customer Experience Management</strong> from Michigan
+        State University's Eli Broad College of Business and a B.S. in Organizational
+        Behavior from Oakland University. I'm a Salesforce Certified Platform Administrator,
+        with additional work in business intelligence and inbound.
       </p>
     </div>
   </section>
 
-  <section class="container section container--prose">
-    <header class="section-head">
-      <h2 class="heading-l">Current focus</h2>
-    </header>
-    <div class="stack-300">
-      <p class="body-l">
-        My current focus is practical AI in customer-facing operations. Not AI
-        as a novelty layer, but AI as a way to reduce administrative drag,
-        prepare better, surface risk earlier, and help teams make cleaner
-        decisions without blurring accountability.
+  <section class="section section--alt">
+    <div class="container prose">
+      <p class="eyebrow">Right now</p>
+      <h2 class="h2" style="margin:var(--space-3) 0 var(--space-5)">
+        Practical AI, without the theater.
+      </h2>
+      <p>
+        My current focus is AI inside customer-facing operations — not as a
+        novelty layer, but as a way to cut administrative drag, prep better, and
+        surface risk earlier without blurring who owns what. Healthtech and
+        other regulated environments are a natural fit, because trust is fragile
+        there and implementation discipline actually matters.
       </p>
-      <p class="body-l">
-        Healthtech, medtech, and other regulated environments are strong fits,
-        because trust is fragile there and implementation discipline matters.
-        But the broader work is the same everywhere: customer lifecycle design
-        for complex teams. Clear owners, usable systems, better handoffs, and
-        fewer surprises near renewal.
+      <p>
+        I'm <strong>open to roles</strong> in customer success, CX, implementation,
+        and RevOps-adjacent work. If that's what you're building, I'd like to hear
+        about it.
       </p>
-    </div>
-  </section>
-
-  <section class="container section container--prose">
-    <SectionMessage appearance="information" title="Open to new roles">
-      I'm currently open to roles in customer success, CX, implementation, and
-      RevOps-adjacent work. If that's what you're hiring for, I'd like to hear
-      about it.
-      <div slot="actions">
-        <Button href="/contact" appearance="primary" spacing="compact"
+      <div style="margin-top:var(--space-6)">
+        <Button href="/contact" variant="accent" arrow
           >Start a conversation</Button
         >
       </div>
-    </SectionMessage>
+    </div>
   </section>
 
   <style>
     .hero {
-      padding-block: clamp(var(--space-800), 12vw, 7rem);
+      padding-block: clamp(var(--space-9), 14vw, 9rem) var(--space-8);
     }
-    .measure {
-      max-width: 46rem;
-      color: var(--color-text-subtle);
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      gap: var(--space-7);
+      justify-content: start;
     }
-    .section-head {
-      margin-bottom: var(--space-300);
+    @media (max-width: 40rem) {
+      .stat-row {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-6);
+      }
+    }
+    .pull {
+      margin: 0;
+      padding: var(--space-2) 0 var(--space-2) var(--space-6);
+      border-left: 2px solid var(--color-accent);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: var(--w-reg);
+      font-size: var(--fs-h3);
+      line-height: 1.3;
+      color: var(--color-text);
+      max-width: 30ch;
     }
   </style>
 </BaseLayout>

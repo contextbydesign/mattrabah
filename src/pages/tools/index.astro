@@ -2,21 +2,20 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Tag from "../../components/ui/Tag.astro";
 import Lozenge from "../../components/lozenge.astro";
-import Card from "../../components/Card.astro";
 
 const tools = [
   {
     title: "Handoff Risk Checker",
-    status: "Prototype",
-    appearance: "inprogress",
-    body: "Checks whether a promised timeline, stakeholder map, or known constraint is likely to become an implementation problem after the customer says yes.",
-    inputs: ["Sales promise", "Stakeholders", "Timeline", "Known constraints"],
+    status: "progress",
+    label: "Prototype",
+    body: "Reads a sales promise, stakeholder map, and known constraints, then flags what's likely to become an implementation problem after the customer says yes.",
+    inputs: ["Sales promise", "Stakeholders", "Timeline", "Constraints"],
   },
   {
     title: "Customer Health Signal Mapper",
-    status: "Prototype",
-    appearance: "inprogress",
-    body: "Turns account signals into likely risk patterns, root causes, and next actions. Built for account review, portfolio triage, and cleaner follow-up.",
+    status: "progress",
+    label: "Prototype",
+    body: "Turns scattered account signals into likely risk patterns, root causes, and a next action. Built for account reviews and portfolio triage.",
     inputs: [
       "Usage signals",
       "Relationship changes",
@@ -26,66 +25,65 @@ const tools = [
   },
   {
     title: "Renewal Readiness Diagnostic",
-    status: "Planned",
-    appearance: "new",
-    body: "Tests whether an account is operationally, commercially, and relationship-ready for renewal before the date forces the conversation.",
-    inputs: ["Adoption", "Executive sponsor", "Business value", "Open risks"],
+    status: "planned",
+    label: "Planned",
+    body: "Tests whether an account is operationally, commercially, and relationship-ready for renewal — before the date forces the conversation.",
+    inputs: ["Adoption", "Sponsor", "Business value", "Open risks"],
   },
   {
     title: "QBR Question Builder",
-    status: "Planned",
-    appearance: "new",
-    body: "Builds executive review questions around decisions, value, unresolved risk, and future commitment instead of turning the QBR into a recap deck.",
-    inputs: [
-      "Account stage",
-      "Known outcomes",
-      "Open risks",
-      "Expansion potential",
-    ],
+    status: "planned",
+    label: "Planned",
+    body: "Builds executive review questions around decisions, value, and unresolved risk instead of letting the QBR collapse into a recap deck.",
+    inputs: ["Account stage", "Outcomes", "Open risks", "Expansion"],
   },
   {
     title: "CRM Field Quality Checker",
-    status: "Planned",
-    appearance: "new",
-    body: "Reviews whether a CRM field has a real owner, a useful update cadence, and a customer-facing decision it actually supports.",
-    inputs: ["Field name", "Owner", "Update cadence", "Decision supported"],
+    status: "planned",
+    label: "Planned",
+    body: "Checks whether a CRM field has a real owner, a useful cadence, and a customer-facing decision it actually supports — or whether it's just noise.",
+    inputs: ["Field", "Owner", "Cadence", "Decision"],
   },
 ];
 ---
 
 <BaseLayout
-  title="AI Tools"
-  description="Practical AI tools from Matt Rabah for CX, customer success, implementation, account health, and CRM discipline."
+  title="Tools"
+  description="Practical AI tools from Matt Rabah for CX, customer success, and implementation teams — handoff risk, account health, renewal readiness."
 >
-  <section class="container section hero">
-    <div class="stack-300">
-      <p class="heading-xxs text-brand">AI tools</p>
-      <h1 class="heading-xxl" style="max-width:14ch">
-        Tools for the handoff gaps.
-      </h1>
-      <p class="body-l measure">
-        Practical prototypes for customer-facing teams: handoff risk, customer
-        health, renewal readiness, and account prep.
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow reveal reveal-1">Practical AI</p>
+      <h1 class="display reveal reveal-2">Tools for the handoff gaps.</h1>
+      <p
+        class="lead reveal reveal-3"
+        style="max-width:48ch; margin-top:var(--space-6)"
+      >
+        Small, honest prototypes for customer-facing teams. Each one targets a
+        moment where accounts quietly slip — the handoff, the health read, the
+        renewal you didn't see coming.
       </p>
     </div>
   </section>
 
-  <section class="container section">
-    <div class="card-grid">
+  <section class="section">
+    <div class="container tool-grid">
       {
         tools.map((t) => (
-          <Card href="/tools">
-            <div class="stack-100">
-              <Lozenge label={t.status} appearance={t.appearance as any} />
-              <h2 class="heading-m">{t.title}</h2>
-              <p class="body">{t.body}</p>
-              <div class="tag-row">
-                {t.inputs.map((i) => (
-                  <Tag text={i} />
-                ))}
-              </div>
+          <article class="tool">
+            <div class="tool-head">
+              <h2 class="h3">{t.title}</h2>
+              <Lozenge label={t.label} status={t.status as any} />
             </div>
-          </Card>
+            <p class="body" style="max-width:50ch">
+              {t.body}
+            </p>
+            <div class="chip-row">
+              {t.inputs.map((i) => (
+                <Tag text={i} />
+              ))}
+            </div>
+          </article>
         ))
       }
     </div>
@@ -93,22 +91,31 @@ const tools = [
 
   <style>
     .hero {
-      padding-block: clamp(var(--space-800), 12vw, 7rem);
+      padding-block: clamp(var(--space-9), 14vw, 9rem) var(--space-8);
     }
-    .measure {
-      max-width: 46rem;
-      color: var(--color-text-subtle);
-    }
-    .card-grid {
+    .tool-grid {
       display: grid;
-      gap: var(--space-200);
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+      gap: 0;
     }
-    .tag-row {
+    .tool {
+      display: grid;
+      gap: var(--space-4);
+      padding: var(--space-7) 0;
+      border-top: 1px solid var(--color-border);
+    }
+    .tool:last-child {
+      border-bottom: 1px solid var(--color-border);
+    }
+    .tool-head {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+    .chip-row {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--space-100);
-      margin-top: var(--space-050);
+      gap: var(--space-2);
     }
   </style>
 </BaseLayout>

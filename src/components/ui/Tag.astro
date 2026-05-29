@@ -1,8 +1,7 @@
 ---
 /**
- * Tag — ADS Tag component (a chip/label, optionally a link, optionally
- * removable). Distinct from Lozenge: Tag = category/label, Lozenge = status.
- * color: standardLink | grey | blue | green | red | purple | teal | yellow
+ * Tag — quiet capability label. Supports both the current `text` API and the
+ * older `label`/`variant`/`size`/`color` usages used across the site.
  */
 export interface Props {
   text?: string;
@@ -13,10 +12,9 @@ export interface Props {
   size?: string;
   icon?: string;
   external?: boolean;
-  class?: string;
-  "aria-label"?: string;
   rel?: string;
   target?: string;
+  class?: string;
 }
 
 const {
@@ -28,19 +26,19 @@ const {
   size,
   icon,
   external = false,
-  class: className,
-  "aria-label": ariaLabel,
   rel: relProp,
   target: targetProp,
+  class: className,
 } = Astro.props;
 
 const content = text ?? label ?? "";
 const TagElement = href ? "a" : "span";
 const classes = [
-  "adg-tag",
-  variant ? `adg-tag--${variant}` : `adg-tag--${color}`,
-  size ? `adg-tag--${size}` : "",
-  href ? "adg-tag--link" : "",
+  "chip",
+  variant ? `chip--${variant}` : `chip--${color}`,
+  size ? `chip--${size}` : "",
+  href ? "chip--link" : "",
+  icon ? "chip--icon" : "",
   className,
 ]
   .filter(Boolean)
@@ -49,66 +47,37 @@ const rel = relProp ?? (external ? "noopener noreferrer" : undefined);
 const target = targetProp ?? (external ? "_blank" : undefined);
 ---
 
-<TagElement
-  class={classes}
-  href={href}
-  rel={rel}
-  target={target}
-  aria-label={ariaLabel}
->
+<TagElement class={classes} href={href} rel={rel} target={target}>
   {content}
 </TagElement>
-
 <style>
-  .adg-tag {
+  .chip {
     display: inline-flex;
     align-items: center;
-    height: 1.25rem;
-    padding-inline: var(--space-075);
-    border-radius: var(--radius-100);
-    font: var(--font-body);
-    text-decoration: none;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta);
+    letter-spacing: 0.04em;
+    color: var(--color-text-subtle);
     white-space: nowrap;
-    background: var(--_bg, var(--color-background-neutral));
-    color: var(--_fg, var(--color-text-subtle));
+    text-decoration: none;
   }
-  .adg-tag--link {
+  .chip--link {
+    transition:
+      border-color var(--dur-1) var(--ease),
+      color var(--dur-1) var(--ease),
+      background-color var(--dur-1) var(--ease);
     cursor: pointer;
-    transition: background-color var(--duration-medium) var(--ease-standard);
   }
-  .adg-tag--link:hover {
-    text-decoration: underline;
+  .chip--link:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text-accent);
+    background: var(--color-accent-bg);
   }
-  .adg-tag--link:focus-visible {
+  .chip--link:focus-visible {
     box-shadow: var(--focus-ring);
-  }
-
-  .adg-tag--grey {
-    --_bg: var(--color-background-neutral);
-    --_fg: var(--color-text-subtle);
-  }
-  .adg-tag--blue {
-    --_bg: var(--color-background-accent-blue-subtler);
-    --_fg: var(--color-text-accent-blue);
-  }
-  .adg-tag--green {
-    --_bg: var(--color-background-accent-green-subtler);
-    --_fg: var(--color-text-accent-green);
-  }
-  .adg-tag--red {
-    --_bg: var(--color-background-accent-red-subtler);
-    --_fg: var(--color-text-accent-red);
-  }
-  .adg-tag--purple {
-    --_bg: var(--color-background-accent-purple-subtler);
-    --_fg: var(--color-text-accent-purple);
-  }
-  .adg-tag--teal {
-    --_bg: var(--color-background-accent-teal-subtler);
-    --_fg: var(--color-text-accent-teal);
-  }
-  .adg-tag--yellow {
-    --_bg: var(--color-background-warning);
-    --_fg: var(--color-text-warning);
   }
 </style>

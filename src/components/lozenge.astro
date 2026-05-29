@@ -1,84 +1,95 @@
 ---
 /**
- * Lozenge — ADS's status pill. The most recognizable ADS element.
- * appearance: default | inprogress | moved | new | removed | success
- *   maps to ADS roles → neutral | information(blue) | warning(yellow) |
- *   discovery(purple) | danger(red) | success(green)
- * isBold: true → bold (filled) variant; false → subtle (tinted) variant.
- * Always uppercase, font.body.small weight bold, radius.100, ~16px tall.
+ * Lozenge — quiet editorial status marker.
  */
 export interface Props {
-  label: string;
-  appearance?: "default" | "inprogress" | "moved" | "new" | "removed" | "success";
+  label?: string;
+  text?: string;
+  status?:
+    | "live"
+    | "progress"
+    | "planned"
+    | "draft"
+    | "inprogress"
+    | "moved"
+    | "new"
+    | "removed"
+    | "success";
+  appearance?:
+    | "live"
+    | "progress"
+    | "planned"
+    | "draft"
+    | "inprogress"
+    | "moved"
+    | "new"
+    | "removed"
+    | "success";
   isBold?: boolean;
   class?: string;
 }
-
-const { label, appearance = "default", isBold = false, class: className } =
-  Astro.props;
+const {
+  label,
+  text,
+  status = "draft",
+  appearance,
+  isBold = false,
+  class: className,
+} = Astro.props;
+const resolvedStatus = appearance ?? status;
+const mappedStatus = resolvedStatus === "inprogress" ? "progress" : resolvedStatus;
 const classes = [
-  "lozenge",
-  `lozenge--${appearance}`,
-  isBold ? "lozenge--bold" : "lozenge--subtle",
+  "loz",
+  `loz--${mappedStatus}`,
+  isBold ? "loz--bold" : "",
   className,
 ]
   .filter(Boolean)
   .join(" ");
+const content = text ?? label ?? "";
 ---
 
-<span class={classes}><span class="lozenge-text">{label}</span></span>
-
+<span class={classes}>
+  <span class="loz-dot" aria-hidden="true"></span>{content}
+</span>
 <style>
-  .lozenge {
+  .loz {
     display: inline-flex;
     align-items: center;
-    max-width: 100%;
-    height: 1rem;
-    padding-inline: var(--space-075);
-    border-radius: var(--radius-100);
-    font: var(--font-body-s);
-    font-weight: var(--font-weight-bold);
-    letter-spacing: 0.02em;
+    gap: 0.4rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--fs-meta);
+    font-weight: var(--w-med);
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    white-space: nowrap;
+    background: var(--_bg);
+    color: var(--_fg);
   }
-  .lozenge-text { overflow: hidden; text-overflow: ellipsis; }
-
-  /* ---- Subtle (tinted bg + colored text) -------------------------------- */
-  .lozenge--subtle.lozenge--default {
-    background: var(--color-background-neutral);
-    color: var(--color-text-subtle);
+  .loz--bold {
+    font-weight: var(--w-semi);
   }
-  .lozenge--subtle.lozenge--inprogress {
-    background: var(--color-background-information);
-    color: var(--color-text-information);
+  .loz-dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 999px;
+    background: currentColor;
   }
-  .lozenge--subtle.lozenge--moved {
-    background: var(--color-background-warning);
-    color: var(--color-text-warning);
+  .loz--live {
+    --_bg: var(--status-live-bg);
+    --_fg: var(--status-live-text);
   }
-  .lozenge--subtle.lozenge--new {
-    background: var(--color-background-discovery);
-    color: var(--color-text-discovery);
+  .loz--progress {
+    --_bg: var(--status-prog-bg);
+    --_fg: var(--status-prog-text);
   }
-  .lozenge--subtle.lozenge--removed {
-    background: var(--color-background-danger);
-    color: var(--color-text-danger);
+  .loz--planned {
+    --_bg: var(--status-plan-bg);
+    --_fg: var(--status-plan-text);
   }
-  .lozenge--subtle.lozenge--success {
-    background: var(--color-background-success);
-    color: var(--color-text-success);
+  .loz--draft {
+    --_bg: var(--status-draft-bg);
+    --_fg: var(--status-draft-text);
   }
-
-  /* ---- Bold (filled) ---------------------------------------------------- */
-  .lozenge--bold { color: var(--color-text-inverse); }
-  .lozenge--bold.lozenge--default { background: var(--color-background-neutral-bold); }
-  .lozenge--bold.lozenge--inprogress { background: var(--color-background-brand-bold); }
-  .lozenge--bold.lozenge--moved {
-    background: var(--color-background-warning-bold);
-    color: var(--ads-n-1000); /* ADS: dark text on yellow for AA */
-  }
-  .lozenge--bold.lozenge--new { background: var(--color-background-discovery-bold); }
-  .lozenge--bold.lozenge--removed { background: var(--color-background-danger-bold); }
-  .lozenge--bold.lozenge--success { background: var(--color-background-success-bold); }
 </style>

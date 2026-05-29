@@ -3,65 +3,47 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import Card from "../components/Card.astro";
 import Lozenge from "../components/lozenge.astro";
+import Stat from "../components/stat.astro";
 import Tag from "../components/ui/Tag.astro";
-
-const pillars = [
-  {
-    eyebrow: "Lifecycle systems",
-    title: "Make the customer lifecycle easier to operate.",
-    body: "Onboarding, adoption, account health, and renewal readiness shouldn't live in scattered notes and heroic follow-up. They need a system the team can run when the account gets complicated.",
-  },
-  {
-    eyebrow: "AI workflow design",
-    title: "Use AI where it reduces drag, not judgment.",
-    body: "AI earns its place when it helps a team prepare faster, summarize context, and surface risk earlier. It becomes noise when it replaces ownership or adds one more place to check.",
-  },
-  {
-    eyebrow: "Change management",
-    title: "Turn process into behavior people repeat.",
-    body: "A process that only works when everyone remembers it isn't a process. I build the cadence, handoffs, and CRM discipline that hold up under real workload.",
-  },
-];
 
 const work = [
   {
+    index: "01",
     href: "/work#neurosync",
-    eyebrow: "Healthtech",
+    kicker: "Healthtech",
     title: "NeuroSync",
-    body: "Built the customer success function across healthcare accounts, where onboarding, adoption, and renewal readiness had to hold up under clinical and operational pressure.",
-    tags: ["Customer success", "Implementation"],
+    line: "Stood up customer success from scratch for a clinical platform — onboarding, adoption tracking, and a renewal motion that held up under real operational pressure.",
+    tags: ["Customer success", "Implementation", "Healthcare"],
   },
   {
+    index: "02",
     href: "/work#shinola",
-    eyebrow: "Brand-side retail",
+    kicker: "Brand-side retail",
     title: "Shinola",
-    body: "Ran high-touch client experience, Salesforce process, and executive-facing account work at the Detroit flagship, where trust was earned one interaction at a time.",
-    tags: ["CX operations", "Portfolio growth"],
+    line: "Ran a corporate account portfolio at the Detroit flagship — high-touch client experience, Salesforce process, and executive relationships, kept personal at scale.",
+    tags: ["Portfolio growth", "Salesforce", "Client experience"],
   },
   {
+    index: "03",
     href: "/work#context-by-design",
-    eyebrow: "Consulting",
+    kicker: "Consulting",
     title: "Context By Design",
-    body: "Built onboarding, retention, and lifecycle frameworks for service businesses that needed a clearer view of where customers stalled, churned, or lost confidence.",
-    tags: ["Lifecycle diagnostics", "Retention"],
+    line: "Built lifecycle and retention frameworks for service businesses that had relationships but no system — so they could finally see where customers stalled.",
+    tags: ["Lifecycle design", "Retention", "CX strategy"],
   },
 ];
 
 const tools = [
-  {
-    title: "Handoff Risk Checker",
-    status: "Prototype",
-    appearance: "inprogress",
-  },
+  { title: "Handoff Risk Checker", status: "progress", label: "Prototype" },
   {
     title: "Customer Health Signal Mapper",
-    status: "Prototype",
-    appearance: "inprogress",
+    status: "progress",
+    label: "Prototype",
   },
   {
     title: "Renewal Readiness Diagnostic",
-    status: "Planned",
-    appearance: "new",
+    status: "planned",
+    label: "Planned",
   },
 ];
 
@@ -76,229 +58,293 @@ const writing = [
   },
   {
     meta: "Customer success",
-    title: "Customer health scores fail when no one owns the next action.",
+    title: "Health scores fail when no one owns the next action.",
   },
 ];
 ---
 
-<BaseLayout
-  title="Matt Rabah"
-  description="Detroit-based CX and customer success. I build customer lifecycle systems, practical AI workflows, and operating models for customer-facing teams."
->
-  <!-- HERO — practical first: who, where, what. Earn bold further down. -->
-  <section class="container section hero">
-    <div class="stack-300">
-      <p class="heading-xxs text-brand">CX systems · AI workflows</p>
-      <h1 class="heading-xxl hero-title">
-        Systems that make customers easier to keep.
+<BaseLayout title="Matt Rabah">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow reveal reveal-1">
+        Customer Experience · Customer Success
+      </p>
+      <h1 class="display reveal reveal-2">
+        I make customers <em>easier to keep.</em>
       </h1>
-      <p class="body-l hero-lead">
-        I'm a Detroit-based CX and customer success professional. I build
-        customer lifecycle systems, practical AI workflows, and operating
-        rhythms for teams that need clearer ownership and fewer surprises near
-        renewal.
+      <p class="lead hero-lead reveal reveal-3">
+        I'm a CX and customer success professional in Detroit. I build the
+        operating layer underneath customer-facing teams — the onboarding,
+        handoffs, account health, and renewal rhythm that decide whether people
+        stay. Lately, that includes practical AI where it actually saves the
+        team time.
       </p>
-      <div class="hero-actions">
-        <Button href="/work" appearance="primary">See the work</Button>
-        <Button href="/contact" appearance="subtle">Start a conversation</Button
-        >
+      <div class="hero-actions reveal reveal-4">
+        <Button href="/work" variant="solid" arrow>See the work</Button>
+        <Button href="/contact" variant="ghost">Start a conversation</Button>
       </div>
     </div>
   </section>
 
-  <!-- FOCUS — replaces the old "homepage is the front door" placeholder -->
-  <section class="container section">
-    <header class="section-head">
-      <h2 class="heading-l">What I focus on</h2>
-    </header>
-    <div class="focus-grid">
-      <p class="body-l">
-        I work on the operating layer customers actually feel: how onboarding
-        flows, who owns the next action, what survives a handoff, and where AI
-        can cut administrative drag without blurring accountability. The
-        industries change. The underlying problem doesn't.
-      </p>
-      <div class="tag-row">
-        <Tag text="Lifecycle systems" />
-        <Tag text="Implementation" color="blue" />
-        <Tag text="Customer success" color="green" />
-        <Tag text="AI workflows" color="teal" />
-        <Tag text="CRM discipline" color="purple" />
+  <!-- POSITIONING + STATS -->
+  <section class="section section--alt">
+    <div class="container">
+      <div class="intro-grid">
+        <p class="lead">
+          Most customer experience problems aren't really about the customer.
+          They're about the system behind them — a vague owner, a note that
+          never got written down, a handoff that dropped context. Fix the
+          operating model and the experience fixes itself.
+        </p>
+        <div class="stat-row">
+          <Stat value="7+" label="Years in CX & CS" />
+          <Stat
+            value="3"
+            label="Industries"
+            note="Healthtech · Retail · Consulting"
+          />
+          <Stat value="M.S." label="CX Management" note="Michigan State" />
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- PILLARS -->
-  <section class="container section">
-    <header class="section-head">
-      <h2 class="heading-l">What I build</h2>
-    </header>
-    <div class="card-grid">
-      {
-        pillars.map((p) => (
-          <Card>
-            <div class="stack-100">
-              <p class="heading-xxs text-brand">{p.eyebrow}</p>
-              <h3 class="heading-m">{p.title}</h3>
-              <p class="body">{p.body}</p>
-            </div>
-          </Card>
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- SELECTED WORK — cards now link to anchors on /work, not loop to /work index -->
-  <section class="container section">
-    <header class="section-head">
-      <h2 class="heading-l">Selected work</h2>
-      <Button href="/work" appearance="link">All work →</Button>
-    </header>
-    <div class="card-grid">
-      {
-        work.map((w) => (
-          <Card href={w.href}>
-            <div class="stack-100">
-              <p class="heading-xxs text-brand">{w.eyebrow}</p>
-              <h3 class="heading-m">{w.title}</h3>
-              <p class="body">{w.body}</p>
-              <div class="tag-row tag-row--tight">
+  <!-- SELECTED WORK -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Selected work</p>
+          <h2 class="h2">Proof across messy customer systems.</h2>
+        </div>
+        <Button href="/work" variant="link" arrow>All work</Button>
+      </div>
+      <div class="work-list">
+        {
+          work.map((w) => (
+            <Card href={w.href} index={w.index}>
+              <p class="meta" style="color:var(--color-text-accent)">
+                {w.kicker}
+              </p>
+              <h3 class="h3" style="margin-top:var(--space-2)">
+                {w.title}
+              </h3>
+              <p class="body" style="margin-top:var(--space-3); max-width:46ch">
+                {w.line}
+              </p>
+              <div class="chip-row">
                 {w.tags.map((t) => (
-                  <Tag text={t} color="blue" />
+                  <Tag text={t} />
                 ))}
               </div>
-            </div>
-          </Card>
-        ))
-      }
+            </Card>
+          ))
+        }
+      </div>
     </div>
   </section>
 
   <!-- AI TOOLS -->
-  <section class="container section">
-    <header class="section-head">
-      <h2 class="heading-l">Practical AI tools</h2>
-      <Button href="/tools" appearance="link">View tools →</Button>
-    </header>
-    <p class="body-l measure">
-      The useful AI work is rarely flashy. It helps a team prepare for a
-      handoff, read account risk, write a cleaner follow-up, or see what changed
-      before the customer has to repeat it. Less drag, a clearer next action,
-      better judgment.
-    </p>
-    <div class="card-grid card-grid--3" style="margin-top:var(--space-300)">
-      {
-        tools.map((t) => (
-          <Card href="/tools">
-            <div class="stack-100">
-              <Lozenge label={t.status} appearance={t.appearance as any} />
-              <h3 class="heading-s">{t.title}</h3>
-            </div>
-          </Card>
-        ))
-      }
+  <section class="section section--alt">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Practical AI</p>
+          <h2 class="h2">Small tools for the gaps that cost you accounts.</h2>
+        </div>
+        <Button href="/tools" variant="link" arrow>View tools</Button>
+      </div>
+      <p class="body" style="max-width:52ch; margin-bottom:var(--space-6)">
+        None of this is flashy. It helps a team prep for a handoff, read account
+        risk early, or write a follow-up that doesn't make the customer repeat
+        themselves. That's the whole bar.
+      </p>
+      <div class="tool-row">
+        {
+          tools.map((t) => (
+            <Card href="/tools" flat>
+              <Lozenge label={t.label} status={t.status as any} />
+              <h3 class="h4" style="margin-top:var(--space-3)">
+                {t.title}
+              </h3>
+            </Card>
+          ))
+        }
+      </div>
     </div>
   </section>
 
   <!-- WRITING -->
-  <section class="container section">
-    <header class="section-head">
-      <h2 class="heading-l">Writing</h2>
-      <Button href="/blog" appearance="link">All writing →</Button>
-    </header>
-    <div class="stack">
-      {
-        writing.map((w) => (
-          <Card href="/blog" elevation="flat">
-            <div class="stack-100">
-              <p class="heading-xxs text-subtlest">{w.meta}</p>
-              <h3 class="heading-s">{w.title}</h3>
-            </div>
-          </Card>
-        ))
-      }
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Writing</p>
+          <h2 class="h2">Notes on better customer systems.</h2>
+        </div>
+        <Button href="/blog" variant="link" arrow>All writing</Button>
+      </div>
+      <div class="writing-list">
+        {
+          writing.map((w, idx) => (
+            <a href="/blog" class="writing-row">
+              <span class="meta writing-idx">
+                {String(idx + 1).padStart(2, "0")}
+              </span>
+              <span class="writing-text">
+                <span class="meta" style="color:var(--color-text-accent)">
+                  {w.meta}
+                </span>
+                <span class="h3 writing-title">{w.title}</span>
+              </span>
+              <span class="writing-arrow" aria-hidden="true">
+                →
+              </span>
+            </a>
+          ))
+        }
+      </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section class="container section">
-    <header class="section-head">
-      <h2 class="heading-l">Let's build the system.</h2>
-    </header>
-    <div class="contact-cta">
-      <p class="body-l measure">
-        If your customer lifecycle leans more on heroic individuals than on a
-        working operating layer, that's the problem I'm built for. Tell me where
-        it's breaking.
-      </p>
-      <Button href="/contact" appearance="primary">Start a conversation</Button>
+  <section class="section section--alt">
+    <div class="container contact-band">
+      <p class="eyebrow eyebrow--plain">Let's talk</p>
+      <h2 class="display contact-title">
+        If your lifecycle runs on heroics, that's the problem I fix.
+      </h2>
+      <div class="hero-actions">
+        <Button href="/contact" variant="accent" arrow
+          >Start a conversation</Button
+        >
+        <Button href="/about" variant="ghost">More about me</Button>
+      </div>
     </div>
   </section>
 
   <style>
     .hero {
-      padding-block: clamp(var(--space-800), 12vw, 7rem);
+      padding-block: clamp(var(--space-9), 16vw, 11rem) var(--space-9);
     }
-    .hero-title {
-      max-width: 18ch;
+    .hero .display {
+      max-width: 16ch;
+      margin-top: var(--space-5);
     }
     .hero-lead {
-      max-width: 46rem;
-      color: var(--color-text-subtle);
+      max-width: 52ch;
+      margin-top: var(--space-6);
     }
     .hero-actions {
       display: flex;
-      gap: var(--space-150);
+      gap: var(--space-3);
       flex-wrap: wrap;
-      margin-top: var(--space-200);
+      margin-top: var(--space-7);
     }
 
-    .section-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: var(--space-200);
-      margin-bottom: var(--space-400);
-      flex-wrap: wrap;
-    }
-    .measure {
-      max-width: 46rem;
-    }
-
-    .focus-grid {
+    .intro-grid {
       display: grid;
-      gap: var(--space-400);
+      gap: var(--space-7);
     }
-    @media (min-width: 48rem) {
-      .focus-grid {
-        grid-template-columns: 1.2fr 0.8fr;
-        align-items: start;
+    @media (min-width: 52rem) {
+      .intro-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: var(--space-9);
+        align-items: center;
+      }
+    }
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      gap: var(--space-6);
+      justify-content: start;
+    }
+    @media (max-width: 30rem) {
+      .stat-row {
+        grid-template-columns: 1fr 1fr;
       }
     }
 
-    .tag-row {
+    .work-list {
+      display: grid;
+      gap: var(--space-4);
+    }
+    @media (min-width: 52rem) {
+      .work-list {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .chip-row {
       display: flex;
       flex-wrap: wrap;
-      gap: var(--space-100);
-      align-content: flex-start;
-    }
-    .tag-row--tight {
-      margin-top: var(--space-050);
+      gap: var(--space-2);
+      margin-top: var(--space-5);
     }
 
-    .card-grid {
+    .tool-row {
       display: grid;
-      gap: var(--space-200);
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-    }
-    .card-grid--3 {
+      gap: var(--space-4);
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
     }
 
-    .contact-cta {
+    .writing-list {
       display: grid;
-      gap: var(--space-300);
-      justify-items: start;
+    }
+    .writing-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: var(--space-5);
+      padding: var(--space-5) 0;
+      border-top: 1px solid var(--color-border);
+      color: inherit;
+      text-decoration: none;
+      transition: padding var(--dur-2) var(--ease);
+    }
+    .writing-row:last-child {
+      border-bottom: 1px solid var(--color-border);
+    }
+    .writing-row:hover {
+      padding-inline: var(--space-3);
+    }
+    .writing-idx {
+      color: var(--color-text-faint);
+    }
+    .writing-text {
+      display: grid;
+      gap: var(--space-2);
+    }
+    .writing-title {
+      color: var(--color-text);
+      transition: color var(--dur-1) var(--ease);
+      max-width: 40ch;
+    }
+    .writing-row:hover .writing-title {
+      color: var(--color-text-accent);
+    }
+    .writing-arrow {
+      color: var(--color-text-faint);
+      transition:
+        transform var(--dur-1) var(--ease),
+        color var(--dur-1) var(--ease);
+    }
+    .writing-row:hover .writing-arrow {
+      color: var(--color-text-accent);
+      transform: translateX(4px);
+    }
+
+    .contact-band {
+      text-align: center;
+      display: grid;
+      justify-items: center;
+      gap: var(--space-6);
+    }
+    .contact-title {
+      max-width: 20ch;
+    }
+    .contact-band .hero-actions {
+      justify-content: center;
     }
   </style>
 </BaseLayout>

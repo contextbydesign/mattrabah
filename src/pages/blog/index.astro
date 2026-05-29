@@ -1,87 +1,145 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Card from "../../components/Card.astro";
 import Lozenge from "../../components/lozenge.astro";
 
 const posts = [
   {
     meta: "AI in CX",
+    read: "5 min",
     title: "AI in CX fails when it starts with tools instead of workflows.",
-    dek: "Most teams don't need another AI demo. They need a clearer view of the customer-facing work that's slow, repetitive, risky, or easy to drop.",
+    dek: "Most teams don't need another demo. They need a clear view of the customer-facing work that's slow, repetitive, risky, or easy to drop — and then AI in exactly those spots.",
   },
   {
     meta: "Implementation",
+    read: "6 min",
     title: "The sales-to-implementation handoff is a risk control.",
-    dek: "A closed deal can still become a delivery problem. The handoff is where context, constraints, and ownership either line up or start leaking trust.",
+    dek: "A closed deal can still become a delivery problem. The handoff is where context, constraints, and ownership either line up — or start quietly leaking trust.",
   },
   {
     meta: "Customer success",
-    title: "Customer health scores fail when no one owns the next action.",
-    dek: "A score is only useful if it changes behavior. Otherwise it's a cleaner way to watch risk arrive late.",
+    read: "4 min",
+    title: "Health scores fail when no one owns the next action.",
+    dek: "A score is only useful if it changes what someone does. Otherwise it's just a cleaner way to watch risk show up late.",
   },
   {
     meta: "Change management",
-    title:
-      "AI adoption is a change-management problem before it's a tooling problem.",
-    dek: "The hard part is rarely access. It's workflow fit, trust, governance, and knowing when to use the tool and when not to.",
+    read: "7 min",
+    title: "AI adoption is a change problem before it's a tooling problem.",
+    dek: "The hard part is rarely access. It's workflow fit, trust, and knowing when to reach for the tool — and when not to.",
   },
 ];
 ---
 
 <BaseLayout
   title="Writing"
-  description="Writing from Matt Rabah on practical AI workflows, customer lifecycle systems, implementation, account health, and CRM discipline."
+  description="Writing from Matt Rabah on AI in CX, implementation, customer health, lifecycle operations, and customer success."
 >
-  <section class="container section hero">
-    <div class="stack-300">
-      <p class="heading-xxs text-brand">Writing</p>
-      <h1 class="heading-xxl" style="max-width:16ch">
-        Notes on better customer systems.
-      </h1>
-      <p class="body-l measure">
-        Short essays on customer success, implementation, AI workflows, and the
-        operating details that decide whether customers stay.
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow reveal reveal-1">Writing</p>
+      <h1 class="display reveal reveal-2">Notes on better customer systems.</h1>
+      <p
+        class="lead reveal reveal-3"
+        style="max-width:48ch; margin-top:var(--space-6)"
+      >
+        Short, practical essays on customer success, implementation, AI
+        workflows, and the operating details that quietly decide whether
+        customers stay.
       </p>
     </div>
   </section>
 
-  <section class="container section">
-    <header class="section-head">
-      <h2 class="heading-l">Recent notes</h2>
-    </header>
-    <div class="stack">
-      {
-        posts.map((p) => (
-          <Card href="/blog" elevation="flat">
-            <div class="stack-100">
-              <div class="post-meta">
-                <span class="heading-xxs text-subtlest">{p.meta}</span>
-                <Lozenge label="Draft" appearance="moved" />
-              </div>
-              <h2 class="heading-m">{p.title}</h2>
-              <p class="body">{p.dek}</p>
-            </div>
-          </Card>
-        ))
-      }
+  <section class="section">
+    <div class="container">
+      <ul class="post-list">
+        {
+          posts.map((p, i) => (
+            <li>
+              <a href="/blog" class="post">
+                <span class="meta post-idx">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span class="post-main">
+                  <span class="post-meta">
+                    <span class="meta" style="color:var(--color-text-accent)">
+                      {p.meta}
+                    </span>
+                    <Lozenge label="Draft" status="draft" />
+                    <span class="meta">{p.read}</span>
+                  </span>
+                  <span class="h3 post-title">{p.title}</span>
+                  <span class="body post-dek">{p.dek}</span>
+                </span>
+                <span class="post-arrow" aria-hidden="true">
+                  →
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 
   <style>
     .hero {
-      padding-block: clamp(var(--space-800), 12vw, 7rem);
+      padding-block: clamp(var(--space-9), 14vw, 9rem) var(--space-8);
     }
-    .measure {
-      max-width: 46rem;
-      color: var(--color-text-subtle);
+    .post-list {
+      display: grid;
     }
-    .section-head {
-      margin-bottom: var(--space-300);
+    .post {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: var(--space-5);
+      align-items: start;
+      padding: var(--space-6) 0;
+      border-top: 1px solid var(--color-border);
+      color: inherit;
+      text-decoration: none;
+      transition: padding var(--dur-2) var(--ease);
+    }
+    .post-list li:last-child .post {
+      border-bottom: 1px solid var(--color-border);
+    }
+    .post:hover {
+      padding-inline: var(--space-3);
+    }
+    .post-idx {
+      color: var(--color-text-faint);
+      padding-top: 0.4rem;
+    }
+    .post-main {
+      display: grid;
+      gap: var(--space-3);
     }
     .post-meta {
       display: flex;
       align-items: center;
-      gap: var(--space-150);
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+    .post-title {
+      color: var(--color-text);
+      max-width: 30ch;
+      transition: color var(--dur-1) var(--ease);
+    }
+    .post:hover .post-title {
+      color: var(--color-text-accent);
+    }
+    .post-dek {
+      max-width: 60ch;
+    }
+    .post-arrow {
+      color: var(--color-text-faint);
+      padding-top: 0.4rem;
+      transition:
+        transform var(--dur-1) var(--ease),
+        color var(--dur-1) var(--ease);
+    }
+    .post:hover .post-arrow {
+      color: var(--color-text-accent);
+      transform: translateX(4px);
     }
   </style>
 </BaseLayout>

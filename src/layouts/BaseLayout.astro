@@ -1,9 +1,4 @@
 ---
-/**
- * BaseLayout (ADS edition) — sets up tokens, top navigation, theme toggle,
- * and the flicker-free theme bootstrap. Light/dark driven entirely by
- * data-theme on <html> + semantic tokens.
- */
 import "../styles/base.css";
 import Button from "../components/Button.astro";
 
@@ -12,15 +7,18 @@ export interface Props {
   description?: string;
 }
 const SITE = "Matt Rabah";
-const { title, description = "Customer lifecycle systems, practical AI workflows, and operating models for customer-facing teams." } = Astro.props;
-const fullTitle = title === SITE ? title : `${title} — ${SITE}`;
+const {
+  title,
+  description = "Detroit-based CX and customer success. Customer lifecycle systems, practical AI workflows, and operating models for customer-facing teams.",
+} = Astro.props;
+const fullTitle =
+  title === SITE ? `${SITE} — CX & Customer Success` : `${title} — ${SITE}`;
 const year = new Date().getFullYear();
 const nav = [
   { href: "/work", label: "Work" },
-  { href: "/tools", label: "AI Tools" },
-  { href: "/blog", label: "Blog" },
+  { href: "/tools", label: "Tools" },
+  { href: "/blog", label: "Writing" },
   { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
 ];
 ---
 
@@ -34,135 +32,343 @@ const nav = [
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <!-- Flicker-free theme: set data-theme before paint -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- Preload the two faces visible above the fold: display + UI -->
+    <link
+      rel="preload"
+      href="/fonts/tiempos/Tiempos Headline/Tiempos-Headline-Semibold-Desktop.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/sohne/Sohne/sohne-book.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <script is:inline>
       (() => {
-        const saved = localStorage.getItem("theme");
-        const dark = saved ? saved === "dark"
-          : window.matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.dataset.theme = dark ? "dark" : "light";
+        const s = localStorage.getItem("theme");
+        const d = s
+          ? s === "dark"
+          : matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.dataset.theme = d ? "dark" : "light";
       })();
     </script>
   </head>
-
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <header class="topnav">
-      <div class="container topnav-inner">
-        <a href="/" class="topnav-brand" aria-label={`${SITE}, home`}>
-          <span class="topnav-mark" aria-hidden="true">MR</span>
-          <span class="topnav-name">{SITE}</span>
+    <header class="masthead">
+      <div class="container masthead-inner">
+        <a href="/" class="wordmark" aria-label={`${SITE}, home`}>
+          <span class="wordmark-name">MR</span>
+          <span class="wordmark-full">
+            <span class="wordmark-line1">Matt Rabah</span>
+            <span class="wordmark-line2">CX · Customer Success</span>
+          </span>
         </a>
 
-        <nav class="topnav-links" aria-label="Primary">
-          {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+        <nav class="nav" aria-label="Primary">
+          {nav.map((i) => <a href={i.href}>{i.label}</a>)}
         </nav>
 
-        <div class="topnav-actions">
-          <button class="theme-toggle" type="button" aria-label="Toggle theme">
-            <svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0-5v3m0 14v3m10-10h-3M5 12H2m15.5-6.5-2 2m-7 7-2 2m11 0-2-2m-7-7-2-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            <svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z" fill="currentColor"/></svg>
+        <div class="masthead-actions">
+          <button class="theme-btn" type="button" aria-label="Toggle theme">
+            <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"
+              ><circle cx="12" cy="12" r="4.2" fill="currentColor"></circle><g
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                ><path
+                  d="M12 2.5v2.6M12 18.9v2.6M21.5 12h-2.6M5.1 12H2.5M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8M18.4 18.4l-1.8-1.8M7.4 7.4 5.6 5.6"
+                ></path></g
+              ></svg
+            >
+            <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"
+              ><path
+                d="M20 14.3A8 8 0 1 1 9.7 4 6.4 6.4 0 0 0 20 14.3Z"
+                fill="currentColor"></path></svg
+            >
           </button>
-          <Button href="/contact" appearance="primary" spacing="compact">Start a conversation</Button>
+          <span class="masthead-cta"
+            ><Button href="/contact" variant="ghost" size="sm" arrow
+              >Contact</Button
+            ></span
+          >
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"><span></span><span></span></button
+          >
+        </div>
+      </div>
+      <div class="mobile-nav" hidden>
+        <div class="container stack-2">
+          {nav.map((i) => <a href={i.href}>{i.label}</a>)}
+          <a href="/contact">Contact</a>
         </div>
       </div>
     </header>
 
     <main id="main"><slot /></main>
 
-    <footer class="site-footer">
-      <div class="container footer-grid">
-        <div class="stack-100">
-          <p class="heading-s">{SITE}</p>
-          <p class="body-s">CX, customer success, and implementation systems.<br />Detroit, MI · Open to new roles.</p>
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-brand stack-3">
+          <a href="/" class="footer-word">Matt Rabah</a>
+          <p class="body-sm" style="max-width:28ch">
+            Customer lifecycle systems and practical AI workflows for
+            customer-facing teams. Detroit, MI.
+          </p>
+          <p class="meta" style="color:var(--color-text-accent)">
+            — Open to new roles
+          </p>
         </div>
-        <nav class="stack-100" aria-label="Site">
-          <p class="heading-xxs">Site</p>
-          {nav.map((item) => <a class="body-s footer-link" href={item.href}>{item.label}</a>)}
+        <nav class="footer-col" aria-label="Site">
+          <p class="footer-col-title">Site</p>
+          {nav.map((i) => <a href={i.href}>{i.label}</a>)}
         </nav>
-        <nav class="stack-100" aria-label="Elsewhere">
-          <p class="heading-xxs">Elsewhere</p>
-          <a class="body-s footer-link" href="mailto:rabah.matthew@gmail.com">Email</a>
-          <a class="body-s footer-link" href="https://www.linkedin.com/in/mattrabah/" target="_blank" rel="me noopener">LinkedIn</a>
+        <nav class="footer-col" aria-label="Contact">
+          <p class="footer-col-title">Contact</p>
+          <a href="mailto:rabah.matthew@gmail.com">Email</a>
+          <a
+            href="https://www.linkedin.com/in/mattrabah/"
+            target="_blank"
+            rel="me noopener">LinkedIn</a
+          >
         </nav>
       </div>
-      <div class="container"><p class="body-s footer-legal">© {year} {SITE} — Detroit, MI</p></div>
+      <div class="container footer-base">
+        <p class="meta">© {year} {SITE}</p>
+        <p class="meta">Detroit, Michigan</p>
+      </div>
     </footer>
 
     <script is:inline>
-      const btn = document.querySelector(".theme-toggle");
-      btn?.addEventListener("click", () => {
-        const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-        document.documentElement.dataset.theme = next;
-        localStorage.setItem("theme", next);
+      document.querySelector(".theme-btn")?.addEventListener("click", () => {
+        const n =
+          document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        document.documentElement.dataset.theme = n;
+        localStorage.setItem("theme", n);
+      });
+      const t = document.querySelector(".nav-toggle"),
+        m = document.querySelector(".mobile-nav");
+      t?.addEventListener("click", () => {
+        const open = t.getAttribute("aria-expanded") === "true";
+        t.setAttribute("aria-expanded", String(!open));
+        if (m) m.hidden = open;
       });
     </script>
 
     <style>
-      .topnav {
+      .masthead {
         position: sticky;
         top: 0;
         z-index: 100;
-        background: color-mix(in srgb, var(--color-elevation-surface) 90%, transparent);
-        backdrop-filter: blur(12px);
+        background: color-mix(in srgb, var(--color-surface) 86%, transparent);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         border-bottom: 1px solid var(--color-border);
       }
-      .topnav-inner {
-        height: 3.5rem;
+      .masthead-inner {
         display: flex;
         align-items: center;
-        gap: var(--space-400);
+        gap: var(--space-6);
+        min-height: 4.25rem;
       }
-      .topnav-brand { display: inline-flex; align-items: center; gap: var(--space-100); color: var(--color-text); text-decoration: none; font: var(--font-heading-s); }
-      .topnav-mark {
-        display: inline-grid; place-items: center;
-        width: 1.75rem; height: 1.75rem;
-        border-radius: var(--radius-100);
-        background: var(--color-background-brand-bold);
-        color: var(--color-text-inverse);
-        font: var(--font-body-s); font-weight: var(--font-weight-bold);
+      /* Wordmark: Söhne Breit monogram + name. Breit's width gives it presence. */
+      .wordmark {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-3);
+        text-decoration: none;
+        color: var(--color-text);
+      }
+      .wordmark-name {
+        display: inline-grid;
+        place-items: center;
+        width: 2.15rem;
+        height: 2.15rem;
+        border-radius: var(--radius-sm);
+        background: var(--color-text);
+        color: var(--color-surface);
+        font-family: var(--font-wide);
+        font-weight: 700;
+        font-size: 0.8rem;
         letter-spacing: 0.02em;
       }
-      .topnav-links { display: flex; gap: var(--space-300); margin-inline-start: auto; }
-      .topnav-links a { color: var(--color-text-subtle); font: var(--font-body); font-weight: var(--font-weight-medium); text-decoration: none; }
-      .topnav-links a:hover { color: var(--color-text); }
-      .topnav-actions { display: flex; align-items: center; gap: var(--space-150); }
-      .theme-toggle {
-        display: inline-grid; place-items: center;
-        width: 2rem; height: 2rem; border: none;
-        border-radius: var(--radius-100);
-        background: var(--color-background-neutral-subtle);
-        color: var(--color-icon); cursor: pointer;
+      .wordmark-full {
+        display: grid;
+        line-height: 1.1;
       }
-      .theme-toggle:hover { background: var(--color-background-neutral-subtle-hovered); }
-      .theme-toggle svg { width: 1.25rem; height: 1.25rem; }
-      .theme-icon-moon { display: none; }
-      :root[data-theme="dark"] .theme-icon-sun { display: none; }
-      :root[data-theme="dark"] .theme-icon-moon { display: block; }
-
-      @media (max-width: 48rem) {
-        .topnav-links { display: none; }
-        .topnav-links { margin-inline-start: auto; }
+      .wordmark-line1 {
+        font-family: var(--font-wide);
+        font-weight: 600;
+        font-size: 0.95rem;
+        letter-spacing: 0.01em;
       }
-
-      .site-footer {
-        margin-top: var(--space-800);
-        padding-block: var(--space-600) var(--space-400);
-        background: var(--color-elevation-surface);
+      .wordmark-line2 {
+        font-family: var(--font-mono);
+        font-size: 0.625rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--color-text-subtlest);
+        margin-top: 2px;
+      }
+      .nav {
+        display: flex;
+        gap: var(--space-6);
+        margin-inline-start: auto;
+      }
+      .nav a {
+        font-family: var(--font-sans);
+        font-size: var(--fs-body-sm);
+        font-weight: var(--w-med);
+        color: var(--color-text-subtle);
+        text-decoration: none;
+      }
+      .nav a:hover {
+        color: var(--color-text-accent);
+      }
+      .masthead-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+      }
+      .theme-btn {
+        display: inline-grid;
+        place-items: center;
+        width: 2.15rem;
+        height: 2.15rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-pill);
+        background: transparent;
+        color: var(--color-text-subtle);
+        cursor: pointer;
+        transition:
+          color var(--dur-1),
+          border-color var(--dur-1);
+      }
+      .theme-btn:hover {
+        color: var(--color-text-accent);
+        border-color: var(--color-border-accent);
+      }
+      .theme-btn svg {
+        width: 1.15rem;
+        height: 1.15rem;
+      }
+      .i-moon {
+        display: none;
+      }
+      :root[data-theme="dark"] .i-sun {
+        display: none;
+      }
+      :root[data-theme="dark"] .i-moon {
+        display: block;
+      }
+      .nav-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        width: 2.4rem;
+        height: 2.4rem;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        background: transparent;
+        cursor: pointer;
+      }
+      .nav-toggle span {
+        width: 1.1rem;
+        height: 1.5px;
+        background: var(--color-text);
+      }
+      .mobile-nav {
         border-top: 1px solid var(--color-border);
-        display: grid;
-        gap: var(--space-400);
+        padding-block: var(--space-4);
       }
-      .footer-grid {
-        display: grid;
-        grid-template-columns: 1.5fr 1fr 1fr;
-        gap: var(--space-400);
+      .mobile-nav a {
+        display: block;
+        padding: var(--space-2) 0;
+        color: var(--color-text);
+        font-size: var(--fs-h4);
+        font-family: var(--font-display);
       }
-      .footer-link { color: var(--color-text-subtle); text-decoration: none; }
-      .footer-link:hover { color: var(--color-text); }
-      .footer-legal { color: var(--color-text-subtlest); }
-      @media (max-width: 48rem) { .footer-grid { grid-template-columns: 1fr; } }
+
+      @media (max-width: 46rem) {
+        .nav,
+        .masthead-cta {
+          display: none;
+        }
+        .nav-toggle {
+          display: flex;
+        }
+        .masthead-actions {
+          margin-inline-start: auto;
+        }
+        .wordmark-line2 {
+          display: none;
+        }
+      }
+
+      .footer {
+        margin-top: var(--space-9);
+        border-top: 1px solid var(--color-border);
+        background: var(--color-surface-sunken);
+      }
+      .footer-inner {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr 1fr;
+        gap: var(--space-6);
+        padding-block: var(--space-8) var(--space-6);
+      }
+      .footer-word {
+        font-family: var(--font-display);
+        font-weight: var(--w-semi);
+        font-size: 1.6rem;
+        letter-spacing: -0.02em;
+        color: var(--color-text);
+        text-decoration: none;
+      }
+      .footer-col {
+        display: grid;
+        gap: var(--space-3);
+        align-content: start;
+      }
+      .footer-col-title {
+        font-family: var(--font-mono);
+        font-size: var(--fs-meta);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--color-text-faint);
+      }
+      .footer-col a {
+        color: var(--color-text-subtle);
+        font-size: var(--fs-body-sm);
+        text-decoration: none;
+      }
+      .footer-col a:hover {
+        color: var(--color-text-accent);
+      }
+      .footer-base {
+        display: flex;
+        justify-content: space-between;
+        padding-block: var(--space-5);
+        border-top: 1px solid var(--color-border);
+      }
+      @media (max-width: 46rem) {
+        .footer-inner {
+          grid-template-columns: 1fr 1fr;
+        }
+        .footer-brand {
+          grid-column: 1 / -1;
+        }
+      }
     </style>
   </body>
 </html>
