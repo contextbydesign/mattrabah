@@ -1,130 +1,138 @@
 /* ==========================================================================
-   tokens.css â€” Matt Rabah portfolio
-   "Credible, differentiated CX with a splash of refined luxury and trust."
+   tokens.css — Matt Rabah portfolio
 
-   Built on the licensed SÃ¶hne + Tiempos families. ADS token discipline
-   (semantic roles, light+dark via data-theme, rem scale) â€” loosely, in an
-   editorial/luxury register rather than product-UI.
+   Direction:
+   Cool, restrained, near-monochrome, refined professional system.
 
-   Palette logic for LUXURY + TRUST:
-     - Paper is a true warm ivory, not stark white. Stark white reads cheap.
-     - Ink is a soft near-black (not #000) â€” warmer, calmer, more expensive.
-     - ONE deep, low-chroma accent (clay). Low chroma = grown-up. A bright
-       saturated accent reads startup; a muted deep one reads considered.
-     - A second whisper-tone (ink-soft) carries most "color" work; the accent
-       is rationed, used like punctuation, never as fill across big areas.
+   Reference mood:
+   Cambridge Audio-style restraint translated for a personal CX / CS /
+   implementation portfolio. Soft ice-white surfaces, graphite ink, quiet
+   rules, very limited color. Typography and spacing carry the luxury signal.
    ========================================================================== */
+
 @import "./fonts.css";
 
 :root {
-  /* ----- Raw palette ------------------------------------------------------ */
-  /* Paper â€” warm ivory at three elevations */
-  --ivory-0: #f7f4ed; /* page */
-  --ivory-1: #efeae0; /* sunken band */
-  --card: #fdfbf6; /* raised card â€” soft, never #fff */
+  /* ====================================================================== */
+  /* RAW PALETTE — COOL MONOCHROME                                          */
+  /* ====================================================================== */
 
-  /* Ink â€” warm near-black, a hint of espresso (not blue, not pure) */
-  --ink-900: #211e1a;
-  --ink-700: #423d36;
-  --ink-500: #6b655c;
-  --ink-300: #9a9389;
-  --rule: rgba(33, 30, 26, 0.1);
-  --rule-2: rgba(33, 30, 26, 0.18);
+  --ice-0: #f7f9fa; /* page */
+  --ice-1: #eef2f4; /* quiet band / sunken */
+  --ice-2: #e3e9ed; /* deeper cool rule/surface */
+  --white: #ffffff; /* raised card */
 
-  /* Accent â€” clay: deep, desaturated terracotta. Confident, not loud. */
-  --clay-50: #f3e7df;
-  --clay-200: #e0bda9;
-  --clay-500: #a8543a; /* primary */
-  --clay-600: #8f4530; /* hover / AA text on ivory */
-  --clay-700: #743623;
+  --graphite-950: #0f1214;
+  --graphite-900: #14181b;
+  --graphite-800: #1b2024;
+  --graphite-700: #2b3338;
+  --graphite-600: #434d54;
+  --graphite-500: #68727a;
+  --graphite-400: #89939b;
+  --graphite-300: #aeb7bd;
+  --graphite-200: #c9d0d5;
 
-  /* Secondary whisper â€” deep pine, for the rare in-prose link contrast */
-  --pine-600: #2f4f47;
+  --rule: rgba(15, 18, 20, 0.09);
+  --rule-2: rgba(15, 18, 20, 0.18);
+  --rule-3: rgba(15, 18, 20, 0.28);
+
+  /* One signal color. It should feel like a status light, not a brand wash. */
+  --signal-500: #d52236;
+  --signal-600: #b7192c;
+  --signal-700: #941325;
+  --signal-soft: rgba(213, 34, 54, 0.075);
+  --signal-rule: rgba(213, 34, 54, 0.24);
 
   /* ====================================================================== */
-  /* SEMANTIC â€” light                                                       */
+  /* SEMANTIC — LIGHT                                                       */
   /* ====================================================================== */
-  --color-surface: var(--ivory-0);
-  --color-surface-sunken: var(--ivory-1);
-  --color-surface-raised: var(--card);
-  --color-surface-hover: #f1ece2;
 
-  --color-text: var(--ink-900);
-  --color-text-subtle: var(--ink-700);
-  --color-text-subtlest: var(--ink-500);
-  --color-text-faint: var(--ink-300);
-  --color-text-inverse: var(--ivory-0);
-  --color-text-accent: var(--clay-600);
+  --color-surface: var(--ice-0);
+  --color-surface-sunken: var(--ice-1);
+  --color-surface-raised: var(--white);
+  --color-surface-hover: #f0f4f6;
 
-  --color-link: var(--clay-600);
-  --color-link-hover: var(--clay-700);
+  --color-text: var(--graphite-950);
+  --color-text-subtle: rgba(15, 18, 20, 0.76);
+  --color-text-subtlest: var(--graphite-500);
+  --color-text-faint: rgba(15, 18, 20, 0.42);
+  --color-text-inverse: var(--ice-0);
+  --color-text-accent: var(--signal-600);
+
+  --color-link: var(--graphite-950);
+  --color-link-hover: var(--signal-600);
 
   --color-border: var(--rule);
   --color-border-strong: var(--rule-2);
-  --color-border-accent: var(--clay-200);
-  --color-focus: var(--clay-500);
+  --color-border-heavy: var(--rule-3);
+  --color-border-accent: var(--signal-rule);
 
-  --color-accent: var(--clay-500);
-  --color-accent-hover: var(--clay-600);
-  --color-accent-bg: var(--clay-50);
-  --color-on-accent: #fbf6f0;
+  --color-focus: var(--signal-500);
 
-  /* Status â€” quiet, all low-chroma to stay in the luxury register */
-  --status-live-bg: #e3ebe2;
-  --status-live-text: #355b41;
-  --status-prog-bg: var(--clay-50);
-  --status-prog-text: var(--clay-700);
-  --status-plan-bg: #e9e6ee;
-  --status-plan-text: #574a6b;
-  --status-draft-bg: #ece8de;
-  --status-draft-text: var(--ink-500);
+  --color-accent: var(--signal-500);
+  --color-accent-hover: var(--signal-600);
+  --color-accent-bg: var(--signal-soft);
+  --color-on-accent: #f9fbfb;
 
-  /* Shadows â€” soft, warm, low. Print-like, not material. */
-  --shadow-card:
-    0 1px 2px rgba(33, 30, 26, 0.04), 0 10px 30px -20px rgba(33, 30, 26, 0.22);
-  --shadow-lift:
-    0 2px 5px rgba(33, 30, 26, 0.05), 0 22px 48px -26px rgba(33, 30, 26, 0.32);
+  /* Status — deliberately cool and low-chroma */
+  --status-live-bg: #e7eee9;
+  --status-live-text: #365944;
+
+  --status-prog-bg: #eef2f4;
+  --status-prog-text: #38434a;
+
+  --status-plan-bg: #e9edf2;
+  --status-plan-text: #404b5a;
+
+  --status-draft-bg: #eceff1;
+  --status-draft-text: var(--graphite-500);
+
+  /* Shadows — nearly removed. Premium here comes from spacing and rules. */
+  --shadow-card: 0 1px 2px rgba(15, 18, 20, 0.035);
+  --shadow-lift: 0 2px 10px rgba(15, 18, 20, 0.055);
 
   /* ====================================================================== */
-  /* TYPE â€” each licensed face in its proper role                           */
+  /* TYPE                                                                   */
   /* ====================================================================== */
+
   --font-display: "Tiempos Headline", Georgia, "Times New Roman", serif;
-  --font-serif: "Tiempos Text", Georgia, serif; /* reading face */
+  --font-serif: "Tiempos Text", Georgia, serif;
   --font-sans: "Sohne", "Inter", "Helvetica Neue", Arial, system-ui, sans-serif;
-  --font-wide: "Sohne Breit", var(--font-sans); /* wordmark / wide caps */
-  --font-mono: "Sohne Mono", ui-monospace, Menlo, monospace;
+  --font-wide: "Sohne Breit", var(--font-sans);
+  --font-mono: "Sohne Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
 
-  /* Editorial fluid scale */
-  --fs-statement: clamp(
-    2.4rem,
-    1.4rem + 4.6vw,
-    4.75rem
-  ); /* big centered interstitials */
-  --fs-display: clamp(3rem, 1.5rem + 6.2vw, 6rem);
-  --fs-h1: clamp(2.3rem, 1.6rem + 3vw, 3.6rem);
-  --fs-h2: clamp(1.8rem, 1.4rem + 1.7vw, 2.6rem);
-  --fs-h3: clamp(1.3rem, 1.15rem + 0.7vw, 1.6rem);
-  --fs-h4: clamp(1.1rem, 1.05rem + 0.25vw, 1.25rem);
-  --fs-lead: clamp(1.2rem, 1.08rem + 0.5vw, 1.5rem);
-  --fs-body: 1.0625rem;
-  --fs-body-sm: 0.9375rem;
-  --fs-meta: 0.8125rem;
-  --fs-mono: 0.875rem;
+  /* Restrained editorial scale */
+  --fs-statement: clamp(2.2rem, 1.4rem + 3.8vw, 4.4rem);
+  --fs-display: clamp(2.8rem, 1.5rem + 5.5vw, 5.6rem);
+  --fs-h1: clamp(2.25rem, 1.55rem + 2.8vw, 3.4rem);
+  --fs-h2: clamp(1.75rem, 1.35rem + 1.5vw, 2.35rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --fs-h4: clamp(1.05rem, 1rem + 0.2vw, 1.18rem);
+  --fs-lead: clamp(1.08rem, 1rem + 0.38vw, 1.28rem);
 
-  --lh-display: 1;
+  --fs-body: 1.025rem;
+  --fs-body-sm: 0.92rem;
+  --fs-meta: 0.78rem;
+  --fs-mono: 0.86rem;
+
+  --lh-display: 0.98;
   --lh-head: 1.08;
-  --lh-lead: 1.5;
-  --lh-body: 1.7;
+  --lh-lead: 1.58;
+  --lh-body: 1.68;
 
-  --tr-display: -0.022em;
+  --tr-display: -0.025em;
   --tr-head: -0.014em;
-  --tr-eyebrow: 0.16em;
+  --tr-eyebrow: 0.14em;
 
   --w-reg: 400;
   --w-med: 500;
   --w-semi: 600;
+  --w-bold: 700;
 
-  /* ----- Space (generous, editorial) -------------------------------------- */
+  /* ====================================================================== */
+  /* SPACE                                                                  */
+  /* ====================================================================== */
+
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -135,12 +143,15 @@
   --space-8: 4rem;
   --space-9: 6rem;
   --space-10: 8rem;
-  --space-12: 11rem; /* statement-section breathing room */
+  --space-12: 11rem;
 
-  /* ----- Radius (restrained â€” luxury uses tighter corners) ---------------- */
-  --radius-sm: 5px;
-  --radius-md: 9px;
-  --radius-lg: 14px;
+  /* ====================================================================== */
+  /* SHAPE / MOTION / LAYOUT                                                */
+  /* ====================================================================== */
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
   --radius-pill: 999px;
 
   --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-focus);
@@ -150,52 +161,56 @@
   --dur-2: 320ms;
   --dur-3: 680ms;
 
-  /* ----- Layout (composed, not full-bleed) -------------------------------- */
-  --max-page: 70rem;
+  --max-page: 76rem;
   --max-text: 39rem;
-  --max-wide: 76rem;
+  --max-wide: 84rem;
   --gutter: clamp(1.5rem, 5vw, 4.5rem);
 }
 
-/* ========================================================================== */
-/* DARK â€” warm ink-on-espresso, not an inversion                              */
-/* ========================================================================== */
+/* ==========================================================================
+   DARK — COOL GRAPHITE, NOT WARM ESPRESSO
+   ========================================================================== */
+
 :root[data-theme="dark"] {
-  --color-surface: #1a1714; /* warm espresso-black */
-  --color-surface-sunken: #14110f;
-  --color-surface-raised: #221e1a;
-  --color-surface-hover: #28231e;
+  --color-surface: #111416;
+  --color-surface-sunken: #0d1012;
+  --color-surface-raised: #1a1f23;
+  --color-surface-hover: #20262b;
 
-  --color-text: #efe9df; /* warm ivory text */
-  --color-text-subtle: #c5beb2;
-  --color-text-subtlest: #938b7f;
-  --color-text-faint: #635c52;
-  --color-text-inverse: #1a1714;
-  --color-text-accent: #d98a68; /* clay lifted for dark AA */
+  --color-text: #edf1f2;
+  --color-text-subtle: rgba(237, 241, 242, 0.76);
+  --color-text-subtlest: rgba(237, 241, 242, 0.58);
+  --color-text-faint: rgba(237, 241, 242, 0.36);
+  --color-text-inverse: #111416;
+  --color-text-accent: #f05a6b;
 
-  --color-link: #d98a68;
-  --color-link-hover: #e8a684;
+  --color-link: #edf1f2;
+  --color-link-hover: #f05a6b;
 
-  --color-border: rgba(239, 233, 223, 0.1);
-  --color-border-strong: rgba(239, 233, 223, 0.2);
-  --color-border-accent: rgba(168, 84, 58, 0.5);
+  --color-border: rgba(237, 241, 242, 0.1);
+  --color-border-strong: rgba(237, 241, 242, 0.2);
+  --color-border-heavy: rgba(237, 241, 242, 0.3);
+  --color-border-accent: rgba(240, 90, 107, 0.35);
 
-  --color-accent: #bd6243;
-  --color-accent-hover: #d98a68;
-  --color-accent-bg: rgba(168, 84, 58, 0.16);
-  --color-on-accent: #1a1714;
+  --color-focus: #f05a6b;
 
-  --status-live-bg: rgba(53, 91, 65, 0.24);
-  --status-live-text: #93cba2;
-  --status-prog-bg: rgba(168, 84, 58, 0.2);
-  --status-prog-text: #e0a585;
-  --status-plan-bg: rgba(87, 74, 107, 0.3);
-  --status-plan-text: #bcabdc;
-  --status-draft-bg: rgba(239, 233, 223, 0.08);
-  --status-draft-text: #938b7f;
+  --color-accent: #f05a6b;
+  --color-accent-hover: #ff7482;
+  --color-accent-bg: rgba(240, 90, 107, 0.13);
+  --color-on-accent: #111416;
 
-  --shadow-card:
-    0 1px 2px rgba(0, 0, 0, 0.45), 0 12px 34px -20px rgba(0, 0, 0, 0.72);
-  --shadow-lift:
-    0 2px 6px rgba(0, 0, 0, 0.5), 0 26px 54px -26px rgba(0, 0, 0, 0.82);
+  --status-live-bg: rgba(75, 128, 93, 0.2);
+  --status-live-text: #a2d2ad;
+
+  --status-prog-bg: rgba(237, 241, 242, 0.08);
+  --status-prog-text: rgba(237, 241, 242, 0.78);
+
+  --status-plan-bg: rgba(120, 133, 150, 0.22);
+  --status-plan-text: #c5ced9;
+
+  --status-draft-bg: rgba(237, 241, 242, 0.06);
+  --status-draft-text: rgba(237, 241, 242, 0.58);
+
+  --shadow-card: none;
+  --shadow-lift: none;
 }
