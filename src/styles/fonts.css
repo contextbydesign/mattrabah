@@ -1,0 +1,155 @@
+/* ==========================================================================
+   fonts.css â€” @font-face for the licensed SÃ¶hne + Tiempos families.
+   Paths assume the structure from the project: /public/fonts/...
+   Astro serves /public at the site root, so URLs are /fonts/... at runtime.
+
+   Loading strategy: only the weights actually used are declared, to keep the
+   network light. font-display: swap so text paints immediately in fallback,
+   then upgrades. Tiempos Text is the reading face; Tiempos Headline the
+   display face; SÃ¶hne the UI face; SÃ¶hne Breit the wordmark; SÃ¶hne Mono meta.
+   ========================================================================== */
+
+/* ----- SÃ¶hne (UI / body) -------------------------------------------------- */
+@font-face {
+  font-family: "Sohne";
+  src: url("/fonts/sohne/Sohne/sohne-light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Sohne";
+  src: url("/fonts/sohne/Sohne/sohne-light-italic.woff2") format("woff2");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Sohne";
+  src: url("/fonts/sohne/Sohne/sohne-book.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Sohne";
+  src: url("/fonts/sohne/Sohne/sohne-book-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Sohne";
+  src: url("/fonts/sohne/Sohne/sohne-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ----- SÃ¶hne Breit (wordmark / wide caps) --------------------------------- */
+@font-face {
+  font-family: "Sohne Breit";
+  src: url("/fonts/sohne/Sohne Breit/sohne-breit-buch.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Sohne Breit";
+  src: url("/fonts/sohne/Sohne Breit/sohne-breit-halbfett.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Sohne Breit";
+  src: url("/fonts/sohne/Sohne Breit/sohne-breit-fett.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ----- SÃ¶hne Mono (meta / eyebrow / code) --------------------------------- */
+@font-face {
+  font-family: "Sohne Mono";
+  src: url("/fonts/sohne/Sohne Mono/sohne-mono-buch.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Sohne Mono";
+  src: url("/fonts/sohne/Sohne Mono/sohne-mono-kraftig.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ----- Tiempos Headline (display / H1 / H2) ------------------------------- */
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("/fonts/tiempos/Tiempos Headline/Tiempos-Headline-Regular-Desktop.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("/fonts/tiempos/Tiempos Headline/Tiempos-Headline-Medium-Desktop.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("/fonts/tiempos/Tiempos Headline/Tiempos-Headline-Semibold-Desktop.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Tiempos Headline";
+  src: url("/fonts/tiempos/Tiempos Headline/Tiempos-Headline-SemiboldItalic-Desktop.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ----- Tiempos Text (lead / article body / pull quotes) ------------------- */
+@font-face {
+  font-family: "Tiempos Text";
+  src: url("/fonts/tiempos/Tiempos Text/Tiempos-Text-Regular-Web.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Tiempos Text";
+  src: url("/fonts/tiempos/Tiempos Text/Tiempos-Text-RegularItalic-Web.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Tiempos Text";
+  src: url("/fonts/tiempos/Tiempos Text/Tiempos-Text-Medium-Web.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Tiempos Text";
+  src: url("/fonts/tiempos/Tiempos Text/Tiempos-Text-Semibold-Web.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
