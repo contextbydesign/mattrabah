@@ -16,14 +16,13 @@ const featureRows = [
   {
     label: "Contextual alternates off",
     description: "Disables contextual substitution and localized forms.",
-    style:
-      "font-feature-settings:'calt' 0,'locl' 0,'aalt' 0;",
+    style: "font-feature-settings:'calt' 0,'locl' 0,'aalt' 0;",
   },
   {
     label: "Alternates forced",
-    description: "Forces alternates/localized forms where the font supports them.",
-    style:
-      "font-feature-settings:'aalt' 1,'locl' 1,'calt' 1;",
+    description:
+      "Forces alternates/localized forms where the font supports them.",
+    style: "font-feature-settings:'aalt' 1,'locl' 1,'calt' 1;",
   },
 ];
 
@@ -54,8 +53,7 @@ const typeScale = [
   {
     label: "Lead",
     className: "lead",
-    text:
-      "I work on customer lifecycle systems, CRM discipline, implementation handoffs, and practical AI workflows for complex customer-facing teams.",
+    text: "I work on customer lifecycle systems, CRM discipline, implementation handoffs, and practical AI workflows for complex customer-facing teams.",
   },
   {
     label: "Section title",
@@ -65,8 +63,7 @@ const typeScale = [
   {
     label: "Body",
     className: "about-prose",
-    text:
-      "The industries are different. The operating problems are not. Healthcare accounts need trust, adoption, and implementation discipline. Brand-side retail needs account visibility, high-touch service, and follow-through at scale.",
+    text: "The industries are different. The operating problems are not. Healthcare accounts need trust, adoption, and implementation discipline. Brand-side retail needs account visibility, high-touch service, and follow-through at scale.",
   },
   {
     label: "Meta",
@@ -81,7 +78,10 @@ const typeScale = [
 ];
 ---
 
-<BaseLayout title="Font Test" description="Full typography QA page for site font rendering.">
+<BaseLayout
+  title="Font Test"
+  description="Full typography QA page for site font rendering."
+>
   <section class="hero container">
     <p class="kicker">Type QA</p>
 
@@ -90,9 +90,9 @@ const typeScale = [
     </h1>
 
     <p class="lead">
-      This page checks the active site typography across display copy, body copy,
-      ligatures, numerals, punctuation, OpenType feature settings, and the exact
-      language used throughout the portfolio.
+      This page checks the active site typography across display copy, body
+      copy, ligatures, numerals, punctuation, OpenType feature settings, and the
+      exact language used throughout the portfolio.
     </p>
   </section>
 
@@ -131,7 +131,9 @@ const typeScale = [
 
   <section class="section container" aria-labelledby="glyph-check">
     <header class="section-head">
-      <h2 class="section-title" id="glyph-check">Glyph, numeral, and punctuation check</h2>
+      <h2 class="section-title" id="glyph-check">
+        Glyph, numeral, and punctuation check
+      </h2>
     </header>
 
     <div class="fonttest-stack">
@@ -147,7 +149,9 @@ const typeScale = [
 
   <section class="section container" aria-labelledby="feature-check">
     <header class="section-head">
-      <h2 class="section-title" id="feature-check">OpenType feature comparison</h2>
+      <h2 class="section-title" id="feature-check">
+        OpenType feature comparison
+      </h2>
     </header>
 
     <div class="fonttest-grid">
@@ -159,7 +163,8 @@ const typeScale = [
               i j l I 1 | fi fl ffi ffl
             </p>
             <p class="fonttest-sample" style={row.style}>
-              Customer lifecycle systems, strengthened by practical AI workflows.
+              Customer lifecycle systems, strengthened by practical AI
+              workflows.
             </p>
             <p class="fonttest-note">{row.description}</p>
           </article>
@@ -204,8 +209,8 @@ const typeScale = [
     <div class="fonttest-card">
       <ul class="fonttest-list">
         <li>
-          The lowercase <strong>i</strong> should not look distracting in body
-          copy or oversized display settings.
+          The lowercase <strong>i</strong> should not look distracting in body copy
+          or oversized display settings.
         </li>
         <li>
           Ligatures like <strong>fi</strong>, <strong>fl</strong>, and
@@ -220,9 +225,7 @@ const typeScale = [
           Display copy should feel intentional without making the writing look
           like a brand slogan generator wrote it.
         </li>
-        <li>
-          Body copy should remain readable in both light and dark mode.
-        </li>
+        <li>Body copy should remain readable in both light and dark mode.</li>
       </ul>
     </div>
   </section>

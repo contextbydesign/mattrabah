@@ -31,16 +31,14 @@ const contactLinks = [
   description="Contact Matt Rabah for customer lifecycle systems, customer success, implementation, CRM discipline, and practical AI workflow work."
 >
   <section class="hero container">
-  <p class="kicker">Contact</p>
+    <p class="kicker">Contact</p>
 
-  <h1 class="display">
-    Start the conversation.
-  </h1>
+    <h1 class="display">Start the conversation.</h1>
 
-  <p class="lead">
-    Tell me where the customer lifecycle is breaking. I’ll respond with a clear
-    next step.
-  </p>
+    <p class="lead">
+      Tell me where the customer lifecycle is breaking. I’ll respond with a
+      clear next step.
+    </p>
   </section>
 
   <section class="section container" aria-labelledby="contact-options">
@@ -60,99 +58,93 @@ const contactLinks = [
               aria-label={`${item.label}: ${item.value}`}
             >
               <span class="contact-icon" aria-hidden="true">
-                {
-                  item.icon === "email" && (
-                    <svg viewBox="0 0 24 24" role="img">
-                      <path
-                        d="M4.75 6.75h14.5v10.5H4.75V6.75Z"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.9"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="m5.25 7.25 6.75 5 6.75-5"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.9"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  )
-                }
+                {item.icon === "email" && (
+                  <svg viewBox="0 0 24 24" role="img">
+                    <path
+                      d="M4.75 6.75h14.5v10.5H4.75V6.75Z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.9"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="m5.25 7.25 6.75 5 6.75-5"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.9"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                )}
 
-                {
-                  item.icon === "linkedin" && (
-                    <svg viewBox="0 0 24 24" role="img">
-                      <path
-                        d="M6.7 9.4v8.15"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.25"
-                        stroke-linecap="round"
-                      />
-                      <path
-                        d="M6.7 6.75h.02"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="3"
-                        stroke-linecap="round"
-                      />
-                      <path
-                        d="M11 17.55v-8.1"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.25"
-                        stroke-linecap="round"
-                      />
-                      <path
-                        d="M11 12.35c.45-1.85 1.65-3.05 3.35-3.05 2.05 0 3.15 1.35 3.15 3.75v4.5"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.25"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <rect
-                        x="3.75"
-                        y="3.75"
-                        width="16.5"
-                        height="16.5"
-                        rx="3.25"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                      />
-                    </svg>
-                  )
-                }
+                {item.icon === "linkedin" && (
+                  <svg viewBox="0 0 24 24" role="img">
+                    <path
+                      d="M6.7 9.4v8.15"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.25"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M6.7 6.75h.02"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M11 17.55v-8.1"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.25"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M11 12.35c.45-1.85 1.65-3.05 3.35-3.05 2.05 0 3.15 1.35 3.15 3.75v4.5"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.25"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <rect
+                      x="3.75"
+                      y="3.75"
+                      width="16.5"
+                      height="16.5"
+                      rx="3.25"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                    />
+                  </svg>
+                )}
 
-                {
-                  item.icon === "instagram" && (
-                    <svg viewBox="0 0 24 24" role="img">
-                      <rect
-                        x="4.25"
-                        y="4.25"
-                        width="15.5"
-                        height="15.5"
-                        rx="4.4"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.9"
-                      />
-                      <circle
-                        cx="12"
-                        cy="12"
-                        r="3.45"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.9"
-                      />
-                      <circle cx="16.55" cy="7.55" r="1.05" fill="currentColor" />
-                    </svg>
-                  )
-                }
+                {item.icon === "instagram" && (
+                  <svg viewBox="0 0 24 24" role="img">
+                    <rect
+                      x="4.25"
+                      y="4.25"
+                      width="15.5"
+                      height="15.5"
+                      rx="4.4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.9"
+                    />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="3.45"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.9"
+                    />
+                    <circle cx="16.55" cy="7.55" r="1.05" fill="currentColor" />
+                  </svg>
+                )}
               </span>
 
               <span class="contact-copy">

@@ -56,16 +56,14 @@ const tools = [
   description="Practical AI tools from Matt Rabah for CX, customer success, implementation, account health, CRM discipline, and customer lifecycle teams."
 >
   <section class="hero container">
-  <p class="kicker">AI tools</p>
+    <p class="kicker">AI tools</p>
 
-  <h1 class="display">
-    Tools for the handoff gaps.
-  </h1>
+    <h1 class="display">Tools for the handoff gaps.</h1>
 
-  <p class="lead">
-    Practical prototypes for customer-facing teams: handoff risk, customer
-    health, renewal readiness, and account prep.
-  </p>
+    <p class="lead">
+      Practical prototypes for customer-facing teams: handoff risk, customer
+      health, renewal readiness, and account prep.
+    </p>
   </section>
 
   <section class="section container" aria-labelledby="tool-list">
@@ -83,13 +81,11 @@ const tools = [
               <p class="work-summary">{tool.summary}</p>
 
               <ul class="capabilities-tags" aria-label={`${tool.title} inputs`}>
-                {
-                  tool.inputs.map((input) => (
-                    <li>
-                      <Tag label={input} variant="muted" size="sm" />
-                    </li>
-                  ))
-                }
+                {tool.inputs.map((input) => (
+                  <li>
+                    <Tag label={input} variant="muted" size="sm" />
+                  </li>
+                ))}
               </ul>
             </a>
           </li>

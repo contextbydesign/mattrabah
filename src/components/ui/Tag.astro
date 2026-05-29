@@ -16,7 +16,9 @@ const hasIconSlot = Astro.slots.has("icon");
 <span class={classes.join(" ")}>
   {
     hasIconSlot ? (
-      <span class="tag-icon" aria-hidden="true"><slot name="icon" /></span>
+      <span class="tag-icon" aria-hidden="true">
+        <slot name="icon" />
+      </span>
     ) : icon === "check" ? (
       <span class="tag-icon" aria-hidden="true">
         <svg viewBox="0 0 16 16" role="img" focusable="false">

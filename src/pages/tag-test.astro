@@ -10,9 +10,15 @@ const tagExamples = [
   { label: "Small", props: { size: "sm" as const } },
   { label: "Medium", props: { size: "md" as const } },
   { label: "Large", props: { size: "lg" as const } },
-  { label: "Check", props: { variant: "accent" as const, icon: "check" as const } },
+  {
+    label: "Check",
+    props: { variant: "accent" as const, icon: "check" as const },
+  },
   { label: "Dot", props: { variant: "muted" as const, icon: "dot" as const } },
-  { label: "Spark", props: { variant: "accent" as const, icon: "spark" as const } },
+  {
+    label: "Spark",
+    props: { variant: "accent" as const, icon: "spark" as const },
+  },
 ];
 ---
 
@@ -24,7 +30,8 @@ const tagExamples = [
     <p class="kicker">Visual Test</p>
     <h1 class="display">Tag variants across light and dark theme samples.</h1>
     <p class="lead">
-      Use this page to compare chip spacing, contrast, and icon treatment in both theme contexts.
+      Use this page to compare chip spacing, contrast, and icon treatment in
+      both theme contexts.
     </p>
   </section>
 
