@@ -138,13 +138,20 @@ const year = new Date().getFullYear();
       <slot />
     </main>
 
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <p class="footer-text">© {year} {SITE_NAME} — Detroit, MI</p>
+    <footer class="site-footer site-footer--large">
+      <div class="container footer-grid">
+        <div class="footer-brand-block">
+          <a href="/" class="footer-logo" aria-label={`${SITE_NAME}, home`}>
+            Matt Rabah
+          </a>
 
-        <ul class="footer-links">
-          <li><a href="mailto:hello@mattrabah.com">Email</a></li>
-          <li>
+          <p class="footer-region">
+            CX, customer success, and implementation systems.<br />
+            Detroit, MI · Open to new roles.
+          </p>
+
+          <div class="footer-socials">
+            <a href="mailto:rabah.matthew@gmail.com">Email</a>
             <a
               href="https://www.linkedin.com/in/mattrabah/"
               rel="me noopener"
@@ -152,9 +159,47 @@ const year = new Date().getFullYear();
             >
               LinkedIn
             </a>
-          </li>
-          <li><a href="/blog">Writing</a></li>
-        </ul>
+          </div>
+        </div>
+
+        <nav class="footer-column" aria-label="Site">
+          <p class="footer-column-title">Site</p>
+          <ul>
+            <li><a href="/work">Work</a></li>
+            <li><a href="/tools">AI Tools</a></li>
+            <li><a href="/blog">Blog</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer-column" aria-label="More">
+          <p class="footer-column-title">More</p>
+          <ul>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer-column" aria-label="Elsewhere">
+          <p class="footer-column-title">Elsewhere</p>
+          <ul>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/mattrabah/"
+                rel="me noopener"
+                target="_blank"
+              >
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a href="mailto:rabah.matthew@gmail.com">Email</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="container footer-baseline">
+        <p class="footer-text">© {year} {SITE_NAME} — Detroit, MI</p>
       </div>
     </footer>
 
