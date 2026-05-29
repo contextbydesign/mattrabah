@@ -10,46 +10,85 @@ const { frontmatter } = Astro.props;
 
 const title = frontmatter.title ?? "Blog post";
 const description = frontmatter.description ?? "";
-const eyebrow = frontmatter.eyebrow ?? "Article";
-const readingTime = frontmatter.readingTime ?? "2 min read";
-const toc = frontmatter.toc ?? [];
+const date = frontmatter.date ?? "";
+const category = frontmatter.category ?? "Article";
+const readingTime = frontmatter.readingTime ?? "4 min read";
+const toc: TocItem[] = frontmatter.toc ?? [];
 ---
 
 <BaseLayout title={title} description={description}>
-  <article class="article-shell">
-    <div class="container article-grid">
-      <header class="article-header">
-        <p class="article-eyebrow">{eyebrow}</p>
-        <h1 class="article-title">{title}</h1>
+  <article class="blog-article">
+    <div class="container blog-article-grid">
+      <main class="blog-article-main">
+        <details class="blog-metabar">
+          <summary>In this article</summary>
 
-        {description && <p class="article-dek">{description}</p>}
-      </header>
+          <nav aria-label="In this article">
+            <ul>
+              {toc.map((item) => (
+                <li><a href={item.href}>{item.label}</a></li>
+              ))}
+            </ul>
+          </nav>
+        </details>
 
-      <div class="article-content">
-        <slot />
-      </div>
+        <header class="blog-article-header">
+          <p class="blog-article-meta">
+            <span>{category}</span>
+            {date && <span>{date}</span>}
+            <span>{readingTime}</span>
+          </p>
 
-      <aside class="article-sidebar" aria-label="Article navigation">
-        <div class="article-sidebar-card">
-          <p class="article-sidebar-title">In this article</p>
+          <h1 class="blog-article-title">{title}</h1>
 
-          {toc.length > 0 && (
-            <nav class="article-toc" aria-label="In this article">
-              <ul>
-                {
-                  toc.map((item: TocItem) => (
-                    <li>
-                      <a href={item.href}>{item.label}</a>
-                    </li>
-                  ))
-                }
-              </ul>
-            </nav>
-          )}
+          {description && <p class="blog-article-dek">{description}</p>}
+        </header>
 
-          <p class="article-reading-time">{readingTime}</p>
+        <div class="blog-article-body">
+          <slot />
         </div>
+      </main>
+
+      <aside class="blog-sidebar" aria-label="Article navigation">
+        <p class="blog-sidebar-title">In this article</p>
+        <p class="blog-reading-time">{readingTime}</p>
+
+        {toc.length > 0 && (
+          <nav class="blog-toc" aria-label="In this article">
+            <ul>
+              {toc.map((item) => (
+                <li><a href={item.href}>{item.label}</a></li>
+              ))}
+            </ul>
+          </nav>
+        )}
       </aside>
     </div>
   </article>
+
+  <script is:inline>
+    const links = Array.from(document.querySelectorAll(".blog-toc a"));
+    const sections = links
+      .map((link) => document.querySelector(link.getAttribute("href")))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          links.forEach((link) => link.classList.remove("is-active"));
+
+          const active = document.querySelector(
+            `.blog-toc a[href="#${entry.target.id}"]`
+          );
+
+          active?.classList.add("is-active");
+        });
+      },
+      { rootMargin: "0px 0px -78% 0px" }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  </script>
 </BaseLayout>

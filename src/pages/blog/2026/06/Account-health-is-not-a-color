@@ -1,0 +1,57 @@
+---
+layout: ../../layouts/BlogPostLayout.astro
+title: "Account health is not a color"
+description: "A health score only matters if it explains what changed, why it matters, and what the team should do next."
+date: "May 2026"
+category: "Operating Systems"
+readingTime: "5 min read"
+toc:
+  - label: "The problem with status"
+    href: "#the-problem-with-status"
+  - label: "Health needs evidence"
+    href: "#health-needs-evidence"
+  - label: "The next-action layer"
+    href: "#the-next-action-layer"
+  - label: "A better model"
+    href: "#a-better-model"
+---
+
+## The problem with status
+
+Red, yellow, and green are useful only when everyone understands the evidence behind them.
+
+Too often, account health becomes a label instead of a decision tool. The team sees a yellow account and still has to ask the real questions: why is it yellow, what changed, who owns it, and what would move it back to green?
+
+If the color creates more questions than action, it is not a health model. It is a decoration.
+
+## Health needs evidence
+
+A better account health system starts with evidence.
+
+That evidence can include onboarding progress, product usage, stakeholder engagement, support friction, renewal timing, commercial risk, or unresolved implementation blockers. The exact inputs depend on the business. The important part is that each signal has a reason for existing.
+
+A good signal says something specific. A weak signal only fills a field.
+
+## The next-action layer
+
+Health data becomes useful when it is connected to a next action.
+
+If usage drops, who investigates? If an executive sponsor disappears, who rebuilds the relationship? If onboarding stalls, who removes the blocker? If support volume rises, who decides whether the problem is training, fit, product friction, or expectation mismatch?
+
+Without that layer, the team is still operating from memory.
+
+<blockquote>
+  <p>The value of account health is not the score. It is the conversation the score forces earlier.</p>
+</blockquote>
+
+## A better model
+
+A better model has three parts:
+
+1. The signal
+2. The evidence
+3. The next action
+
+The signal tells the team something changed. The evidence explains why it matters. The next action turns awareness into ownership.
+
+That is the practical line between reporting and customer success operations.

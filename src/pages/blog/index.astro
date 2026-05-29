@@ -1,145 +1,64 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Lozenge from "../../components/lozenge.astro";
 
 const posts = [
   {
-    meta: "AI in CX",
-    read: "5 min",
-    title: "AI in CX fails when it starts with tools instead of workflows.",
-    dek: "Most teams don't need another demo. They need a clear view of the customer-facing work that's slow, repetitive, risky, or easy to drop — and then AI in exactly those spots.",
+    href: "/blog/customer-handoffs",
+    date: "May 2026",
+    category: "Customer Success",
+    title: "Customer handoffs fail before anyone notices",
+    description:
+      "A practical note on why lifecycle ownership breaks, what to document, and how to make the next action visible before the account stalls.",
   },
   {
-    meta: "Implementation",
-    read: "6 min",
-    title: "The sales-to-implementation handoff is a risk control.",
-    dek: "A closed deal can still become a delivery problem. The handoff is where context, constraints, and ownership either line up — or start quietly leaking trust.",
-  },
-  {
-    meta: "Customer success",
-    read: "4 min",
-    title: "Health scores fail when no one owns the next action.",
-    dek: "A score is only useful if it changes what someone does. Otherwise it's just a cleaner way to watch risk show up late.",
-  },
-  {
-    meta: "Change management",
-    read: "7 min",
-    title: "AI adoption is a change problem before it's a tooling problem.",
-    dek: "The hard part is rarely access. It's workflow fit, trust, and knowing when to reach for the tool — and when not to.",
+    href: "/blog/account-health",
+    date: "May 2026",
+    category: "Operating Systems",
+    title: "Account health is not a color",
+    description:
+      "Red, yellow, and green only help when the team knows what changed, who owns the next move, and what evidence would change the status.",
   },
 ];
 ---
 
 <BaseLayout
   title="Writing"
-  description="Writing from Matt Rabah on AI in CX, implementation, customer health, lifecycle operations, and customer success."
+  description="Notes on customer success, implementation, AI workflows, and the operating details that decide whether customers stay."
 >
-  <section class="hero">
+  <section class="blog-index">
     <div class="container">
-      <p class="eyebrow reveal reveal-1">Writing</p>
-      <h1 class="display reveal reveal-2">Notes on better customer systems.</h1>
-      <p
-        class="lead reveal reveal-3"
-        style="max-width:48ch; margin-top:var(--space-6)"
-      >
-        Short, practical essays on customer success, implementation, AI
-        workflows, and the operating details that quietly decide whether
-        customers stay.
-      </p>
-    </div>
-  </section>
+      <header class="blog-index-hero">
+        <p class="eyebrow">Writing</p>
+        <h1 class="h1">Notes on customer systems.</h1>
+        <p class="lead">
+          Short essays on customer success, implementation, AI workflows, and
+          the operating details that decide whether customers stay.
+        </p>
+      </header>
 
-  <section class="section">
-    <div class="container">
-      <ul class="post-list">
+      <div class="blog-list" aria-label="Blog posts">
         {
-          posts.map((p, i) => (
-            <li>
-              <a href="/blog" class="post">
-                <span class="meta post-idx">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span class="post-main">
-                  <span class="post-meta">
-                    <span class="meta" style="color:var(--color-text-accent)">
-                      {p.meta}
-                    </span>
-                    <Lozenge label="Draft" status="draft" />
-                    <span class="meta">{p.read}</span>
-                  </span>
-                  <span class="h3 post-title">{p.title}</span>
-                  <span class="body post-dek">{p.dek}</span>
-                </span>
-                <span class="post-arrow" aria-hidden="true">
+          posts.map((post) => (
+            <article class="blog-list-item">
+              <a class="blog-list-link" href={post.href}>
+                <p class="blog-list-date">
+                  {post.category}
+                  <br />
+                  {post.date}
+                </p>
+
+                <h2 class="blog-list-title">{post.title}</h2>
+
+                <p class="blog-list-dek">{post.description}</p>
+
+                <span class="blog-list-arrow" aria-hidden="true">
                   →
                 </span>
               </a>
-            </li>
+            </article>
           ))
         }
-      </ul>
+      </div>
     </div>
   </section>
-
-  <style>
-    .hero {
-      padding-block: clamp(var(--space-9), 14vw, 9rem) var(--space-8);
-    }
-    .post-list {
-      display: grid;
-    }
-    .post {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: var(--space-5);
-      align-items: start;
-      padding: var(--space-6) 0;
-      border-top: 1px solid var(--color-border);
-      color: inherit;
-      text-decoration: none;
-      transition: padding var(--dur-2) var(--ease);
-    }
-    .post-list li:last-child .post {
-      border-bottom: 1px solid var(--color-border);
-    }
-    .post:hover {
-      padding-inline: var(--space-3);
-    }
-    .post-idx {
-      color: var(--color-text-faint);
-      padding-top: 0.4rem;
-    }
-    .post-main {
-      display: grid;
-      gap: var(--space-3);
-    }
-    .post-meta {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-      flex-wrap: wrap;
-    }
-    .post-title {
-      color: var(--color-text);
-      max-width: 30ch;
-      transition: color var(--dur-1) var(--ease);
-    }
-    .post:hover .post-title {
-      color: var(--color-text-accent);
-    }
-    .post-dek {
-      max-width: 60ch;
-    }
-    .post-arrow {
-      color: var(--color-text-faint);
-      padding-top: 0.4rem;
-      transition:
-        transform var(--dur-1) var(--ease),
-        color var(--dur-1) var(--ease);
-    }
-    .post:hover .post-arrow {
-      color: var(--color-text-accent);
-      transform: translateX(4px);
-    }
-  </style>
 </BaseLayout>
