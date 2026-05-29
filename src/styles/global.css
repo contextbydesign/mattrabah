@@ -29,22 +29,19 @@
   --c-accent-edge: rgba(253, 36, 62, 0.3);
 
   /* Fonts */
-  --font-headline:
-    "tiempos-headline", "Tiempos Headline", Georgia, serif;
+  --font-headline: "tiempos-headline", "Tiempos Headline", Georgia, serif;
 
-  --font-text:
-    "tiempos-text", "Tiempos Text", Georgia, serif;
+  --font-text: "tiempos-text", "Tiempos Text", Georgia, serif;
 
   --font-sans:
     "sohne", "Söhne", "tt-commons-pro", "Inter", "Helvetica Neue", Arial,
     system-ui, sans-serif;
 
-  --font-breit:
-    "sohne-breit", "Söhne Breit", var(--font-sans);
+  --font-breit: "sohne-breit", "Söhne Breit", var(--font-sans);
 
   --font-mono:
-    "sohne-mono", "Söhne Mono", "JetBrains Mono", "IBM Plex Mono",
-    ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    "sohne-mono", "Söhne Mono", "JetBrains Mono", "IBM Plex Mono", ui-monospace,
+    SFMono-Regular, Menlo, Consolas, monospace;
 
   --ff-sans: var(--font-sans);
   --ff-serif: var(--font-headline);
@@ -1648,6 +1645,43 @@ main {
   .footer-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ==========================================================================
+   Full-bleed section backgrounds
+   Keeps content constrained while backgrounds reach the viewport edges
+   ========================================================================== */
+
+.hero,
+.section,
+.article-shell {
+  box-shadow: 0 0 0 100vmax var(--section-bg, transparent);
+  clip-path: inset(0 -100vmax);
+}
+
+.hero {
+  --section-bg: var(--c-cream);
+  background: var(--section-bg);
+}
+
+.section {
+  --section-bg: var(--c-paper);
+  background: var(--section-bg);
+}
+
+.section:nth-of-type(even) {
+  --section-bg: var(--c-cream);
+  background: var(--section-bg);
+}
+
+.section--dark {
+  --section-bg: var(--c-moss);
+  background: var(--section-bg);
+}
+
+.article-shell {
+  --section-bg: var(--c-paper);
+  background: var(--section-bg);
 }
 
 /* ==========================================================================

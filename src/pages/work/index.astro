@@ -86,16 +86,13 @@ const operatingPrinciples = [
   description="Selected work from Matt Rabah across customer success, implementation, customer lifecycle systems, CRM discipline, healthtech, retail, consulting, and practical AI workflows."
 >
   <section class="hero container">
-    <p class="kicker">Work</p>
+    <p class="kicker">Portfolio</p>
 
-    <h1 class="display">
-      Customer work breaks when the system behind it is unclear.
-    </h1>
+    <h1 class="display">Proof across messy customer systems.</h1>
 
     <p class="lead">
-      My work sits between customer experience, customer success, implementation,
-      CRM operations, and practical AI workflows. The common thread is simple:
-      make the customer lifecycle easier to see, own, and improve.
+      Case studies from healthtech, retail, and consulting where onboarding,
+      adoption, retention, and account visibility had to work in practice.
     </p>
   </section>
 
@@ -114,14 +111,15 @@ const operatingPrinciples = [
               <p class="meta">{entry.subtitle}</p>
               <p class="work-summary">{entry.summary}</p>
 
-              <ul class="capabilities-tags" aria-label={`${entry.title} work areas`}>
-                {
-                  entry.details.map((detail) => (
-                    <li>
-                      <Tag label={detail} variant="muted" size="sm" />
-                    </li>
-                  ))
-                }
+              <ul
+                class="capabilities-tags"
+                aria-label={`${entry.title} work areas`}
+              >
+                {entry.details.map((detail) => (
+                  <li>
+                    <Tag label={detail} variant="muted" size="sm" />
+                  </li>
+                ))}
               </ul>
             </article>
           </li>
@@ -184,8 +182,8 @@ const operatingPrinciples = [
       The work spans different industries, but the operating problems rhyme.
       Healthcare accounts need trust, adoption, and implementation discipline.
       Brand-side retail needs account visibility, high-touch service, and
-      follow-through at scale. Consulting work needs a clear way to turn customer
-      journey language into decisions a team can actually run.
+      follow-through at scale. Consulting work needs a clear way to turn
+      customer journey language into decisions a team can actually run.
     </p>
 
     <p class="about-prose">
