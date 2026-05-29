@@ -67,7 +67,15 @@ const nav = [
           <span class="wordmark-name">MR</span>
           <span class="wordmark-full">
             <span class="wordmark-line1">Matt Rabah</span>
-            <span class="wordmark-line2">CX · Customer Success</span>
+            <span class="brand-signal" aria-hidden="true">
+              <span>CX</span>
+              <span>AI</span>
+              <span>CS</span>
+              <span>CRM</span>
+              <span>OPS</span>
+              <span>GTM</span>
+              <span>VOC</span>
+            </span>
           </span>
         </a>
 
@@ -211,13 +219,86 @@ const nav = [
         font-size: 0.95rem;
         letter-spacing: 0.01em;
       }
-      .wordmark-line2 {
+
+      /* Animated discipline signal — a small clay pill that rotates through
+         the disciplines. Count-agnostic: add/remove <span>s freely. */
+      .brand-signal {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+        height: 1.05rem;
+        margin-top: 3px;
+        overflow: hidden;
+        border-radius: var(--radius-pill);
+        background: var(--color-accent-bg);
+        border: 1px solid var(--color-border-accent);
+      }
+      .brand-signal span {
+        position: absolute;
+        inset: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         font-family: var(--font-mono);
-        font-size: 0.625rem;
-        letter-spacing: 0.14em;
+        font-size: 0.5625rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: var(--color-text-subtlest);
-        margin-top: 2px;
+        color: var(--color-text-accent);
+        opacity: 0;
+        transform: translateY(90%);
+        animation: brand-signal 14s infinite;
+      }
+      /* 7 items → each occupies 1/7 of the cycle. Delays are evenly spaced;
+         keeping them explicit is clearer than calc and easy to extend. */
+      .brand-signal span:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .brand-signal span:nth-child(2) {
+        animation-delay: 2s;
+      }
+      .brand-signal span:nth-child(3) {
+        animation-delay: 4s;
+      }
+      .brand-signal span:nth-child(4) {
+        animation-delay: 6s;
+      }
+      .brand-signal span:nth-child(5) {
+        animation-delay: 8s;
+      }
+      .brand-signal span:nth-child(6) {
+        animation-delay: 10s;
+      }
+      .brand-signal span:nth-child(7) {
+        animation-delay: 12s;
+      }
+      @keyframes brand-signal {
+        0% {
+          opacity: 0;
+          transform: translateY(90%);
+        }
+        4%,
+        11% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        15%,
+        100% {
+          opacity: 0;
+          transform: translateY(-90%);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .brand-signal span {
+          animation: none;
+          opacity: 0;
+          transform: none;
+        }
+        .brand-signal span:first-child {
+          opacity: 1;
+        }
       }
       .nav {
         display: flex;
@@ -311,8 +392,8 @@ const nav = [
         .masthead-actions {
           margin-inline-start: auto;
         }
-        .wordmark-line2 {
-          display: none;
+        .brand-signal {
+          width: 2.6rem;
         }
       }
 
