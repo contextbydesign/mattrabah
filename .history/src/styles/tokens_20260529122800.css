@@ -1,0 +1,255 @@
+/* ==========================================================================
+   tokens.css — Matt Rabah portfolio
+
+   Direction:
+   Cool, restrained, near-monochrome, refined professional system.
+
+   Notes:
+   - Tokens should not force composition.
+   - Layout behavior belongs in base.css/page CSS.
+   - Keep containers controlled so no-image sections do not become tiny islands
+     or over-wide empty fields.
+   ========================================================================== */
+
+@import "./fonts.css";
+
+:root {
+  /* ====================================================================== */
+  /* RAW PALETTE — COOL MONOCHROME                                          */
+  /* ====================================================================== */
+
+  --ice-0: #f7f9fa;
+  --ice-1: #eef2f4;
+  --ice-2: #e3e9ed;
+  --white: #ffffff;
+
+  --graphite-950: #0f1214;
+  --graphite-900: #14181b;
+  --graphite-800: #1b2024;
+  --graphite-700: #2b3338;
+  --graphite-600: #434d54;
+  --graphite-500: #68727a;
+  --graphite-400: #7d8790;
+  --graphite-300: #aeb7bd;
+  --graphite-200: #c9d0d5;
+
+  --rule: rgba(15, 18, 20, 0.09);
+  --rule-2: rgba(15, 18, 20, 0.18);
+  --rule-3: rgba(15, 18, 20, 0.28);
+
+  --signal-500: #d52236;
+  --signal-600: #b7192c;
+  --signal-700: #941325;
+  --signal-soft: rgba(213, 34, 54, 0.075);
+  --signal-rule: rgba(213, 34, 54, 0.24);
+
+  /* ====================================================================== */
+  /* SEMANTIC — LIGHT                                                       */
+  /* ====================================================================== */
+
+  --color-surface: var(--ice-0);
+  --color-surface-sunken: var(--ice-1);
+  --color-surface-raised: var(--white);
+  --color-surface-hover: #f0f4f6;
+  --color-surface-strong: var(--ice-2);
+
+  --color-text: var(--graphite-950);
+  --color-text-subtle: rgba(15, 18, 20, 0.84);
+  --color-text-subtlest: var(--graphite-500);
+  --color-text-faint: rgba(15, 18, 20, 0.58);
+  --color-text-disabled: rgba(15, 18, 20, 0.36);
+  --color-text-inverse: var(--ice-0);
+  --color-text-accent: var(--signal-600);
+
+  --color-link: var(--graphite-950);
+  --color-link-hover: var(--signal-600);
+
+  --color-border: var(--rule);
+  --color-border-strong: var(--rule-2);
+  --color-border-heavy: var(--rule-3);
+  --color-border-accent: var(--signal-rule);
+
+  --color-focus: var(--signal-500);
+
+  --color-footer-bg: #0f1214;
+  --color-footer-text: #f7f9fa;
+  --color-footer-text-subtle: rgba(247, 249, 250, 0.8);
+  --color-footer-text-muted: rgba(247, 249, 250, 0.56);
+  --color-footer-border: rgba(247, 249, 250, 0.14);
+
+  --color-accent: var(--signal-500);
+  --color-accent-hover: var(--signal-600);
+  --color-accent-bg: var(--signal-soft);
+  --color-on-accent: #f9fbfb;
+
+  --status-live-bg: #e7eee9;
+  --status-live-text: #365944;
+
+  --status-prog-bg: #eef2f4;
+  --status-prog-text: #38434a;
+
+  --status-plan-bg: #e9edf2;
+  --status-plan-text: #404b5a;
+
+  --status-draft-bg: #eceff1;
+  --status-draft-text: var(--graphite-500);
+
+  --shadow-card: 0 1px 2px rgba(15, 18, 20, 0.035);
+  --shadow-lift: 0 2px 10px rgba(15, 18, 20, 0.055);
+
+  /* ====================================================================== */
+  /* TYPE                                                                   */
+  /* ====================================================================== */
+
+  --font-display: "Tiempos Headline", Georgia, "Times New Roman", serif;
+  --font-serif: "Tiempos Text", Georgia, serif;
+  --font-sans: "Sohne", "Inter", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-wide: "Sohne Breit", var(--font-sans);
+  --font-mono: "Sohne Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+
+  --fs-display: clamp(2.8rem, 1.5rem + 5.5vw, 5.6rem);
+  --fs-statement: clamp(2.2rem, 1.4rem + 3.8vw, 4.4rem);
+
+  --fs-h1: clamp(2.25rem, 1.55rem + 2.8vw, 3.4rem);
+  --fs-h2: clamp(1.75rem, 1.35rem + 1.5vw, 2.35rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --fs-h4: clamp(1.05rem, 1rem + 0.2vw, 1.18rem);
+  --fs-lead: clamp(1.08rem, 1rem + 0.38vw, 1.28rem);
+
+  --fs-body: 1.0625rem;
+  --fs-body-sm: 0.98rem;
+  --fs-meta: 0.85rem;
+  --fs-mono: 0.9rem;
+
+  --fs-blog-title: clamp(2.35rem, 1.45rem + 4.2vw, 4.6rem);
+  --fs-blog-h2: clamp(1.75rem, 1.25rem + 2vw, 2.8rem);
+  --fs-blog-h3: clamp(1.35rem, 1.1rem + 0.9vw, 1.9rem);
+  --fs-blog-body: clamp(1.075rem, 1.02rem + 0.22vw, 1.18rem);
+
+  --lh-display: 0.98;
+  --lh-statement: 1;
+  --lh-head: 1.08;
+  --lh-lead: 1.6;
+  --lh-body: 1.72;
+  --lh-blog: 1.72;
+  --lh-ui: 1.35;
+  --lh-tight: 1.08;
+
+  --tr-display: -0.025em;
+  --tr-head: -0.014em;
+  --tr-wide: -0.04em;
+  --tr-eyebrow: 0.14em;
+
+  --w-reg: 400;
+  --w-med: 500;
+  --w-semi: 600;
+  --w-bold: 700;
+
+  /* ====================================================================== */
+  /* SPACE                                                                  */
+  /* ====================================================================== */
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --space-11: 9.375rem;
+  --space-12: 11rem;
+
+  --section-gap-sm: clamp(3rem, 5vw, 5rem);
+  --section-gap-md: clamp(4rem, 7vw, 7.5rem);
+  --section-gap-lg: clamp(5rem, 10vw, 9.375rem);
+  --row-gap: clamp(2rem, 4vw, 4.375rem);
+
+  /* ====================================================================== */
+  /* SHAPE / MOTION / LAYOUT                                                */
+  /* ====================================================================== */
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-focus);
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-1: 150ms;
+  --dur-2: 320ms;
+  --dur-3: 680ms;
+
+  /*
+     Keep this restrained. Do not solve layout by making the global container
+     enormous. Page-specific composition belongs in base.css/page files.
+  */
+  --max-page: 76rem;
+  --max-wide: 84rem;
+  --max-text: 46rem;
+  --max-copy: 40rem;
+  --max-narrow: 34rem;
+
+  --gutter: clamp(1.5rem, 5vw, 4.5rem);
+}
+
+/* ==========================================================================
+   DARK — COOL GRAPHITE, NOT WARM ESPRESSO
+   ========================================================================== */
+
+:root[data-theme="dark"] {
+  --color-surface: #111416;
+  --color-surface-sunken: #0d1012;
+  --color-surface-raised: #1a1f23;
+  --color-surface-hover: #20262b;
+  --color-surface-strong: #252c31;
+
+  --color-text: #edf1f2;
+  --color-text-subtle: rgba(237, 241, 242, 0.84);
+  --color-text-subtlest: rgba(237, 241, 242, 0.72);
+  --color-text-faint: rgba(237, 241, 242, 0.58);
+  --color-text-disabled: rgba(237, 241, 242, 0.36);
+  --color-text-inverse: #111416;
+  --color-text-accent: #f05a6b;
+
+  --color-link: #edf1f2;
+  --color-link-hover: #f05a6b;
+
+  --color-border: rgba(237, 241, 242, 0.1);
+  --color-border-strong: rgba(237, 241, 242, 0.2);
+  --color-border-heavy: rgba(237, 241, 242, 0.3);
+  --color-border-accent: rgba(240, 90, 107, 0.35);
+
+  --color-focus: #f05a6b;
+
+  --color-accent: #f05a6b;
+  --color-accent-hover: #ff7482;
+  --color-accent-bg: rgba(240, 90, 107, 0.13);
+  --color-on-accent: #111416;
+
+  --color-footer-bg: #f7f9fa;
+  --color-footer-text: #0f1214;
+  --color-footer-text-subtle: rgba(15, 18, 20, 0.82);
+  --color-footer-text-muted: rgba(15, 18, 20, 0.56);
+  --color-footer-border: rgba(15, 18, 20, 0.12);
+
+  --status-live-bg: rgba(75, 128, 93, 0.2);
+  --status-live-text: #a2d2ad;
+
+  --status-prog-bg: rgba(237, 241, 242, 0.08);
+  --status-prog-text: rgba(237, 241, 242, 0.78);
+
+  --status-plan-bg: rgba(120, 133, 150, 0.22);
+  --status-plan-text: #c5ced9;
+
+  --status-draft-bg: rgba(237, 241, 242, 0.06);
+  --status-draft-text: rgba(237, 241, 242, 0.72);
+
+  --shadow-card: none;
+  --shadow-lift: none;
+
+  --focus-ring: 0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-focus);
+}
