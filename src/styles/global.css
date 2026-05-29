@@ -1685,6 +1685,57 @@ main {
 }
 
 /* ==========================================================================
+   Unified page background
+   Removes visible container/background panels
+   ========================================================================== */
+
+html,
+body,
+main {
+  background: var(--c-paper);
+}
+
+.hero,
+.section,
+.article-shell {
+  background: var(--c-paper);
+  box-shadow: none;
+  clip-path: none;
+}
+
+.section:nth-of-type(even) {
+  background: var(--c-paper);
+}
+
+.section--dark {
+  background: var(--c-paper);
+  color: var(--c-ink);
+}
+
+.section--dark .section-title,
+.section--dark .section-more,
+.section--dark .work-title,
+.section--dark .work-summary,
+.section--dark .meta,
+.section--dark strong {
+  color: var(--c-ink);
+}
+
+.section--dark .kicker {
+  color: var(--c-mute);
+}
+
+.section--dark .work-list-item {
+  background: var(--c-surface);
+  border-color: var(--c-rule);
+}
+
+.section--dark .work-list-item:hover {
+  border-color: var(--c-rule-strong);
+  box-shadow: 0 10px 40px -10px rgba(28, 28, 34, 0.08);
+}
+
+/* ==========================================================================
    Reduced motion
    ========================================================================== */
 
