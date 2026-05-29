@@ -1,0 +1,136 @@
+---
+/**
+ * Button — single element that renders as <a> when `href` is given, else <button>.
+ * Variants match the two button shapes already in your header:
+ *   solid  → the dark `.header-cta` pill
+ *   outline→ the `.search-toggle` bordered pill
+ *   ghost  → text-only with arrow, like `.section-more`
+ */
+export interface Props {
+  href?: string;
+  variant?: "solid" | "outline" | "ghost";
+  size?: "sm" | "md";
+  type?: "button" | "submit" | "reset";
+  external?: boolean;
+  arrow?: boolean;
+  class?: string;
+  "aria-label"?: string;
+}
+
+const {
+  href,
+  variant = "solid",
+  size = "md",
+  type = "button",
+  external = false,
+  arrow = false,
+  class: className,
+  "aria-label": ariaLabel,
+} = Astro.props;
+
+const classes = ["btn", `btn--${variant}`, `btn--${size}`, className]
+  .filter(Boolean)
+  .join(" ");
+
+const rel = external ? "noopener noreferrer" : undefined;
+const target = external ? "_blank" : undefined;
+---
+
+{
+  href ? (
+    <a
+      class={classes}
+      href={href}
+      target={target}
+      rel={rel}
+      aria-label={ariaLabel}
+    >
+      <slot />
+      {arrow && (
+        <span class="btn-arrow" aria-hidden="true">
+          →
+        </span>
+      )}
+    </a>
+  ) : (
+    <button class={classes} type={type} aria-label={ariaLabel}>
+      <slot />
+      {arrow && (
+        <span class="btn-arrow" aria-hidden="true">
+          →
+        </span>
+      )}
+    </button>
+  )
+}
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    border: 1px solid transparent;
+    border-radius: var(--r-pill);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      color var(--ms-base),
+      background-color var(--ms-base),
+      border-color var(--ms-base),
+      transform var(--ms-base);
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+  .btn-arrow {
+    transition: transform var(--ms-base);
+  }
+  .btn:hover .btn-arrow {
+    transform: translateX(2px);
+  }
+
+  .btn--md {
+    min-height: 2.2rem;
+    padding: 0.45rem 0.95rem;
+    font-size: var(--fs-small);
+  }
+  .btn--sm {
+    min-height: 1.9rem;
+    padding: 0.35rem 0.75rem;
+    font-size: var(--fs-eyebrow);
+  }
+
+  .btn--solid {
+    background: var(--c-ink);
+    color: var(--c-paper);
+  }
+  .btn--solid:hover {
+    background: var(--c-rust);
+    color: var(--c-on-accent);
+  }
+
+  .btn--outline {
+    border-color: var(--c-rule);
+    background: color-mix(in srgb, var(--c-surface) 86%, transparent);
+    color: var(--c-ink-soft);
+  }
+  .btn--outline:hover {
+    border-color: var(--c-accent-edge);
+    background: var(--c-accent-pale);
+    color: var(--c-rust-text);
+  }
+
+  .btn--ghost {
+    padding-inline: 0;
+    border-radius: var(--r-sm);
+    background: transparent;
+    color: var(--c-rust-text);
+  }
+  .btn--ghost:hover {
+    color: var(--c-rust-text);
+  }
+</style>

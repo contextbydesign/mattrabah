@@ -1,0 +1,67 @@
+---
+/**
+ * Badge — a small status pill. Distinct from Tag: Badge carries state
+ * (Prototype / Planned / Live / Draft), Tag carries a topic label.
+ * Used on /tools (status) and /blog (Draft) where you currently inline a kicker.
+ */
+export interface Props {
+  label: string;
+  status?: "neutral" | "live" | "progress" | "planned" | "accent";
+  class?: string;
+}
+
+const { label, status = "neutral", class: className } = Astro.props;
+const classes = ["badge", `badge--${status}`, className]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<span class={classes}>
+  <span class="badge-dot" aria-hidden="true"></span>
+  <span class="badge-label">{label}</span>
+</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    padding: 0.34em 0.7em;
+    border: 1px solid var(--c-rule);
+    border-radius: var(--r-pill);
+    background: var(--c-cream);
+    color: var(--c-mute);
+    font-family: var(--font-breit);
+    font-size: var(--fs-eyebrow);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .badge-dot {
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 999px;
+    background: currentColor;
+    flex: none;
+  }
+
+  .badge--live {
+    border-color: var(--c-accent-edge);
+    background: var(--c-accent-pale);
+    color: var(--c-rust-text);
+  }
+  .badge--progress {
+    border-color: var(--c-rule-strong);
+    color: var(--c-ink-soft);
+  }
+  .badge--planned {
+    color: var(--c-faint);
+  }
+  .badge--accent {
+    border-color: transparent;
+    background: var(--c-rust);
+    color: var(--c-on-accent);
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+/**
+ * SectionHeader — the title + optional "more" link row repeated above every
+ * section (`<header class="section-head">`). Pass `moreHref`/`moreLabel` to get
+ * the right-aligned link (e.g. "All work →"). `id` wires up aria-labelledby.
+ */
+export interface Props {
+  title: string;
+  id?: string;
+  moreHref?: string;
+  moreLabel?: string;
+  class?: string;
+}
+
+const {
+  title,
+  id,
+  moreHref,
+  moreLabel = "More",
+  class: className,
+} = Astro.props;
+const classes = ["section-head", className].filter(Boolean).join(" ");
+---
+
+<header class={classes}>
+  <h2 class="section-title" id={id}>{title}</h2>
+
+  {
+    moreHref && (
+      <a href={moreHref} class="section-more">
+        {moreLabel} <span aria-hidden="true">→</span>
+      </a>
+    )
+  }
+</header>

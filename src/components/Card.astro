@@ -1,0 +1,102 @@
+---
+/**
+ * Card — the lift-on-hover surface used across /work, /tools, /blog and the
+ * homepage. Renders as <a> when `href` is set (whole card clickable, like the
+ * Selected Work cards), else as <article> (static, like the /work detail cards).
+ * Slots: default (body), "footer" (e.g. a row of Tags), "media" (top image).
+ *
+ * Replaces the repeated `.work-list-item > .work-link` markup. Wrap a set of
+ * these in a <ul class="work-list"> (or work-list--full) to keep the grid.
+ */
+export interface Props {
+  href?: string;
+  kicker?: string;
+  title?: string;
+  meta?: string;
+  external?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  kicker,
+  title,
+  meta,
+  external = false,
+  class: className,
+} = Astro.props;
+
+const Tag = href ? "a" : "article";
+const classes = ["work-list-item", "card-x", className]
+  .filter(Boolean)
+  .join(" ");
+const rel = external ? "noopener noreferrer" : undefined;
+const target = external ? "_blank" : undefined;
+const hasMedia = Astro.slots.has("media");
+const hasFooter = Astro.slots.has("footer");
+---
+
+<Tag class={classes} href={href} target={target} rel={rel}>
+  {
+    hasMedia && (
+      <div class="card-x-media">
+        <slot name="media" />
+      </div>
+    )
+  }
+
+  <div class="work-link card-x-body">
+    {kicker && <p class="kicker">{kicker}</p>}
+    {title && <h3 class="work-title">{title}</h3>}
+
+    <div class="card-x-content">
+      <slot />
+    </div>
+
+    {meta && <p class="meta">{meta}</p>}
+
+    {
+      hasFooter && (
+        <div class="card-x-footer">
+          <slot name="footer" />
+        </div>
+      )
+    }
+  </div>
+</Tag>
+
+<style>
+  /* Inherits .work-list-item (border, surface, radius, hover-lift) from
+     global.css. These rules only add what the wrapper element needs when it
+     is itself the card (anchor/article) rather than an <li>. */
+  .card-x {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+  .card-x-media {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--c-moss);
+    border-bottom: 1px solid var(--c-rule);
+  }
+  .card-x-media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .card-x-content {
+    display: grid;
+    gap: var(--s-sm);
+  }
+  .card-x-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-xs);
+    margin-top: var(--s-xs);
+  }
+  /* Whole-card hover echoes the existing link-title color shift */
+  a.card-x:hover .work-title {
+    color: var(--c-rust-text);
+  }
+</style>
