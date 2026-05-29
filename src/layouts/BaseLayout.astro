@@ -6,20 +6,26 @@ export interface Props {
   title: string;
   description?: string;
 }
+
 const SITE = "Matt Rabah";
+
 const {
   title,
   description = "Detroit-based CX and customer success. Customer lifecycle systems, practical AI workflows, and operating models for customer-facing teams.",
 } = Astro.props;
+
 const fullTitle =
   title === SITE ? `${SITE} — CX & Customer Success` : `${title} — ${SITE}`;
 const year = new Date().getFullYear();
+
 const nav = [
   { href: "/work", label: "Work" },
   { href: "/tools", label: "Tools" },
   { href: "/blog", label: "Writing" },
   { href: "/about", label: "About" },
 ];
+
+const signals = ["CX", "AI", "CS", "CRM", "OPS", "GTM", "VOC"];
 ---
 
 <!doctype html>
@@ -33,7 +39,7 @@ const nav = [
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <!-- Preload the two faces visible above the fold: display + UI -->
+
     <link
       rel="preload"
       href="/fonts/tiempos/Tiempos Headline/Tiempos-Headline-Semibold-Desktop.woff2"
@@ -48,81 +54,95 @@ const nav = [
       type="font/woff2"
       crossorigin
     />
+
     <script is:inline>
       (() => {
-        const s = localStorage.getItem("theme");
-        const d = s
-          ? s === "dark"
-          : matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.dataset.theme = d ? "dark" : "light";
+        const storedTheme = localStorage.getItem("theme");
+        const prefersDark = matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.dataset.theme = storedTheme
+          ? storedTheme
+          : prefersDark
+            ? "dark"
+            : "light";
       })();
     </script>
   </head>
+
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="masthead">
       <div class="container masthead-inner">
         <a href="/" class="wordmark" aria-label={`${SITE}, home`}>
-          <span class="wordmark-name">MR</span>
-          <span class="wordmark-full">
-            <span class="wordmark-line1">Matt Rabah</span>
+          <span class="wordmark-mark" aria-hidden="true">
+            <span class="wordmark-m">M</span>
+            <span class="wordmark-r">R</span>
+          </span>
+
+          <span class="wordmark-system">
+            <span class="wordmark-name">Matt Rabah</span>
+
             <span class="brand-signal" aria-hidden="true">
-              <span>CX</span>
-              <span>AI</span>
-              <span>CS</span>
-              <span>CRM</span>
-              <span>OPS</span>
-              <span>GTM</span>
-              <span>VOC</span>
+              {signals.map((signal) => <span>{signal}</span>)}
             </span>
           </span>
         </a>
 
         <nav class="nav" aria-label="Primary">
-          {nav.map((i) => <a href={i.href}>{i.label}</a>)}
+          {nav.map((item) => <a href={item.href}>{item.label}</a>)}
         </nav>
 
         <div class="masthead-actions">
           <button class="theme-btn" type="button" aria-label="Toggle theme">
-            <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"
-              ><circle cx="12" cy="12" r="4.2" fill="currentColor"></circle><g
+            <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.2" fill="currentColor"></circle>
+              <g
                 stroke="currentColor"
                 stroke-width="1.8"
                 stroke-linecap="round"
-                ><path
+              >
+                <path
                   d="M12 2.5v2.6M12 18.9v2.6M21.5 12h-2.6M5.1 12H2.5M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8M18.4 18.4l-1.8-1.8M7.4 7.4 5.6 5.6"
-                ></path></g
-              ></svg
-            >
-            <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"
-              ><path
+                ></path>
+              </g>
+            </svg>
+
+            <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
                 d="M20 14.3A8 8 0 1 1 9.7 4 6.4 6.4 0 0 0 20 14.3Z"
-                fill="currentColor"></path></svg
-            >
+                fill="currentColor"></path>
+            </svg>
           </button>
-          <span class="masthead-cta"
-            ><Button href="/contact" variant="ghost" size="sm" arrow
+
+          <span class="masthead-cta">
+            <Button href="/contact" variant="ghost" size="sm" arrow
               >Contact</Button
-            ></span
-          >
+            >
+          </span>
+
           <button
             class="nav-toggle"
             type="button"
             aria-label="Open menu"
-            aria-expanded="false"><span></span><span></span></button
+            aria-expanded="false"
           >
+            <span></span>
+            <span></span>
+          </button>
         </div>
       </div>
+
       <div class="mobile-nav" hidden>
         <div class="container stack-2">
-          {nav.map((i) => <a href={i.href}>{i.label}</a>)}
+          {nav.map((item) => <a href={item.href}>{item.label}</a>)}
           <a href="/contact">Contact</a>
         </div>
       </div>
     </header>
 
-    <main id="main"><slot /></main>
+    <main id="main">
+      <slot />
+    </main>
 
     <footer class="footer">
       <div class="container footer-inner">
@@ -133,13 +153,15 @@ const nav = [
             customer-facing teams. Detroit, MI.
           </p>
           <p class="meta" style="color:var(--color-text-accent)">
-            — Open to new roles
+            Open to new roles
           </p>
         </div>
+
         <nav class="footer-col" aria-label="Site">
           <p class="footer-col-title">Site</p>
-          {nav.map((i) => <a href={i.href}>{i.label}</a>)}
+          {nav.map((item) => <a href={item.href}>{item.label}</a>)}
         </nav>
+
         <nav class="footer-col" aria-label="Contact">
           <p class="footer-col-title">Contact</p>
           <a href="mailto:rabah.matthew@gmail.com">Email</a>
@@ -150,6 +172,7 @@ const nav = [
           >
         </nav>
       </div>
+
       <div class="container footer-base">
         <p class="meta">© {year} {SITE}</p>
         <p class="meta">Detroit, Michigan</p>
@@ -158,17 +181,22 @@ const nav = [
 
     <script is:inline>
       document.querySelector(".theme-btn")?.addEventListener("click", () => {
-        const n =
+        const nextTheme =
           document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-        document.documentElement.dataset.theme = n;
-        localStorage.setItem("theme", n);
+        document.documentElement.dataset.theme = nextTheme;
+        localStorage.setItem("theme", nextTheme);
       });
-      const t = document.querySelector(".nav-toggle"),
-        m = document.querySelector(".mobile-nav");
-      t?.addEventListener("click", () => {
-        const open = t.getAttribute("aria-expanded") === "true";
-        t.setAttribute("aria-expanded", String(!open));
-        if (m) m.hidden = open;
+
+      const navToggle = document.querySelector(".nav-toggle");
+      const mobileNav = document.querySelector(".mobile-nav");
+
+      navToggle?.addEventListener("click", () => {
+        const isOpen = navToggle.getAttribute("aria-expanded") === "true";
+        navToggle.setAttribute("aria-expanded", String(!isOpen));
+
+        if (mobileNav) {
+          mobileNav.hidden = isOpen;
+        }
       });
     </script>
 
@@ -177,82 +205,131 @@ const nav = [
         position: sticky;
         top: 0;
         z-index: 100;
-        background: color-mix(in srgb, var(--color-surface) 86%, transparent);
+        border-bottom: 1px solid var(--color-border);
+        background: color-mix(in srgb, var(--color-surface) 88%, transparent);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
-        border-bottom: 1px solid var(--color-border);
       }
+
       .masthead-inner {
         display: flex;
         align-items: center;
         gap: var(--space-6);
         min-height: 4.25rem;
       }
-      /* Wordmark: Söhne Breit monogram + name. Breit's width gives it presence. */
+
       .wordmark {
         display: inline-flex;
         align-items: center;
-        gap: var(--space-3);
-        text-decoration: none;
+        gap: 0.85rem;
         color: var(--color-text);
-      }
-      .wordmark-name {
-        display: inline-grid;
-        place-items: center;
-        width: 2.15rem;
-        height: 2.15rem;
-        border-radius: var(--radius-sm);
-        background: var(--color-text);
-        color: var(--color-surface);
-        font-family: var(--font-wide);
-        font-weight: 700;
-        font-size: 0.8rem;
-        letter-spacing: 0.02em;
-      }
-      .wordmark-full {
-        display: grid;
-        line-height: 1.1;
-      }
-      .wordmark-line1 {
-        font-family: var(--font-wide);
-        font-weight: 600;
-        font-size: 0.95rem;
-        letter-spacing: 0.01em;
+        text-decoration: none;
       }
 
-      /* Animated discipline signal — a small clay pill that rotates through
-         the disciplines. Count-agnostic: add/remove <span>s freely. */
+      .wordmark:hover {
+        color: var(--color-text);
+      }
+
+      .wordmark-mark {
+        position: relative;
+        display: inline-grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        overflow: hidden;
+        border: 1px solid var(--color-text);
+        border-radius: calc(var(--radius-sm) + 2px);
+        background: linear-gradient(
+          135deg,
+          var(--color-text) 0 49%,
+          color-mix(in srgb, var(--color-text) 92%, transparent) 49% 100%
+        );
+        color: var(--color-surface);
+        font-family: var(--font-wide);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1;
+      }
+
+      .wordmark-mark::after {
+        content: "";
+        position: absolute;
+        inset: 0.46rem;
+        border: 1px solid
+          color-mix(in srgb, var(--color-surface) 18%, transparent);
+        border-radius: 2px;
+        pointer-events: none;
+      }
+
+      .wordmark-m,
+      .wordmark-r {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        height: 100%;
+      }
+
+      .wordmark-m {
+        transform: translateX(0.08rem);
+      }
+
+      .wordmark-r {
+        transform: translateX(-0.08rem);
+        opacity: 0.9;
+      }
+
+      .wordmark-system {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        min-width: 0;
+      }
+
+      .wordmark-name {
+        font-family: var(--font-wide);
+        font-size: 1.02rem;
+        font-weight: 600;
+        letter-spacing: -0.035em;
+        line-height: 1;
+        white-space: nowrap;
+      }
+
       .brand-signal {
         position: relative;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         width: 3rem;
-        height: 1.05rem;
-        margin-top: 3px;
+        height: 1.12rem;
         overflow: hidden;
+        border: 1px solid var(--color-border-accent);
         border-radius: var(--radius-pill);
         background: var(--color-accent-bg);
-        border: 1px solid var(--color-border-accent);
+        color: var(--color-text-accent);
+        flex: 0 0 auto;
       }
+
       .brand-signal span {
         position: absolute;
         inset: 0;
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        color: currentColor;
         font-family: var(--font-mono);
-        font-size: 0.5625rem;
+        font-size: 0.55rem;
         font-weight: 500;
         letter-spacing: 0.12em;
+        line-height: 1;
         text-transform: uppercase;
-        color: var(--color-text-accent);
         opacity: 0;
         transform: translateY(90%);
         animation: brand-signal 14s infinite;
       }
-      /* 7 items → each occupies 1/7 of the cycle. Delays are evenly spaced;
-         keeping them explicit is clearer than calc and easy to extend. */
+
       .brand-signal span:nth-child(1) {
         animation-delay: 0s;
       }
@@ -274,52 +351,50 @@ const nav = [
       .brand-signal span:nth-child(7) {
         animation-delay: 12s;
       }
+
       @keyframes brand-signal {
         0% {
           opacity: 0;
           transform: translateY(90%);
         }
+
         4%,
         11% {
           opacity: 1;
           transform: translateY(0);
         }
+
         15%,
         100% {
           opacity: 0;
           transform: translateY(-90%);
         }
       }
-      @media (prefers-reduced-motion: reduce) {
-        .brand-signal span {
-          animation: none;
-          opacity: 0;
-          transform: none;
-        }
-        .brand-signal span:first-child {
-          opacity: 1;
-        }
-      }
+
       .nav {
         display: flex;
         gap: var(--space-6);
         margin-inline-start: auto;
       }
+
       .nav a {
+        color: var(--color-text-subtle);
         font-family: var(--font-sans);
         font-size: var(--fs-body-sm);
         font-weight: var(--w-med);
-        color: var(--color-text-subtle);
         text-decoration: none;
       }
+
       .nav a:hover {
-        color: var(--color-text-accent);
+        color: var(--color-text);
       }
+
       .masthead-actions {
         display: flex;
         align-items: center;
         gap: var(--space-3);
       }
+
       .theme-btn {
         display: inline-grid;
         place-items: center;
@@ -332,69 +407,65 @@ const nav = [
         cursor: pointer;
         transition:
           color var(--dur-1),
-          border-color var(--dur-1);
+          border-color var(--dur-1),
+          background-color var(--dur-1);
       }
+
       .theme-btn:hover {
-        color: var(--color-text-accent);
-        border-color: var(--color-border-accent);
+        border-color: var(--color-border-strong);
+        background: var(--color-surface-hover);
+        color: var(--color-text);
       }
+
       .theme-btn svg {
         width: 1.15rem;
         height: 1.15rem;
       }
+
       .i-moon {
         display: none;
       }
+
       :root[data-theme="dark"] .i-sun {
         display: none;
       }
+
       :root[data-theme="dark"] .i-moon {
         display: block;
       }
+
       .nav-toggle {
         display: none;
         flex-direction: column;
         gap: 5px;
-        width: 2.4rem;
-        height: 2.4rem;
         align-items: center;
         justify-content: center;
+        width: 2.4rem;
+        height: 2.4rem;
         border: 1px solid var(--color-border);
         border-radius: var(--radius-sm);
         background: transparent;
         cursor: pointer;
       }
+
       .nav-toggle span {
         width: 1.1rem;
         height: 1.5px;
         background: var(--color-text);
       }
+
       .mobile-nav {
         border-top: 1px solid var(--color-border);
         padding-block: var(--space-4);
       }
+
       .mobile-nav a {
         display: block;
         padding: var(--space-2) 0;
         color: var(--color-text);
+        font-family: var(--font-sans);
         font-size: var(--fs-h4);
-        font-family: var(--font-display);
-      }
-
-      @media (max-width: 46rem) {
-        .nav,
-        .masthead-cta {
-          display: none;
-        }
-        .nav-toggle {
-          display: flex;
-        }
-        .masthead-actions {
-          margin-inline-start: auto;
-        }
-        .brand-signal {
-          width: 2.6rem;
-        }
+        text-decoration: none;
       }
 
       .footer {
@@ -402,52 +473,126 @@ const nav = [
         border-top: 1px solid var(--color-border);
         background: var(--color-surface-sunken);
       }
+
       .footer-inner {
         display: grid;
         grid-template-columns: 1.6fr 1fr 1fr;
         gap: var(--space-6);
         padding-block: var(--space-8) var(--space-6);
       }
+
       .footer-word {
-        font-family: var(--font-display);
-        font-weight: var(--w-semi);
-        font-size: 1.6rem;
-        letter-spacing: -0.02em;
         color: var(--color-text);
+        font-family: var(--font-display);
+        font-size: 1.6rem;
+        font-weight: var(--w-semi);
+        letter-spacing: -0.02em;
         text-decoration: none;
       }
+
       .footer-col {
         display: grid;
         gap: var(--space-3);
         align-content: start;
       }
+
       .footer-col-title {
+        color: var(--color-text-faint);
         font-family: var(--font-mono);
         font-size: var(--fs-meta);
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        color: var(--color-text-faint);
       }
+
       .footer-col a {
         color: var(--color-text-subtle);
         font-size: var(--fs-body-sm);
         text-decoration: none;
       }
+
       .footer-col a:hover {
-        color: var(--color-text-accent);
+        color: var(--color-text);
       }
+
       .footer-base {
         display: flex;
         justify-content: space-between;
+        gap: var(--space-4);
         padding-block: var(--space-5);
         border-top: 1px solid var(--color-border);
       }
+
+      @media (prefers-reduced-motion: reduce) {
+        .brand-signal span {
+          animation: none;
+          opacity: 0;
+          transform: none;
+        }
+
+        .brand-signal span:first-child {
+          opacity: 1;
+        }
+      }
+
       @media (max-width: 46rem) {
+        .nav,
+        .masthead-cta {
+          display: none;
+        }
+
+        .nav-toggle {
+          display: flex;
+        }
+
+        .masthead-actions {
+          margin-inline-start: auto;
+        }
+
+        .wordmark {
+          gap: 0.65rem;
+        }
+
+        .wordmark-mark {
+          width: 2.05rem;
+          height: 2.05rem;
+          font-size: 0.66rem;
+        }
+
+        .wordmark-name {
+          font-size: 0.92rem;
+        }
+
+        .brand-signal {
+          width: 2.65rem;
+          height: 1.05rem;
+        }
+
         .footer-inner {
           grid-template-columns: 1fr 1fr;
         }
+
         .footer-brand {
           grid-column: 1 / -1;
+        }
+      }
+
+      @media (max-width: 27rem) {
+        .wordmark-name {
+          max-width: 7.4rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .brand-signal {
+          display: none;
+        }
+
+        .footer-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-base {
+          flex-direction: column;
         }
       }
     </style>
