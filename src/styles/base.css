@@ -2119,3 +2119,236 @@ section,
     opacity: 1;
   }
 }
+
+/* ==========================================================================
+   Portfolio layout corrections
+   Less empty theatrical space, stronger hierarchy, wider proof rows
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Reduce excessive vertical whitespace
+   -------------------------------------------------------------------------- */
+
+.hero {
+  min-height: auto;
+  padding-block: clamp(var(--space-8), 9vw, var(--space-10));
+}
+
+.section {
+  padding-block: clamp(var(--space-7), 7vw, var(--space-9));
+}
+
+.statement,
+.quote-band {
+  padding-block: clamp(var(--space-7), 8vw, var(--space-9));
+}
+
+.article-shell {
+  padding-block: clamp(var(--space-7), 8vw, var(--space-9));
+}
+
+/* --------------------------------------------------------------------------
+   Stop copy from feeling bunched up
+   -------------------------------------------------------------------------- */
+
+.display,
+.h1,
+.hero-title,
+.statement-title {
+  max-width: 15ch;
+}
+
+.lead,
+.hero-lead,
+.statement-sub,
+.body,
+.body-sm,
+.prose,
+.prose p,
+.capabilities-prose,
+.about-prose,
+.work-summary,
+.writing-dek,
+.pillar-body {
+  max-width: 46rem;
+}
+
+.hero {
+  gap: var(--space-5);
+}
+
+.hero .lead,
+.hero-lead {
+  margin-top: var(--space-2);
+}
+
+/* Give section labels and titles proper breathing room */
+.eyebrow {
+  margin-bottom: clamp(var(--space-5), 2.5vw, var(--space-6));
+}
+
+.section-head {
+  margin-bottom: clamp(var(--space-6), 6vw, var(--space-8));
+}
+
+.section-head > div,
+.section-head > header {
+  gap: var(--space-5);
+}
+
+/* --------------------------------------------------------------------------
+   Three ways I help / pillar section
+   Use Söhne Breit for titles, Tiempos/Söhne contrast for body
+   -------------------------------------------------------------------------- */
+
+.pillars {
+  gap: clamp(var(--space-5), 4vw, var(--space-7));
+  margin-top: var(--space-7);
+}
+
+.pillar {
+  gap: var(--space-4);
+  padding-top: var(--space-5);
+}
+
+.pillar-title {
+  font-family: var(--font-wide);
+  font-size: clamp(1.05rem, 0.98rem + 0.45vw, 1.32rem);
+  font-weight: var(--w-semi);
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+}
+
+.pillar-body {
+  font-family: var(--font-serif);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+/* Make the pillar kicker feel like a technical label, not a mini headline */
+.pillar-kicker {
+  margin-bottom: var(--space-1);
+  color: var(--color-text-subtlest);
+}
+
+/* --------------------------------------------------------------------------
+   Proof section: convert card grid into full-width thin rows
+   This fixes the 3-card imbalance.
+   -------------------------------------------------------------------------- */
+
+.work-list {
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-top: var(--space-7);
+  border-top: 1px solid var(--color-border);
+}
+
+.work-list-item {
+  border: 0;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.work-list-item:hover {
+  transform: none;
+  border-color: var(--color-border);
+  background: var(--color-surface-hover);
+}
+
+.work-link {
+  display: grid;
+  grid-template-columns: 4rem minmax(10rem, 0.75fr) minmax(18rem, 1.4fr) auto;
+  align-items: start;
+  gap: clamp(var(--space-4), 4vw, var(--space-7));
+  padding: clamp(var(--space-5), 4vw, var(--space-7)) 0;
+}
+
+.work-link .meta:first-child,
+.work-number {
+  color: var(--color-text-faint);
+}
+
+.work-title {
+  max-width: 22rem;
+  font-family: var(--font-wide);
+  font-size: clamp(1.1rem, 1rem + 0.55vw, 1.45rem);
+  font-weight: var(--w-semi);
+  line-height: 1.18;
+  letter-spacing: -0.035em;
+}
+
+.work-summary {
+  max-width: 38rem;
+  font-family: var(--font-serif);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.work-link::after {
+  content: "→";
+  align-self: start;
+  color: var(--color-text-faint);
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  line-height: 1;
+  transition:
+    color var(--dur-1) var(--ease),
+    transform var(--dur-1) var(--ease);
+}
+
+.work-link:hover::after {
+  color: var(--color-text);
+  transform: translateX(0.2rem);
+}
+
+/* Tags inside work rows should sit under the summary, not crowd title rhythm */
+.work-link .tag,
+.work-link .lozenge {
+  margin-top: var(--space-2);
+}
+
+/* --------------------------------------------------------------------------
+   Writing cards can remain cards, but make them quieter
+   -------------------------------------------------------------------------- */
+
+.writing-list {
+  margin-top: var(--space-7);
+}
+
+.writing-list-item {
+  box-shadow: none;
+}
+
+.writing-title {
+  font-family: var(--font-wide);
+  letter-spacing: -0.035em;
+}
+
+.writing-dek {
+  font-family: var(--font-serif);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive proof rows
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 52rem) {
+  .work-link {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .work-link::after {
+    display: none;
+  }
+
+  .work-title {
+    max-width: 100%;
+  }
+
+  .work-summary {
+    max-width: 100%;
+  }
+}
