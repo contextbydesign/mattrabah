@@ -348,10 +348,7 @@ section,
 }
 
 .section {
-  padding-block: var(
-    --section-gap-md,
-    clamp(var(--space-8), 8vw, var(--space-10))
-  );
+  padding-block: var(--section-gap-md, clamp(var(--space-8), 8vw, var(--space-10)));
   background: var(--color-surface);
 }
 
@@ -442,10 +439,7 @@ section,
 
 .statement {
   display: block;
-  padding-block: var(
-    --section-gap-lg,
-    clamp(var(--space-9), 10vw, var(--space-11))
-  );
+  padding-block: var(--section-gap-lg, clamp(var(--space-9), 10vw, var(--space-11)));
   background: var(--color-surface);
   text-align: left;
 }
@@ -489,10 +483,7 @@ section,
    ========================================================================== */
 
 .quote-band {
-  padding-block: var(
-    --section-gap-md,
-    clamp(var(--space-8), 9vw, var(--space-10))
-  );
+  padding-block: var(--section-gap-md, clamp(var(--space-8), 9vw, var(--space-10)));
   background: var(--color-surface);
   text-align: left;
 }
@@ -767,11 +758,12 @@ section,
   overflow: hidden;
   border: 1px solid var(--color-text);
   border-radius: calc(var(--radius-sm) + 2px);
-  background: linear-gradient(
-    135deg,
-    var(--color-text) 0 49%,
-    color-mix(in srgb, var(--color-text) 92%, transparent) 49% 100%
-  );
+  background:
+    linear-gradient(
+      135deg,
+      var(--color-text) 0 49%,
+      color-mix(in srgb, var(--color-text) 92%, transparent) 49% 100%
+    );
   color: var(--color-surface);
   font-family: var(--font-wide);
   font-size: 0.72rem;
@@ -1198,18 +1190,12 @@ section,
 .page-hero {
   display: block;
   min-height: auto;
-  padding-block: var(
-    --section-gap-lg,
-    clamp(var(--space-9), 10vw, var(--space-11))
-  );
+  padding-block: var(--section-gap-lg, clamp(var(--space-9), 10vw, var(--space-11)));
   text-align: left;
 }
 
 .hero--compact {
-  padding-block: var(
-    --section-gap-md,
-    clamp(var(--space-7), 8vw, var(--space-9))
-  );
+  padding-block: var(--section-gap-md, clamp(var(--space-7), 8vw, var(--space-9)));
 }
 
 .hero-kicker {
@@ -1467,10 +1453,7 @@ section,
    ========================================================================== */
 
 .blog-index {
-  padding-block: var(
-    --section-gap-md,
-    clamp(var(--space-8), 9vw, var(--space-10))
-  );
+  padding-block: var(--section-gap-md, clamp(var(--space-8), 9vw, var(--space-10)));
 }
 
 .blog-index-hero {
@@ -1561,10 +1544,7 @@ section,
    ========================================================================== */
 
 .article-shell {
-  padding-block: var(
-    --section-gap-md,
-    clamp(var(--space-8), 9vw, var(--space-10))
-  );
+  padding-block: var(--section-gap-md, clamp(var(--space-8), 9vw, var(--space-10)));
   background: var(--color-surface);
   text-align: left;
 }
@@ -1772,10 +1752,7 @@ section,
 /* Blog article system */
 
 .blog-article {
-  padding-block: var(
-    --section-gap-md,
-    clamp(var(--space-8), 9vw, var(--space-10))
-  );
+  padding-block: var(--section-gap-md, clamp(var(--space-8), 9vw, var(--space-10)));
 }
 
 .blog-article-grid {
@@ -2336,10 +2313,7 @@ section,
 
   .hero,
   .page-hero {
-    padding-block: var(
-      --section-gap-md,
-      clamp(var(--space-7), 10vw, var(--space-9))
-    );
+    padding-block: var(--section-gap-md, clamp(var(--space-7), 10vw, var(--space-9)));
   }
 
   .about-profile,
