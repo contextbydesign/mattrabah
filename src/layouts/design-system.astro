@@ -1,0 +1,135 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import Lozenge from "../components/lozenge.astro";
+import SectionMessage from "../components/sectionmessage.astro";
+import Card from "../components/Card.astro";
+import Tag from "../components/ui/Tag.astro";
+
+const tools = [
+  {
+    title: "Handoff Risk Checker",
+    status: "inprogress",
+    statusLabel: "Prototype",
+    tags: ["Implementation", "CRM"],
+  },
+  {
+    title: "Customer Health Signal Mapper",
+    status: "inprogress",
+    statusLabel: "Prototype",
+    tags: ["Customer success"],
+  },
+  {
+    title: "Renewal Readiness Diagnostic",
+    status: "new",
+    statusLabel: "Planned",
+    tags: ["Retention"],
+  },
+];
+---
+
+<BaseLayout
+  title="Design System"
+  description="ADS-structured component and token reference for the Matt Rabah portfolio."
+>
+  <section class="container section">
+    <div class="stack-300" style="max-width:44rem">
+      <p class="heading-xxs text-brand">Design system</p>
+      <h1 class="heading-xxl">Components, tokens, and tone.</h1>
+      <p class="body-l">
+        An Atlassian-Design-System–structured foundation: semantic color tokens
+        with full light and dark themes, the ADS type scale, and the core
+        component set adapted for a personal portfolio.
+      </p>
+      <div style="display:flex;gap:var(--space-150);flex-wrap:wrap">
+        <Button appearance="primary">Primary</Button>
+        <Button appearance="default">Default</Button>
+        <Button appearance="subtle">Subtle</Button>
+        <Button appearance="link">Link</Button>
+      </div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <h2 class="heading-l" style="margin-bottom:var(--space-300)">
+      Lozenges (status)
+    </h2>
+    <div
+      style="display:flex;gap:var(--space-150);flex-wrap:wrap;margin-bottom:var(--space-200)"
+    >
+      <Lozenge label="Default" />
+      <Lozenge label="In progress" appearance="inprogress" />
+      <Lozenge label="Moved" appearance="moved" />
+      <Lozenge label="New" appearance="new" />
+      <Lozenge label="Removed" appearance="removed" />
+      <Lozenge label="Success" appearance="success" />
+    </div>
+    <div style="display:flex;gap:var(--space-150);flex-wrap:wrap">
+      <Lozenge label="In progress" appearance="inprogress" isBold />
+      <Lozenge label="New" appearance="new" isBold />
+      <Lozenge label="Success" appearance="success" isBold />
+      <Lozenge label="Removed" appearance="removed" isBold />
+    </div>
+  </section>
+
+  <section class="container section">
+    <h2 class="heading-l" style="margin-bottom:var(--space-300)">Tags</h2>
+    <div style="display:flex;gap:var(--space-100);flex-wrap:wrap">
+      <Tag text="Lifecycle systems" />
+      <Tag text="Implementation" color="blue" href="/work" />
+      <Tag text="Customer success" color="green" />
+      <Tag text="CRM discipline" color="purple" />
+      <Tag text="AI workflows" color="teal" />
+    </div>
+  </section>
+
+  <section class="container section">
+    <h2 class="heading-l" style="margin-bottom:var(--space-300)">
+      Section messages (voice + tone)
+    </h2>
+    <div class="stack-300">
+      <SectionMessage appearance="information" title="Inform to build trust">
+        Tell people only what they need in the moment. This banner uses the
+        information role.
+      </SectionMessage>
+      <SectionMessage appearance="success" title="Delight, sparingly">
+        A renewal closed two weeks early. Celebrate progress once trust is
+        earned — a flourish, not a joke.
+      </SectionMessage>
+      <SectionMessage
+        appearance="warning"
+        title="Satisfy by meeting expectations"
+      >
+        This account has no executive sponsor mapped. Add one before the renewal
+        window opens.
+      </SectionMessage>
+      <SectionMessage appearance="error" title="Be practical first">
+        The handoff is missing a documented timeline. Implementation can't start
+        until it's added.
+      </SectionMessage>
+    </div>
+  </section>
+
+  <section class="container section">
+    <h2 class="heading-l" style="margin-bottom:var(--space-300)">Cards</h2>
+    <div
+      style="display:grid;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));gap:var(--space-200)"
+    >
+      {
+        tools.map((t) => (
+          <Card href="/tools">
+            <div class="stack-100">
+              <Lozenge label={t.statusLabel} appearance={t.status as any} />
+              <p class="heading-m">{t.title}</p>
+              <div style="display:flex;gap:var(--space-100);flex-wrap:wrap;margin-top:var(--space-050)">
+                {t.tags.map((tag) => (
+                  <Tag text={tag} color="blue" />
+                ))}
+              </div>
+            </div>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

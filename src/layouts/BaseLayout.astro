@@ -1,18 +1,27 @@
 ---
-import "../styles/global.css";
+/**
+ * BaseLayout (ADS edition) — sets up tokens, top navigation, theme toggle,
+ * and the flicker-free theme bootstrap. Light/dark driven entirely by
+ * data-theme on <html> + semantic tokens.
+ */
+import "../styles/base.css";
+import Button from "../components/Button.astro";
 
 export interface Props {
   title: string;
   description?: string;
 }
-
-const SITE_NAME = "Matt Rabah";
-const DEFAULT_DESCRIPTION =
-  "Matt Rabah builds customer lifecycle systems, practical AI workflows, and operating models for complex customer-facing teams.";
-
-const { title, description = DEFAULT_DESCRIPTION } = Astro.props;
-const fullTitle = title === SITE_NAME ? title : `${title} — ${SITE_NAME}`;
+const SITE = "Matt Rabah";
+const { title, description = "Customer lifecycle systems, practical AI workflows, and operating models for customer-facing teams." } = Astro.props;
+const fullTitle = title === SITE ? title : `${title} — ${SITE}`;
 const year = new Date().getFullYear();
+const nav = [
+  { href: "/work", label: "Work" },
+  { href: "/tools", label: "AI Tools" },
+  { href: "/blog", label: "Blog" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+];
 ---
 
 <!doctype html>
@@ -22,461 +31,138 @@ const year = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <link rel="stylesheet" href="https://use.typekit.net/vex0ome.css" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <!-- Flicker-free theme: set data-theme before paint -->
+    <script is:inline>
+      (() => {
+        const saved = localStorage.getItem("theme");
+        const dark = saved ? saved === "dark"
+          : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.dataset.theme = dark ? "dark" : "light";
+      })();
+    </script>
   </head>
 
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <header class="site-header">
-      <div class="container header-inner">
-        <a href="/" class="brand brand-wordmark" aria-label={`${SITE_NAME}, home`}>
-          <span class="brand-wordmark-name">Matt Rabah</span>
-
-          <span class="brand-wordmark-signal" aria-hidden="true">
-            <span>CX</span>
-            <span>AI</span>
-            <span>CS</span>
-            <span>CRM</span>
-            <span>OPS</span>
-          </span>
+    <header class="topnav">
+      <div class="container topnav-inner">
+        <a href="/" class="topnav-brand" aria-label={`${SITE}, home`}>
+          <span class="topnav-mark" aria-hidden="true">MR</span>
+          <span class="topnav-name">{SITE}</span>
         </a>
 
-        <nav class="site-nav" id="primary-navigation" aria-label="Primary">
-          <ul>
-            <li><a href="/work">Work</a></li>
-            <li><a href="/tools">AI Tools</a></li>
-            <li><a href="/blog">Blog</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li class="theme-toggle-item">
-              <button
-                class="theme-toggle"
-                type="button"
-                aria-label="Switch to dark mode"
-              >
-                <span class="theme-toggle-icon" aria-hidden="true">☾</span>
-              </button>
-            </li>
-          </ul>
+        <nav class="topnav-links" aria-label="Primary">
+          {nav.map((item) => <a href={item.href}>{item.label}</a>)}
         </nav>
 
-        <div class="header-actions">
-          <button
-            class="search-toggle"
-            type="button"
-            aria-label="Open search"
-            aria-controls="site-search-panel"
-            aria-expanded="false"
-          >
-            Search
+        <div class="topnav-actions">
+          <button class="theme-toggle" type="button" aria-label="Toggle theme">
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0-5v3m0 14v3m10-10h-3M5 12H2m15.5-6.5-2 2m-7 7-2 2m11 0-2-2m-7-7-2-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z" fill="currentColor"/></svg>
           </button>
-
-          <a class="header-cta" href="/contact">
-            Start a conversation
-            <span aria-hidden="true">→</span>
-          </a>
-
-          <button
-            class="nav-toggle"
-            type="button"
-            aria-label="Open navigation"
-            aria-controls="primary-navigation"
-            aria-expanded="false"
-          >
-            <span class="nav-toggle-line"></span>
-            <span class="nav-toggle-line"></span>
-            <span class="nav-toggle-line"></span>
-          </button>
-        </div>
-      </div>
-
-      <div
-        class="site-search-panel"
-        id="site-search-panel"
-        hidden
-        aria-label="Site search"
-      >
-        <div class="container search-inner">
-          <form class="site-search-form" role="search">
-            <label class="search-label" for="site-search-input">
-              Search the site
-            </label>
-
-            <div class="search-input-row">
-              <input
-                class="site-search-input"
-                id="site-search-input"
-                type="search"
-                placeholder="Search work, tools, writing, about..."
-                autocomplete="off"
-                spellcheck="false"
-              />
-
-              <button class="search-close" type="button">Close</button>
-            </div>
-          </form>
-
-          <div class="search-results-wrap">
-            <p class="search-help" id="search-help">
-              Try “AI tools,” “implementation,” “Shinola,” “customer health,” or
-              “renewal.”
-            </p>
-
-            <ul
-              class="search-results"
-              id="search-results"
-              aria-live="polite"
-              aria-label="Search results"
-            ></ul>
-          </div>
+          <Button href="/contact" appearance="primary" spacing="compact">Start a conversation</Button>
         </div>
       </div>
     </header>
 
-    <main id="main">
-      <slot />
-    </main>
+    <main id="main"><slot /></main>
 
-    <footer class="site-footer site-footer--large">
+    <footer class="site-footer">
       <div class="container footer-grid">
-        <div class="footer-brand-block">
-          <a href="/" class="footer-logo" aria-label={`${SITE_NAME}, home`}>
-            Matt Rabah
-          </a>
-
-          <p class="footer-region">
-            CX, customer success, and implementation systems.<br />
-            Detroit, MI · Open to new roles.
-          </p>
-
-          <div class="footer-socials">
-            <a href="mailto:rabah.matthew@gmail.com">Email</a>
-            <a
-              href="https://www.linkedin.com/in/mattrabah/"
-              rel="me noopener"
-              target="_blank"
-            >
-              LinkedIn
-            </a>
-          </div>
+        <div class="stack-100">
+          <p class="heading-s">{SITE}</p>
+          <p class="body-s">CX, customer success, and implementation systems.<br />Detroit, MI · Open to new roles.</p>
         </div>
-
-        <nav class="footer-column" aria-label="Site">
-          <p class="footer-column-title">Site</p>
-          <ul>
-            <li><a href="/work">Work</a></li>
-            <li><a href="/tools">AI Tools</a></li>
-            <li><a href="/blog">Blog</a></li>
-          </ul>
+        <nav class="stack-100" aria-label="Site">
+          <p class="heading-xxs">Site</p>
+          {nav.map((item) => <a class="body-s footer-link" href={item.href}>{item.label}</a>)}
         </nav>
-
-        <nav class="footer-column" aria-label="More">
-          <p class="footer-column-title">More</p>
-          <ul>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer-column" aria-label="Elsewhere">
-          <p class="footer-column-title">Elsewhere</p>
-          <ul>
-            <li>
-              <a
-                href="https://www.linkedin.com/in/mattrabah/"
-                rel="me noopener"
-                target="_blank"
-              >
-                LinkedIn
-              </a>
-            </li>
-            <li>
-              <a href="mailto:rabah.matthew@gmail.com">Email</a>
-            </li>
-          </ul>
+        <nav class="stack-100" aria-label="Elsewhere">
+          <p class="heading-xxs">Elsewhere</p>
+          <a class="body-s footer-link" href="mailto:rabah.matthew@gmail.com">Email</a>
+          <a class="body-s footer-link" href="https://www.linkedin.com/in/mattrabah/" target="_blank" rel="me noopener">LinkedIn</a>
         </nav>
       </div>
-
-      <div class="container footer-baseline">
-        <p class="footer-text">© {year} {SITE_NAME} — Detroit, MI</p>
-      </div>
+      <div class="container"><p class="body-s footer-legal">© {year} {SITE} — Detroit, MI</p></div>
     </footer>
 
-    <script>
-      type SearchItem = {
-        title: string;
-        url: string;
-        type: string;
-        description: string;
-        keywords: string;
-      };
-
-      type SearchItemWithScore = SearchItem & {
-        score: number;
-      };
-
-      type ThemeName = "light" | "dark";
-
-      const navToggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
-      const nav = document.querySelector<HTMLElement>(".site-nav");
-
-      const searchToggle =
-        document.querySelector<HTMLButtonElement>(".search-toggle");
-      const searchPanel =
-        document.querySelector<HTMLElement>(".site-search-panel");
-      const searchInput =
-        document.querySelector<HTMLInputElement>(".site-search-input");
-      const searchClose =
-        document.querySelector<HTMLButtonElement>(".search-close");
-      const searchResults =
-        document.querySelector<HTMLUListElement>(".search-results");
-      const searchHelp = document.querySelector<HTMLElement>(".search-help");
-
-      const themeToggle =
-        document.querySelector<HTMLButtonElement>(".theme-toggle");
-      const themeToggleIcon =
-        document.querySelector<HTMLElement>(".theme-toggle-icon");
-
-      const searchIndex: SearchItem[] = [
-        {
-          title: "Home",
-          url: "/",
-          type: "Overview",
-          description:
-            "Customer lifecycle systems, practical AI workflows, implementation discipline, account health, retention, and change management.",
-          keywords:
-            "home customer lifecycle systems ai workflows implementation cx customer success retention adoption account health",
-        },
-        {
-          title: "Work",
-          url: "/work",
-          type: "Case studies",
-          description:
-            "Selected work across healthtech, brand-side retail, consulting, portfolio growth, onboarding, adoption, and customer lifecycle systems.",
-          keywords:
-            "work case studies shinola neurosync context by design healthtech retail consulting implementation portfolio growth salesforce onboarding adoption",
-        },
-        {
-          title: "AI Tools",
-          url: "/tools",
-          type: "Tools",
-          description:
-            "Practical AI tools for handoff risk, customer health, renewal readiness, QBR preparation, and CRM field quality.",
-          keywords:
-            "ai tools handoff risk checker customer health signal mapper renewal readiness diagnostic qbr crm field quality implementation customer success",
-        },
-        {
-          title: "Blog",
-          url: "/blog",
-          type: "Writing",
-          description:
-            "Writing on AI in customer experience, implementation, customer health, lifecycle operations, and customer-facing systems.",
-          keywords:
-            "blog writing articles ai cx implementation customer health sales handoff lifecycle operations customer success",
-        },
-        {
-          title: "About",
-          url: "/about",
-          type: "Profile",
-          description:
-            "About Matt Rabah, a Detroit-based customer experience, customer success, and implementation professional.",
-          keywords:
-            "about matt rabah detroit customer experience customer success implementation msu shinola neurosync context by design",
-        },
-        {
-          title: "Contact",
-          url: "/contact",
-          type: "Contact",
-          description:
-            "Contact Matt Rabah for customer experience, implementation, customer success, lifecycle systems, and AI workflow work.",
-          keywords:
-            "contact email linkedin matt rabah cx implementation customer success ai workflows",
-        },
-      ];
-
-      const closeNavigation = () => {
-        navToggle?.setAttribute("aria-expanded", "false");
-        navToggle?.setAttribute("aria-label", "Open navigation");
-        nav?.classList.remove("is-open");
-        document.body.classList.remove("nav-open");
-      };
-
-      const normalizeText = (value: string) => value.toLowerCase().trim();
-
-      const renderSearchResults = (query: string) => {
-        if (!searchResults || !searchHelp) return;
-
-        const normalizedQuery = normalizeText(query);
-        searchResults.innerHTML = "";
-
-        if (!normalizedQuery) {
-          searchHelp.hidden = false;
-          return;
-        }
-
-        const terms = normalizedQuery.split(/\s+/).filter(Boolean);
-
-        const matches: SearchItemWithScore[] = searchIndex
-          .map((item) => {
-            const haystack = normalizeText(
-              `${item.title} ${item.type} ${item.description} ${item.keywords}`
-            );
-
-            const score = terms.reduce((total, term) => {
-              if (normalizeText(item.title).includes(term)) return total + 4;
-              if (normalizeText(item.type).includes(term)) return total + 3;
-              if (normalizeText(item.description).includes(term)) return total + 2;
-              if (haystack.includes(term)) return total + 1;
-              return total;
-            }, 0);
-
-            return { ...item, score };
-          })
-          .filter((item) => item.score > 0)
-          .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
-
-        searchHelp.hidden = matches.length > 0;
-
-        if (matches.length === 0) {
-          const emptyItem = document.createElement("li");
-          emptyItem.className = "search-empty";
-          emptyItem.textContent = `No results for “${query}.”`;
-          searchResults.appendChild(emptyItem);
-          return;
-        }
-
-        matches.forEach((item) => {
-          const result = document.createElement("li");
-          result.className = "search-result-item";
-
-          const link = document.createElement("a");
-          link.className = "search-result-link";
-          link.href = item.url;
-
-          const type = document.createElement("span");
-          type.className = "search-result-type";
-          type.textContent = item.type;
-
-          const title = document.createElement("strong");
-          title.className = "search-result-title";
-          title.textContent = item.title;
-
-          const description = document.createElement("span");
-          description.className = "search-result-description";
-          description.textContent = item.description;
-
-          link.append(type, title, description);
-          result.appendChild(link);
-          searchResults.appendChild(result);
-        });
-      };
-
-      const openSearch = () => {
-        searchPanel?.removeAttribute("hidden");
-        searchToggle?.setAttribute("aria-expanded", "true");
-        searchToggle?.setAttribute("aria-label", "Close search");
-        document.body.classList.add("search-open");
-        closeNavigation();
-
-        window.requestAnimationFrame(() => {
-          searchInput?.focus();
-        });
-      };
-
-      const closeSearch = () => {
-        searchPanel?.setAttribute("hidden", "");
-        searchToggle?.setAttribute("aria-expanded", "false");
-        searchToggle?.setAttribute("aria-label", "Open search");
-        document.body.classList.remove("search-open");
-
-        if (searchInput) {
-          searchInput.value = "";
-        }
-
-        renderSearchResults("");
-      };
-
-      const isThemeName = (value: string | null): value is ThemeName =>
-        value === "light" || value === "dark";
-
-      const applyTheme = (theme: ThemeName) => {
-        document.documentElement.dataset.theme = theme;
-        localStorage.setItem("theme", theme);
-
-        if (themeToggle && themeToggleIcon) {
-          const isDark = theme === "dark";
-
-          themeToggle.setAttribute(
-            "aria-label",
-            isDark ? "Switch to light mode" : "Switch to dark mode"
-          );
-
-          themeToggleIcon.textContent = isDark ? "☼" : "☾";
-        }
-      };
-
-      const savedTheme = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-
-      applyTheme(
-        isThemeName(savedTheme) ? savedTheme : prefersDark ? "dark" : "light"
-      );
-
-      themeToggle?.addEventListener("click", () => {
-        const currentTheme = document.documentElement.dataset.theme;
-        applyTheme(currentTheme === "dark" ? "light" : "dark");
-      });
-
-      navToggle?.addEventListener("click", () => {
-        const isOpen = navToggle.getAttribute("aria-expanded") === "true";
-
-        navToggle.setAttribute("aria-expanded", String(!isOpen));
-        navToggle.setAttribute(
-          "aria-label",
-          isOpen ? "Open navigation" : "Close navigation"
-        );
-
-        nav?.classList.toggle("is-open", !isOpen);
-        document.body.classList.toggle("nav-open", !isOpen);
-
-        if (!isOpen) {
-          closeSearch();
-        }
-      });
-
-      searchToggle?.addEventListener("click", () => {
-        const isOpen = searchToggle.getAttribute("aria-expanded") === "true";
-        isOpen ? closeSearch() : openSearch();
-      });
-
-      searchClose?.addEventListener("click", closeSearch);
-
-      searchInput?.addEventListener("input", (event) => {
-        const input = event.currentTarget;
-        if (!(input instanceof HTMLInputElement)) return;
-        renderSearchResults(input.value);
-      });
-
-      nav?.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", closeNavigation);
-      });
-
-      searchResults?.addEventListener("click", (event) => {
-        const target = event.target;
-
-        if (target instanceof Element && target.closest("a")) {
-          closeSearch();
-        }
-      });
-
-      window.addEventListener("keydown", (event) => {
-        if (event.key !== "Escape") return;
-        closeNavigation();
-        closeSearch();
+    <script is:inline>
+      const btn = document.querySelector(".theme-toggle");
+      btn?.addEventListener("click", () => {
+        const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem("theme", next);
       });
     </script>
+
+    <style>
+      .topnav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: color-mix(in srgb, var(--color-elevation-surface) 90%, transparent);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--color-border);
+      }
+      .topnav-inner {
+        height: 3.5rem;
+        display: flex;
+        align-items: center;
+        gap: var(--space-400);
+      }
+      .topnav-brand { display: inline-flex; align-items: center; gap: var(--space-100); color: var(--color-text); text-decoration: none; font: var(--font-heading-s); }
+      .topnav-mark {
+        display: inline-grid; place-items: center;
+        width: 1.75rem; height: 1.75rem;
+        border-radius: var(--radius-100);
+        background: var(--color-background-brand-bold);
+        color: var(--color-text-inverse);
+        font: var(--font-body-s); font-weight: var(--font-weight-bold);
+        letter-spacing: 0.02em;
+      }
+      .topnav-links { display: flex; gap: var(--space-300); margin-inline-start: auto; }
+      .topnav-links a { color: var(--color-text-subtle); font: var(--font-body); font-weight: var(--font-weight-medium); text-decoration: none; }
+      .topnav-links a:hover { color: var(--color-text); }
+      .topnav-actions { display: flex; align-items: center; gap: var(--space-150); }
+      .theme-toggle {
+        display: inline-grid; place-items: center;
+        width: 2rem; height: 2rem; border: none;
+        border-radius: var(--radius-100);
+        background: var(--color-background-neutral-subtle);
+        color: var(--color-icon); cursor: pointer;
+      }
+      .theme-toggle:hover { background: var(--color-background-neutral-subtle-hovered); }
+      .theme-toggle svg { width: 1.25rem; height: 1.25rem; }
+      .theme-icon-moon { display: none; }
+      :root[data-theme="dark"] .theme-icon-sun { display: none; }
+      :root[data-theme="dark"] .theme-icon-moon { display: block; }
+
+      @media (max-width: 48rem) {
+        .topnav-links { display: none; }
+        .topnav-links { margin-inline-start: auto; }
+      }
+
+      .site-footer {
+        margin-top: var(--space-800);
+        padding-block: var(--space-600) var(--space-400);
+        background: var(--color-elevation-surface);
+        border-top: 1px solid var(--color-border);
+        display: grid;
+        gap: var(--space-400);
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: var(--space-400);
+      }
+      .footer-link { color: var(--color-text-subtle); text-decoration: none; }
+      .footer-link:hover { color: var(--color-text); }
+      .footer-legal { color: var(--color-text-subtlest); }
+      @media (max-width: 48rem) { .footer-grid { grid-template-columns: 1fr; } }
+    </style>
   </body>
 </html>

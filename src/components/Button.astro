@@ -1,136 +1,143 @@
 ---
 /**
- * Button — single element that renders as <a> when `href` is given, else <button>.
- * Variants match the two button shapes already in your header:
- *   solid  → the dark `.header-cta` pill
- *   outline→ the `.search-toggle` bordered pill
- *   ghost  → text-only with arrow, like `.section-more`
+ * Button — Atlassian Design System button.
+ * Appearances: primary | default | subtle | link | warning | danger
+ * Renders <a> when `href` is set, else <button>.
+ *
+ * ADS rules encoded here:
+ *  - primary  = brand.bold background, inverse text
+ *  - default  = neutral background, default text
+ *  - subtle   = transparent, neutral.subtle hover
+ *  - link     = looks like a link, button semantics
+ *  - 32px (default) / 24px (compact) heights, radius.100
  */
 export interface Props {
   href?: string;
-  variant?: "solid" | "outline" | "ghost";
-  size?: "sm" | "md";
+  appearance?: "primary" | "default" | "subtle" | "link" | "warning" | "danger";
+  spacing?: "default" | "compact";
   type?: "button" | "submit" | "reset";
+  iconAfter?: boolean;
   external?: boolean;
-  arrow?: boolean;
   class?: string;
   "aria-label"?: string;
 }
 
 const {
   href,
-  variant = "solid",
-  size = "md",
+  appearance = "default",
+  spacing = "default",
   type = "button",
   external = false,
-  arrow = false,
   class: className,
   "aria-label": ariaLabel,
 } = Astro.props;
 
-const classes = ["btn", `btn--${variant}`, `btn--${size}`, className]
+const Tag = href ? "a" : "button";
+const classes = ["btn", `btn--${appearance}`, `btn--${spacing}`, className]
   .filter(Boolean)
   .join(" ");
-
 const rel = external ? "noopener noreferrer" : undefined;
 const target = external ? "_blank" : undefined;
 ---
 
-{
-  href ? (
-    <a
-      class={classes}
-      href={href}
-      target={target}
-      rel={rel}
-      aria-label={ariaLabel}
-    >
-      <slot />
-      {arrow && (
-        <span class="btn-arrow" aria-hidden="true">
-          →
-        </span>
-      )}
-    </a>
-  ) : (
-    <button class={classes} type={type} aria-label={ariaLabel}>
-      <slot />
-      {arrow && (
-        <span class="btn-arrow" aria-hidden="true">
-          →
-        </span>
-      )}
-    </button>
-  )
-}
+<Tag
+  class={classes}
+  href={href}
+  type={href ? undefined : type}
+  rel={rel}
+  target={target}
+  aria-label={ariaLabel}
+>
+  <span class="btn-content"><slot /></span>
+  {
+    Astro.slots.has("iconAfter") && (
+      <span class="btn-icon" aria-hidden="true">
+        <slot name="iconAfter" />
+      </span>
+    )
+  }
+</Tag>
 
 <style>
   .btn {
+    --_bg: var(--color-background-neutral);
+    --_bg-hover: var(--color-background-neutral-hovered);
+    --_bg-press: var(--color-background-neutral-pressed);
+    --_fg: var(--color-text);
+
     display: inline-flex;
     align-items: center;
-    gap: 0.45rem;
-    border: 1px solid transparent;
-    border-radius: var(--r-pill);
-    font-family: var(--font-sans);
-    font-weight: 400;
-    line-height: 1;
+    justify-content: center;
+    gap: var(--space-075);
+    border: none;
+    border-radius: var(--radius-100);
+    background: var(--_bg);
+    color: var(--_fg);
+    font: var(--font-body);
+    font-weight: var(--font-weight-medium);
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
     transition:
-      color var(--ms-base),
-      background-color var(--ms-base),
-      border-color var(--ms-base),
-      transform var(--ms-base);
+      background-color var(--duration-medium) var(--ease-standard),
+      color var(--duration-medium) var(--ease-standard);
   }
+  .btn--default {
+    height: 2rem;
+    padding-inline: var(--space-150);
+  }
+  .btn--compact {
+    height: 1.5rem;
+    padding-inline: var(--space-100);
+    font-size: 0.8125rem;
+  }
+
   .btn:hover {
-    transform: translateY(-1px);
+    background: var(--_bg-hover);
   }
-  .btn-arrow {
-    transition: transform var(--ms-base);
+  .btn:active {
+    background: var(--_bg-press);
   }
-  .btn:hover .btn-arrow {
-    transform: translateX(2px);
-  }
-
-  .btn--md {
-    min-height: 2.2rem;
-    padding: 0.45rem 0.95rem;
-    font-size: var(--fs-small);
-  }
-  .btn--sm {
-    min-height: 1.9rem;
-    padding: 0.35rem 0.75rem;
-    font-size: var(--fs-eyebrow);
+  .btn:focus-visible {
+    box-shadow: var(--focus-ring);
   }
 
-  .btn--solid {
-    background: var(--c-ink);
-    color: var(--c-paper);
+  .btn--primary {
+    --_bg: var(--color-background-brand-bold);
+    --_bg-hover: var(--color-background-brand-bold-hovered);
+    --_bg-press: var(--color-background-brand-bold-pressed);
+    --_fg: var(--color-text-inverse);
   }
-  .btn--solid:hover {
-    background: var(--c-rust);
-    color: var(--c-on-accent);
+  .btn--subtle {
+    --_bg: var(--color-background-neutral-subtle);
+    --_bg-hover: var(--color-background-neutral-subtle-hovered);
+    --_bg-press: var(--color-background-neutral-subtle-pressed);
+    --_fg: var(--color-text-subtle);
   }
-
-  .btn--outline {
-    border-color: var(--c-rule);
-    background: color-mix(in srgb, var(--c-surface) 86%, transparent);
-    color: var(--c-ink-soft);
+  .btn--link {
+    --_bg: transparent;
+    --_bg-hover: transparent;
+    --_bg-press: transparent;
+    --_fg: var(--color-link);
+    height: auto;
+    padding-inline: var(--space-050);
   }
-  .btn--outline:hover {
-    border-color: var(--c-accent-edge);
-    background: var(--c-accent-pale);
-    color: var(--c-rust-text);
+  .btn--link:hover {
+    text-decoration: underline;
   }
-
-  .btn--ghost {
-    padding-inline: 0;
-    border-radius: var(--r-sm);
-    background: transparent;
-    color: var(--c-rust-text);
+  .btn--warning {
+    --_bg: var(--color-background-warning-bold);
+    --_bg-hover: var(--color-background-warning-bold);
+    --_fg: var(--ads-n-1000);
   }
-  .btn--ghost:hover {
-    color: var(--c-rust-text);
+  .btn--danger {
+    --_bg: var(--color-background-danger-bold);
+    --_bg-hover: var(--color-background-danger-bold);
+    --_fg: var(--color-text-inverse);
+  }
+  .btn-icon {
+    display: inline-flex;
+    width: 1em;
+    height: 1em;
   }
 </style>

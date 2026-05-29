@@ -1,0 +1,84 @@
+---
+/**
+ * Lozenge — ADS's status pill. The most recognizable ADS element.
+ * appearance: default | inprogress | moved | new | removed | success
+ *   maps to ADS roles → neutral | information(blue) | warning(yellow) |
+ *   discovery(purple) | danger(red) | success(green)
+ * isBold: true → bold (filled) variant; false → subtle (tinted) variant.
+ * Always uppercase, font.body.small weight bold, radius.100, ~16px tall.
+ */
+export interface Props {
+  label: string;
+  appearance?: "default" | "inprogress" | "moved" | "new" | "removed" | "success";
+  isBold?: boolean;
+  class?: string;
+}
+
+const { label, appearance = "default", isBold = false, class: className } =
+  Astro.props;
+const classes = [
+  "lozenge",
+  `lozenge--${appearance}`,
+  isBold ? "lozenge--bold" : "lozenge--subtle",
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<span class={classes}><span class="lozenge-text">{label}</span></span>
+
+<style>
+  .lozenge {
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    height: 1rem;
+    padding-inline: var(--space-075);
+    border-radius: var(--radius-100);
+    font: var(--font-body-s);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .lozenge-text { overflow: hidden; text-overflow: ellipsis; }
+
+  /* ---- Subtle (tinted bg + colored text) -------------------------------- */
+  .lozenge--subtle.lozenge--default {
+    background: var(--color-background-neutral);
+    color: var(--color-text-subtle);
+  }
+  .lozenge--subtle.lozenge--inprogress {
+    background: var(--color-background-information);
+    color: var(--color-text-information);
+  }
+  .lozenge--subtle.lozenge--moved {
+    background: var(--color-background-warning);
+    color: var(--color-text-warning);
+  }
+  .lozenge--subtle.lozenge--new {
+    background: var(--color-background-discovery);
+    color: var(--color-text-discovery);
+  }
+  .lozenge--subtle.lozenge--removed {
+    background: var(--color-background-danger);
+    color: var(--color-text-danger);
+  }
+  .lozenge--subtle.lozenge--success {
+    background: var(--color-background-success);
+    color: var(--color-text-success);
+  }
+
+  /* ---- Bold (filled) ---------------------------------------------------- */
+  .lozenge--bold { color: var(--color-text-inverse); }
+  .lozenge--bold.lozenge--default { background: var(--color-background-neutral-bold); }
+  .lozenge--bold.lozenge--inprogress { background: var(--color-background-brand-bold); }
+  .lozenge--bold.lozenge--moved {
+    background: var(--color-background-warning-bold);
+    color: var(--ads-n-1000); /* ADS: dark text on yellow for AA */
+  }
+  .lozenge--bold.lozenge--new { background: var(--color-background-discovery-bold); }
+  .lozenge--bold.lozenge--removed { background: var(--color-background-danger-bold); }
+  .lozenge--bold.lozenge--success { background: var(--color-background-success-bold); }
+</style>

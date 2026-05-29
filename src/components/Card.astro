@@ -1,102 +1,65 @@
 ---
 /**
- * Card — the lift-on-hover surface used across /work, /tools, /blog and the
- * homepage. Renders as <a> when `href` is set (whole card clickable, like the
- * Selected Work cards), else as <article> (static, like the /work detail cards).
- * Slots: default (body), "footer" (e.g. a row of Tags), "media" (top image).
- *
- * Replaces the repeated `.work-list-item > .work-link` markup. Wrap a set of
- * these in a <ul class="work-list"> (or work-list--full) to keep the grid.
+ * Card — ADS elevation.surface.raised container with hover state.
+ * Renders <a> (clickable card) when `href` is set, else <article>.
+ * Slots: default body, "eyebrow", "footer".
  */
 export interface Props {
   href?: string;
-  kicker?: string;
-  title?: string;
-  meta?: string;
   external?: boolean;
+  elevation?: "raised" | "flat";
   class?: string;
 }
 
 const {
   href,
-  kicker,
-  title,
-  meta,
   external = false,
+  elevation = "raised",
   class: className,
 } = Astro.props;
-
 const Tag = href ? "a" : "article";
-const classes = ["work-list-item", "card-x", className]
+const classes = [
+  "card",
+  `card--${elevation}`,
+  href ? "card--link" : "",
+  className,
+]
   .filter(Boolean)
   .join(" ");
 const rel = external ? "noopener noreferrer" : undefined;
 const target = external ? "_blank" : undefined;
-const hasMedia = Astro.slots.has("media");
-const hasFooter = Astro.slots.has("footer");
 ---
 
-<Tag class={classes} href={href} target={target} rel={rel}>
-  {
-    hasMedia && (
-      <div class="card-x-media">
-        <slot name="media" />
-      </div>
-    )
-  }
-
-  <div class="work-link card-x-body">
-    {kicker && <p class="kicker">{kicker}</p>}
-    {title && <h3 class="work-title">{title}</h3>}
-
-    <div class="card-x-content">
-      <slot />
-    </div>
-
-    {meta && <p class="meta">{meta}</p>}
-
-    {
-      hasFooter && (
-        <div class="card-x-footer">
-          <slot name="footer" />
-        </div>
-      )
-    }
-  </div>
+<Tag class={classes} href={href} rel={rel} target={target}>
+  <slot />
 </Tag>
 
 <style>
-  /* Inherits .work-list-item (border, surface, radius, hover-lift) from
-     global.css. These rules only add what the wrapper element needs when it
-     is itself the card (anchor/article) rather than an <li>. */
-  .card-x {
+  .card {
     display: block;
+    padding: var(--space-300);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-300);
+    background: var(--color-elevation-surface-raised);
     color: inherit;
     text-decoration: none;
+    transition:
+      box-shadow var(--duration-medium) var(--ease-standard),
+      border-color var(--duration-medium) var(--ease-standard),
+      transform var(--duration-medium) var(--ease-standard);
   }
-  .card-x-media {
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-    background: var(--c-moss);
-    border-bottom: 1px solid var(--c-rule);
+  .card--raised {
+    box-shadow: var(--elevation-shadow-raised);
   }
-  .card-x-media :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .card--link {
+    cursor: pointer;
   }
-  .card-x-content {
-    display: grid;
-    gap: var(--s-sm);
+  .card--link:hover {
+    border-color: var(--color-border-bold);
+    box-shadow: var(--elevation-shadow-overlay);
+    transform: translateY(-2px);
   }
-  .card-x-footer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--s-xs);
-    margin-top: var(--s-xs);
-  }
-  /* Whole-card hover echoes the existing link-title color shift */
-  a.card-x:hover .work-title {
-    color: var(--c-rust-text);
+  .card--link:focus-visible {
+    box-shadow: var(--focus-ring);
   }
 </style>

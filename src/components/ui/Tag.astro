@@ -1,176 +1,114 @@
 ---
+/**
+ * Tag — ADS Tag component (a chip/label, optionally a link, optionally
+ * removable). Distinct from Lozenge: Tag = category/label, Lozenge = status.
+ * color: standardLink | grey | blue | green | red | purple | teal | yellow
+ */
 export interface Props {
-  label: string;
+  text?: string;
+  label?: string;
   href?: string;
-  variant?: "default" | "accent" | "muted" | "ghost";
-  size?: "sm" | "md" | "lg";
-  icon?: "check" | "dot" | "spark";
+  color?: "grey" | "blue" | "green" | "red" | "purple" | "teal" | "yellow";
+  variant?: string;
+  size?: string;
+  icon?: string;
   external?: boolean;
   class?: string;
   "aria-label"?: string;
+  rel?: string;
+  target?: string;
 }
 
 const {
+  text,
   label,
   href,
-  variant = "default",
-  size = "md",
+  color = "grey",
+  variant,
+  size,
   icon,
   external = false,
   class: className,
   "aria-label": ariaLabel,
+  rel: relProp,
+  target: targetProp,
 } = Astro.props;
 
-const classes: string[] = ["tag"];
-if (variant && variant !== "default") classes.push(`tag--${variant}`);
-if (size) classes.push(`tag--${size}`);
-if (href) classes.push("tag--link");
-if (className) classes.push(className);
-
-const hasIconSlot = Astro.slots.has("icon");
-const Wrapper = href ? "a" : "span";
-const rel = external ? "noopener noreferrer" : undefined;
-const target = external ? "_blank" : undefined;
+const content = text ?? label ?? "";
+const TagElement = href ? "a" : "span";
+const classes = [
+  "adg-tag",
+  variant ? `adg-tag--${variant}` : `adg-tag--${color}`,
+  size ? `adg-tag--${size}` : "",
+  href ? "adg-tag--link" : "",
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
+const rel = relProp ?? (external ? "noopener noreferrer" : undefined);
+const target = targetProp ?? (external ? "_blank" : undefined);
 ---
 
-<Wrapper
-  class={classes.join(" ")}
+<TagElement
+  class={classes}
   href={href}
-  target={target}
   rel={rel}
+  target={target}
   aria-label={ariaLabel}
 >
-  {
-    hasIconSlot ? (
-      <span class="tag-icon" aria-hidden="true">
-        <slot name="icon" />
-      </span>
-    ) : icon === "check" ? (
-      <span class="tag-icon" aria-hidden="true">
-        <svg viewBox="0 0 16 16" role="img" focusable="false">
-          <path
-            d="M6.5 11.5 3.3 8.3l1.1-1.1 2.1 2.1 4.8-4.8 1.1 1.1-5.9 5.9Z"
-            fill="currentColor"
-          />
-        </svg>
-      </span>
-    ) : icon === "dot" ? (
-      <span class="tag-icon" aria-hidden="true">
-        <svg viewBox="0 0 16 16" role="img" focusable="false">
-          <circle cx="8" cy="8" r="3.1" fill="currentColor" />
-        </svg>
-      </span>
-    ) : icon === "spark" ? (
-      <span class="tag-icon" aria-hidden="true">
-        <svg viewBox="0 0 16 16" role="img" focusable="false">
-          <path
-            d="M8 1.2 9.3 5l3.8 1.3-3.8 1.3L8 11.4 6.7 7.6 2.9 6.3 6.7 5 8 1.2Z"
-            fill="currentColor"
-          />
-        </svg>
-      </span>
-    ) : null
-  }
-  <span class="tag-label">{label}</span>
-</Wrapper>
+  {content}
+</TagElement>
 
 <style>
-  /* Scoped overrides. Component now owns its own look so it no longer depends
-     on the global `.tag` rule. Typography: Söhne Mono, uppercase. The default
-     pill uses the rust accent so it reads as a deliberate signal, not a chip. */
-  .tag {
+  .adg-tag {
     display: inline-flex;
     align-items: center;
-    gap: 0.4em;
-    padding: 0.5em 0.8em;
-    border: 1px solid transparent;
-    border-radius: var(--r-pill);
-    background: var(--c-rust);
-    color: var(--c-on-accent);
-    font-family: var(--font-mono);
-    font-size: var(--fs-eyebrow);
-    font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    height: 1.25rem;
+    padding-inline: var(--space-075);
+    border-radius: var(--radius-100);
+    font: var(--font-body);
     text-decoration: none;
     white-space: nowrap;
-    box-shadow: 0 0.4rem 1rem rgba(253, 36, 62, 0.22);
+    background: var(--_bg, var(--color-background-neutral));
+    color: var(--_fg, var(--color-text-subtle));
   }
-
-  .tag-icon {
-    display: inline-flex;
-    width: 0.95em;
-    height: 0.95em;
-  }
-  .tag-icon svg {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
-  .tag-label {
-    display: inline-block;
-  }
-
-  /* ---- Variants ---------------------------------------------------------- */
-  /* accent = even louder: deeper rust fill, stronger glow */
-  .tag--accent {
-    background: var(--c-rust);
-    color: var(--c-on-accent);
-    box-shadow: 0 0.5rem 1.25rem rgba(253, 36, 62, 0.32);
-  }
-
-  /* muted = quiet companion for dense rows (e.g. card meta tags) */
-  .tag--muted {
-    background: var(--c-cream);
-    color: var(--c-mute);
-    border-color: var(--c-rule);
-    box-shadow: none;
-  }
-
-  /* ghost = outline only, accent ink */
-  .tag--ghost {
-    background: transparent;
-    color: var(--c-rust-text);
-    border-color: var(--c-accent-edge);
-    box-shadow: none;
-  }
-
-  /* ---- Sizes ------------------------------------------------------------- */
-  .tag--sm {
-    padding: 0.4em 0.65em;
-    font-size: calc(var(--fs-eyebrow) - 0.04rem);
-  }
-  .tag--lg {
-    padding: 0.6em 1em;
-    font-size: var(--fs-small);
-  }
-
-  /* ---- Link behavior ----------------------------------------------------- */
-  .tag--link {
+  .adg-tag--link {
     cursor: pointer;
-    transition:
-      transform var(--ms-base),
-      box-shadow var(--ms-base),
-      background-color var(--ms-base),
-      border-color var(--ms-base),
-      color var(--ms-base);
+    transition: background-color var(--duration-medium) var(--ease-standard);
   }
-  .tag--link:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 0.6rem 1.4rem rgba(253, 36, 62, 0.34);
+  .adg-tag--link:hover {
+    text-decoration: underline;
   }
-  .tag--muted.tag--link:hover {
-    background: var(--c-accent-pale);
-    border-color: var(--c-accent-edge);
-    color: var(--c-rust-text);
-    box-shadow: none;
+  .adg-tag--link:focus-visible {
+    box-shadow: var(--focus-ring);
   }
-  .tag--ghost.tag--link:hover {
-    background: var(--c-accent-pale);
+
+  .adg-tag--grey {
+    --_bg: var(--color-background-neutral);
+    --_fg: var(--color-text-subtle);
   }
-  .tag--link:focus-visible {
-    outline: var(--focus-ring);
-    outline-offset: 2px;
+  .adg-tag--blue {
+    --_bg: var(--color-background-accent-blue-subtler);
+    --_fg: var(--color-text-accent-blue);
+  }
+  .adg-tag--green {
+    --_bg: var(--color-background-accent-green-subtler);
+    --_fg: var(--color-text-accent-green);
+  }
+  .adg-tag--red {
+    --_bg: var(--color-background-accent-red-subtler);
+    --_fg: var(--color-text-accent-red);
+  }
+  .adg-tag--purple {
+    --_bg: var(--color-background-accent-purple-subtler);
+    --_fg: var(--color-text-accent-purple);
+  }
+  .adg-tag--teal {
+    --_bg: var(--color-background-accent-teal-subtler);
+    --_fg: var(--color-text-accent-teal);
+  }
+  .adg-tag--yellow {
+    --_bg: var(--color-background-warning);
+    --_fg: var(--color-text-warning);
   }
 </style>

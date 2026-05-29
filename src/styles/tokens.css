@@ -1,24 +1,320 @@
+/* ==========================================================================
+   tokens.css â€” Atlassian Design Systemâ€“structured tokens, adapted for the
+   Matt Rabah portfolio.
+
+   Structure mirrors ADS:
+     color.<property>.<role>.<emphasis>.<state>
+   flattened into CSS custom properties as:
+     --color-<property>-<role>-<emphasis>-<state>
+
+   Roles:      neutral Â· brand Â· information Â· success Â· warning Â· danger Â·
+               discovery Â· accent(blue/teal/green/etc) Â· inverse
+   Emphasis:   subtlest â†’ subtle â†’ (default) â†’ bold â†’ boldest
+   States:     (default) Â· hovered Â· pressed
+
+   Light + dark are both defined here. Theme switches by setting
+   data-theme="dark" on <html>, exactly like ADS theming.
+
+   DEVIATION FROM ADS: ADS uses Atlassian Sans + blue (#0C66E4) brand.
+   For a personal portfolio I keep Atlassian's *blue brand* and neutral-gray
+   surfaces (that's the recognizable ADS look) but pair it with a system
+   sans stack rather than the proprietary Atlassian Sans, which is not
+   publicly licensed for non-Atlassian sites. Swap --font-sans if you
+   license a closer face.
+   ========================================================================== */
+
 :root {
-  --bg: #ffffff;
-  --surface: #f6f8fa;
-  --surface-elevated: #ffffff;
-  --text: #1f2328;
-  --text-muted: #59636e;
-  --border: #d8dee4;
-  --accent: #0969da;
+  /* ----- Brand seed (ADS blue) -------------------------------------------- */
+  --ads-blue-100: #e9f2ff;
+  --ads-blue-200: #cce0ff;
+  --ads-blue-300: #85b8ff;
+  --ads-blue-400: #579dff;
+  --ads-blue-500: #388bff;
+  --ads-blue-600: #1d7afc;
+  --ads-blue-700: #0c66e4;
+  --ads-blue-800: #0055cc;
+  --ads-blue-900: #09326c;
 
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  /* ----- Neutral ramp (light) --------------------------------------------- */
+  --ads-n-0: #ffffff;
+  --ads-n-100: #f7f8f9;
+  --ads-n-200: #f1f2f4;
+  --ads-n-300: #dcdfe4;
+  --ads-n-400: #b3b9c4;
+  --ads-n-500: #8590a2;
+  --ads-n-600: #758195;
+  --ads-n-700: #626f86;
+  --ads-n-800: #44546f;
+  --ads-n-900: #2c3e5d;
+  --ads-n-1000: #172b4d;
+  --ads-n-1100: #091e42;
 
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-12: 48px;
+  /* ----- Semantic seeds (light) ------------------------------------------- */
+  --ads-green-600: #22a06b;
+  --ads-green-700: #1f845a;
+  --ads-green-100: #dcfff1;
+  --ads-yellow-600: #e2b203;
+  --ads-yellow-700: #946f00;
+  --ads-yellow-100: #fff7d6;
+  --ads-red-600: #e34935;
+  --ads-red-700: #ca3521;
+  --ads-red-100: #ffeceb;
+  --ads-purple-600: #8270db;
+  --ads-purple-700: #6e5dc6;
+  --ads-purple-100: #f3f0ff;
+  --ads-teal-600: #2898bd;
+  --ads-teal-100: #e7f9ff;
 
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-serif: "Instrument Serif", Georgia, serif;
+  /* ====================================================================== */
+  /* SEMANTIC TOKENS â€” light theme                                          */
+  /* ====================================================================== */
+
+  /* Surfaces / elevation (ADS: elevation.surface.*) */
+  --color-elevation-surface: var(--ads-n-0);
+  --color-elevation-surface-hovered: var(--ads-n-100);
+  --color-elevation-surface-pressed: var(--ads-n-200);
+  --color-elevation-surface-sunken: var(--ads-n-100);
+  --color-elevation-surface-raised: var(--ads-n-0);
+  --color-elevation-surface-overlay: var(--ads-n-0);
+  --elevation-shadow-raised:
+    0 1px 1px rgba(9, 30, 66, 0.25), 0 0 1px rgba(9, 30, 66, 0.31);
+  --elevation-shadow-overlay:
+    0 4px 8px rgba(9, 30, 66, 0.16), 0 0 1px rgba(9, 30, 66, 0.31);
+
+  /* Text (color.text.*) */
+  --color-text: var(--ads-n-1000);
+  --color-text-subtle: var(--ads-n-800);
+  --color-text-subtlest: var(--ads-n-700);
+  --color-text-disabled: var(--ads-n-400);
+  --color-text-inverse: var(--ads-n-0);
+  --color-text-brand: var(--ads-blue-700);
+  --color-text-selected: var(--ads-blue-700);
+  --color-text-danger: var(--ads-red-700);
+  --color-text-warning: var(--ads-yellow-700);
+  --color-text-success: var(--ads-green-700);
+  --color-text-discovery: var(--ads-purple-700);
+  --color-text-information: var(--ads-blue-700);
+  --color-link: var(--ads-blue-700);
+  --color-link-pressed: var(--ads-blue-800);
+
+  /* Icon (color.icon.*) */
+  --color-icon: var(--ads-n-800);
+  --color-icon-subtle: var(--ads-n-700);
+  --color-icon-inverse: var(--ads-n-0);
+  --color-icon-brand: var(--ads-blue-700);
+
+  /* Border (color.border.*) */
+  --color-border: var(--ads-n-300);
+  --color-border-bold: var(--ads-n-500);
+  --color-border-inverse: var(--ads-n-0);
+  --color-border-focused: var(--ads-blue-500);
+  --color-border-brand: var(--ads-blue-700);
+  --color-border-danger: var(--ads-red-600);
+  --color-border-success: var(--ads-green-600);
+  --color-border-disabled: var(--ads-n-200);
+
+  /* Background â€” neutral role (color.background.neutral.*) */
+  --color-background-neutral: var(--ads-n-200);
+  --color-background-neutral-hovered: var(--ads-n-300);
+  --color-background-neutral-pressed: var(--ads-n-400);
+  --color-background-neutral-subtle: transparent;
+  --color-background-neutral-subtle-hovered: var(--ads-n-200);
+  --color-background-neutral-subtle-pressed: var(--ads-n-300);
+  --color-background-neutral-bold: var(--ads-n-1000);
+  --color-background-neutral-bold-hovered: var(--ads-n-900);
+  --color-background-neutral-bold-pressed: var(--ads-n-800);
+
+  /* Background â€” brand role */
+  --color-background-brand-bold: var(--ads-blue-700);
+  --color-background-brand-bold-hovered: var(--ads-blue-800);
+  --color-background-brand-bold-pressed: var(--ads-blue-900);
+  --color-background-brand-subtlest: var(--ads-blue-100);
+  --color-background-brand-subtlest-hovered: var(--ads-blue-200);
+
+  /* Background â€” semantic roles (subtlest = banner/lozenge fills) */
+  --color-background-success: var(--ads-green-100);
+  --color-background-success-bold: var(--ads-green-700);
+  --color-background-warning: var(--ads-yellow-100);
+  --color-background-warning-bold: var(--ads-yellow-600);
+  --color-background-danger: var(--ads-red-100);
+  --color-background-danger-bold: var(--ads-red-700);
+  --color-background-discovery: var(--ads-purple-100);
+  --color-background-discovery-bold: var(--ads-purple-700);
+  --color-background-information: var(--ads-blue-100);
+
+  /* Accent text (color.text.accent.*) â€” meaningless-by-design colors */
+  --color-text-accent-blue: var(--ads-blue-800);
+  --color-text-accent-green: var(--ads-green-700);
+  --color-text-accent-red: var(--ads-red-700);
+  --color-text-accent-purple: var(--ads-purple-700);
+  --color-text-accent-teal: var(--ads-teal-600);
+  --color-background-accent-blue-subtler: var(--ads-blue-100);
+  --color-background-accent-green-subtler: var(--ads-green-100);
+  --color-background-accent-red-subtler: var(--ads-red-100);
+  --color-background-accent-purple-subtler: var(--ads-purple-100);
+  --color-background-accent-teal-subtler: var(--ads-teal-100);
+
+  /* Interaction */
+  --color-background-selected: var(--ads-blue-100);
+  --color-background-selected-hovered: var(--ads-blue-200);
+  --color-border-selected: var(--ads-blue-700);
+
+  /* ====================================================================== */
+  /* TYPOGRAPHY â€” exact ADS scale (rem-based)                               */
+  /* ====================================================================== */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial,
+    "Inter", system-ui, sans-serif;
+  --font-mono:
+    "SFMono-Regular", "JetBrains Mono", "IBM Plex Mono", ui-monospace, Menlo,
+    Consolas, monospace;
+
+  /* Heading (font.heading.*) â€” weight 700 */
+  --font-heading-xxl: 700 2rem/2.25rem var(--font-sans);
+  --font-heading-xl: 700 1.75rem/2rem var(--font-sans);
+  --font-heading-l: 700 1.5rem/1.75rem var(--font-sans);
+  --font-heading-m: 700 1.25rem/1.5rem var(--font-sans);
+  --font-heading-s: 700 1rem/1.25rem var(--font-sans);
+  --font-heading-xs: 700 0.875rem/1.25rem var(--font-sans);
+  --font-heading-xxs: 700 0.75rem/1rem var(--font-sans);
+
+  /* Body (font.body.*) â€” weight 400 */
+  --font-body-l: 400 1rem/1.5rem var(--font-sans);
+  --font-body: 400 0.875rem/1.25rem var(--font-sans);
+  --font-body-s: 400 0.75rem/1rem var(--font-sans);
+
+  /* Metric (font.metric.*) â€” weight 700, for emphasized numbers */
+  --font-metric-l: 700 1.75rem/2rem var(--font-sans);
+  --font-metric-m: 700 1.5rem/1.75rem var(--font-sans);
+  --font-metric-s: 700 1rem/1.25rem var(--font-sans);
+
+  --font-code: 400 0.75rem/1rem var(--font-mono);
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* ====================================================================== */
+  /* SPACE (ADS space scale, 8px base, rem)                                 */
+  /* ====================================================================== */
+  --space-0: 0;
+  --space-025: 0.125rem; /* 2 */
+  --space-050: 0.25rem; /* 4 */
+  --space-075: 0.375rem; /* 6 */
+  --space-100: 0.5rem; /* 8 */
+  --space-150: 0.75rem; /* 12 */
+  --space-200: 1rem; /* 16 */
+  --space-250: 1.25rem; /* 20 */
+  --space-300: 1.5rem; /* 24 */
+  --space-400: 2rem; /* 32 */
+  --space-500: 2.5rem; /* 40 */
+  --space-600: 3rem; /* 48 */
+  --space-800: 4rem; /* 64 */
+  --space-1000: 5rem; /* 80 */
+
+  /* ----- Radius (ADS radius scale) ---------------------------------------- */
+  --radius-050: 0.125rem;
+  --radius-100: 0.25rem; /* default control radius */
+  --radius-200: 0.5rem;
+  --radius-300: 0.75rem;
+  --radius-400: 1rem;
+  --radius-full: 9999px;
+
+  /* ----- Focus ------------------------------------------------------------ */
+  --border-width-focus: 2px;
+  --focus-ring: 0 0 0 var(--border-width-focus) var(--color-border-focused);
+
+  /* ----- Motion (ADS motion durations) ------------------------------------ */
+  --duration-fast: 100ms;
+  --duration-medium: 175ms;
+  --duration-large: 350ms;
+  --ease-standard: cubic-bezier(0.15, 1, 0.3, 1);
+
+  /* Layout */
+  --layout-max: 75rem;
+  --layout-prose: 44rem;
+}
+
+/* ========================================================================== */
+/* DARK THEME â€” ADS dark mappings                                             */
+/* ========================================================================== */
+:root[data-theme="dark"] {
+  /* Neutral ramp (dark) â€” ADS dark neutrals are a separate ramp, not inverted */
+  --ads-n-0: #1d2125; /* DarkNeutral0 = darkest surface */
+  --ads-n-100: #22272b;
+  --ads-n-200: #2c333a;
+  --ads-n-300: #454f59;
+  --ads-n-400: #596773;
+  --ads-n-500: #738496;
+  --ads-n-600: #8c9bab;
+  --ads-n-700: #9fadbc;
+  --ads-n-800: #b6c2cf;
+  --ads-n-900: #c7d1db;
+  --ads-n-1000: #dee4ea;
+  --ads-n-1100: #f1f2f4;
+
+  /* Blue shifts brighter for dark surfaces (ADS uses 400-level for text/links) */
+  --color-text-brand: var(--ads-blue-400);
+  --color-text-selected: var(--ads-blue-300);
+  --color-text-information: var(--ads-blue-300);
+  --color-link: var(--ads-blue-400);
+  --color-link-pressed: var(--ads-blue-300);
+  --color-icon-brand: var(--ads-blue-400);
+  --color-border-brand: var(--ads-blue-400);
+  --color-border-focused: var(--ads-blue-300);
+
+  /* Surfaces: in dark, "raised/overlay" go LIGHTER than base, per ADS */
+  --color-elevation-surface: var(--ads-n-100);
+  --color-elevation-surface-hovered: var(--ads-n-200);
+  --color-elevation-surface-pressed: var(--ads-n-300);
+  --color-elevation-surface-sunken: var(--ads-n-0);
+  --color-elevation-surface-raised: var(--ads-n-200);
+  --color-elevation-surface-overlay: var(--ads-n-300);
+  --elevation-shadow-raised:
+    0 1px 1px rgba(3, 4, 4, 0.5), 0 0 1px rgba(3, 4, 4, 0.5);
+  --elevation-shadow-overlay:
+    0 8px 12px rgba(3, 4, 4, 0.36), 0 0 1px rgba(3, 4, 4, 0.5);
+
+  --color-text: var(--ads-n-1000);
+  --color-text-subtle: var(--ads-n-800);
+  --color-text-subtlest: var(--ads-n-700);
+  --color-text-inverse: var(--ads-n-0);
+  --color-icon: var(--ads-n-800);
+
+  --color-border: var(--ads-n-300);
+  --color-border-bold: var(--ads-n-500);
+
+  --color-background-neutral: var(--ads-n-300);
+  --color-background-neutral-hovered: var(--ads-n-400);
+  --color-background-neutral-pressed: var(--ads-n-500);
+  --color-background-neutral-subtle-hovered: var(--ads-n-200);
+  --color-background-neutral-subtle-pressed: var(--ads-n-300);
+  --color-background-neutral-bold: var(--ads-n-1000);
+  --color-background-neutral-bold-hovered: var(--ads-n-900);
+
+  /* Semantic fills go darker/desaturated in dark mode */
+  --ads-green-100: #1c3329;
+  --ads-yellow-100: #332e1b;
+  --ads-red-100: #42221f;
+  --ads-purple-100: #2b273f;
+  --ads-teal-100: #1e3137;
+  --color-background-success: var(--ads-green-100);
+  --color-background-warning: var(--ads-yellow-100);
+  --color-background-danger: var(--ads-red-100);
+  --color-background-discovery: var(--ads-purple-100);
+  --color-background-information: #12253f;
+  --color-background-brand-subtlest: #12253f;
+  --color-background-selected: #12253f;
+
+  --color-text-success: #7ee2b8;
+  --color-text-warning: #f5cd47;
+  --color-text-danger: #ff9c8f;
+  --color-text-discovery: #b8acf6;
+}
+
+/* Respect OS preference when no explicit choice is stored (handled in JS too) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+  }
 }
