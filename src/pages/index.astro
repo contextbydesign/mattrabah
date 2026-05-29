@@ -1,238 +1,304 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import Card from "../components/Card.astro";
+import Lozenge from "../components/Lozenge.astro";
 import Tag from "../components/ui/Tag.astro";
 
 const pillars = [
   {
-    kicker: "Lifecycle Systems",
+    eyebrow: "Lifecycle systems",
     title: "Make the customer lifecycle easier to operate.",
-    summary:
-      "Onboarding, adoption, account health, and renewal readiness should not live in scattered notes and heroic follow-up. They need a system the team can run when the account gets complicated.",
+    body: "Onboarding, adoption, account health, and renewal readiness shouldn't live in scattered notes and heroic follow-up. They need a system the team can run when the account gets complicated.",
   },
   {
-    kicker: "AI Workflow Design",
+    eyebrow: "AI workflow design",
     title: "Use AI where it reduces drag, not judgment.",
-    summary:
-      "AI earns its place when it helps a team prepare faster, summarize context, and surface risk earlier. It becomes noise when it replaces ownership or adds one more place to check.",
+    body: "AI earns its place when it helps a team prepare faster, summarize context, and surface risk earlier. It becomes noise when it replaces ownership or adds one more place to check.",
   },
   {
-    kicker: "Change Management",
+    eyebrow: "Change management",
     title: "Turn process into behavior people repeat.",
-    summary:
-      "A process that only works when everyone remembers it is not a process. I build the cadence, handoffs, and CRM discipline that hold up under real workload.",
+    body: "A process that only works when everyone remembers it isn't a process. I build the cadence, handoffs, and CRM discipline that hold up under real workload.",
   },
 ];
 
-const featuredWork = [
+const work = [
   {
-    kicker: "Healthtech",
+    href: "/work#neurosync",
+    eyebrow: "Healthtech",
     title: "NeuroSync",
-    subtitle: "Customer Lifecycle Systems",
-    summary:
-      "Built the customer success function from the ground up across healthcare accounts, where onboarding, adoption, and renewal readiness had to hold up under clinical and operational pressure.",
-    meta: "Healthtech · Customer Success · Implementation",
+    body: "Built the customer success function across healthcare accounts, where onboarding, adoption, and renewal readiness had to hold up under clinical and operational pressure.",
+    tags: ["Customer success", "Implementation"],
   },
   {
-    kicker: "Brand-side retail",
+    href: "/work#shinola",
+    eyebrow: "Brand-side retail",
     title: "Shinola",
-    subtitle: "Portfolio Growth & CX Operations",
-    summary:
-      "Ran high-touch client experience, Salesforce process, and executive-facing account work at the Detroit flagship, where trust was earned one interaction at a time.",
-    meta: "Retail · Client Experience · Operating Cadence",
+    body: "Ran high-touch client experience, Salesforce process, and executive-facing account work at the Detroit flagship, where trust was earned one interaction at a time.",
+    tags: ["CX operations", "Portfolio growth"],
   },
   {
-    kicker: "Consulting",
+    href: "/work#context-by-design",
+    eyebrow: "Consulting",
     title: "Context By Design",
-    subtitle: "Lifecycle Diagnostics & Retention",
-    summary:
-      "Built onboarding, retention, and lifecycle frameworks for service businesses that needed a clearer view of where customers stalled, churned, or lost confidence.",
-    meta: "Consulting · Transformation · Retention Systems",
+    body: "Built onboarding, retention, and lifecycle frameworks for service businesses that needed a clearer view of where customers stalled, churned, or lost confidence.",
+    tags: ["Lifecycle diagnostics", "Retention"],
   },
 ];
 
-const aiTools = [
-  "Handoff Risk Checker",
-  "Customer Health Signal Mapper",
-  "Renewal Readiness Diagnostic",
+const tools = [
+  {
+    title: "Handoff Risk Checker",
+    status: "Prototype",
+    appearance: "inprogress",
+  },
+  {
+    title: "Customer Health Signal Mapper",
+    status: "Prototype",
+    appearance: "inprogress",
+  },
+  {
+    title: "Renewal Readiness Diagnostic",
+    status: "Planned",
+    appearance: "new",
+  },
 ];
 
 const writing = [
   {
+    meta: "AI in CX",
     title: "AI in CX fails when it starts with tools instead of workflows.",
-    meta: "AI in CX · Draft",
   },
   {
+    meta: "Implementation",
     title: "The sales-to-implementation handoff is a risk control.",
-    meta: "Implementation · Draft",
   },
   {
+    meta: "Customer success",
     title: "Customer health scores fail when no one owns the next action.",
-    meta: "Customer Success · Draft",
   },
 ];
 ---
 
 <BaseLayout
   title="Matt Rabah"
-  description="Matt Rabah builds customer lifecycle systems, practical AI workflows, and operating models for customer-facing teams."
+  description="Detroit-based CX and customer success. I build customer lifecycle systems, practical AI workflows, and operating models for customer-facing teams."
 >
-  <section class="hero container">
-    <p class="kicker">CX systems · AI workflows</p>
-
-    <h1 class="display">Systems that make customers easier to keep.</h1>
-
-    <p class="lead">
-      I am a Detroit-based CX and customer success professional. I build
-      customer lifecycle systems, practical AI workflows, and operating rhythms
-      for teams that need clearer ownership and fewer surprises near renewal.
-    </p>
+  <!-- HERO — practical first: who, where, what. Earn bold further down. -->
+  <section class="container section hero">
+    <div class="stack-300">
+      <p class="heading-xxs text-brand">CX systems · AI workflows</p>
+      <h1 class="heading-xxl hero-title">
+        Systems that make customers easier to keep.
+      </h1>
+      <p class="body-l hero-lead">
+        I'm a Detroit-based CX and customer success professional. I build
+        customer lifecycle systems, practical AI workflows, and operating
+        rhythms for teams that need clearer ownership and fewer surprises near
+        renewal.
+      </p>
+      <div class="hero-actions">
+        <Button href="/work" appearance="primary">See the work</Button>
+        <Button href="/contact" appearance="subtle">Start a conversation</Button
+        >
+      </div>
+    </div>
   </section>
 
-  <section class="section container" aria-labelledby="home-intro">
+  <!-- FOCUS — replaces the old "homepage is the front door" placeholder -->
+  <section class="container section">
     <header class="section-head">
-      <h2 class="section-title" id="home-intro">What I focus on</h2>
+      <h2 class="heading-l">What I focus on</h2>
     </header>
-
-    <div class="capabilities">
-      <p class="capabilities-prose">
+    <div class="focus-grid">
+      <p class="body-l">
         I work on the operating layer customers actually feel: how onboarding
         flows, who owns the next action, what survives a handoff, and where AI
         can cut administrative drag without blurring accountability. The
-        industries change. The underlying problem does not.
+        industries change. The underlying problem doesn't.
       </p>
-
-      <ul class="capabilities-tags" aria-label="Focus areas">
-        <li><Tag text="Lifecycle systems" /></li>
-        <li><Tag text="Implementation" /></li>
-        <li><Tag text="Customer success" /></li>
-        <li><Tag text="AI workflows" /></li>
-        <li><Tag text="CRM discipline" /></li>
-      </ul>
+      <div class="tag-row">
+        <Tag text="Lifecycle systems" />
+        <Tag text="Implementation" color="blue" />
+        <Tag text="Customer success" color="green" />
+        <Tag text="AI workflows" color="teal" />
+        <Tag text="CRM discipline" color="purple" />
+      </div>
     </div>
   </section>
 
-  <section class="section container" aria-labelledby="pillars">
+  <!-- PILLARS -->
+  <section class="container section">
     <header class="section-head">
-      <h2 class="section-title" id="pillars">What I build</h2>
+      <h2 class="heading-l">What I build</h2>
     </header>
-
-    <ul class="work-list">
+    <div class="card-grid">
       {
-        pillars.map((pillar) => (
-          <li class="work-list-item">
-            <div class="work-link">
-              <p class="kicker">{pillar.kicker}</p>
-              <h3 class="work-title">{pillar.title}</h3>
-              <p class="work-summary">{pillar.summary}</p>
+        pillars.map((p) => (
+          <Card>
+            <div class="stack-100">
+              <p class="heading-xxs text-brand">{p.eyebrow}</p>
+              <h3 class="heading-m">{p.title}</h3>
+              <p class="body">{p.body}</p>
             </div>
-          </li>
+          </Card>
         ))
       }
-    </ul>
-  </section>
-
-  <section
-    class="section section--dark container"
-    aria-labelledby="selected-work"
-  >
-    <header class="section-head">
-      <h2 class="section-title" id="selected-work">Selected work</h2>
-      <a href="/work" class="section-more">All work →</a>
-    </header>
-
-    <ul class="work-list">
-      {
-        featuredWork.map((entry) => (
-          <li class="work-list-item">
-            <a href="/work" class="work-link">
-              <p class="kicker">{entry.kicker}</p>
-              <h3 class="work-title">{entry.title}</h3>
-              <p class="work-summary">
-                <strong>{entry.subtitle}</strong> — {entry.summary}
-              </p>
-              <p class="meta">{entry.meta}</p>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <section class="section container" aria-labelledby="ai-tools">
-    <header class="section-head">
-      <h2 class="section-title" id="ai-tools">Practical AI tools</h2>
-      <a href="/tools" class="section-more">View tools →</a>
-    </header>
-
-    <div class="capabilities">
-      <p class="capabilities-prose">
-        The useful AI work is rarely flashy. It helps a team prepare for a
-        handoff, read account risk, write a cleaner follow-up, or see what
-        changed before the customer has to repeat it. That is the bar: less
-        administrative drag, a clearer next action, better human judgment.
-      </p>
-
-      <ul class="capabilities-tags" aria-label="AI tool previews">
-        {
-          aiTools.map((tool) => (
-            <li>
-              <Tag text={tool} />
-            </li>
-          ))
-        }
-      </ul>
     </div>
   </section>
 
-  <section class="section container" aria-labelledby="writing">
+  <!-- SELECTED WORK — cards now link to anchors on /work, not loop to /work index -->
+  <section class="container section">
     <header class="section-head">
-      <h2 class="section-title" id="writing">Writing</h2>
-      <a href="/blog" class="section-more">All writing →</a>
+      <h2 class="heading-l">Selected work</h2>
+      <Button href="/work" appearance="link">All work →</Button>
     </header>
-
-    <ul class="writing-list">
+    <div class="card-grid">
       {
-        writing.map((entry) => (
-          <li class="writing-list-item">
-            <a href="/blog" class="writing-link">
-              <p class="meta">{entry.meta}</p>
-              <h3 class="writing-title">{entry.title}</h3>
-            </a>
-          </li>
+        work.map((w) => (
+          <Card href={w.href}>
+            <div class="stack-100">
+              <p class="heading-xxs text-brand">{w.eyebrow}</p>
+              <h3 class="heading-m">{w.title}</h3>
+              <p class="body">{w.body}</p>
+              <div class="tag-row tag-row--tight">
+                {w.tags.map((t) => (
+                  <Tag text={t} color="blue" />
+                ))}
+              </div>
+            </div>
+          </Card>
         ))
       }
-    </ul>
+    </div>
   </section>
 
-  <section class="section container about-snapshot" aria-labelledby="about">
+  <!-- AI TOOLS -->
+  <section class="container section">
     <header class="section-head">
-      <h2 class="section-title" id="about">About</h2>
-      <a href="/about" class="section-more">More about me →</a>
+      <h2 class="heading-l">Practical AI tools</h2>
+      <Button href="/tools" appearance="link">View tools →</Button>
     </header>
-
-    <p class="about-prose">
-      I have spent seven-plus years across healthtech, brand-side retail, and
-      consulting, building the parts of the customer experience that decide
-      whether people stay.
+    <p class="body-l measure">
+      The useful AI work is rarely flashy. It helps a team prepare for a
+      handoff, read account risk, write a cleaner follow-up, or see what changed
+      before the customer has to repeat it. Less drag, a clearer next action,
+      better judgment.
     </p>
-
-    <p class="about-prose">
-      My work makes the customer lifecycle less dependent on memory,
-      personality, and rescue work. Clearer systems, better handoffs, cleaner
-      operating cadence, and account visibility a team can act on.
-    </p>
+    <div class="card-grid card-grid--3" style="margin-top:var(--space-300)">
+      {
+        tools.map((t) => (
+          <Card href="/tools">
+            <div class="stack-100">
+              <Lozenge label={t.status} appearance={t.appearance as any} />
+              <h3 class="heading-s">{t.title}</h3>
+            </div>
+          </Card>
+        ))
+      }
+    </div>
   </section>
 
-  <section class="section container" aria-labelledby="contact">
+  <!-- WRITING -->
+  <section class="container section">
     <header class="section-head">
-      <h2 class="section-title" id="contact">Let's build the system.</h2>
-      <a href="/contact" class="section-more">Contact →</a>
+      <h2 class="heading-l">Writing</h2>
+      <Button href="/blog" appearance="link">All writing →</Button>
     </header>
-
-    <p class="about-prose">
-      If your customer lifecycle leans more on heroic individuals than on a
-      working operating layer, that is the problem I am built for. Tell me where
-      it is breaking.
-    </p>
+    <div class="stack">
+      {
+        writing.map((w) => (
+          <Card href="/blog" elevation="flat">
+            <div class="stack-100">
+              <p class="heading-xxs text-subtlest">{w.meta}</p>
+              <h3 class="heading-s">{w.title}</h3>
+            </div>
+          </Card>
+        ))
+      }
+    </div>
   </section>
+
+  <!-- CONTACT -->
+  <section class="container section">
+    <header class="section-head">
+      <h2 class="heading-l">Let's build the system.</h2>
+    </header>
+    <div class="contact-cta">
+      <p class="body-l measure">
+        If your customer lifecycle leans more on heroic individuals than on a
+        working operating layer, that's the problem I'm built for. Tell me where
+        it's breaking.
+      </p>
+      <Button href="/contact" appearance="primary">Start a conversation</Button>
+    </div>
+  </section>
+
+  <style>
+    .hero {
+      padding-block: clamp(var(--space-800), 12vw, 7rem);
+    }
+    .hero-title {
+      max-width: 18ch;
+    }
+    .hero-lead {
+      max-width: 46rem;
+      color: var(--color-text-subtle);
+    }
+    .hero-actions {
+      display: flex;
+      gap: var(--space-150);
+      flex-wrap: wrap;
+      margin-top: var(--space-200);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-200);
+      margin-bottom: var(--space-400);
+      flex-wrap: wrap;
+    }
+    .measure {
+      max-width: 46rem;
+    }
+
+    .focus-grid {
+      display: grid;
+      gap: var(--space-400);
+    }
+    @media (min-width: 48rem) {
+      .focus-grid {
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: start;
+      }
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-100);
+      align-content: flex-start;
+    }
+    .tag-row--tight {
+      margin-top: var(--space-050);
+    }
+
+    .card-grid {
+      display: grid;
+      gap: var(--space-200);
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    }
+    .card-grid--3 {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+    }
+
+    .contact-cta {
+      display: grid;
+      gap: var(--space-300);
+      justify-items: start;
+    }
+  </style>
 </BaseLayout>

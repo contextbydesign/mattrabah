@@ -1,27 +1,28 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Card from "../../components/Card.astro";
 
-const contactLinks = [
+const links = [
   {
     label: "Email",
-    href: "mailto:rabah.matthew@gmail.com",
     value: "rabah.matthew@gmail.com",
+    href: "mailto:rabah.matthew@gmail.com",
     external: false,
-    icon: "email",
+    icon: "M4.75 6.75h14.5v10.5H4.75zM5.25 7.25l6.75 5 6.75-5",
   },
   {
     label: "LinkedIn",
-    href: "https://linkedin.com/in/mattrabah",
     value: "linkedin.com/in/mattrabah",
+    href: "https://linkedin.com/in/mattrabah",
     external: true,
-    icon: "linkedin",
+    icon: "M6.7 9.4v8.15M6.7 6.75h.02M11 17.55v-8.1M11 12.35c.45-1.85 1.65-3.05 3.35-3.05 2.05 0 3.15 1.35 3.15 3.75v4.5",
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/contextbydesign.io",
     value: "@contextbydesign.io",
+    href: "https://www.instagram.com/contextbydesign.io",
     external: true,
-    icon: "instagram",
+    icon: "M12 8.55a3.45 3.45 0 1 0 0 6.9 3.45 3.45 0 0 0 0-6.9",
   },
 ];
 ---
@@ -30,131 +31,85 @@ const contactLinks = [
   title="Contact"
   description="Contact Matt Rabah about customer lifecycle systems, customer success, implementation, CRM discipline, and practical AI workflow work."
 >
-  <section class="hero container">
-    <p class="kicker">Contact</p>
-
-    <h1 class="display">Start the conversation.</h1>
-
-    <p class="lead">
-      Tell me where the customer lifecycle is breaking, or what you are hiring
-      for. I read every message and reply with a clear next step.
-    </p>
+  <section class="container section hero">
+    <div class="stack-300">
+      <p class="heading-xxs text-brand">Contact</p>
+      <h1 class="heading-xxl" style="max-width:14ch">
+        Start the conversation.
+      </h1>
+      <p class="body-l measure">
+        Tell me where the customer lifecycle is breaking, or what you're hiring
+        for. I read every message and reply with a clear next step.
+      </p>
+    </div>
   </section>
 
-  <section class="section container" aria-labelledby="contact-options">
+  <section class="container section">
     <header class="section-head">
-      <h2 class="section-title" id="contact-options">Reach me directly</h2>
+      <h2 class="heading-l">Reach me directly</h2>
     </header>
-
-    <ul class="contact-list" aria-label="Contact links">
+    <div class="contact-grid">
       {
-        contactLinks.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              class="contact-button"
-              target={item.external ? "_blank" : undefined}
-              rel={item.external ? "me noopener noreferrer" : undefined}
-              aria-label={`${item.label}: ${item.value}`}
-            >
+        links.map((l) => (
+          <Card href={l.href} external={l.external}>
+            <div class="contact-row">
               <span class="contact-icon" aria-hidden="true">
-                {item.icon === "email" && (
-                  <svg viewBox="0 0 24 24" role="img">
-                    <path
-                      d="M4.75 6.75h14.5v10.5H4.75V6.75Z"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.9"
-                      stroke-linejoin="round"
-                    />
-                    <path
-                      d="m5.25 7.25 6.75 5 6.75-5"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.9"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                )}
-
-                {item.icon === "linkedin" && (
-                  <svg viewBox="0 0 24 24" role="img">
-                    <path
-                      d="M6.7 9.4v8.15"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.25"
-                      stroke-linecap="round"
-                    />
-                    <path
-                      d="M6.7 6.75h.02"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="3"
-                      stroke-linecap="round"
-                    />
-                    <path
-                      d="M11 17.55v-8.1"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.25"
-                      stroke-linecap="round"
-                    />
-                    <path
-                      d="M11 12.35c.45-1.85 1.65-3.05 3.35-3.05 2.05 0 3.15 1.35 3.15 3.75v4.5"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.25"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                    <rect
-                      x="3.75"
-                      y="3.75"
-                      width="16.5"
-                      height="16.5"
-                      rx="3.25"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                    />
-                  </svg>
-                )}
-
-                {item.icon === "instagram" && (
-                  <svg viewBox="0 0 24 24" role="img">
-                    <rect
-                      x="4.25"
-                      y="4.25"
-                      width="15.5"
-                      height="15.5"
-                      rx="4.4"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.9"
-                    />
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="3.45"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.9"
-                    />
-                    <circle cx="16.55" cy="7.55" r="1.05" fill="currentColor" />
-                  </svg>
-                )}
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d={l.icon} />
+                </svg>
               </span>
-
-              <span class="contact-copy">
-                <span class="contact-label">{item.label}</span>
-                <span class="contact-value">{item.value}</span>
+              <span class="stack-100">
+                <span class="heading-s">{l.label}</span>
+                <span class="body text-subtlest">{l.value}</span>
               </span>
-            </a>
-          </li>
+            </div>
+          </Card>
         ))
       }
-    </ul>
+    </div>
   </section>
+
+  <style>
+    .hero {
+      padding-block: clamp(var(--space-800), 12vw, 7rem);
+    }
+    .measure {
+      max-width: 46rem;
+      color: var(--color-text-subtle);
+    }
+    .section-head {
+      margin-bottom: var(--space-300);
+    }
+    .contact-grid {
+      display: grid;
+      gap: var(--space-200);
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-200);
+    }
+    .contact-icon {
+      display: inline-grid;
+      place-items: center;
+      flex: none;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: var(--radius-200);
+      background: var(--color-background-brand-subtlest);
+      color: var(--color-text-brand);
+    }
+    .contact-icon svg {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+  </style>
 </BaseLayout>

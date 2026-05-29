@@ -4,11 +4,11 @@ import Tag from "../../components/ui/Tag.astro";
 
 const work = [
   {
-    kicker: "Healthtech",
+    id: "neurosync",
+    eyebrow: "Healthtech",
     title: "NeuroSync",
-    subtitle: "Customer Success, Implementation, and Healthcare Accounts",
-    summary:
-      "Owned customer-facing work across healthcare accounts where adoption, implementation discipline, and account visibility mattered. The job was not just keeping relationships warm. It was making sure clinical and operational customers had the context, follow-through, and support needed to keep using the system.",
+    role: "Customer Success, Implementation, and Healthcare Accounts",
+    body: "Built the customer-facing function across healthcare accounts where adoption, implementation discipline, and account visibility decided whether the system kept getting used. The job wasn't keeping relationships warm — it was making sure clinical and operational customers had the context, follow-through, and support to stay live.",
     details: [
       "Onboarding and implementation support",
       "Healthcare account management",
@@ -17,11 +17,11 @@ const work = [
     ],
   },
   {
-    kicker: "Brand-side retail",
+    id: "shinola",
+    eyebrow: "Brand-side retail",
     title: "Shinola",
-    subtitle: "Portfolio Growth, Salesforce Process, and High-touch CX",
-    summary:
-      "Managed a large corporate account portfolio inside a brand environment where the customer experience had to feel personal, but the operating model still had to scale. The work connected Salesforce discipline, account segmentation, executive-facing communication, and high-touch client experience.",
+    role: "Portfolio Growth, Salesforce Process, and High-touch CX",
+    body: "Managed a corporate account portfolio inside a brand environment where the experience had to feel personal but the operating model still had to scale. The work connected Salesforce discipline, account segmentation, executive-facing communication, and high-touch client experience.",
     details: [
       "Corporate account portfolio management",
       "Salesforce segmentation and process design",
@@ -30,11 +30,11 @@ const work = [
     ],
   },
   {
-    kicker: "Consulting",
+    id: "context-by-design",
+    eyebrow: "Consulting",
     title: "Context By Design",
-    subtitle: "Lifecycle Diagnostics, Retention Systems, and CX Strategy",
-    summary:
-      "Developed lifecycle and retention frameworks for service businesses that had customer relationships, but limited visibility into the systems behind them. The work focused on making the customer journey easier to see, operate, and improve.",
+    role: "Lifecycle Diagnostics, Retention Systems, and CX Strategy",
+    body: "Built lifecycle and retention frameworks for service businesses that had customer relationships but limited visibility into the systems behind them. The work made the customer journey easier to see, operate, and improve.",
     details: [
       "Customer journey diagnostics",
       "Onboarding and retention frameworks",
@@ -44,153 +44,103 @@ const work = [
   },
 ];
 
-const capabilities = [
-  {
-    kicker: "Lifecycle systems",
-    title: "Make customer progress visible.",
-    summary:
-      "Onboarding, adoption, account health, renewal readiness, and executive visibility need a shared operating model. If the team cannot see where the customer is, it cannot manage what happens next.",
-  },
-  {
-    kicker: "Implementation discipline",
-    title: "Treat the handoff as a risk control.",
-    summary:
-      "A signed deal is not a clean handoff. The customer has already heard promises, timelines, constraints, and assumptions. Implementation inherits all of it, whether it was documented or not.",
-  },
-  {
-    kicker: "CRM operations",
-    title: "Make the system useful to the next owner.",
-    summary:
-      "CRM data only matters if it helps the next person make a better decision. Fields, notes, stages, and account records should reduce rediscovery, not create another place for vague updates to live.",
-  },
-  {
-    kicker: "Practical AI workflows",
-    title: "Use AI to reduce drag, not judgment.",
-    summary:
-      "AI is useful when it helps teams prepare faster, summarize context, surface risk, and follow through with more discipline. It is a liability when it hides uncertainty or blurs accountability.",
-  },
-];
-
-const operatingPrinciples = [
+const principles = [
   "Customers feel the operating model.",
   "A weak handoff turns a closed deal into implementation risk.",
   "A dashboard is not an operating system.",
   "CRM hygiene is customer-facing, even when it looks internal.",
-  "AI should reduce administrative drag without replacing ownership.",
+  "AI should reduce drag without replacing ownership.",
   "Renewal readiness starts long before the renewal conversation.",
 ];
 ---
 
 <BaseLayout
   title="Work"
-  description="Selected work from Matt Rabah across customer success, implementation, customer lifecycle systems, CRM discipline, healthtech, retail, consulting, and practical AI workflows."
+  description="Selected work from Matt Rabah across customer success, implementation, lifecycle systems, CRM discipline, healthtech, retail, and consulting."
 >
-  <section class="hero container">
-    <p class="kicker">Portfolio</p>
-
-    <h1 class="display">Proof across messy customer systems.</h1>
-
-    <p class="lead">
-      Case studies from healthtech, retail, and consulting where onboarding,
-      adoption, retention, and account visibility had to work in practice.
-    </p>
-  </section>
-
-  <section class="section container" aria-labelledby="selected-work">
-    <header class="section-head">
-      <h2 class="section-title" id="selected-work">Selected work</h2>
-    </header>
-
-    <ul class="work-list work-list--full">
-      {
-        work.map((entry) => (
-          <li class="work-list-item">
-            <article class="work-link">
-              <p class="kicker">{entry.kicker}</p>
-              <h3 class="work-title">{entry.title}</h3>
-              <p class="meta">{entry.subtitle}</p>
-              <p class="work-summary">{entry.summary}</p>
-
-              <ul
-                class="capabilities-tags"
-                aria-label={`${entry.title} work areas`}
-              >
-                {entry.details.map((detail) => (
-                  <li>
-                    <Tag text={detail} variant="muted" size="sm" />
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <section class="section container" aria-labelledby="capabilities">
-    <header class="section-head">
-      <h2 class="section-title" id="capabilities">How I work</h2>
-    </header>
-
-    <ul class="work-list">
-      {
-        capabilities.map((capability) => (
-          <li class="work-list-item">
-            <article class="work-link">
-              <p class="kicker">{capability.kicker}</p>
-              <h3 class="work-title">{capability.title}</h3>
-              <p class="work-summary">{capability.summary}</p>
-            </article>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
-
-  <section class="section container" aria-labelledby="principles">
-    <header class="section-head">
-      <h2 class="section-title" id="principles">Operating principles</h2>
-    </header>
-
-    <div class="capabilities">
-      <p class="capabilities-prose">
-        The work is not about making customer-facing teams sound more mature
-        than they are. It is about giving them fewer places to hide ambiguity:
-        clearer owners, cleaner handoffs, better records, stronger preparation,
-        and a more honest view of account risk.
+  <section class="container section hero">
+    <div class="stack-300">
+      <p class="heading-xxs text-brand">Portfolio</p>
+      <h1 class="heading-xxl" style="max-width:16ch">
+        Proof across messy customer systems.
+      </h1>
+      <p class="body-l measure">
+        Work from healthtech, retail, and consulting where onboarding, adoption,
+        retention, and account visibility had to hold up in practice.
       </p>
-
-      <ul class="capabilities-tags" aria-label="Operating principles">
-        {
-          operatingPrinciples.map((principle) => (
-            <li>
-              <Tag text={principle} variant="ghost" size="md" />
-            </li>
-          ))
-        }
-      </ul>
     </div>
   </section>
 
-  <section class="section container" aria-labelledby="proof">
+  {
+    work.map((w) => (
+      <section id={w.id} class="container section work-detail">
+        <div class="work-detail-head">
+          <p class="heading-xxs text-brand">{w.eyebrow}</p>
+          <h2 class="heading-xl">{w.title}</h2>
+          <p class="body text-subtlest">{w.role}</p>
+        </div>
+        <div class="work-detail-body">
+          <p class="body-l">{w.body}</p>
+          <div class="tag-row">
+            {w.details.map((d) => (
+              <Tag text={d} color="blue" />
+            ))}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="container section">
     <header class="section-head">
-      <h2 class="section-title" id="proof">What this proves</h2>
+      <h2 class="heading-l">Operating principles</h2>
     </header>
-
-    <p class="about-prose">
-      The work spans different industries, but the operating problems rhyme.
-      Healthcare accounts need trust, adoption, and implementation discipline.
-      Brand-side retail needs account visibility, high-touch service, and
-      follow-through at scale. Consulting work needs a clear way to turn
-      customer journey language into decisions a team can actually run.
+    <p class="body-l measure" style="margin-bottom:var(--space-300)">
+      The work isn't about making teams sound more mature than they are. It's
+      about giving them fewer places to hide ambiguity: clearer owners, cleaner
+      handoffs, better records, stronger preparation, and an honest view of
+      account risk.
     </p>
-
-    <p class="about-prose">
-      That is the useful pattern: customer experience improves when the internal
-      system becomes easier to operate. Better notes. Better handoffs. Better
-      ownership. Better use of AI where it helps the team prepare, see risk, and
-      act sooner.
-    </p>
+    <div class="tag-row">
+      {principles.map((p) => <Tag text={p} />)}
+    </div>
   </section>
+
+  <style>
+    .hero {
+      padding-block: clamp(var(--space-800), 12vw, 7rem);
+    }
+    .measure {
+      max-width: 46rem;
+      color: var(--color-text-subtle);
+    }
+    .section-head {
+      margin-bottom: var(--space-300);
+    }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-100);
+    }
+
+    .work-detail {
+      display: grid;
+      gap: var(--space-400);
+      scroll-margin-top: 4.5rem;
+    }
+    @media (min-width: 52rem) {
+      .work-detail {
+        grid-template-columns: 0.8fr 1.2fr;
+        align-items: start;
+      }
+    }
+    .work-detail-head {
+      display: grid;
+      gap: var(--space-100);
+    }
+    .work-detail-body {
+      display: grid;
+      gap: var(--space-200);
+    }
+  </style>
 </BaseLayout>
