@@ -1,7 +1,7 @@
 ---
 title: Account health is not a color
 description: Red, yellow, and green only help when the team knows what changed, who owns the next move, and what evidence would change the status.
-date: 2026-06-15
+date: "2026-06-15T00:00:00Z"
 category: Operating Systems
 draft: false
 ---

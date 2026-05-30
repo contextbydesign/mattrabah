@@ -1,7 +1,7 @@
 ---
 title: How to make health scores actionable
 description: Health scores only help when they point to evidence, owners, and next actions.
-date: 2026-06-01
+date: "2026-06-01T00:00:00Z"
 category: Operating Systems
 draft: false
 ---

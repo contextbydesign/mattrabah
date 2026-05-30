@@ -1,7 +1,7 @@
 ---
 title: A practical handoff checklist
 description: A short list to make sure a closed deal becomes an operational success.
-date: 2026-05-15
+date: "2026-05-15T00:00:00Z"
 category: Implementation
 draft: false
 ---
