@@ -1,7 +1,7 @@
 ---
 title: "Customer handoffs fail before anyone notices"
 description: "A practical note on where ownership breaks down between sales, onboarding, success, and renewal."
-date: "2026-05-30"
+date: "2026-05-30T00:00:00Z"
 draft: true
 category: "Customer Lifecycle"
 tags:
