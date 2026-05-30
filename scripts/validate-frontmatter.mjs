@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-import { promises as fs } from 'fs';
-import path from 'path';
+import { promises as fs } from "fs";
+import path from "path";
 
 const roots = [
-  path.resolve(process.cwd(), 'src/content'),
-  path.resolve(process.cwd(), 'content'),
+  path.resolve(process.cwd(), "src/content"),
+  path.resolve(process.cwd(), "content"),
 ];
 
 function isMarkdown(file) {
@@ -23,7 +23,7 @@ async function walk(dir) {
 }
 
 async function checkFile(file) {
-  const content = await fs.readFile(file, 'utf8');
+  const content = await fs.readFile(file, "utf8");
   const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
   if (!fmMatch) return null;
   const fm = fmMatch[1];
@@ -40,27 +40,28 @@ async function checkFile(file) {
 }
 
 async function fixFile(file, date, draft) {
-  let content = await fs.readFile(file, 'utf8');
+  let content = await fs.readFile(file, "utf8");
   let fixed = content;
 
   if (date) {
     fixed = fixed.replace(
       /^date:\s*"(\d{4}-\d{2}-\d{2})"/m,
-      `date: "${date}T00:00:00Z"`
+      `date: "${date}T00:00:00Z"`,
     );
   }
 
   if (draft) {
     // normalize yes/no to true/false
-    const normalized = draft === 'yes' ? 'true' : draft === 'no' ? 'false' : draft;
+    const normalized =
+      draft === "yes" ? "true" : draft === "no" ? "false" : draft;
     fixed = fixed.replace(
       /^draft:\s*['"]?(true|false|yes|no)['"]?/gim,
-      `draft: ${normalized}`
+      `draft: ${normalized}`,
     );
   }
 
   if (fixed !== content) {
-    await fs.writeFile(file, fixed, 'utf8');
+    await fs.writeFile(file, fixed, "utf8");
     return true;
   }
   return false;
@@ -68,7 +69,7 @@ async function fixFile(file, date, draft) {
 
 async function main() {
   const args = process.argv.slice(2);
-  const fix = args.includes('--fix');
+  const fix = args.includes("--fix");
 
   let found = [];
   for (const root of roots) {
@@ -84,20 +85,23 @@ async function main() {
   }
 
   if (found.length === 0) {
-    console.log('No date-only frontmatter found.');
+    console.log("No date-only frontmatter found.");
     process.exit(0);
   }
 
   if (!fix) {
-    console.log('Files with date-only or draft issues:');
-    for (const f of found) console.log(
-      ` - ${f.file}${f.date ? `: date=${f.date}` : ''}${f.draft ? `, draft=${f.draft}` : ''}`
+    console.log("Files with date-only or draft issues:");
+    for (const f of found)
+      console.log(
+        ` - ${f.file}${f.date ? `: date=${f.date}` : ""}${f.draft ? `, draft=${f.draft}` : ""}`,
+      );
+    console.log(
+      "\nRun with --fix to convert these to ISO-8601 datetimes and normalize `draft`.",
     );
-    console.log('\nRun with --fix to convert these to ISO-8601 datetimes and normalize `draft`.');
     process.exit(1);
   }
 
-  console.log('Auto-fixing date-only frontmatter...');
+  console.log("Auto-fixing date-only frontmatter...");
   let changed = [];
   for (const f of found) {
     const ok = await fixFile(f.file, f.date, f.draft);
@@ -105,13 +109,16 @@ async function main() {
   }
 
   if (changed.length === 0) {
-    console.log('No files needed fixing.');
+    console.log("No files needed fixing.");
     process.exit(0);
   }
 
-  console.log('Fixed files:');
+  console.log("Fixed files:");
   for (const p of changed) console.log(` - ${p}`);
   process.exit(0);
 }
 
-main().catch((e) => { console.error(e); process.exit(2); });
+main().catch((e) => {
+  console.error(e);
+  process.exit(2);
+});
