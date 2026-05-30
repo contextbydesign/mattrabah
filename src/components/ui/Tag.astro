@@ -8,24 +8,62 @@ export interface Props {
   href?: string;
   external?: boolean;
   class?: string;
-  color?: string;
+  color?: "blue" | "green" | "purple" | "teal";
+  variant?: "accent" | "muted" | "ghost";
+  size?: "sm" | "md" | "lg";
+  icon?: "check" | "dot" | "spark";
   rel?: string;
   target?: string;
 }
-const { text, href, external = false, class: className } = Astro.props;
+const {
+  text,
+  href,
+  external = false,
+  class: className,
+  color,
+  variant = "default",
+  size = "md",
+  icon,
+  rel: relProp,
+  target: targetProp,
+} = Astro.props;
 const TagEl = href ? "a" : "span";
 const classes = ["chip", href ? "chip--link" : "", className]
   .filter(Boolean)
   .join(" ");
-const rel = external ? "noopener noreferrer" : undefined;
-const target = external ? "_blank" : undefined;
+const rel = relProp ?? (external ? "noopener noreferrer" : undefined);
+const target = targetProp ?? (external ? "_blank" : undefined);
+const iconMap = {
+  check: "✓",
+  dot: "•",
+  spark: "✦",
+} as const;
+const iconText = icon ? iconMap[icon] : "";
+const chipClasses = [
+  classes,
+  variant !== "default" ? `chip--${variant}` : "",
+  size !== "md" ? `chip--${size}` : "",
+  color ? `chip--color-${color}` : "",
+]
+  .filter(Boolean)
+  .join(" ");
 ---
 
-<TagEl class={classes} href={href} rel={rel} target={target}>{text}</TagEl>
+<TagEl class={chipClasses} href={href} rel={rel} target={target}>
+  {
+    iconText && (
+      <span class="chip__icon" aria-hidden="true">
+        {iconText}
+      </span>
+    )
+  }
+  <span class="chip__text">{text}</span>
+</TagEl>
 <style>
   .chip {
     display: inline-flex;
     align-items: center;
+    gap: 0.35rem;
     padding: 0.35rem 0.7rem;
     border: 1px solid var(--color-border-strong);
     border-radius: var(--radius-pill);
@@ -36,6 +74,45 @@ const target = external ? "_blank" : undefined;
     color: var(--color-text);
     white-space: nowrap;
     text-decoration: none;
+  }
+  .chip--sm {
+    padding: 0.25rem 0.55rem;
+    font-size: 0.72rem;
+  }
+  .chip--lg {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.9rem;
+  }
+  .chip--accent {
+    border-color: var(--color-accent);
+    color: var(--color-text-accent);
+    background: var(--color-accent-bg);
+  }
+  .chip--muted {
+    border-color: var(--color-border);
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+  }
+  .chip--ghost {
+    border-color: transparent;
+    color: var(--color-text-muted);
+    background: transparent;
+  }
+  .chip--color-blue,
+  .chip--color-green,
+  .chip--color-purple,
+  .chip--color-teal {
+    color: var(--color-text);
+  }
+  .chip__icon {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.95em;
+    line-height: 1;
+  }
+  .chip__text {
+    display: inline-flex;
+    align-items: center;
   }
   .chip--link {
     transition:

@@ -23,6 +23,9 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+# editor local history
+.history/
+
 # Local font source files
 font-src/
 public/fonts/
