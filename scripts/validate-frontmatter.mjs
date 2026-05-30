@@ -33,7 +33,23 @@ async function checkFile(file) {
   return null;
 }
 
+async function fixFile(file, date) {
+  const content = await fs.readFile(file, 'utf8');
+  const fixed = content.replace(
+    /^date:\s*"(\d{4}-\d{2}-\d{2})"/m,
+    `date: "${date}T00:00:00Z"`
+  );
+  if (fixed !== content) {
+    await fs.writeFile(file, fixed, 'utf8');
+    return true;
+  }
+  return false;
+}
+
 async function main() {
+  const args = process.argv.slice(2);
+  const fix = args.includes('--fix');
+
   let found = [];
   for (const root of roots) {
     try {
@@ -52,10 +68,28 @@ async function main() {
     process.exit(0);
   }
 
-  console.log('Files with date-only frontmatter:');
-  for (const f of found) console.log(` - ${f.file}: ${f.date}`);
-  console.log('\nConsider normalizing to ISO-8601 like "2026-05-30T00:00:00Z".');
-  process.exit(1);
+  if (!fix) {
+    console.log('Files with date-only frontmatter:');
+    for (const f of found) console.log(` - ${f.file}: ${f.date}`);
+    console.log('\nRun with --fix to convert these to ISO-8601 datetimes.');
+    process.exit(1);
+  }
+
+  console.log('Auto-fixing date-only frontmatter...');
+  let changed = [];
+  for (const f of found) {
+    const ok = await fixFile(f.file, f.date);
+    if (ok) changed.push(f.file);
+  }
+
+  if (changed.length === 0) {
+    console.log('No files needed fixing.');
+    process.exit(0);
+  }
+
+  console.log('Fixed files:');
+  for (const p of changed) console.log(` - ${p}`);
+  process.exit(0);
 }
 
 main().catch((e) => { console.error(e); process.exit(2); });
