@@ -29,16 +29,36 @@ async function checkFile(file) {
   const fm = fmMatch[1];
   // look for date: "YYYY-MM-DD" (date-only)
   const dateOnly = fm.match(/^date:\s*"(\d{4}-\d{2}-\d{2})"$/m);
-  if (dateOnly) return { file, date: dateOnly[1] };
-  return null;
+  // look for draft: "true" or draft: "false" (quoted booleans)
+  const draftQuoted = fm.match(/^draft:\s*['"]?(true|false|yes|no)['"]?$/im);
+
+  const res = {};
+  if (dateOnly) res.date = dateOnly[1];
+  if (draftQuoted) res.draft = draftQuoted[1].toLowerCase();
+  if (Object.keys(res).length === 0) return null;
+  return { file, ...res };
 }
 
-async function fixFile(file, date) {
-  const content = await fs.readFile(file, 'utf8');
-  const fixed = content.replace(
-    /^date:\s*"(\d{4}-\d{2}-\d{2})"/m,
-    `date: "${date}T00:00:00Z"`
-  );
+async function fixFile(file, date, draft) {
+  let content = await fs.readFile(file, 'utf8');
+  let fixed = content;
+
+  if (date) {
+    fixed = fixed.replace(
+      /^date:\s*"(\d{4}-\d{2}-\d{2})"/m,
+      `date: "${date}T00:00:00Z"`
+    );
+  }
+
+  if (draft) {
+    // normalize yes/no to true/false
+    const normalized = draft === 'yes' ? 'true' : draft === 'no' ? 'false' : draft;
+    fixed = fixed.replace(
+      /^draft:\s*['"]?(true|false|yes|no)['"]?/gim,
+      `draft: ${normalized}`
+    );
+  }
+
   if (fixed !== content) {
     await fs.writeFile(file, fixed, 'utf8');
     return true;
