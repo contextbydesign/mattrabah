@@ -1,45 +1,55 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
 
-const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
-);
+const posts = [
+  {
+    title: "Customer handoffs fail before anyone notices",
+    dek: "A practical look at where ownership breaks down between sales, onboarding, success, and renewal.",
+    href: "/blog/2026/05/customer-handoffs/",
+    date: "May 2026",
+    type: "Operating Note",
+  },
+  {
+    title: "Account health is not a color",
+    dek: "Why health scoring should explain risk, ownership, next action, and commercial consequence.",
+    href: "/blog/2026/05/account-health/",
+    date: "May 2026",
+    type: "Framework",
+  },
+];
 ---
 
 <BaseLayout
-  title="Writing"
-  description="Notes on customer success, implementation, AI workflows, and the operating details that decide whether customers stay."
+  title="Writing — Matt Rabah"
+  description="Writing on customer experience, implementation, account health, lifecycle systems, and practical AI workflows."
 >
-  <section class="blog-index">
-    <div class="container">
+  <main id="main" class="blog-index">
+    <section class="container">
       <header class="blog-index-hero">
         <p class="eyebrow">Writing</p>
-        <h1 class="h1">Notes on customer systems.</h1>
+        <h1 class="h1">
+          Notes on customer systems, implementation, and practical AI work.
+        </h1>
         <p class="lead">
-          Short essays and practical checklists for teams that run customer
-          lifecycles — implementation, adoption, and the small signals that
-          matter.
+          Short pieces on the operating details behind better customer outcomes:
+          onboarding, adoption, account health, retention, and the systems that
+          make ownership visible.
         </p>
       </header>
 
-      <div class="blog-list" aria-label="Blog posts">
+      <div class="blog-list" aria-label="Published writing">
         {
           posts.map((post) => (
             <article class="blog-list-item">
-              <a class="blog-list-link" href={`/blog/${post.id}`}>
-                <p class="blog-list-date">
-                  {post.data.category}
-                  <br />
-                  {post.data.date.toLocaleDateString("en-US", {
-                    month: "short",
-                    year: "numeric",
-                  })}
-                </p>
+              <a class="blog-list-link" href={post.href}>
+                <p class="blog-list-date">{post.date}</p>
 
-                <h2 class="blog-list-title">{post.data.title}</h2>
+                <div>
+                  <p class="meta">{post.type}</p>
+                  <h2 class="blog-list-title">{post.title}</h2>
+                </div>
 
-                <p class="blog-list-dek">{post.data.description}</p>
+                <p class="blog-list-dek">{post.dek}</p>
 
                 <span class="blog-list-arrow" aria-hidden="true">
                   →
@@ -49,6 +59,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
           ))
         }
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 </BaseLayout>
