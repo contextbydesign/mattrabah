@@ -89,16 +89,18 @@ async function main() {
   }
 
   if (!fix) {
-    console.log('Files with date-only frontmatter:');
-    for (const f of found) console.log(` - ${f.file}: ${f.date}`);
-    console.log('\nRun with --fix to convert these to ISO-8601 datetimes.');
+    console.log('Files with date-only or draft issues:');
+    for (const f of found) console.log(
+      ` - ${f.file}${f.date ? `: date=${f.date}` : ''}${f.draft ? `, draft=${f.draft}` : ''}`
+    );
+    console.log('\nRun with --fix to convert these to ISO-8601 datetimes and normalize `draft`.');
     process.exit(1);
   }
 
   console.log('Auto-fixing date-only frontmatter...');
   let changed = [];
   for (const f of found) {
-    const ok = await fixFile(f.file, f.date);
+    const ok = await fixFile(f.file, f.date, f.draft);
     if (ok) changed.push(f.file);
   }
 
