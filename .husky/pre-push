@@ -1,0 +1,2 @@
+echo "🔨 Building Astro project to ensure it doesn't break production..."
+npm run build

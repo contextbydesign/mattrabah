@@ -30,9 +30,6 @@
   },
   "lint-staged": {
     "*.{md,mdx,json}": "prettier --write",
-    "*.{astro,js,ts,jsx,tsx}": [
-      "eslint --fix",
-      "prettier --write"
-    ]
+    "*.{astro,js,ts,jsx,tsx}": ["eslint --fix", "prettier --write"]
   }
 }
