@@ -1,7 +1,7 @@
 ---
 title: Customer handoffs fail before anyone notices
 description: A practical note on why lifecycle ownership breaks, what to document, and how to make the next action visible before the account stalls.
-date: 2026-05-20
+date: "2026-05-20T00:00:00Z"
 category: Customer Success
 draft: false
 ---

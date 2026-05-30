@@ -29,3 +29,6 @@ pnpm-debug.log*
 # Local font source files
 font-src/
 public/fonts/
+
+node_modules
+tina/__generated__
