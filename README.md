@@ -1,43 +1,69 @@
-# Astro Starter Kit: Minimal
+# mattarabah
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Portfolio + blog site built with Astro, with room to grow AI-powered tools.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Stack
 
-## 🚀 Project Structure
+- Astro + TypeScript
+- Svelte integration enabled for interactive components
+- MDX support for richer writing workflows
+- ESLint + Prettier + Husky + lint-staged for guardrails
 
-Inside of your Astro project, you'll see the following folders and files:
+## Current Structure
 
 ```text
 /
-├── public/
+├── public/                  # static assets
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/          # shared UI components
+│   ├── content/             # content collections (blog)
+│   │   └── blog/
+│   ├── layouts/             # page layouts
+│   ├── lib/
+│   │   └── ai/              # AI provider and env helpers
+│   ├── pages/
+│   │   ├── api/ai/          # AI endpoints
+│   │   ├── blog/            # blog list + dynamic post routes
+│   │   ├── tools/
+│   │   └── ...
+│   ├── styles/
+│   └── content.config.ts    # Astro content collection schema
+├── .husky/                  # git hooks
+├── eslint.config.js
+└── lint-staged.config.mjs
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Commands
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- `npm install`
+- `npm run dev`
+- `npm run check`
+- `npm run build`
+- `npm run preview`
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Blog Content
 
-## 🧞 Commands
+Blog posts now live in `src/content/blog/*.md` and are typed by `src/content.config.ts`.
 
-All commands are run from the root of the project, from a terminal:
+- List page: `src/pages/blog/index.astro`
+- Post page: `src/pages/blog/[slug].astro`
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## AI Tooling Scaffold
 
-## 👀 Want to learn more?
+The project includes a starter server-side AI shape:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `src/lib/ai/env.ts` validates required environment variables
+- `src/lib/ai/providers/openai.ts` contains a provider wrapper
+- `src/pages/api/ai/health.json.ts` health endpoint
+- `src/pages/api/ai/generate.json.ts` prompt -> text endpoint
+
+### Environment
+
+Copy `.env.example` and set:
+
+- `OPENAI_API_KEY`
+
+## Notes
+
+- Keep API keys server-side only (never in client bundles).
+- Use API routes for AI calls and keep prompts/provider logic inside `src/lib/ai`.

@@ -17,26 +17,34 @@ const classes = ["section-message", `section-message--${appearance}`, className]
   .join(" ");
 
 const icons: Record<string, string> = {
-  information: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 15h-2v-6h2Zm0-8h-2V7h2Z",
-  success: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.2 14.2-3.5-3.5 1.4-1.4 2.1 2.1 4.6-4.6 1.4 1.4Z",
+  information:
+    "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 15h-2v-6h2Zm0-8h-2V7h2Z",
+  success:
+    "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-1.2 14.2-3.5-3.5 1.4-1.4 2.1 2.1 4.6-4.6 1.4 1.4Z",
   warning: "M12 2 1 21h22L12 2Zm1 15h-2v-2h2Zm0-4h-2V9h2Z",
   error: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 15h-2v-2h2Zm0-4h-2V7h2Z",
-  discovery: "M12 2 9.2 8.8 2 9.6l5.4 4.7L5.8 22 12 18l6.2 4-1.6-7.7L22 9.6l-7.2-.8Z",
+  discovery:
+    "M12 2 9.2 8.8 2 9.6l5.4 4.7L5.8 22 12 18l6.2 4-1.6-7.7L22 9.6l-7.2-.8Z",
 };
 const iconPath = icons[appearance] ?? icons.information;
 ---
 
 <section class={classes} role="status">
   <span class="section-message-icon" aria-hidden="true">
-    <svg viewBox="0 0 24 24"><path d={iconPath} fill="currentColor" /></svg>
+    <svg viewBox="0 0 24 24"><path d={iconPath} fill="currentColor"></path></svg
+    >
   </span>
 
   <div class="section-message-body">
     {title && <p class="section-message-title heading-xs">{title}</p>}
     <div class="section-message-text body"><slot /></div>
-    {Astro.slots.has("actions") && (
-      <div class="section-message-actions"><slot name="actions" /></div>
-    )}
+    {
+      Astro.slots.has("actions") && (
+        <div class="section-message-actions">
+          <slot name="actions" />
+        </div>
+      )
+    }
   </div>
 </section>
 
@@ -54,19 +62,44 @@ const iconPath = icons[appearance] ?? icons.information;
     height: 1.25rem;
     color: var(--_icon, var(--color-text-information));
   }
-  .section-message-icon svg { width: 100%; height: 100%; }
-  .section-message-body { display: grid; gap: var(--space-100); }
-  .section-message-title { margin: 0; }
-  .section-message-text { color: var(--color-text); }
+  .section-message-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+  .section-message-body {
+    display: grid;
+    gap: var(--space-100);
+  }
+  .section-message-title {
+    margin: 0;
+  }
+  .section-message-text {
+    color: var(--color-text);
+  }
   .section-message-actions {
     display: flex;
     gap: var(--space-150);
     margin-top: var(--space-050);
   }
 
-  .section-message--information { --_bg: var(--color-background-information); --_icon: var(--color-text-information); }
-  .section-message--success     { --_bg: var(--color-background-success);     --_icon: var(--color-text-success); }
-  .section-message--warning     { --_bg: var(--color-background-warning);     --_icon: var(--color-text-warning); }
-  .section-message--error       { --_bg: var(--color-background-danger);      --_icon: var(--color-text-danger); }
-  .section-message--discovery   { --_bg: var(--color-background-discovery);   --_icon: var(--color-text-discovery); }
+  .section-message--information {
+    --_bg: var(--color-background-information);
+    --_icon: var(--color-text-information);
+  }
+  .section-message--success {
+    --_bg: var(--color-background-success);
+    --_icon: var(--color-text-success);
+  }
+  .section-message--warning {
+    --_bg: var(--color-background-warning);
+    --_icon: var(--color-text-warning);
+  }
+  .section-message--error {
+    --_bg: var(--color-background-danger);
+    --_icon: var(--color-text-danger);
+  }
+  .section-message--discovery {
+    --_bg: var(--color-background-discovery);
+    --_icon: var(--color-text-discovery);
+  }
 </style>

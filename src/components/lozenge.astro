@@ -10,9 +10,22 @@ export interface Props {
   isBold?: boolean;
   class?: string;
 }
-const { label, status = "draft", appearance, isBold = false, class: className } = Astro.props;
+const {
+  label,
+  status = "draft",
+  appearance,
+  isBold = false,
+  class: className,
+} = Astro.props;
 const statusVal = appearance ?? status;
-const classes = ["loz", `loz--${statusVal}`, isBold ? "loz--bold" : "", className].filter(Boolean).join(" ");
+const classes = [
+  "loz",
+  `loz--${statusVal}`,
+  isBold ? "loz--bold" : "",
+  className,
+]
+  .filter(Boolean)
+  .join(" ");
 ---
 
 <span class={classes}

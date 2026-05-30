@@ -1,24 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
-const posts = [
-  {
-    href: "/blog/customer-handoffs",
-    date: "May 2026",
-    category: "Customer Success",
-    title: "Customer handoffs fail before anyone notices",
-    description:
-      "A practical note on why lifecycle ownership breaks, what to document, and how to make the next action visible before the account stalls.",
-  },
-  {
-    href: "/blog/account-health",
-    date: "May 2026",
-    category: "Operating Systems",
-    title: "Account health is not a color",
-    description:
-      "Red, yellow, and green only help when the team knows what changed, who owns the next move, and what evidence would change the status.",
-  },
-];
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
 ---
 
 <BaseLayout
@@ -31,8 +17,9 @@ const posts = [
         <p class="eyebrow">Writing</p>
         <h1 class="h1">Notes on customer systems.</h1>
         <p class="lead">
-          Short essays on customer success, implementation, AI workflows, and
-          the operating details that decide whether customers stay.
+          Short essays and practical checklists for teams that run customer
+          lifecycles — implementation, adoption, and the small signals that
+          matter.
         </p>
       </header>
 
@@ -40,16 +27,19 @@ const posts = [
         {
           posts.map((post) => (
             <article class="blog-list-item">
-              <a class="blog-list-link" href={post.href}>
+              <a class="blog-list-link" href={`/blog/${post.id}`}>
                 <p class="blog-list-date">
-                  {post.category}
+                  {post.data.category}
                   <br />
-                  {post.date}
+                  {post.data.date.toLocaleDateString("en-US", {
+                    month: "short",
+                    year: "numeric",
+                  })}
                 </p>
 
-                <h2 class="blog-list-title">{post.title}</h2>
+                <h2 class="blog-list-title">{post.data.title}</h2>
 
-                <p class="blog-list-dek">{post.description}</p>
+                <p class="blog-list-dek">{post.data.description}</p>
 
                 <span class="blog-list-arrow" aria-hidden="true">
                   →

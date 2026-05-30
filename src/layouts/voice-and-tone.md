@@ -8,20 +8,20 @@ ADS defines voice as three traits — **Bold, Optimistic, Practical (with a wink
 
 **Optimistic** — Focus on what's possible and what you'd do next, not on lamenting broken systems. ADS frames optimism as meeting people where they are in the journey. For a recruiter, that's: lead with the outcome, keep the vocabulary consistent across pages, and always point to a clear next step.
 
-**Practical, with a wink** — Get to the point. The "wink" is a light touch you earn *after* substance, and ADS is explicit that it's a small flourish, never a joke and never on a frustration/error moment. On your site that means: one dry, human aside is fine on a success or About moment; never in a contact form error or a "page not found."
+**Practical, with a wink** — Get to the point. The "wink" is a light touch you earn _after_ substance, and ADS is explicit that it's a small flourish, never a joke and never on a frustration/error moment. On your site that means: one dry, human aside is fine on a success or About moment; never in a contact form error or a "page not found."
 
 ## The six tone principles → where they map on your site
 
 ADS's principles, with the place each belongs:
 
-| Principle | ADS intent | Where on your site |
-| --- | --- | --- |
-| **Inform to build trust** | Say only what's needed, be open and warm | Hero, About intro, case-study summaries |
-| **Empower to inspire action** | Educate at pivotal moments | AI Tools descriptions, blog teasers |
-| **Encourage people along the path** | Upbeat support, you're-on-the-right-track | Contact page, form helper text |
-| **Motivate by showing possibilities** | Show the ideal end state | Work outcomes, "what this proves" |
-| **Satisfy by meeting expectations** | Just answer; get out of the way | Footer, nav labels, error/empty states |
-| **Delight (sparingly)** | A flourish once trust is earned | A single success state; never repeated |
+| Principle                             | ADS intent                                | Where on your site                      |
+| ------------------------------------- | ----------------------------------------- | --------------------------------------- |
+| **Inform to build trust**             | Say only what's needed, be open and warm  | Hero, About intro, case-study summaries |
+| **Empower to inspire action**         | Educate at pivotal moments                | AI Tools descriptions, blog teasers     |
+| **Encourage people along the path**   | Upbeat support, you're-on-the-right-track | Contact page, form helper text          |
+| **Motivate by showing possibilities** | Show the ideal end state                  | Work outcomes, "what this proves"       |
+| **Satisfy by meeting expectations**   | Just answer; get out of the way           | Footer, nav labels, error/empty states  |
+| **Delight (sparingly)**               | A flourish once trust is earned           | A single success state; never repeated  |
 
 ## Tone flexes by the reader's emotional state
 
@@ -34,7 +34,7 @@ ADS's core rule: be **more bold/optimistic** when the reader is confident (a hir
 
 ## Writing conventions (from ADS style & grammar)
 
-- Sentence case everywhere — headings, buttons, labels. Not Title Case, not ALL CAPS (except the small uppercase eyebrow/lozenge style, which is a *visual* treatment, not shouting).
+- Sentence case everywhere — headings, buttons, labels. Not Title Case, not ALL CAPS (except the small uppercase eyebrow/lozenge style, which is a _visual_ treatment, not shouting).
 - Second person ("you"), active voice, present tense.
 - Numerals for numbers (7+ years, 3 case studies), and be consistent.
 - Cut qualifiers: "helped," "various," "leveraged," "passionate about." ADS calls this getting out of the way.
